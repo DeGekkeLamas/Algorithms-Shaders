@@ -4,6 +4,10 @@ public class SpriteEditor : MonoBehaviour
 {
     static Color bgColor = new(0.3019608f, 0.3019608f, 0.3019608f);
     static Color otherBgColor = new(0.07450981f, 0.07450981f, 0.07450981f);
+
+
+
+
     static Texture2D DuplicateTexture(Texture2D source)
     {
         RenderTexture renderTex = RenderTexture.GetTemporary(
@@ -26,27 +30,54 @@ public class SpriteEditor : MonoBehaviour
         Color[] colors = DuplicateTexture(originSprite).GetPixels();
         Color[] newColors = colors;
         Texture2D newSprite = new(originSprite.width, originSprite.height);
-        for (int i = 0; i < newColors.Length; i++)
-        {
-            Color output = newColors[i];
-            float x = (float)i % originSprite.width / (originSprite.width - 1);
-            float y = (float)i % originSprite.height / (originSprite.height - 1);
 
-            if (colors[i] == bgColor)
+        for (int y = 0; y < originSprite.height; y++)
+        {
+            for (int x = 0; x < originSprite.width; x++)
             {
-                output = bgColor;
-                if (
-                    colors[(int)Mathf.Clamp(x + y * originSprite.width - 10, 0, colors.Length - 1)] != colors[i] ||
-                    colors[(int)Mathf.Clamp(x + y * originSprite.width + 10, 0, colors.Length - 1)] != colors[i] ||
-                    colors[(int)Mathf.Clamp(x + y * originSprite.width - (10 * originSprite.width), 0, colors.Length - 1)] != colors[i] ||
-                    colors[(int)Mathf.Clamp(x + y * originSprite.width + (10 * originSprite.width), 0, colors.Length - 1)] != colors[i]
-                    ) output = Color.magenta;
+                int _index = y * originSprite.width + x;
+                Color output = colors[_index];
+
+                if (colors[_index] == bgColor)
+                {
+                    int offset = 5;
+                    bool isEdge = false;
+                    int[] _pointsToCheck = new int[8];
+                    _pointsToCheck[0] = (y - offset) * originSprite.width + (x - offset);
+                    _pointsToCheck[1] = (y - offset) *originSprite.width + x;
+                    _pointsToCheck[2] = (y - offset) * originSprite.width + (x + offset);
+                    _pointsToCheck[3] = y * originSprite.width + (x - offset);
+                    _pointsToCheck[4] = y * originSprite.width + (x + offset);
+                    _pointsToCheck[5] = (y + offset) * originSprite.width + (x - offset);
+                    _pointsToCheck[6] = (y + offset) * originSprite.width + x;
+                    _pointsToCheck[7] = (y + offset) * originSprite.width + (x + offset);
+
+                    foreach (int _point in _pointsToCheck)
+                    {
+                        if (_point > 0 && _point < colors.Length && !IsColorClose(colors[_point], colors[_index], 0.31f))//!(colors[_point] == colors[_index]))
+                        {
+                            isEdge = true;
+                            //colors[Mathf.Clamp(_point, 0, colors.Length - 1)] *= 0.5f;
+                            break;
+                        }
+                    }
+
+                    if (isEdge) output = Color.black;
+                }
+                newColors[_index] = output;
             }
-            newColors[i] = output;
         }
 
-        newSprite.SetPixels(colors);
+        newSprite.SetPixels(newColors);
         newSprite.Apply();
         return newSprite;
+    }
+
+    static bool IsColorClose(Color color1, Color color2, float tolerance)
+    {
+        return Mathf.Abs(color1.r - color2.r) < tolerance &&
+               Mathf.Abs(color1.g - color2.g) < tolerance &&
+               Mathf.Abs(color1.b - color2.b) < tolerance &&
+               Mathf.Abs(color1.a - color2.a) < tolerance;
     }
 }
