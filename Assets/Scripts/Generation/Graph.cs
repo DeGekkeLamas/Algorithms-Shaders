@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Graph<T>
 {
-    private Dictionary<T, List<T>> adjacencyList;
+     Dictionary<T, List<T>> adjacencyList;
     public Graph() { adjacencyList = new Dictionary<T, List<T>>(); }
     public void AddNode(T node)
     {
@@ -13,11 +13,16 @@ public class Graph<T>
     {
         if (!adjacencyList.ContainsKey(fromNode) || !adjacencyList.ContainsKey(toNode))
         {
-            Debug.Log($"Not all notes currently exist, from {this}");
+            Debug.Log($"Not all notes currently exist, from Graph");
             return;
         }
         adjacencyList[fromNode].Add(toNode);
         adjacencyList[toNode].Add(fromNode);
+    }
+
+    public void PrintGraph()
+    {
+        foreach(KeyValuePair<T, List<T>> kvp in adjacencyList) Debug.Log($"{kvp.Key}, { kvp.Value}");
     }
 }
 

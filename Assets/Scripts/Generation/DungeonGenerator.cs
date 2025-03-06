@@ -7,7 +7,10 @@ public class DungeonGenerator : MonoBehaviour
     RectInt initialRoom = new(0, 0, 100, 100);
     //RectInt initialRoom = new(30, 30, 30, 30);
     public float height = 5;
-    public List<RectInt> rooms = new List<RectInt>(1);
+
+    public List<RectInt> rooms = new(1);
+    public List<RectInt> doors = new(1);
+
     float fraction = 0.5f;
     public int splitDepth = 1;
     public int splitOffset = 1;
@@ -15,34 +18,61 @@ public class DungeonGenerator : MonoBehaviour
     private void Awake() => StartCoroutine(GenerateRooms());
     IEnumerator GenerateRooms()
     {
-        RandomizeFraction();
         rooms.Add(initialRoom);
-        //rooms.Add(SplitHorizontal(initialRoom, fraction));
 
-        yield return new WaitForSeconds(0.5f);
-        //bool canSplit = false;
+        yield return new WaitForSeconds(0.1f);
+
         for (int i = 0; i < splitDepth; i++)
         {
-            int _length = rooms.Count;
-            for (int j = 0; j < _length; j++)
+            int _biggestRoom = GetBiggestRoom();
+
+            RandomizeFraction();
+            if (rooms[_biggestRoom].width > rooms[_biggestRoom].height)
             {
-                RandomizeFraction();
-                if (rooms[j].width > rooms[j].height)
-                {
-                    rooms.Add(SplitVertical(rooms[j], fraction).Item1);
-                    rooms[j] = SplitVertical(rooms[j], fraction).Item2;
-                }
-                else
-                {
-                    rooms.Add(SplitHorizontal(rooms[j], fraction).Item1);
-                    rooms[j] = SplitHorizontal(rooms[j], fraction).Item2;
-                }
-                yield return new WaitForSeconds(0.5f);
+                rooms.Add(SplitVertical(rooms[_biggestRoom], fraction).Item1);
+                rooms[_biggestRoom] = SplitVertical(rooms[_biggestRoom], fraction).Item2;
             }
-            Debug.Log($"{i} cycles done, from {this}");
+            else
+            {
+                rooms.Add(SplitHorizontal(rooms[_biggestRoom], fraction).Item1);
+                rooms[_biggestRoom] = SplitHorizontal(rooms[_biggestRoom], fraction).Item2;
+            }
+            yield return new WaitForSeconds(0.1f);
         }
+
+        Debug.Log($"Generated all rooms, from {this}");
+
+        Debug.Log(rooms.Count);
+        for (int i = 0;i < rooms.Count; i++)
+        {
+            for (int j = 0; j < rooms.Count; j++)
+            {
+                if (i != j && AlgorithmsUtils.Intersects(rooms[i], rooms[j]))
+                {
+                    doors.Add(AlgorithmsUtils.Intersect(rooms[i], rooms[j]));
+                    yield return new WaitForSeconds(0.25f);
+                }
+            }
+        }
+
+        Debug.Log($"Generated all doors, from {this}");
     }
-    void RandomizeFraction() => fraction = (float)Random.Range(25, 76) / 100f;
+    int GetBiggestRoom()
+    {
+        int biggestIndex = 0;
+        RectInt biggestRoom = new(0,0,0,0);
+
+        for (int i = 0;i < rooms.Count; i++)
+        {
+            if (rooms[i].width * rooms[i].height > biggestRoom.width * biggestRoom.height)
+            {
+                biggestIndex = i;
+                biggestRoom = rooms[i];
+            }
+        }
+        return biggestIndex;
+    }
+    void RandomizeFraction() => fraction = (float)Random.Range(35, 66) / 100f;
 
     (RectInt, RectInt) SplitHorizontal(RectInt _origianalRoom, float _fraction)
     {
@@ -76,9 +106,18 @@ public class DungeonGenerator : MonoBehaviour
     void Update()
     {
         DrawRectangle(initialRoom, height + 1, Color.red);
-        foreach (RectInt room in rooms) { DrawRectangle(new(room.xMin + splitOffset, room.yMin + splitOffset, 
-            room.width - splitOffset, room.height - splitOffset), 
-            height, Color.magenta); }
+
+        foreach (RectInt _room in rooms) { DrawRectangle(new(_room.xMin + splitOffset, _room.yMin + splitOffset, 
+            _room.width - splitOffset, _room.height - splitOffset), 
+            height, Color.magenta);
+        }
+
+        foreach (RectInt _door in doors)
+        {
+            DrawRectangle(new(_door.xMin + splitOffset, _door.yMin + splitOffset,
+            _door.width - splitOffset, _door.height - splitOffset),
+            height, Color.blue);
+        }
     }
 
     public static void DrawRectangle(RectInt _room, float _height, Color _color)
