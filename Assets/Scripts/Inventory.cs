@@ -1,25 +1,26 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 [System.Serializable]
-public class InventoryItem
+public struct InventoryItem
 {
     public string itemName;
     public Texture2D itemSprite;
     public GameObject itemModel;
     public string toolTip;
     public bool isStackable;
-    public int maxStack = 1;
-    public int amountLeft = 1;
+    public int maxStack ;
+    public int amountLeft;
     [Header("Stats")]
     public float durability;
     public float currentDurability;
     public float damage;
     public float hpHealed;
-    public int amountOfTargets = 1;
+    public int amountOfTargets;
     public bool targetAll;
-    public int amountOfHits = 1;
+    public int amountOfHits;
     [Header("Properties")]
     public bool slotIsEmty;
     public bool isConsumedOnUse;
@@ -83,11 +84,11 @@ public class Inventory : MonoBehaviour
     {
         if (itemToAdd.isStackable)
         {
-            foreach (var item in currentInventory)
+            for (int i = 0; i < currentInventory.Length; i++)
             {
-                if (item.isStackable && item.amountLeft < item.maxStack)
+                if (currentInventory[i].isStackable && currentInventory[i].amountLeft < currentInventory[i].maxStack)
                 {
-                    item.amountLeft++;
+                    currentInventory[i].amountLeft++;
                     UpdateInventory();
                     return;
                 }
@@ -97,67 +98,18 @@ public class Inventory : MonoBehaviour
         {
             if (currentInventory[i].slotIsEmty)
             {
-                currentInventory[i] = ClonePreset(itemToAdd);
+                if (itemToAdd.maxStack == 0) itemToAdd.maxStack = 1;
+                if (itemToAdd.amountLeft == 0) itemToAdd.amountLeft = 1;
+                if (itemToAdd.amountOfTargets == 0) itemToAdd.amountOfTargets = 1;
+                if (itemToAdd.amountOfHits == 0) itemToAdd.amountOfHits = 1;
+
+                currentInventory[i] = itemToAdd;
                 UpdateInventory();
                 Debug.Log("Added " + itemToAdd.itemName + ", from " + this);
                 return;
             }
         }
         Debug.Log("Inventory full, from " + this);
-    }
-    InventoryItem ClonePreset(InventoryItem itemToAdd)
-    {
-        InventoryItem _clonedItem = new InventoryItem
-        {
-            slotIsEmty = false,
-            itemModel = itemToAdd.itemModel, 
-            itemName = itemToAdd.itemName,
-            isConsumedOnUse = itemToAdd.isConsumedOnUse,
-            isEmptyMicrowave = itemToAdd.isEmptyMicrowave,
-            isFood = itemToAdd.isFood,
-            isKnife = itemToAdd.isKnife,
-            isMetal = itemToAdd.isMetal,
-            isStackable = itemToAdd.isStackable,
-            isStoveIngredient = itemToAdd.isStoveIngredient,
-            inflictStuck = itemToAdd.inflictStuck,
-            itemSprite = itemToAdd.itemSprite,
-            fireImmunity = itemToAdd.fireImmunity,
-            damage = itemToAdd.damage,
-            damageAfterBlock = itemToAdd.damageAfterBlock,
-            damageScalesWithHP = itemToAdd.damageScalesWithHP,
-            durability = itemToAdd.durability,
-            durabilityBoost = itemToAdd.durabilityBoost,
-            amountLeft = itemToAdd.amountLeft,
-            amountOfHits = itemToAdd.amountOfHits,
-            amountOfTargets = itemToAdd.amountOfTargets,
-            canAttack = itemToAdd.canAttack,
-            onAttackHealHP = itemToAdd.onAttackHealHP,
-            targetAll = itemToAdd.targetAll,
-            canBlock = itemToAdd.canBlock,
-            canConsume = itemToAdd.canConsume,
-            canThrow = itemToAdd.canThrow,
-            consumesBread = itemToAdd.consumesBread,
-            curesOnFireWhenConsumed = itemToAdd.curesOnFireWhenConsumed,
-            foodBoost = itemToAdd.foodBoost,
-            foodResistanceBoost = itemToAdd.foodResistanceBoost,
-            grantsImmortality = itemToAdd.grantsImmortality,
-            healingBoost = itemToAdd.healingBoost,
-            hpHealed = itemToAdd.hpHealed,
-            inflictBlindness = itemToAdd.inflictBlindness,
-            inflictFakeBlood = itemToAdd.inflictFakeBlood,
-            inflictOnFire = itemToAdd.inflictOnFire,
-            inflictPoisoned = itemToAdd.inflictPoisoned,
-            seeEnemyInventories = itemToAdd.seeEnemyInventories,
-            knifeBoost = itemToAdd.knifeBoost,
-            maxStack = itemToAdd.maxStack,
-            toolTip = itemToAdd.toolTip,
-        };
-        if (itemToAdd.currentDurability != 0) _clonedItem.currentDurability = itemToAdd.currentDurability;
-        else _clonedItem.currentDurability = itemToAdd.durability;
-        //object _objWithValues = System.Activator.CreateInstance(itemToAdd.GetType());
-        //_clonedItem = _objWithValues as InventoryItem;
-
-        return _clonedItem;
     }
      public void RemoveItem(int index)
     {

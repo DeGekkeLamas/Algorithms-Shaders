@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemPresets : MonoBehaviour
@@ -7,6 +8,15 @@ public class ItemPresets : MonoBehaviour
         itemName = "Apron",
         foodResistanceBoost = true,
         toolTip = "What does your grandma's death have to do with the blo- tomato stains on this?"
+    };
+    public InventoryItem baguette = new InventoryItem
+    {
+        itemName = "Baguette",
+        isFood = true,
+        damage = 45,
+        durability = 10,
+        toolTip = "A French katana, or a French Japanese sword.",
+        canAttack = true,
     };
     public InventoryItem banana = new InventoryItem
     {

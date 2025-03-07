@@ -2630,64 +2630,6 @@ Transform:
   - {fileID: 1785740228}
   m_Father: {fileID: 132782394}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1908514579
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1908514582}
-  - component: {fileID: 1908514581}
-  - component: {fileID: 1908514580}
-  m_Layer: 0
-  m_Name: OtherInventory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1908514580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908514579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b29164f350be894e8ea125631cd8bae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: Kaas
---- !u!114 &1908514581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908514579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bb2091edd4bcd74491e24c0f39b1701, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1908514582
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908514579}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 43.180374, y: -4.1779313, z: 41.96068}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1923988869
 GameObject:
   m_ObjectHideFlags: 0
@@ -3463,6 +3405,814 @@ PrefabInstance:
       propertyPath: currentInventory.Array.data[2].itemModel
       value: 
       objectReference: {fileID: 919132149155446097, guid: 4cda69c66e4642642805242b9890c7d2, type: 3}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cake.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: fork.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: apron.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: egg.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: knife.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: knork.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pizza.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: plate.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spife.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spoon.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: sporf.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spork.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: towel.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: banana.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: butter.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cake.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cheese.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: fork.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: apron.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: bread.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: chefHat.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: egg.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: knife.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: knork.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pizza.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: plate.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: sausage.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spife.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spoon.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: sporf.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spork.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: toaster.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: tomato.itemModel
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: a8fd15390e7ff9245804f9cd77a49fa9, type: 3}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: towel.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: banana.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: butter.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cake.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cheese.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: dyingPan.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: fork.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: jalapeno.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: tomato.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: apron.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: bread.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cakeKnife.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: chefHat.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cryingPan.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: dryingPan.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: fryingPan.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: knife.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: knork.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pipingBag.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: plate.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: sausage.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spife.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spoon.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: sporf.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spork.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: toaster.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: towel.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: banana.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: butter.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cheese.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: dyingPan.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: egg.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: jalapeno.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: rawChicken.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: rollingPin.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: saltShaker.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spicyPizza.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: tomato.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: undyingPan.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cake.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cakeKnife.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cheesePizza.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: chefHat.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cryingPan.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: dryingPan.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: fork.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: fryingPan.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pipingBag.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: sausage.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: toaster.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: tomatoPizza.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: waterBottle.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: apron.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: bread.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cuttingBoard.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: dyingPan.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: jalapeno.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: knife.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: knork.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pepperShaker.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pizza.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: plate.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: rawChicken.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: rollingPin.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: saltShaker.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spicyPizza.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spife.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spoon.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: sporf.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spork.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: towel.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: undyingPan.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: waterBottle.itemModel
+      value: 
+      objectReference: {fileID: 919132149155446097, guid: b6e7d8da7dd773c4ea0f6fc7cb943f49, type: 3}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: banana.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: blessedCheese.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: butter.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cakeKnife.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cheese.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cheesePizza.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cryingPan.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: dryingPan.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: fork.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: fryingPan.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: ketchupBottle.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: mystifyingPan.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pipingBag.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: tomato.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: tomatoPizza.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: waterBottle.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: bread.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: chefHat.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cuttingBoard.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: emptyMicrowave.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: grilledChicken.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: identifyingPan.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: knife.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: knork.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pepperShaker.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pizza.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: rawChicken.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: rollingPin.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: saltShaker.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: sausage.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spife.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spoon.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spork.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: toaster.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: towel.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: undyingPan.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: blessedCheese.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cheese.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: dyingPan.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: jalapeno.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: ketchupBottle.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: loadedMicrowave.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: mystifyingPan.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: tomato.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: waterBottle.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cakeKnife.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cryingPan.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cuttingBoard.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: dryingPan.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: emptyMicrowave.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: fryingPan.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: grilledChicken.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: identifyingPan.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pepperShaker.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: blessedCheese.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: dyingPan.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: jalapeno.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: ketchupBottle.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: loadedMicrowave.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: mystifyingPan.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: rawChicken.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: rollingPin.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: saltShaker.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: spicyPizza.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: stainlessSteelPot.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: undyingPan.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cakeKnife.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cheesePizza.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cryingPan.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: dryingPan.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: emptyMicrowave.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: fryingPan.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: grilledChicken.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: identifyingPan.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: tomatoPizza.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: waterBottle.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: cuttingBoard.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: loadedMicrowave.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: pepperShaker.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: rawChicken.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: stainlessSteelPot.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: blessedCheese.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: ketchupBottle.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: waterBottle.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: emptyMicrowave.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: grilledCheeseSandwich.maxStack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: grilledChicken.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: identifyingPan.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: stainlessSteelPot.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: loadedMicrowave.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: grilledCheeseSandwich.amountLeft
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: identifyingPan.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: stainlessSteelPot.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: grilledCheeseSandwich.amountOfHits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: stainlessSteelPot.isStoveIngredient
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5293728399048542619, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: grilledCheeseSandwich.amountOfTargets
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7148870164262935656, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -3481,4 +4231,3 @@ SceneRoots:
   - {fileID: 1769553118}
   - {fileID: 1234952403}
   - {fileID: 132782394}
-  - {fileID: 1908514582}
