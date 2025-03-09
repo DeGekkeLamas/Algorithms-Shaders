@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
 {
-    RectInt initialRoom = new(0, 0, 100, 100);
+    public RectInt initialRoom = new(0, 0, 100, 100);
     //RectInt initialRoom = new(30, 30, 30, 30);
     public float height = 5;
 
@@ -14,6 +14,10 @@ public class DungeonGenerator : MonoBehaviour
     float fraction = 0.5f;
     public int splitDepth = 1;
     public int splitOffset = 1;
+
+    public int doorWidth = 1;
+
+    Graph<Vector2> dungeonGraph = new();
 
     private void Awake() => StartCoroutine(GenerateRooms());
     IEnumerator GenerateRooms()
@@ -39,6 +43,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             yield return new WaitForSeconds(0.1f);
         }
+        foreach (var room in rooms) { dungeonGraph.AddNode(room.center); }
 
         Debug.Log($"Generated all rooms, from {this}");
 
@@ -51,8 +56,18 @@ public class DungeonGenerator : MonoBehaviour
                     //Debug.Log($"Intersection between rooms {i} and {j}, from {this}");
 
                     var _newDoor = AlgorithmsUtils.Intersect(rooms[i], rooms[j]);
+
+                    _newDoor = new(
+                        (_newDoor.width <= 0) ? _newDoor.xMin - doorWidth : (_newDoor.xMin) + _newDoor.width/2,
+                        (_newDoor.height <= 0) ? _newDoor.yMin - doorWidth : (_newDoor.yMin) + _newDoor.height/2,
+                        (_newDoor.width <= 0) ? _newDoor.width + doorWidth : doorWidth,
+                        (_newDoor.height <= 0) ? _newDoor.height + doorWidth : doorWidth);
+
                     doors.Add(_newDoor);
-                    if (_newDoor.width == 0 && _newDoor.height == 0) doors.Remove(_newDoor);
+
+                    dungeonGraph.AddNode(_newDoor.center);
+                    dungeonGraph.AddEdge(_newDoor.center, rooms[i].center);
+                    dungeonGraph.AddEdge(_newDoor.center, rooms[j].center);
 
                     yield return new WaitForSeconds(0.1f);
                 }
@@ -60,6 +75,31 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         Debug.Log($"Generated all doors, from {this}");
+
+
+        List<Vector2> _pointsToRemove = new();
+
+        foreach (KeyValuePair<Vector2, List<Vector2>> point in dungeonGraph.adjacencyList)
+            if (point.Value.Count == 0) _pointsToRemove.Add(point.Key);
+
+        foreach (Vector2 point in _pointsToRemove)
+        {
+            RectInt _roomToRemove = GetRoomByCenter(point);
+
+            rooms.Remove(_roomToRemove);
+            if(dungeonGraph.adjacencyList.ContainsKey(point)) dungeonGraph.adjacencyList.Remove(point);
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        Debug.Log($"Removed inaccessible rooms, from {this}");
+    }
+
+    RectInt GetRoomByCenter(Vector2 centerToRemove)
+    {
+        foreach (var room in rooms) 
+            if (room.center == centerToRemove) 
+                return room;
+        return new(0, 0, 0, 0);
     }
     int GetBiggestRoom()
     {
@@ -119,8 +159,14 @@ public class DungeonGenerator : MonoBehaviour
         foreach (RectInt _door in doors)
         {
             DrawRectangle(new(_door.xMin + splitOffset, _door.yMin + splitOffset,
-            _door.width - splitOffset, _door.height - splitOffset),
+            _door.width, _door.height),
             height, Color.blue);
+        }
+
+        foreach(KeyValuePair<Vector2, List<Vector2>> point in dungeonGraph.adjacencyList)
+        {
+            for(int i = 0; i < point.Value.Count; i++)
+                Debug.DrawLine(new(point.Key.x, 1, point.Key.y), new(point.Value[i].x, 1, point.Value[i].y), Color.green);
         }
     }
 

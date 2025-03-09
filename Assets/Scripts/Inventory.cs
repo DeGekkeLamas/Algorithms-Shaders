@@ -52,6 +52,9 @@ public struct InventoryItem
     public bool canBlock;
     public bool canConsume;
     public bool canThrow;
+    [Header("Overworld properties")]
+    public bool hasOverworldUses;
+    public GameObject projectile;
 }
 public class Inventory : MonoBehaviour
 {
@@ -60,11 +63,9 @@ public class Inventory : MonoBehaviour
     public TMP_Text[] quantityCounters = new TMP_Text[5];
     public Texture2D HotbarItemBG;
 
-    ItemPresets presets;
     HotbarHover HH;
     private void Start()
     {
-        presets = this.GetComponent<ItemPresets>();
         HH = GameObject.FindFirstObjectByType<HotbarHover>().GetComponent<HotbarHover>();
         UpdateInventory();
     }

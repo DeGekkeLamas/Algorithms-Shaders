@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Graph<T>
 {
-     Dictionary<T, List<T>> adjacencyList;
+    public Dictionary<T, List<T>> adjacencyList;
     public Graph() { adjacencyList = new Dictionary<T, List<T>>(); }
     public void AddNode(T node)
     {

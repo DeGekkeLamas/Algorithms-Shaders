@@ -3,12 +3,7 @@ using UnityEngine;
 public class ItemCheats : MonoBehaviour
 {
     Inventory inventory;
-    ItemPresets presets;
-    private void Awake()
-    {
-        inventory = GetComponent<Inventory>();
-        presets = GetComponent<ItemPresets>();
-    }
+    private void Awake() => inventory = GetComponent<Inventory>();
     private void Update()
     {
         if (Input.GetKey(KeyCode.Equals))
