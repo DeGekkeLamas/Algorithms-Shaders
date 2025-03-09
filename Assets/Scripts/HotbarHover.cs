@@ -17,7 +17,7 @@ public class HotbarHover : MonoBehaviour
     private void Awake() => inventory = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Inventory>();
     public void MouseHover()
     {
-        Debug.Log("Mouse over " + this);
+        //Debug.Log("Mouse over " + this);
         itemSelected = itemNumber - 1;
         SetSelectedBorder(itemNumber - 1);
     }

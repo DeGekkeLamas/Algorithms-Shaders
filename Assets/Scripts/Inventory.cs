@@ -98,11 +98,6 @@ public class Inventory : MonoBehaviour
         {
             if (currentInventory[i].slotIsEmty)
             {
-                if (itemToAdd.maxStack == 0) itemToAdd.maxStack = 1;
-                if (itemToAdd.amountLeft == 0) itemToAdd.amountLeft = 1;
-                if (itemToAdd.amountOfTargets == 0) itemToAdd.amountOfTargets = 1;
-                if (itemToAdd.amountOfHits == 0) itemToAdd.amountOfHits = 1;
-
                 currentInventory[i] = itemToAdd;
                 UpdateInventory();
                 Debug.Log("Added " + itemToAdd.itemName + ", from " + this);
@@ -145,7 +140,7 @@ public class Inventory : MonoBehaviour
     }
 
     [ContextMenu("Test add item)")]
-    void AddItemTest() => AddItem(presets.cryingPan);
+    void AddItemTest() => AddItem(ItemPresets.presets["CryingPan"]);
 
     [ContextMenu("Test remove item)")]
     void RemoveItemTest() => RemoveItem(0);

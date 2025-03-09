@@ -5,9 +5,10 @@ public class AlgorithmsUtils
     
     public static bool Intersects(RectInt a, RectInt b)
     {
+        //Debug.Log($"{a.xMin < b.xMax}, {a.xMax > b.xMin}, {a.yMin < b.yMax}, {a.yMax > b.yMin}");
         return a.xMin < b.xMax &&
-               a.xMax > b.xMin &&
-               a.yMin < b.yMax &&
+               a.xMax >= b.xMin &&
+               a.yMin <= b.yMax &&
                a.yMax > b.yMin;
     }
     
@@ -17,15 +18,8 @@ public class AlgorithmsUtils
         int y = Mathf.Max(a.yMin, b.yMin);
         int width = Mathf.Min(a.xMax, b.xMax) - x;
         int height = Mathf.Min(a.yMax, b.yMax) - y;
-
-        if (width <= 0 || height <= 0)
-        {
-            return new RectInt();
-        }
-        else
-        {
-            return new RectInt(x, y, width, height);
-        }
+        
+        return new RectInt(x, y, width, height);
     }
     
     public static void FillRectangle(char[,] array, RectInt area, char value)

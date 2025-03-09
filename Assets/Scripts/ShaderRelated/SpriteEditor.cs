@@ -27,7 +27,10 @@ public class SpriteEditor : MonoBehaviour
     }
     public static Texture2D AddOutline(Texture2D originSprite)
     {
-        Color[] colors = DuplicateTexture(originSprite).GetPixels();
+        Color[] colors;
+        if (!originSprite.isReadable) colors = DuplicateTexture(originSprite).GetPixels();
+        else colors =originSprite.GetPixels();
+
         Color[] newColors = colors;
         Texture2D newSprite = new(originSprite.width, originSprite.height);
 

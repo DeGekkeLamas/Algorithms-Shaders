@@ -16,145 +16,148 @@ public class ItemCheats : MonoBehaviour
             switch(Input.inputString)
             {
                 case "q":
-                    inventory.AddItem(presets.apron);
+                    inventory.AddItem(ItemPresets.presets["Apron"]);
                     break;
                 case "w":
-                    inventory.AddItem(presets.banana);
+                    inventory.AddItem(ItemPresets.presets["Banana"]);
                     break;
                 case "e":
-                    inventory.AddItem(presets.bread);
+                    inventory.AddItem(ItemPresets.presets["Bread"]);
                     break;
                 case "r":
-                    inventory.AddItem(presets.butter);
+                    inventory.AddItem(ItemPresets.presets["Butter"]);
                     break;
                 case "t":
-                    inventory.AddItem(presets.cake);
+                    inventory.AddItem(ItemPresets.presets["Cake"]);
                     break;
                 case "y":
-                    inventory.AddItem(presets.cakeKnife);
+                    inventory.AddItem(ItemPresets.presets["CakeKnife"]);
                     break;
                 case "u":
-                    inventory.AddItem(presets.cheese);
+                    inventory.AddItem(ItemPresets.presets["Cheese"]);
                     break;
                 case "i":
-                    inventory.AddItem(presets.cheesePizza);
+                    inventory.AddItem(ItemPresets.presets["CheesePizza"]);
                     break;
                 case "o":
-                    inventory.AddItem(presets.chefHat);
+                    inventory.AddItem(ItemPresets.presets["ChefHat"]);
                     break;
                 case "p":
-                    inventory.AddItem(presets.cryingPan);
+                    inventory.AddItem(ItemPresets.presets["CryingPan"]);
                     break;
                 case "a":
-                    inventory.AddItem(presets.cuttingBoard);
+                    inventory.AddItem(ItemPresets.presets["CuttingBoard"]);
                     break;
                 case "s":
-                    inventory.AddItem(presets.dryingPan);
+                    inventory.AddItem(ItemPresets.presets["DryingPan"]);
                     break;
                 case "d":
-                    inventory.AddItem(presets.dyingPan);
+                    inventory.AddItem(ItemPresets.presets["DyingPan"]);
                     break;
                 case "f":
-                    inventory.AddItem(presets.egg);
+                    inventory.AddItem(ItemPresets.presets["Egg"]);
                     break;
                 case "g":
-                    inventory.AddItem(presets.emptyMicrowave);
+                    inventory.AddItem(ItemPresets.presets["EmptyMicrowave"]);
                     break;
                 case "h":
-                    inventory.AddItem(presets.fork);
+                    inventory.AddItem(ItemPresets.presets["Fork"]);
                     break;
                 case "j":
-                    inventory.AddItem(presets.fryingPan);
+                    inventory.AddItem(ItemPresets.presets["FryingPan"]);
                     break;
                 case "k":
-                    inventory.AddItem(presets.grilledCheeseSandwich);
+                    inventory.AddItem(ItemPresets.presets["GrilledCheeseSandwich"]);
                     break;
                 case "l":
-                    inventory.AddItem(presets.grilledChicken);
+                    inventory.AddItem(ItemPresets.presets["GrilledChicken"]);
                     break;
                 case "z":
-                    inventory.AddItem(presets.identifyingPan);
+                    inventory.AddItem(ItemPresets.presets["IdentifyingPan"]);
                     break;
                 case "x":
-                    inventory.AddItem(presets.jalapeno);
+                    inventory.AddItem(ItemPresets.presets["Jalapeno"]);
                     break;
                 case "c":
-                    inventory.AddItem(presets.ketchupBottle);
+                    inventory.AddItem(ItemPresets.presets["KetchupBottle"]);
                     break;
                 case "v":
-                    inventory.AddItem(presets.knife);
+                    inventory.AddItem(ItemPresets.presets["Knife"]);
                     break;
                 case "bb":
-                    inventory.AddItem(presets.knork);
+                    inventory.AddItem(ItemPresets.presets["Knork"]);
                     break;
                 case "n":
-                    inventory.AddItem(presets.loadedMicrowave);
+                    inventory.AddItem(ItemPresets.presets["LoadedMicrowave"]);
                     break;
                 case "m":
-                    inventory.AddItem(presets.mystifyingPan);
+                    inventory.AddItem(ItemPresets.presets["MystifyingPan"]);
                     break;
                 case "Q":
-                    inventory.AddItem(presets.pepperShaker);
+                    inventory.AddItem(ItemPresets.presets["PepperShaker"]);
                     break;
                 case "W":
-                    inventory.AddItem(presets.pipingBag);
+                    inventory.AddItem(ItemPresets.presets["PipingBag"]);
                     break;
                 case "E":
-                    inventory.AddItem(presets.pizza);
+                    inventory.AddItem(ItemPresets.presets["Pizza"]);
                     break;
                 case "R":
-                    inventory.AddItem(presets.plate);
+                    inventory.AddItem(ItemPresets.presets["Plate"]);
                     break;
                 case "T":
-                    inventory.AddItem(presets.rawChicken);
+                    inventory.AddItem(ItemPresets.presets["RawChicken"]);
                     break;
                 case "Y":
-                    inventory.AddItem(presets.rollingPin);
+                    inventory.AddItem(ItemPresets.presets["RollingPin"]);
                     break;
                 case "U":
-                    inventory.AddItem(presets.saltShaker);
+                    inventory.AddItem(ItemPresets.presets["SaltShaker"]);
                     break;
                 case "I":
-                    inventory.AddItem(presets.spicyPizza);
+                    inventory.AddItem(ItemPresets.presets["SpicyPizza"]);
                     break;
                 case "O":
-                    inventory.AddItem(presets.spife);
+                    inventory.AddItem(ItemPresets.presets["Spife"]);
                     break;
                 case "P":
-                    inventory.AddItem(presets.spoon);
+                    inventory.AddItem(ItemPresets.presets["Spoon"]);
                     break;
                 case "A":
-                    inventory.AddItem(presets.sporf);
+                    inventory.AddItem(ItemPresets.presets["Sporf"]);
                     break;
                 case "S":
-                    inventory.AddItem(presets.spork);
+                    inventory.AddItem(ItemPresets.presets["Spork"]);
                     break;
                 case "D":
-                    inventory.AddItem(presets.stainlessSteelPot);
+                    inventory.AddItem(ItemPresets.presets["StainlessSteelPot"]);
                     break;
                 case "F":
-                    inventory.AddItem(presets.sausage);
+                    inventory.AddItem(ItemPresets.presets["Sausage"]);
                     break;
                 case "G":
-                    inventory.AddItem(presets.toaster);
+                    inventory.AddItem(ItemPresets.presets["Toaster"]);
                     break;
                 case "H":
-                    inventory.AddItem(presets.tomato);
+                    inventory.AddItem(ItemPresets.presets["Tomato"]);
                     break;
                 case "J":
-                    inventory.AddItem(presets.tomatoPizza);
+                    inventory.AddItem(ItemPresets.presets["TomatoPizza"]);
                     break;
                 case "K":
-                    inventory.AddItem(presets.towel);
+                    inventory.AddItem(ItemPresets.presets["Towel"]);
                     break;
                 case "L":
-                    inventory.AddItem(presets.waterBottle);
+                    inventory.AddItem(ItemPresets.presets["WaterBottle"]);
+                    break;
+                case "Z":
+                    inventory.AddItem(ItemPresets.presets["Baguette"]);
                     break;
                 case "1":
-                    inventory.AddItem(presets.blessedCheese);
+                    inventory.AddItem(ItemPresets.presets["BlessedCheese"]);
                     break;
                 case "2":
-                    inventory.AddItem(presets.undyingPan);
+                    inventory.AddItem(ItemPresets.presets["UndyingPan"]);
                     break;
 
                 case "-":

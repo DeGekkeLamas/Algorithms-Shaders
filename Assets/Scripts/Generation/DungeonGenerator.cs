@@ -42,15 +42,19 @@ public class DungeonGenerator : MonoBehaviour
 
         Debug.Log($"Generated all rooms, from {this}");
 
-        Debug.Log(rooms.Count);
         for (int i = 0;i < rooms.Count; i++)
         {
-            for (int j = 0; j < rooms.Count; j++)
+            for (int j = i; j < rooms.Count; j++)
             {
                 if (i != j && AlgorithmsUtils.Intersects(rooms[i], rooms[j]))
                 {
-                    doors.Add(AlgorithmsUtils.Intersect(rooms[i], rooms[j]));
-                    yield return new WaitForSeconds(0.25f);
+                    //Debug.Log($"Intersection between rooms {i} and {j}, from {this}");
+
+                    var _newDoor = AlgorithmsUtils.Intersect(rooms[i], rooms[j]);
+                    doors.Add(_newDoor);
+                    if (_newDoor.width == 0 && _newDoor.height == 0) doors.Remove(_newDoor);
+
+                    yield return new WaitForSeconds(0.1f);
                 }
             }
         }
@@ -124,6 +128,6 @@ public class DungeonGenerator : MonoBehaviour
     {
         DebugExtension.DebugBounds(new Bounds(new Vector3(_room.center.x, 0, _room.center.y), 
             new Vector3(_room.width, _height, _room.height)),
-            _color, 1);
+            _color, 0.1f);
     }
 }
