@@ -79,16 +79,14 @@ public class DungeonGenerator : MonoBehaviour
 
         List<Vector2> _pointsToRemove = new();
 
-        foreach (KeyValuePair<Vector2, List<Vector2>> point in dungeonGraph.adjacencyList)
-            if (point.Value.Count == 0) _pointsToRemove.Add(point.Key);
-
-        foreach (Vector2 point in _pointsToRemove)
+        for(int i = 0; i < rooms.Count; i++)
         {
-            RectInt _roomToRemove = GetRoomByCenter(point);
-
-            rooms.Remove(_roomToRemove);
-            if(dungeonGraph.adjacencyList.ContainsKey(point)) dungeonGraph.adjacencyList.Remove(point);
-            yield return new WaitForSeconds(0.1f);
+            if (dungeonGraph.adjacencyList[ rooms[i].center ].Count == 0)
+            {
+                dungeonGraph.adjacencyList.Remove(rooms[i].center);
+                rooms.RemoveAt(i);
+                i--;
+            }
         }
 
         Debug.Log($"Removed inaccessible rooms, from {this}");
