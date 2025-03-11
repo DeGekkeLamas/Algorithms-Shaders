@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class DungeonGenerator : MonoBehaviour
 {
     public RectInt initialRoom = new(0, 0, 100, 100);
-    //RectInt initialRoom = new(30, 30, 30, 30);
+    RectInt originRoom;
     public float height = 5;
 
     public List<RectInt> rooms = new(1);
@@ -48,6 +49,7 @@ public class DungeonGenerator : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         foreach (var room in rooms) { dungeonGraph.AddNode(room.center); }
+        originRoom = GetNearestToOrigin();
 
         Debug.Log($"Generated all rooms, from {this}");
 
@@ -92,20 +94,11 @@ public class DungeonGenerator : MonoBehaviour
 
         Debug.Log($"Generated all doors, from {this}");
 
-        // Removed inaccessible rooms
-        List<Vector2> _accessibleRooms = dungeonGraph.BFS(rooms[0].center);
-        foreach (Vector2 room in _accessibleRooms)
-        {
-            if (!dungeonGraph.adjacencyList.ContainsKey(room))
-            {
-
-            }
-        }
-
+        // Removes rooms with 0 doors
         int _doorsRemoved = 0;
-        for(int i = 0; i < rooms.Count; i++)
+        for (int i = 0; i < rooms.Count; i++)
         {
-            if (dungeonGraph.adjacencyList[ rooms[i].center ].Count == 0)
+            if (dungeonGraph.adjacencyList[rooms[i].center].Count == 0)
             {
                 dungeonGraph.adjacencyList.Remove(rooms[i].center);
                 rooms.RemoveAt(i);
@@ -114,6 +107,24 @@ public class DungeonGenerator : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
         }
+
+        // removed rooms with doors but no way to reach origin
+        List<Vector2> _accessibleRooms = dungeonGraph.BFS(originRoom.center);
+
+        List<Vector2> _roomsToRemove = new();
+        foreach (KeyValuePair<Vector2, List<Vector2>> point in dungeonGraph.adjacencyList)
+        {
+            if (!_accessibleRooms.Contains(point.Key)) _roomsToRemove.Add(point.Key);
+        }
+        foreach(Vector2 room in _roomsToRemove)
+        {
+            foreach (Vector2 door in dungeonGraph.adjacencyList[room])
+                doors.Remove(GetDoorByCenter(door));
+            rooms.Remove(GetRoomByCenter(room));
+            dungeonGraph.adjacencyList.Remove(room);
+            yield return new WaitForSeconds(0.1f);
+        }
+
 
         Debug.Log($"Removed {_doorsRemoved} inaccessible rooms, from {this}");
     }
@@ -132,6 +143,24 @@ public class DungeonGenerator : MonoBehaviour
         }
         return biggestIndex;
     }
+    RectInt GetNearestToOrigin()
+    {
+        RectInt _origin = rooms[0];
+        foreach(RectInt room in rooms)
+            if (room.center.magnitude < _origin.center.magnitude) _origin = room;
+        return _origin;
+    }
+    RectInt GetRoomByCenter(Vector2 center)
+    {
+        foreach(RectInt room in rooms) if (room.center == center) return room;
+        return new(0, 0, 0, 0);
+    }
+    RectInt GetDoorByCenter(Vector2 center)
+    {
+        foreach (RectInt door in doors) if (door.center == center) return door;
+        return new(0, 0, 0, 0);
+    }
+
     void RandomizeFraction() => fraction = (float)Random.Range(35, 66) / 100f;
 
     (RectInt, RectInt) SplitHorizontal(RectInt _origianalRoom, float _fraction)
@@ -170,6 +199,8 @@ public class DungeonGenerator : MonoBehaviour
             _room.width - splitOffset, _room.height - splitOffset), 
             height, Color.magenta);
         }
+        if (originRoom != new RectInt(0,0,0,0)) DrawRectangle(new(originRoom.xMin + splitOffset, originRoom.yMin + splitOffset,
+            originRoom.width - splitOffset, originRoom.height - splitOffset), height + 1, Color.cyan);
 
         // Draws doors
         foreach (RectInt _door in doors)
