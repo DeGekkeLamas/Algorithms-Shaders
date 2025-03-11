@@ -11,11 +11,14 @@ public class DungeonGenerator : MonoBehaviour
     public List<RectInt> rooms = new(1);
     public List<RectInt> doors = new(1);
 
+    public List<RectInt> removedDoors = new(1);
+
     float fraction = 0.5f;
-    public int splitDepth = 1;
+    public int splitDepth;
     public int splitOffset = 1;
 
     public int doorWidth = 1;
+    public int maxDoorsPerRoom = 3;
 
     Graph<Vector2> dungeonGraph = new();
 
@@ -26,6 +29,7 @@ public class DungeonGenerator : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
 
+        // Room generation
         for (int i = 0; i < splitDepth; i++)
         {
             int _biggestRoom = GetBiggestRoom();
@@ -47,21 +51,33 @@ public class DungeonGenerator : MonoBehaviour
 
         Debug.Log($"Generated all rooms, from {this}");
 
+        // Door generation
+        int _tolerance = 3;
         for (int i = 0;i < rooms.Count; i++)
         {
             for (int j = i; j < rooms.Count; j++)
             {
-                if (i != j && AlgorithmsUtils.Intersects(rooms[i], rooms[j]))
+                if (i != j && AlgorithmsUtils.Intersects(rooms[i], rooms[j]) && 
+                    dungeonGraph.adjacencyList[rooms[i].center].Count < maxDoorsPerRoom &&
+                    dungeonGraph.adjacencyList[rooms[j].center].Count < maxDoorsPerRoom)
                 {
-                    //Debug.Log($"Intersection between rooms {i} and {j}, from {this}");
-
                     var _newDoor = AlgorithmsUtils.Intersect(rooms[i], rooms[j]);
 
                     _newDoor = new(
-                        (_newDoor.width <= 0) ? _newDoor.xMin - doorWidth : (_newDoor.xMin) + _newDoor.width/2,
-                        (_newDoor.height <= 0) ? _newDoor.yMin - doorWidth : (_newDoor.yMin) + _newDoor.height/2,
+                        (_newDoor.width <= 0) ? _newDoor.xMin - doorWidth/2 : (_newDoor.xMin) + _newDoor.width/2,
+                        (_newDoor.height <= 0) ? _newDoor.yMin - doorWidth/2 : (_newDoor.yMin) + _newDoor.height/2,
                         (_newDoor.width <= 0) ? _newDoor.width + doorWidth : doorWidth,
                         (_newDoor.height <= 0) ? _newDoor.height + doorWidth : doorWidth);
+
+                    if (Mathf.Abs(rooms[i].center.x - _newDoor.center.x) > rooms[i].width / _tolerance &&
+                        Mathf.Abs(rooms[i].center.y - _newDoor.center.y) > rooms[i].height / _tolerance ||
+                        Mathf.Abs(rooms[j].center.x - _newDoor.center.x) > rooms[j].width / _tolerance &&
+                        Mathf.Abs(rooms[j].center.y - _newDoor.center.y) > rooms[j].height / _tolerance)
+                    {
+                        Debug.Log($"Removed corner door, from {this}");
+                        removedDoors.Add(_newDoor);
+                        continue;
+                    }
 
                     doors.Add(_newDoor);
 
@@ -76,28 +92,30 @@ public class DungeonGenerator : MonoBehaviour
 
         Debug.Log($"Generated all doors, from {this}");
 
+        // Removed inaccessible rooms
+        List<Vector2> _accessibleRooms = dungeonGraph.BFS(rooms[0].center);
+        foreach (Vector2 room in _accessibleRooms)
+        {
+            if (!dungeonGraph.adjacencyList.ContainsKey(room))
+            {
 
-        List<Vector2> _pointsToRemove = new();
+            }
+        }
 
+        int _doorsRemoved = 0;
         for(int i = 0; i < rooms.Count; i++)
         {
             if (dungeonGraph.adjacencyList[ rooms[i].center ].Count == 0)
             {
                 dungeonGraph.adjacencyList.Remove(rooms[i].center);
                 rooms.RemoveAt(i);
+                _doorsRemoved++;
                 i--;
+                yield return new WaitForSeconds(0.1f);
             }
         }
 
-        Debug.Log($"Removed inaccessible rooms, from {this}");
-    }
-
-    RectInt GetRoomByCenter(Vector2 centerToRemove)
-    {
-        foreach (var room in rooms) 
-            if (room.center == centerToRemove) 
-                return room;
-        return new(0, 0, 0, 0);
+        Debug.Log($"Removed {_doorsRemoved} inaccessible rooms, from {this}");
     }
     int GetBiggestRoom()
     {
@@ -127,7 +145,6 @@ public class DungeonGenerator : MonoBehaviour
                                     _origianalRoom.yMin + (int)(_origianalRoom.height * _fraction),
                                     _origianalRoom.width, 
                                     _origianalRoom.height - _roomA.height);
-        //rooms.Remove(_origianalRoom);
         return (_roomA, _roomB);
     }
     (RectInt, RectInt) SplitVertical(RectInt _origianalRoom, float _fraction)
@@ -141,7 +158,6 @@ public class DungeonGenerator : MonoBehaviour
                                     _origianalRoom.yMin,
                                     _origianalRoom.width - _roomA.width,
                                     _origianalRoom.height);
-        //rooms.Remove(_origianalRoom);
         return (_roomA, _roomB);
     }
 
@@ -149,19 +165,30 @@ public class DungeonGenerator : MonoBehaviour
     {
         DrawRectangle(initialRoom, height + 1, Color.red);
 
+        // Draws rooms
         foreach (RectInt _room in rooms) { DrawRectangle(new(_room.xMin + splitOffset, _room.yMin + splitOffset, 
             _room.width - splitOffset, _room.height - splitOffset), 
             height, Color.magenta);
         }
 
+        // Draws doors
         foreach (RectInt _door in doors)
         {
-            DrawRectangle(new(_door.xMin + splitOffset, _door.yMin + splitOffset,
+            DrawRectangle(new(_door.xMin, _door.yMin,
             _door.width, _door.height),
             height, Color.blue);
         }
 
-        foreach(KeyValuePair<Vector2, List<Vector2>> point in dungeonGraph.adjacencyList)
+        // Draws removed doors
+        foreach (RectInt _door in removedDoors)
+        {
+            DrawRectangle(new(_door.xMin, _door.yMin,
+            _door.width, _door.height),
+            height, Color.black);
+        }
+
+        // Draws graph lines
+        foreach (KeyValuePair<Vector2, List<Vector2>> point in dungeonGraph.adjacencyList)
         {
             for(int i = 0; i < point.Value.Count; i++)
                 Debug.DrawLine(new(point.Key.x, 1, point.Key.y), new(point.Value[i].x, 1, point.Value[i].y), Color.green);

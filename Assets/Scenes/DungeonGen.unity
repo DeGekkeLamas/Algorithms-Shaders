@@ -135,7 +135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &168485409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,9 +200,11 @@ MonoBehaviour:
   height: 5
   rooms: []
   doors: []
+  removedDoors: []
   splitDepth: 16
   splitOffset: 2
-  doorWidth: 3
+  doorWidth: 4
+  maxDoorsPerRoom: 3
 --- !u!4 &1256635334
 Transform:
   m_ObjectHideFlags: 0

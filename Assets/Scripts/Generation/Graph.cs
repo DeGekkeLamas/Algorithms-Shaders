@@ -24,5 +24,62 @@ public class Graph<T>
     {
         foreach(KeyValuePair<T, List<T>> kvp in adjacencyList) Debug.Log($"{kvp.Key}, { kvp.Value}");
     }
+
+    public List<T> BFS(T _start)
+    {
+        if (!adjacencyList.ContainsKey(_start)) {
+            Debug.LogWarning($"{_start} doesn't exist dumbass, from {this}");
+            return new();
+        }
+
+        List<T> visitedList = new();
+        Queue<T> queue = new();
+        queue.Enqueue(_start);
+        visitedList.Add(_start);
+
+        while(queue.Count > 0)
+        {
+            _start = queue.Dequeue();
+            //Debug.Log(_start);
+
+            foreach (T w in adjacencyList[_start]) 
+            {
+                if (!visitedList.Contains(w))
+                {
+                    queue.Enqueue(w);
+                    visitedList.Add(w);
+                }
+            }
+        }
+        return visitedList;
+    }
+    public void DFS(T _start)
+    {
+        if (!adjacencyList.ContainsKey(_start))
+        {
+            Debug.LogWarning($"{_start} doesn't exist dumbass, from {this}");
+            return;
+        }
+
+        List<T> visitedList = new();
+        Stack<T> stack = new();
+        stack.Push(_start);
+        visitedList.Add (_start);
+
+        while(stack.Count > 0)
+        {
+            _start = stack.Pop();
+            Debug.Log(_start);
+
+            foreach(T w in adjacencyList[_start])
+            {
+                if (!visitedList.Contains(w))
+                {
+                    stack.Push(w);
+                    visitedList.Add(w);
+                }
+            }
+        }
+    }
 }
 
