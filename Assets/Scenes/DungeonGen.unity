@@ -195,16 +195,18 @@ MonoBehaviour:
   initialRoom:
     x: 0
     y: 0
-    width: 150
-    height: 150
+    width: 100
+    height: 100
   height: 5
   rooms: []
   doors: []
   removedDoors: []
-  splitDepth: 16
+  roomMaxSize: 1000
   splitOffset: 2
+  generationInterval: 0.1
   doorWidth: 4
   maxDoorsPerRoom: 3
+  maxDoorsForOriginRoom: 1
 --- !u!4 &1256635334
 Transform:
   m_ObjectHideFlags: 0

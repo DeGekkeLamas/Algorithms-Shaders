@@ -15,11 +15,13 @@ public class DungeonGenerator : MonoBehaviour
     public List<RectInt> removedDoors = new(1);
 
     float fraction = 0.5f;
-    public int splitDepth;
-    public int splitOffset = 1;
+    public float roomMaxSize = 1000;
+    public int splitOffset = 2;
+    public float generationInterval = .1f;
 
     public int doorWidth = 1;
     public int maxDoorsPerRoom = 3;
+    public int maxDoorsForOriginRoom = 1;
 
     Graph<Vector2> dungeonGraph = new();
 
@@ -31,7 +33,25 @@ public class DungeonGenerator : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         // Room generation
-        for (int i = 0; i < splitDepth; i++)
+        while (rooms[GetBiggestRoom()].width * rooms[GetBiggestRoom()].height > roomMaxSize)
+        {
+            int _biggestRoom = GetBiggestRoom();
+
+            RandomizeFraction();
+            if (rooms[_biggestRoom].width > rooms[_biggestRoom].height)
+            {
+                rooms.Add(SplitVertical(rooms[_biggestRoom], fraction).Item1);
+                rooms[_biggestRoom] = SplitVertical(rooms[_biggestRoom], fraction).Item2;
+            }
+            else
+            {
+                rooms.Add(SplitHorizontal(rooms[_biggestRoom], fraction).Item1);
+                rooms[_biggestRoom] = SplitHorizontal(rooms[_biggestRoom], fraction).Item2;
+            }
+            yield return new WaitForSeconds(generationInterval);
+        }
+
+        /**for (int i = 0; i < splitDepth; i++)
         {
             int _biggestRoom = GetBiggestRoom();
 
@@ -47,9 +67,9 @@ public class DungeonGenerator : MonoBehaviour
                 rooms[_biggestRoom] = SplitHorizontal(rooms[_biggestRoom], fraction).Item2;
             }
             yield return new WaitForSeconds(0.1f);
-        }
+        }**/
         foreach (var room in rooms) { dungeonGraph.AddNode(room.center); }
-        originRoom = GetNearestToOrigin();
+        originRoom = rooms[GetNearestToOrigin()];
 
         Debug.Log($"Generated all rooms, from {this}");
 
@@ -60,8 +80,10 @@ public class DungeonGenerator : MonoBehaviour
             for (int j = i; j < rooms.Count; j++)
             {
                 if (i != j && AlgorithmsUtils.Intersects(rooms[i], rooms[j]) && 
-                    dungeonGraph.adjacencyList[rooms[i].center].Count < maxDoorsPerRoom &&
-                    dungeonGraph.adjacencyList[rooms[j].center].Count < maxDoorsPerRoom)
+                    (rooms[i] != originRoom && dungeonGraph.adjacencyList[rooms[i].center].Count < maxDoorsPerRoom || 
+                    rooms[i] == originRoom && dungeonGraph.adjacencyList[rooms[i].center].Count < maxDoorsForOriginRoom) &&
+                    (rooms[j] != originRoom && dungeonGraph.adjacencyList[rooms[j].center].Count < maxDoorsPerRoom ||
+                    rooms[j] == originRoom && dungeonGraph.adjacencyList[rooms[j].center].Count < maxDoorsForOriginRoom))
                 {
                     var _newDoor = AlgorithmsUtils.Intersect(rooms[i], rooms[j]);
 
@@ -78,6 +100,7 @@ public class DungeonGenerator : MonoBehaviour
                     {
                         Debug.Log($"Removed corner door, from {this}");
                         removedDoors.Add(_newDoor);
+                        yield return new WaitForSeconds(generationInterval);
                         continue;
                     }
 
@@ -87,7 +110,7 @@ public class DungeonGenerator : MonoBehaviour
                     dungeonGraph.AddEdge(_newDoor.center, rooms[i].center);
                     dungeonGraph.AddEdge(_newDoor.center, rooms[j].center);
 
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(generationInterval);
                 }
             }
         }
@@ -108,7 +131,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        // removed rooms with doors but no way to reach origin
+        // removes rooms with doors but no way to reach origin
         List<Vector2> _accessibleRooms = dungeonGraph.BFS(originRoom.center);
 
         List<Vector2> _roomsToRemove = new();
@@ -119,10 +142,14 @@ public class DungeonGenerator : MonoBehaviour
         foreach(Vector2 room in _roomsToRemove)
         {
             foreach (Vector2 door in dungeonGraph.adjacencyList[room])
+            {
                 doors.Remove(GetDoorByCenter(door));
+                //dungeonGraph.adjacencyList.Remove(door);
+            }
+
             rooms.Remove(GetRoomByCenter(room));
             dungeonGraph.adjacencyList.Remove(room);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(generationInterval);
         }
 
 
@@ -143,11 +170,11 @@ public class DungeonGenerator : MonoBehaviour
         }
         return biggestIndex;
     }
-    RectInt GetNearestToOrigin()
+    int GetNearestToOrigin()
     {
-        RectInt _origin = rooms[0];
-        foreach(RectInt room in rooms)
-            if (room.center.magnitude < _origin.center.magnitude) _origin = room;
+        int _origin = 0;
+        for(int i = 0; i < rooms.Count; i++)
+            if (rooms[i].center.magnitude < rooms[_origin].center.magnitude) _origin = i;
         return _origin;
     }
     RectInt GetRoomByCenter(Vector2 center)
