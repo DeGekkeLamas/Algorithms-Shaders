@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Rendering.CameraUI;
 
 public class SpriteEditor : MonoBehaviour
 {
@@ -69,6 +70,25 @@ public class SpriteEditor : MonoBehaviour
                 }
                 newColors[_index] = output;
             }
+        }
+
+        newSprite.SetPixels(newColors);
+        newSprite.Apply();
+        return newSprite;
+    }
+    public static Texture2D MakeGrayScale(Texture2D originSprite)
+    {
+        Color[] colors;
+        if (!originSprite.isReadable) colors = DuplicateTexture(originSprite).GetPixels();
+        else colors = originSprite.GetPixels();
+
+        Color[] newColors = colors;
+        Texture2D newSprite = new(originSprite.width, originSprite.height);
+
+        for(int i = 0; i < colors.Length; i++)
+        {
+            Color.RGBToHSV(colors[i], out float H, out float S, out float V);
+            newColors[i] = Color.HSVToRGB(H, 0, V);
         }
 
         newSprite.SetPixels(newColors);

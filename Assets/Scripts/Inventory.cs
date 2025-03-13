@@ -59,16 +59,28 @@ public struct InventoryItem
 public class Inventory : MonoBehaviour
 {
     public InventoryItem[] currentInventory = new InventoryItem[5];
+
+    [Header("UI")]
     public Image[] Hotbar = new Image[5];
     public TMP_Text[] quantityCounters = new TMP_Text[5];
     public Texture2D HotbarItemBG;
 
+    static Inventory reference;
+
     HotbarHover HH;
-    private void Start()
+
+    private void Awake()
     {
+        if (reference == null)
+        {
+            reference = this;
+            DontDestroyOnLoad(this);
+        }
+        else Destroy(this);
+
         HH = GameObject.FindFirstObjectByType<HotbarHover>().GetComponent<HotbarHover>();
-        UpdateInventory();
     }
+    private void Start() => UpdateInventory();
     void Update()
     {
         if (Input.mouseScrollDelta.y != 0)
@@ -114,15 +126,18 @@ public class Inventory : MonoBehaviour
     }
 
     [ContextMenu("Update inventory")]
-    void UpdateInventory()
+    public void UpdateInventory()
     {
         for (int i = 0; i < currentInventory.Length; i++)
         {
             if (currentInventory[i].itemModel != null)
             {
                 currentInventory[i].itemSprite = RuntimePreviewGenerator.GenerateModelPreview(currentInventory[i].itemModel.transform, 256, 256, false, true);
+                
                 currentInventory[i].itemSprite = SpriteEditor.AddOutline(currentInventory[i].itemSprite);
-                //currentInventory[i].itemSprite = SpriteEditor.AddOutline(currentInventory[i].itemSprite);
+
+                if (!currentInventory[i].hasOverworldUses && !GameManager.isInBattle)
+                    currentInventory[i].itemSprite = SpriteEditor.MakeGrayScale(currentInventory[i].itemSprite);
             }
             else currentInventory[i].itemSprite = HotbarItemBG;
 
