@@ -12,13 +12,12 @@ public class HotbarHover : MonoBehaviour
     public TMP_Text itemname;
     public TMP_Text description;
     public GameObject[] selectedBorders = new GameObject[5];
-    public static int itemSelected;
 
     private void Awake() => inventory = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Inventory>();
     public void MouseHover()
     {
         //Debug.Log("Mouse over " + this);
-        itemSelected = itemNumber - 1;
+        Inventory.itemSelected = itemNumber - 1;
         SetSelectedBorder(itemNumber - 1);
     }
 

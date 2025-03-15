@@ -509,7 +509,8 @@ public class ItemPresets : MonoBehaviour
             inflictStuck = true,
             isFood = true,
             toolTip = "You cheated to get this item =)",
-            canAttack = true
+            canAttack = true,
+            hasOverworldUses = true,
         };
         presets["UndyingPan"] = new InventoryItem
         {

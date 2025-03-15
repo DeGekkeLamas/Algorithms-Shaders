@@ -54,7 +54,7 @@ public struct InventoryItem
     public bool canThrow;
     [Header("Overworld properties")]
     public bool hasOverworldUses;
-    public GameObject projectile;
+    public Rigidbody projectile;
 }
 public class Inventory : MonoBehaviour
 {
@@ -64,6 +64,7 @@ public class Inventory : MonoBehaviour
     public Image[] Hotbar = new Image[5];
     public TMP_Text[] quantityCounters = new TMP_Text[5];
     public Texture2D HotbarItemBG;
+    public static int itemSelected;
 
     static Inventory reference;
 
@@ -86,10 +87,10 @@ public class Inventory : MonoBehaviour
         if (Input.mouseScrollDelta.y != 0)
         {
             float _direction = (Input.mouseScrollDelta.y > 0) ? -1 : 1;
-            HotbarHover.itemSelected += Mathf.RoundToInt(_direction);
-            if (HotbarHover.itemSelected < 0) HotbarHover.itemSelected = 4;
-            if (HotbarHover.itemSelected > 4) HotbarHover.itemSelected = 0;
-            HH.SetSelectedBorder(HotbarHover.itemSelected);
+            itemSelected += Mathf.RoundToInt(_direction);
+            if (itemSelected < 0) itemSelected = 4;
+            if (itemSelected > 4) itemSelected = 0;
+            HH.SetSelectedBorder(itemSelected);
         }
     }
 
@@ -144,7 +145,7 @@ public class Inventory : MonoBehaviour
             Hotbar[i].sprite = Sprite.Create(currentInventory[i].itemSprite, new Rect(0.0f, 0.0f, 
                 currentInventory[i].itemSprite.width, currentInventory[i].itemSprite.height), new Vector2(0, 0));
 
-            HH.SetSelectedBorder(HotbarHover.itemSelected);
+            HH.SetSelectedBorder(itemSelected);
 
             if (currentInventory[i].isStackable)
             {

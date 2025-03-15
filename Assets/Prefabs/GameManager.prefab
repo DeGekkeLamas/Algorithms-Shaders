@@ -2385,7 +2385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6344304053365704841}
   m_Layer: 0
-  m_Name: ItemThumbs
+  m_Name: HotBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2500,7 +2500,7 @@ GameObject:
   - component: {fileID: 5267894825740193886}
   - component: {fileID: 6598300183471032173}
   m_Layer: 5
-  m_Name: ItemTips
+  m_Name: ItemDescription
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3612,6 +3612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1413741798407944745}
   - component: {fileID: 3377598894811355491}
+  - component: {fileID: 1807757889685326516}
   - component: {fileID: 5293728399048542619}
   - component: {fileID: 2990881938606332820}
   m_Layer: 0
@@ -3652,7 +3653,7 @@ MonoBehaviour:
   currentInventory:
   - itemName: 
     itemSprite: {fileID: 0}
-    itemModel: {fileID: 919132149155446097, guid: bae3b18278764f744b622a60310b4521, type: 3}
+    itemModel: {fileID: 0}
     toolTip: 
     isStackable: 0
     maxStack: 1
@@ -3697,7 +3698,7 @@ MonoBehaviour:
     projectile: {fileID: 0}
   - itemName: 
     itemSprite: {fileID: 0}
-    itemModel: {fileID: 919132149155446097, guid: a8fd15390e7ff9245804f9cd77a49fa9, type: 3}
+    itemModel: {fileID: 0}
     toolTip: 
     isStackable: 0
     maxStack: 1
@@ -3742,7 +3743,7 @@ MonoBehaviour:
     projectile: {fileID: 0}
   - itemName: 
     itemSprite: {fileID: 0}
-    itemModel: {fileID: 919132149155446097, guid: 4cda69c66e4642642805242b9890c7d2, type: 3}
+    itemModel: {fileID: 0}
     toolTip: 
     isStackable: 0
     maxStack: 1
@@ -3888,10 +3889,22 @@ MonoBehaviour:
   - {fileID: 453922507873886351}
   - {fileID: 1019380545701234030}
   HotbarItemBG: {fileID: 2800000, guid: f3f4f7d01c46ce5468bee5012f504649, type: 3}
-  hotBar: {fileID: 0}
-  itemDescription: {fileID: 0}
-  battleUIPosition: {x: 0, y: 0, z: 0}
-  overworldUIPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &1807757889685326516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7148870164262935656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49dd665afb07194283e35bcc1d27119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hotBar: {fileID: 4886532645219844462}
+  itemDescription: {fileID: 5001704730604281708}
+  battleUIPosition: {x: 342.5, y: 195, z: 0}
+  overworldUIPosition: {x: 180, y: 495, z: 0}
 --- !u!114 &5293728399048542619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3919,7 +3932,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: a8fd15390e7ff9245804f9cd77a49fa9, type: 3}
   - {fileID: 919132149155446097, guid: 25f3956d6acf477478bb1e1ed105a35b, type: 3}
   - {fileID: 919132149155446097, guid: b6e7d8da7dd773c4ea0f6fc7cb943f49, type: 3}
-  placeholderModel: {fileID: 0}
+  placeholderModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
 --- !u!114 &2990881938606332820
 MonoBehaviour:
   m_ObjectHideFlags: 0
