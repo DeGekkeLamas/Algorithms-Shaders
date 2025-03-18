@@ -550,7 +550,7 @@ public class ItemPresets : MonoBehaviour
     Rigidbody GetProjectileByName(string _name)
     {
         foreach (var projectile in projectiles)
-            if (projectile.name.Replace("Projectile", "") == _name) return projectile;
+            if (projectile.name == _name + "Projectile") return projectile;
 
         return placeholderProjectile;
     }

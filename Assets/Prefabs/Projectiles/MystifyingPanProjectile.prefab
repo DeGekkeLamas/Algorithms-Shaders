@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8806985211751940049}
   - component: {fileID: -4791254542994142077}
   m_Layer: 7
-  m_Name: PlaceholderProjectile
+  m_Name: MystifyingPanProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1a333e06641a2214fb44de1be230820d, type: 2}
+  - {fileID: 2100000, guid: b5d1d86a9cf2e0a4a99cf88ebefcb76e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -151,6 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 20
   useGravity: 0
-  expands: 0
+  expands: 1
   expansionFactor: 1.1
   maxExpansion: 5

@@ -55,6 +55,9 @@ public struct InventoryItem
     [Header("Overworld properties")]
     public bool hasOverworldUses;
     public Rigidbody projectile;
+    public bool autoFire;
+    public float cooldown;
+    public float cooldownLeft;
 }
 public class Inventory : MonoBehaviour
 {
@@ -92,6 +95,10 @@ public class Inventory : MonoBehaviour
             if (itemSelected > 4) itemSelected = 0;
             HH.SetSelectedBorder(itemSelected);
         }
+
+        for (int i = 0; i < currentInventory.Length; i++)
+            if (currentInventory[i].hasOverworldUses)
+                currentInventory[i].cooldownLeft -= Time.deltaTime;
     }
 
     public void AddItem(InventoryItem itemToAdd)

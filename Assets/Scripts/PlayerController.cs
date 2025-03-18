@@ -18,12 +18,15 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             if (inventory.currentInventory[Inventory.itemSelected].hasOverworldUses &&
-                inventory.currentInventory[Inventory.itemSelected].projectile != null)
+                inventory.currentInventory[Inventory.itemSelected].projectile != null && 
+                inventory.currentInventory[Inventory.itemSelected].cooldownLeft <= 0)
             {
                 Rigidbody spawnedProjectile = Instantiate(inventory.currentInventory[Inventory.itemSelected].projectile,
                     transform.position + new Vector3(0,1,0), Quaternion.identity);
                 spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position).normalized * 
                     spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
+                inventory.currentInventory[Inventory.itemSelected].cooldownLeft =
+                    inventory.currentInventory[Inventory.itemSelected].cooldown;
                 Debug.Log($"Spawned projectile, from {this}");
             }
         }

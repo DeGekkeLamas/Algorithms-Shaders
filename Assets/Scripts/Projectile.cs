@@ -20,4 +20,10 @@ public class Projectile : MonoBehaviour
         if (expands && this.transform.localScale.x < maxExpansion)
             this.transform.localScale *= expansionFactor;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer != 3)
+            Destroy(this.gameObject);
+    }
 }
