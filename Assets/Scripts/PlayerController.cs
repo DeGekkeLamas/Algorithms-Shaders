@@ -4,6 +4,7 @@ public class PlayerController : MonoBehaviour
 {
     Vector3 playerDestination;
     public float moveSpeed = 1;
+    public float projectileForce = 5;
 
     Inventory inventory;
     private void Awake()
@@ -13,6 +14,20 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
+        // Use item if it has interactions
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (inventory.currentInventory[Inventory.itemSelected].hasOverworldUses &&
+                inventory.currentInventory[Inventory.itemSelected].projectile != null)
+            {
+                Rigidbody spawnedProjectile = Instantiate(inventory.currentInventory[Inventory.itemSelected].projectile,
+                    transform.position + new Vector3(0,1,0), Quaternion.identity);
+                spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position).normalized * 
+                    spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
+                Debug.Log($"Spawned projectile, from {this}");
+            }
+        }
+
         // Set destination on click
         if (Input.GetMouseButton(0))
         {
@@ -22,32 +37,62 @@ public class PlayerController : MonoBehaviour
             Vector3 _mousePosition = new(_posX, _posY, 0);
 
             // Casts in direction of mouse position
-            if (Physics.Raycast(Camera.main.transform.position, _mousePosition,
+            if (Physics.Raycast(Camera.main.transform.position, RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles) 
+                /*Camera.main.transform.forward + _mousePosition*/,
                 out RaycastHit rayHit, 1000, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore))
             {
                 Debug.DrawLine(Camera.main.transform.position, rayHit.point, Color.red, 1);
                 playerDestination = rayHit.point;
             }
-            Debug.DrawLine(Camera.main.transform.position, _mousePosition, Color.magenta, 1);
         }
-        
+
+        // Checks for mouse position on right mouse click for interaction
+        if (Input.GetMouseButtonDown(1))
+        {
+            //Translates mouse 2D position
+            float _posX = Remap(0, 1, -1, 1, Input.mousePosition.x / Screen.width);
+            float _posY = Remap(0, 1, -0.667f, 0.667f, Input.mousePosition.y / Screen.height);
+            Vector3 _mousePosition = new(_posX, _posY, 0);
+
+            // Casts in direction of mouse position
+            if (Physics.Raycast(Camera.main.transform.position, RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
+                out RaycastHit otherRayHit, 1000, ~LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Collide))
+            {
+                Debug.DrawLine(Camera.main.transform.position, otherRayHit.point, Color.blue, 1);
+
+                if (otherRayHit.collider.gameObject.TryGetComponent<PickupItem>(out PickupItem item))
+                {
+                    inventory.AddItem(item.itemToGive);
+                    Destroy(otherRayHit.collider.gameObject);
+                }
+            }
+        }
         // Move to destination
         if ((playerDestination - transform.position).magnitude > 1)
         {
             Vector3 movement = (playerDestination - transform.position).normalized;
             this.transform.position += Time.deltaTime * moveSpeed * movement;
         }
+    }
 
-        if (Input.GetMouseButtonDown(1))
+    Vector3 GetMousePosition()
+    {
+        //Translates mouse 2D position
+        float _posX = Remap(0, 1, -1, 1, Input.mousePosition.x / Screen.width);
+        float _posY = Remap(0, 1, -0.667f, 0.667f, Input.mousePosition.y / Screen.height);
+        Vector3 _mousePosition = new(_posX, _posY, 0);
+
+        if (Physics.Raycast(Camera.main.transform.position, RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
+            out RaycastHit rayHit, 1000, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore))
         {
-            if (inventory.currentInventory[Inventory.itemSelected].hasOverworldUses &&
-                inventory.currentInventory[Inventory.itemSelected].projectile != null)
-            {
-                Rigidbody spawnedProjectile = Instantiate(inventory.currentInventory[Inventory.itemSelected].projectile, 
-                    transform.position, Quaternion.identity);
-                Debug.Log($"Spawned projectile, from {this}");
-            }
+
         }
+        return rayHit.point;
+    }
+    static Vector3 RotateVector3(Vector3 originalVector, Vector3 rotation)
+    {
+        Vector3 newVector = Quaternion.Euler(rotation) * originalVector;
+        return newVector;
     }
 
     static float Remap(float oldRangeX, float oldRangeY, float newRangeX, float newRangeY, float value)

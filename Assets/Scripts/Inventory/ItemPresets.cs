@@ -6,6 +6,8 @@ public class ItemPresets : MonoBehaviour
     public static Dictionary<string, InventoryItem> presets = new Dictionary<string, InventoryItem>();
     public GameObject[] itemModels;
     public GameObject placeholderModel;
+    public Rigidbody[] projectiles;
+    public Rigidbody placeholderProjectile;
     private void Awake()
     {
         presets["Apron"] = new InventoryItem
@@ -533,6 +535,7 @@ public class ItemPresets : MonoBehaviour
             if (preset.Value.amountOfHits == 0) _newItem.amountOfHits = 1;
 
             _newItem.itemModel = GetMeshByName(_name);
+            _newItem.projectile = GetProjectileByName(_name);
             _newPresets[_name] = _newItem;
         }
         presets = _newPresets;
@@ -543,5 +546,12 @@ public class ItemPresets : MonoBehaviour
             if (model.name == _name) return model;
 
         return placeholderModel;
+    }
+    Rigidbody GetProjectileByName(string _name)
+    {
+        foreach (var projectile in projectiles)
+            if (projectile.name.Replace("Projectile", "") == _name) return projectile;
+
+        return placeholderProjectile;
     }
 }
