@@ -3696,6 +3696,9 @@ MonoBehaviour:
     canThrow: 0
     hasOverworldUses: 0
     projectile: {fileID: 0}
+    autoFire: 0
+    cooldown: 0
+    cooldownLeft: 0
   - itemName: 
     itemSprite: {fileID: 0}
     itemModel: {fileID: 0}
@@ -3741,6 +3744,9 @@ MonoBehaviour:
     canThrow: 0
     hasOverworldUses: 0
     projectile: {fileID: 0}
+    autoFire: 0
+    cooldown: 0
+    cooldownLeft: 0
   - itemName: 
     itemSprite: {fileID: 0}
     itemModel: {fileID: 0}
@@ -3786,6 +3792,9 @@ MonoBehaviour:
     canThrow: 0
     hasOverworldUses: 0
     projectile: {fileID: 0}
+    autoFire: 0
+    cooldown: 0
+    cooldownLeft: 0
   - itemName: 
     itemSprite: {fileID: 0}
     itemModel: {fileID: 0}
@@ -3831,6 +3840,9 @@ MonoBehaviour:
     canThrow: 0
     hasOverworldUses: 0
     projectile: {fileID: 0}
+    autoFire: 0
+    cooldown: 0
+    cooldownLeft: 0
   - itemName: 
     itemSprite: {fileID: 0}
     itemModel: {fileID: 0}
@@ -3876,6 +3888,9 @@ MonoBehaviour:
     canThrow: 0
     hasOverworldUses: 0
     projectile: {fileID: 0}
+    autoFire: 0
+    cooldown: 0
+    cooldownLeft: 0
   Hotbar:
   - {fileID: 3565875426722051589}
   - {fileID: 7082999946771178380}
@@ -3935,6 +3950,7 @@ MonoBehaviour:
   placeholderModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
   projectiles:
   - {fileID: -8806985211751940049, guid: 5f701301407c6644f996319132fd3a8e, type: 3}
+  - {fileID: -8806985211751940049, guid: bf0428376ca0fcd48bec4b47f9a1cbe6, type: 3}
   placeholderProjectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
 --- !u!114 &2990881938606332820
 MonoBehaviour:

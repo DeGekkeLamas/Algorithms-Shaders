@@ -14,22 +14,7 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        // Use item if it has interactions
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (inventory.currentInventory[Inventory.itemSelected].hasOverworldUses &&
-                inventory.currentInventory[Inventory.itemSelected].projectile != null && 
-                inventory.currentInventory[Inventory.itemSelected].cooldownLeft <= 0)
-            {
-                Rigidbody spawnedProjectile = Instantiate(inventory.currentInventory[Inventory.itemSelected].projectile,
-                    transform.position + new Vector3(0,1,0), Quaternion.identity);
-                spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position).normalized * 
-                    spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
-                inventory.currentInventory[Inventory.itemSelected].cooldownLeft =
-                    inventory.currentInventory[Inventory.itemSelected].cooldown;
-                Debug.Log($"Spawned projectile, from {this}");
-            }
-        }
+        bool canUseItem = true;
 
         // Set destination on click
         if (Input.GetMouseButton(0))
@@ -68,8 +53,31 @@ public class PlayerController : MonoBehaviour
                     inventory.AddItem(item.itemToGive);
                     Destroy(otherRayHit.collider.gameObject);
                 }
+                canUseItem = false;
             }
         }
+
+        // Use item if it has interactions
+        if (Input.GetMouseButtonDown(1) && canUseItem || Input.GetMouseButton(1) && inventory.currentInventory[Inventory.itemSelected].autoFire &&
+            inventory.currentInventory[Inventory.itemSelected].cooldownLeft <= 0 && canUseItem)
+        {
+            if (inventory.currentInventory[Inventory.itemSelected].hasOverworldUses &&
+                inventory.currentInventory[Inventory.itemSelected].projectile != null &&
+                inventory.currentInventory[Inventory.itemSelected].cooldownLeft <= 0)
+            {
+                Rigidbody spawnedProjectile = Instantiate(inventory.currentInventory[Inventory.itemSelected].projectile,
+                    transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position).normalized *
+                    spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
+                inventory.currentInventory[Inventory.itemSelected].cooldownLeft =
+                    inventory.currentInventory[Inventory.itemSelected].cooldown;
+                if (inventory.currentInventory[Inventory.itemSelected].isConsumedOnUse) 
+                    inventory.RemoveFromStack(Inventory.itemSelected);
+
+                Debug.Log($"Spawned projectile, from {this}");
+            }
+        }
+
         // Move to destination
         if ((playerDestination - transform.position).magnitude > 1)
         {

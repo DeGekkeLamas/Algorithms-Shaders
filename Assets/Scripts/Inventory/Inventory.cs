@@ -132,6 +132,12 @@ public class Inventory : MonoBehaviour
         currentInventory[index] = new InventoryItem { slotIsEmty = true };
         UpdateInventory();
     }
+    public void RemoveFromStack(int index)
+    {
+        currentInventory[index].amountLeft--;
+        if (currentInventory[index].amountLeft == 0) RemoveItem(index);
+        UpdateInventoryTexts();
+    }
 
     [ContextMenu("Update inventory")]
     public void UpdateInventory()
@@ -153,7 +159,15 @@ public class Inventory : MonoBehaviour
                 currentInventory[i].itemSprite.width, currentInventory[i].itemSprite.height), new Vector2(0, 0));
 
             HH.SetSelectedBorder(itemSelected);
+        }
+        UpdateInventoryTexts();
+    }
+    void UpdateInventoryTexts()
+    {
 
+        for (int i = 0; i < currentInventory.Length; i++)
+        {
+            // Set quantity counters
             if (currentInventory[i].isStackable)
             {
                 quantityCounters[i].gameObject.SetActive(true);

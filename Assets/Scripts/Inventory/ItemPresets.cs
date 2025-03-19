@@ -98,6 +98,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "You can never have enough cheese.",
             canAttack = true,
             hasOverworldUses = true,
+            cooldown = 0.5f,
         };
         presets["ChefHat"] = new InventoryItem
         {
@@ -294,6 +295,7 @@ public class ItemPresets : MonoBehaviour
             isMetal = true,
             toolTip = "One pan to rule them all...",
             hasOverworldUses = true,
+            cooldown = 0.2f,
         };
         presets["PepperShaker"] = new InventoryItem
         {
@@ -313,6 +315,8 @@ public class ItemPresets : MonoBehaviour
             toolTip = "",
             canAttack = true,
             hasOverworldUses = true,
+            cooldown = 0.2f,
+            autoFire = true,
         };
         presets["Pizza"] = new InventoryItem
         {
@@ -325,6 +329,7 @@ public class ItemPresets : MonoBehaviour
             canAttack = true,
             isStoveIngredient = true,
             hasOverworldUses = true,
+            cooldown = 0.5f,
         };
         presets["Plate"] = new InventoryItem
         {
@@ -336,6 +341,7 @@ public class ItemPresets : MonoBehaviour
             canThrow = true,
             canBlock = true,
             hasOverworldUses = true,
+            cooldown = 0.5f,
         };
         presets["RawChicken"] = new InventoryItem
         {
@@ -378,6 +384,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "",
             canAttack = true,
             hasOverworldUses = true,
+            cooldown = 0.5f,
         };
         presets["Spife"] = new InventoryItem
         {
@@ -462,6 +469,7 @@ public class ItemPresets : MonoBehaviour
             canThrow = true,
             isStoveIngredient = true,
             hasOverworldUses = true,
+            cooldown = 0.3f,
         };
         presets["TomatoPizza"] = new InventoryItem
         {
@@ -473,6 +481,7 @@ public class ItemPresets : MonoBehaviour
             isFood = true,
             toolTip = "",
             canAttack = true,
+            cooldown = 0.5f,
         };
         presets["Towel"] = new InventoryItem
         {
@@ -492,6 +501,7 @@ public class ItemPresets : MonoBehaviour
             canConsume = true,
             isStoveIngredient = true,
             hasOverworldUses = true,
+            cooldown = 0.5f,
         };
 
 
@@ -513,6 +523,8 @@ public class ItemPresets : MonoBehaviour
             toolTip = "You cheated to get this item =)",
             canAttack = true,
             hasOverworldUses = true,
+            cooldown = 0.2f,
+            autoFire = true,
         };
         presets["UndyingPan"] = new InventoryItem
         {

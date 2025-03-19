@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8806985211751940049}
   - component: {fileID: -4791254542994142077}
   m_Layer: 7
-  m_Name: MystifyingPanProjectile
+  m_Name: TomatoProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 354.27344, y: 188.34372, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97514727698275135}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: -1340541719380434750, guid: a8fd15390e7ff9245804f9cd77a49fa9, type: 3}
 --- !u!23 &5298393269010741978
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -67,7 +67,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b5d1d86a9cf2e0a4a99cf88ebefcb76e, type: 2}
+  - {fileID: 2100000, guid: 5a2b907c42ba13d41aa2990029a74048, type: 2}
+  - {fileID: 2100000, guid: fd39eba94a0be9b4da715abe9ea787fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,7 +109,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 12
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-8806985211751940049
 Rigidbody:
@@ -149,9 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0995d91cc4baa49b647456bbb59d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 40
-  useGravity: 0
-  onlyDestroyOnTerrain: 1
-  expands: 1
-  expansionFactor: 1.15
+  projectileSpeed: 20
+  upForce: 300
+  useGravity: 1
+  startRotationForce: {x: -50, y: -50, z: -50}
+  onlyDestroyOnTerrain: 0
+  destroyOnGround: 1
+  expands: 0
+  expansionFactor: 1.1
   maxExpansion: 5
