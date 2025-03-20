@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         isInBattle = true;
         itemDescription.SetActive(true);
         hotBar.transform.position = battleUIPosition;
-        inventory.UpdateInventory();
+        for (int i = 0; i < inventory.currentInventory.Length; i++) inventory.UpdateInventory(i);
     }
 
     [ContextMenu("End battle")]
@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     {
         isInBattle = false;
         itemDescription.SetActive(false);
-        hotBar.transform.position = overworldUIPosition;
-        inventory.UpdateInventory();
+        for (int i = 0; i < inventory.currentInventory.Length; i++) inventory.UpdateInventory(i);
     }
 }

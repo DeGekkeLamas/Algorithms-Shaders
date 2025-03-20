@@ -3951,6 +3951,8 @@ MonoBehaviour:
   projectiles:
   - {fileID: -8806985211751940049, guid: 5f701301407c6644f996319132fd3a8e, type: 3}
   - {fileID: -8806985211751940049, guid: bf0428376ca0fcd48bec4b47f9a1cbe6, type: 3}
+  - {fileID: -8806985211751940049, guid: 81865e04c6089024aa1cb85ca1330bdc, type: 3}
+  - {fileID: -8806985211751940049, guid: d7af4061e5ae1bc41a95cc7542c2c9a1, type: 3}
   placeholderProjectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
 --- !u!114 &2990881938606332820
 MonoBehaviour:

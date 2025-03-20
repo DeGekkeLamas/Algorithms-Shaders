@@ -6,11 +6,14 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 1;
     public float projectileForce = 5;
 
+    public static PlayerController playerReference;
+
     Inventory inventory;
     private void Awake()
     {
         playerDestination = transform.position;
         inventory = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Inventory>();
+        playerReference = this;
     }
     void Update()
     {
@@ -67,8 +70,16 @@ public class PlayerController : MonoBehaviour
             {
                 Rigidbody spawnedProjectile = Instantiate(inventory.currentInventory[Inventory.itemSelected].projectile,
                     transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-                spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position).normalized *
-                    spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
+                if (!spawnedProjectile.GetComponent<Projectile>().useGravity)
+                {
+                    spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position).normalized *
+                        spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
+                }
+                else
+                {
+                    spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position) *
+                        spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
+                }
                 inventory.currentInventory[Inventory.itemSelected].cooldownLeft =
                     inventory.currentInventory[Inventory.itemSelected].cooldown;
                 if (inventory.currentInventory[Inventory.itemSelected].isConsumedOnUse) 

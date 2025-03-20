@@ -84,7 +84,10 @@ public class Inventory : MonoBehaviour
 
         HH = GameObject.FindFirstObjectByType<HotbarHover>().GetComponent<HotbarHover>();
     }
-    private void Start() => UpdateInventory();
+    private void Start()
+    {
+        for(int i = 0; i < currentInventory.Length; i++) UpdateInventory(i);
+    }
     void Update()
     {
         if (Input.mouseScrollDelta.y != 0)
@@ -110,7 +113,7 @@ public class Inventory : MonoBehaviour
                 if (currentInventory[i].isStackable && currentInventory[i].amountLeft < currentInventory[i].maxStack)
                 {
                     currentInventory[i].amountLeft++;
-                    UpdateInventory();
+                    UpdateInventoryTexts();
                     return;
                 }
             }
@@ -120,7 +123,7 @@ public class Inventory : MonoBehaviour
             if (currentInventory[i].slotIsEmty)
             {
                 currentInventory[i] = itemToAdd;
-                UpdateInventory();
+                UpdateInventory(i);
                 Debug.Log("Added " + itemToAdd.itemName + ", from " + this);
                 return;
             }
@@ -130,7 +133,7 @@ public class Inventory : MonoBehaviour
      public void RemoveItem(int index)
     {
         currentInventory[index] = new InventoryItem { slotIsEmty = true };
-        UpdateInventory();
+        UpdateInventory(index);
     }
     public void RemoveFromStack(int index)
     {
@@ -140,26 +143,23 @@ public class Inventory : MonoBehaviour
     }
 
     [ContextMenu("Update inventory")]
-    public void UpdateInventory()
+    public void UpdateInventory(int index)
     {
-        for (int i = 0; i < currentInventory.Length; i++)
+        if (currentInventory[index].itemModel != null)
         {
-            if (currentInventory[i].itemModel != null)
-            {
-                currentInventory[i].itemSprite = RuntimePreviewGenerator.GenerateModelPreview(currentInventory[i].itemModel.transform, 256, 256, false, true);
-                
-                currentInventory[i].itemSprite = SpriteEditor.AddOutline(currentInventory[i].itemSprite);
+            currentInventory[index].itemSprite = RuntimePreviewGenerator.GenerateModelPreview(currentInventory[index].itemModel.transform, 256, 256, false, true);
 
-                if (!currentInventory[i].hasOverworldUses && !GameManager.isInBattle)
-                    currentInventory[i].itemSprite = SpriteEditor.MakeGrayScale(currentInventory[i].itemSprite);
-            }
-            else currentInventory[i].itemSprite = HotbarItemBG;
+            currentInventory[index].itemSprite = SpriteEditor.AddOutline(currentInventory[index].itemSprite);
 
-            Hotbar[i].sprite = Sprite.Create(currentInventory[i].itemSprite, new Rect(0.0f, 0.0f, 
-                currentInventory[i].itemSprite.width, currentInventory[i].itemSprite.height), new Vector2(0, 0));
-
-            HH.SetSelectedBorder(itemSelected);
+            if (!currentInventory[index].hasOverworldUses && !GameManager.isInBattle)
+                currentInventory[index].itemSprite = SpriteEditor.MakeGrayScale(currentInventory[index].itemSprite);
         }
+        else currentInventory[index].itemSprite = HotbarItemBG;
+
+        Hotbar[index].sprite = Sprite.Create(currentInventory[index].itemSprite, new Rect(0.0f, 0.0f,
+            currentInventory[index].itemSprite.width, currentInventory[index].itemSprite.height), new Vector2(0, 0));
+
+        HH.SetSelectedBorder(itemSelected);
         UpdateInventoryTexts();
     }
     void UpdateInventoryTexts()

@@ -315,7 +315,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "",
             canAttack = true,
             hasOverworldUses = true,
-            cooldown = 0.2f,
+            cooldown = 0.3f,
             autoFire = true,
         };
         presets["Pizza"] = new InventoryItem
@@ -337,6 +337,8 @@ public class ItemPresets : MonoBehaviour
             isConsumedOnUse = true,
             damage = 35,
             damageAfterBlock = 15,
+            isStackable = true,
+            maxStack = 5,
             toolTip = "Good thing it doesn't fly back when thrown as frisbee!",
             canThrow = true,
             canBlock = true,
@@ -495,6 +497,7 @@ public class ItemPresets : MonoBehaviour
             itemName = "Water bottle",
             damage = 10,
             curesOnFireWhenConsumed = true,
+            isConsumedOnUse = true,
             isFood = true,
             toolTip = "Bo'ol o' wa'ah",
             canThrow = true,

@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0995d91cc4baa49b647456bbb59d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 20
+  projectileSpeed: 0.8
   upForce: 300
   useGravity: 1
   startRotationForce: {x: -50, y: -50, z: -50}

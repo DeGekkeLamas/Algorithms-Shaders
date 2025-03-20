@@ -143,7 +143,7 @@ public class ItemCheats : MonoBehaviour
                     inventory.AddItem(ItemPresets.presets["Towel"]);
                     break;
                 case "L":
-                    inventory.AddItem(ItemPresets.presets["WaterBottle"]);
+                    inventory.AddItem(ItemPresets.presets["WaterGlass"]);
                     break;
                 case "Z":
                     inventory.AddItem(ItemPresets.presets["Baguette"]);

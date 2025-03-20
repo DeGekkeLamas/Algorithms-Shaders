@@ -30,6 +30,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.TryGetComponent<Crate>(out Crate crate)) 
+            crate.SubtractHP(1);
+
         if (other.gameObject.layer != 3 && !onlyDestroyOnTerrain || 
             onlyDestroyOnTerrain && other.gameObject.layer == 8 || 
             destroyOnGround && other.gameObject.layer == 3)
