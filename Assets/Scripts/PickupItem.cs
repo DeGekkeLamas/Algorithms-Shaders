@@ -16,10 +16,4 @@ public class PickupItem : MonoBehaviour
         }
         Instantiate(itemToGive.itemModel, this.transform).tag = this.tag;
     }
-
-    void PickUp()
-    {
-        Inventory inventory = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Inventory>();
-        inventory.AddItem(itemToGive);
-    }
 }

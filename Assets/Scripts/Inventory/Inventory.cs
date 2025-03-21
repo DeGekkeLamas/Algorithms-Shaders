@@ -130,6 +130,12 @@ public class Inventory : MonoBehaviour
         }
         Debug.Log("Inventory full, from " + this);
     }
+    public bool InventoryHasSpace()
+    {
+        for (int i = 0; i < currentInventory.Length; i++)
+            if (currentInventory[i].slotIsEmty) return true;
+        return false;
+    }
      public void RemoveItem(int index)
     {
         currentInventory[index] = new InventoryItem { slotIsEmty = true };

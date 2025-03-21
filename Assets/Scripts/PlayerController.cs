@@ -53,10 +53,14 @@ public class PlayerController : MonoBehaviour
 
                 if (otherRayHit.collider.gameObject.TryGetComponent<PickupItem>(out PickupItem item))
                 {
-                    inventory.AddItem(item.itemToGive);
-                    Destroy(otherRayHit.collider.gameObject);
+                    if (inventory.InventoryHasSpace())
+                    {
+                        inventory.AddItem(item.itemToGive);
+                        Destroy(otherRayHit.collider.gameObject);
+                    }
+                    else Debug.Log($"No space in inventory, from {this}");
+                    canUseItem = false;
                 }
-                canUseItem = false;
             }
         }
 
@@ -68,18 +72,21 @@ public class PlayerController : MonoBehaviour
                 inventory.currentInventory[Inventory.itemSelected].projectile != null &&
                 inventory.currentInventory[Inventory.itemSelected].cooldownLeft <= 0)
             {
+                // shot projectiles
                 Rigidbody spawnedProjectile = Instantiate(inventory.currentInventory[Inventory.itemSelected].projectile,
                     transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 if (!spawnedProjectile.GetComponent<Projectile>().useGravity)
-                {
+                { // Straight projectile
                     spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position).normalized *
                         spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
+                    spawnedProjectile.linearVelocity = new(spawnedProjectile.linearVelocity.x, 0, spawnedProjectile.linearVelocity.z);
                 }
-                else
+                else // Lobbed projectile
                 {
                     spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position) *
                         spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
                 }
+
                 inventory.currentInventory[Inventory.itemSelected].cooldownLeft =
                     inventory.currentInventory[Inventory.itemSelected].cooldown;
                 if (inventory.currentInventory[Inventory.itemSelected].isConsumedOnUse) 
@@ -105,7 +112,7 @@ public class PlayerController : MonoBehaviour
         Vector3 _mousePosition = new(_posX, _posY, 0);
 
         if (Physics.Raycast(Camera.main.transform.position, RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
-            out RaycastHit rayHit, 1000, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore))
+            out RaycastHit rayHit, 1000, ~LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore))
         {
 
         }
