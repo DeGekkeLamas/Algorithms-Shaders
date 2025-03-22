@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PlayerController : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 1;
     public float projectileForce = 5;
 
+    public Rigidbody pickupSpawned;
     public static PlayerController playerReference;
 
     Inventory inventory;
@@ -94,6 +96,14 @@ public class PlayerController : MonoBehaviour
 
                 Debug.Log($"Spawned projectile, from {this}");
             }
+        }
+        // Drop currently held item
+        if (Input.GetKeyDown(KeyCode.E) && !inventory.currentInventory[Inventory.itemSelected].slotIsEmty)
+        {
+            Debug.Log($"Dropped {inventory.currentInventory[Inventory.itemSelected].itemName}, from {this}");
+            Rigidbody droppedItem = Instantiate(pickupSpawned, this.transform.position + transform.forward, Quaternion.identity);
+            droppedItem.gameObject.GetComponent<PickupItem>().itemToGive = inventory.currentInventory[Inventory.itemSelected];
+            inventory.RemoveFromStack(Inventory.itemSelected);
         }
 
         // Move to destination

@@ -15,11 +15,11 @@ public class WallGenerator : MonoBehaviour
         originalScale = transform.localScale;
         GenerateWalls();
     }
-    private void OnValidate()
+    /**private void OnValidate()
     {
         if (UnityEditor.EditorApplication.isPlaying && didAwake)
             GenerateWalls();
-    }
+    }**/
     void GenerateWalls()
     {
         bool wallOverZAxis = originalScale.x < originalScale.z;
@@ -35,16 +35,16 @@ public class WallGenerator : MonoBehaviour
             );
 
         transform.localScale = Vector3.one;
-        Vector3 offset = new();
+        Vector3 offset = new(0,0, originalScale.z * 0.25f);
 
         // generate on both sides
         for(int h = 0; h < 2; h++)
         {
             // continue generation vertically
-            for (int i = 0; i < (originalScale.y / height); i++)
+            for (int i = 0; i < Mathf.Ceil(originalScale.y / height); i++)
             {
                 // continue generation horizontally
-                for (int j = 0; j <= (originalScale.x / width); j++)
+                for (int j = 0; j < Mathf.Ceil(originalScale.x / width); j++)
                 {
                     //side left
                     int v0 = builder.AddVertex(origin + offset + new Vector3(0, 0, 0));
@@ -92,7 +92,7 @@ public class WallGenerator : MonoBehaviour
                 }
                 offset = new((i % 2 != 0) ? 0 : (-0.5f * width), offset.y + height, offset.z);
             }
-            offset = new(0, 0, originalScale.z);
+            offset = new(0, 0, originalScale.z * 0.25f);
             builder.RotateVertices(180);
         }
         if (wallOverZAxis) builder.RotateVertices(90);
