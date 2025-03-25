@@ -33,8 +33,6 @@ public class EnemyFollower : MonoBehaviour
                 (PlayerController.playerReference.transform.position - this.transform.position).normalized;
             transform.LookAt(PlayerController.playerReference.transform.position);
         }
-
-        Debug.Log(GetAngleBetweenVectors(PlayerController.playerReference.transform.position, this.transform.position));
     }
     static Vector3 RotateVectorXZ(Vector3 start, float rotation)
     {
