@@ -10,7 +10,7 @@ public class Crate : MonoBehaviour
     public void SubtractHP(int hpToRemove)
     {
         boxHP -= hpToRemove;
-        Debug.Log($"Dealt {hpToRemove} damage, from {this}");
+        Debug.Log($"Dealt {hpToRemove} damage to crate");
         if (boxHP <= 0) DestroyBox();
     }
 

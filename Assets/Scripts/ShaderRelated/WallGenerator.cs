@@ -100,6 +100,6 @@ public class WallGenerator : MonoBehaviour
 
         this.AddComponent<BoxCollider>();
 
-        Debug.Log($"Generated wall, from {this}");
+        //Debug.Log($"Generated wall, from {this}");
     }
 }
