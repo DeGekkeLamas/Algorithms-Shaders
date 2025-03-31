@@ -1,7 +1,6 @@
 using UnityEngine;
-using static UnityEditor.Rendering.CameraUI;
 
-public class SpriteEditor : MonoBehaviour
+public class SpriteEditor
 {
     static Color bgColor = new(0.3019608f, 0.3019608f, 0.3019608f);
     static Color otherBgColor = new(0.07450981f, 0.07450981f, 0.07450981f);

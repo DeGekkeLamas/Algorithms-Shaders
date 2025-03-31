@@ -31,10 +31,9 @@ public class PlayerController : MonoBehaviour
 
             // Casts in direction of mouse position
             if (Physics.Raycast(Camera.main.transform.position, RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles) 
-                /*Camera.main.transform.forward + _mousePosition*/,
-                out RaycastHit rayHit, 1000, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore))
+                , out RaycastHit rayHit, 1000, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore))
             {
-                Debug.DrawLine(Camera.main.transform.position, rayHit.point, Color.red, 1);
+                //Debug.DrawLine(Camera.main.transform.position, rayHit.point, Color.red, 1);
                 playerDestination = rayHit.point;
             }
         }

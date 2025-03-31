@@ -13,6 +13,7 @@ public class EnemyFollower : MonoBehaviour
     public float rotationSpeed = 30;
     public float maxRotationPerSpin = 45;
     public float delayBetweenMovements = .5f;
+    public float moveDistance = 2;
 
     [Header("Debug")]
     public TMP_Text debugText;
@@ -22,6 +23,7 @@ public class EnemyFollower : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        CloserToPlusSide(180, 100);
         StartCoroutine(RandomMovements());
     }
 
@@ -30,10 +32,8 @@ public class EnemyFollower : MonoBehaviour
     {
         // shows vision range
         DebugExtension.DebugCircle(this.transform.position, Color.green, maxDistance);
-        Debug.DrawRay(transform.position, RotateVectorXZ(this.transform.forward * maxDistance, 
-            visionAngle), Color.green * 1.5f);
-        Debug.DrawRay(transform.position, RotateVectorXZ(this.transform.forward * maxDistance, 
-            -visionAngle), Color.green * 0.5f);
+        Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * maxDistance, visionAngle), Color.green);
+        Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * maxDistance, -visionAngle), Color.green);
 
         // start following player if player has been seen before
         float playerEnemyDistance = (PlayerController.playerReference.transform.position - this.transform.position).magnitude;
@@ -41,7 +41,7 @@ public class EnemyFollower : MonoBehaviour
         if (playerEnemyDistance > .5f && (hasSeenPlayer ||
             (PlayerController.playerReference != null && 
             playerEnemyDistance < maxDistance &&
-            GetAngleBetweenVectors(this.transform.position - PlayerController.playerReference.transform.position, this.transform.forward) 
+            VectorMath.GetAngleBetweenVectors(this.transform.position - PlayerController.playerReference.transform.position, this.transform.forward) 
                 < visionAngle)))
         {
             hasSeenPlayer = true;
@@ -56,7 +56,7 @@ public class EnemyFollower : MonoBehaviour
                 manager.StartBattle();
             }
         }
-        debugText.text = GetAngleBetweenVectors(this.transform.position - PlayerController.playerReference.transform.position, 
+        debugText.text = VectorMath.GetAngleBetweenVectors(this.transform.position - PlayerController.playerReference.transform.position, 
             this.transform.forward).ToString();
     }
 
@@ -65,59 +65,57 @@ public class EnemyFollower : MonoBehaviour
         while(!hasSeenPlayer)
         {
             // Rotate enemy at random
-            float _rotation = Random.Range(maxRotationPerSpin * .5f, maxRotationPerSpin);
-            _rotation = Random.Range(0, 2) == 0 ? 0 - _rotation : _rotation;
-
-            Vector3 _newRotation = new(this.transform.eulerAngles.x, GetRotation(this.transform.eulerAngles.y, _rotation), this.transform.eulerAngles.z);
-            Debug.Log($"new rotation is {_newRotation.y}");
-            while(Mathf.RoundToInt(this.transform.eulerAngles.y) != Mathf.RoundToInt(_newRotation.y))
+            float _rotation;
+            if (Physics.Raycast(this.transform.position, this.transform.forward, out RaycastHit info, maxDistance, LayerMask.GetMask("Walls")))
             {
-                Debug.Log(CloserToPlusSide(this.transform.position.y, _newRotation.y));
+                _rotation = 120;
+            }
+            else
+            {
+                _rotation = Random.Range(maxRotationPerSpin * .5f, maxRotationPerSpin);
+                _rotation = Random.Range(0, 2) == 0 ? 0 -_rotation : _rotation;
+            }
+            Vector3 _newRotation = new(this.transform.eulerAngles.x, 
+                GetRotation(this.transform.eulerAngles.y, _rotation), this.transform.eulerAngles.z);
 
+            bool _rotateToPlus = CloserToPlusSide(this.transform.eulerAngles.y, _newRotation.y);
+            while (Mathf.RoundToInt(this.transform.eulerAngles.y / 10) != Mathf.RoundToInt(_newRotation.y / 10))
+            {
                 this.transform.eulerAngles += new Vector3(
-                    0,CloserToPlusSide(this.transform.position.y, _newRotation.y) ? 
-                    Mathf.Min(rotationSpeed * Time.deltaTime, 1) : -Mathf.Min(rotationSpeed * Time.deltaTime, 1), 0);
+                    0, _rotateToPlus ? rotationSpeed * Time.deltaTime : -rotationSpeed * Time.deltaTime, 0);
                 yield return null;
+            }
+
+            // Moves enemy forward
+            Vector3 _destination = this.transform.position + this.transform.forward * moveDistance;
+
+            while ((this.transform.position - _destination).magnitude > .25f)
+            {
+                this.transform.position += moveSpeed * Time.deltaTime * transform.forward;
+                yield return null;
+
             }
 
             Debug.Log($"Movement done, from {this}");
             yield return new WaitForSeconds(delayBetweenMovements);
         }
-
-        // Gets rotation for spin
-        static float GetRotation(float original, float rotation)
-        {
-            original = (original + rotation) % 360;
-            if (original < 0) original = 360 + rotation;
-
-            return original;
-        }
-        // Determined which direction is shorter for rotation
-        static bool CloserToPlusSide(float currentRotation, float destination)
-        {
-            float differenceUp = (360 + destination - currentRotation) % 360;
-            float differenceDown = (360 + currentRotation - destination) % 360;
-
-            if (differenceDown < differenceUp) return false;
-            else return true;
-        }
     }
-
-    static Vector3 RotateVectorXZ(Vector3 start, float rotation)
+    // Determines which direction is shorter for rotation
+    static bool CloserToPlusSide(float currentRotation, float destination)
     {
-        rotation *= (Mathf.PI / 180);
-
-        return new(
-                start.x * Mathf.Cos(rotation) - start.z * Mathf.Sin(rotation)
-                , start.y
-                , start.x * Mathf.Sin(rotation) + start.z * Mathf.Cos(rotation)
-            );
+        float differenceUp = (360 + destination - currentRotation) % 360; 
+        float differenceDown = (360 + currentRotation - destination) % 360;
+        return differenceDown > differenceUp;
     }
-    static float GetAngleBetweenVectors(Vector3 start, Vector3 end)
+    // Gets rotation for spin
+    static float GetRotation(float original, float rotation)
     {
-        float _angle = Mathf.Acos(Vector3.Dot(end, end - start) / (end.magnitude * (end-start).magnitude)) * (180 / Mathf.PI);
-        return _angle;
+        original = (original + rotation) % 360;
+        if (original < 0) original = 360 + rotation;
+
+        return original;
     }
+
 
     // start battle on collision with player or projectile
     private void OnTriggerEnter(Collider other)

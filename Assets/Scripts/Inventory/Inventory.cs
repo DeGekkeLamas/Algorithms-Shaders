@@ -182,11 +182,5 @@ public class Inventory : MonoBehaviour
             else quantityCounters[i].gameObject.SetActive(false);
         }
     }
-
-    [ContextMenu("Test add item)")]
-    void AddItemTest() => AddItem(ItemPresets.presets["CryingPan"]);
-
-    [ContextMenu("Test remove item)")]
-    void RemoveItemTest() => RemoveItem(0);
 }
 
