@@ -11,12 +11,9 @@ public class EnemyFollower : MonoBehaviour
 
     [Header("Movement before seeing player")]
     public float rotationSpeed = 30;
-    public float maxRotationPerSpin = 45;
+    public Vector2 RotationRange = new(30, 45);
     public float delayBetweenMovements = .5f;
     public float moveDistance = 2;
-
-    [Header("Debug")]
-    public TMP_Text debugText;
 
     bool hasSeenPlayer;
 
@@ -56,8 +53,6 @@ public class EnemyFollower : MonoBehaviour
                 manager.StartBattle();
             }
         }
-        debugText.text = VectorMath.GetAngleBetweenVectors(this.transform.position - PlayerController.playerReference.transform.position, 
-            this.transform.forward).ToString();
     }
 
     IEnumerator RandomMovements()
@@ -72,7 +67,7 @@ public class EnemyFollower : MonoBehaviour
             }
             else
             {
-                _rotation = Random.Range(maxRotationPerSpin * .5f, maxRotationPerSpin);
+                _rotation = Random.Range(RotationRange.x, RotationRange.y);
                 _rotation = Random.Range(0, 2) == 0 ? 0 -_rotation : _rotation;
             }
             Vector3 _newRotation = new(this.transform.eulerAngles.x, 

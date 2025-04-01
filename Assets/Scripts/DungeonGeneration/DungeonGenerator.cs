@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public class DungeonGenerator : MonoBehaviour
 {
+    [Tooltip("Leave as 0 to use a random seed")]
+    public int seed;
+
     public RectInt initialRoom = new(0, 0, 100, 100);
     RectInt originRoom;
     public float height = 5;
@@ -24,8 +27,13 @@ public class DungeonGenerator : MonoBehaviour
     public int maxDoorsForOriginRoom = 1;
 
     Graph<Vector2> dungeonGraph = new();
+    System.Random _random = new System.Random();
+    private void Awake()
+    {
+        if (seed != 0) _random = new System.Random(seed);
 
-    private void Awake() => StartCoroutine(GenerateRooms());
+        StartCoroutine(GenerateRooms());
+    }
     IEnumerator GenerateRooms()
     {
         rooms.Add(initialRoom);
@@ -33,7 +41,7 @@ public class DungeonGenerator : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         // Room generation
-        while (rooms[GetBiggestRoom()].width * rooms[GetBiggestRoom()].height > roomMaxSize)
+        while (rooms[GetBiggestRoom()].size.magnitude > roomMaxSize)
         {
             int _biggestRoom = GetBiggestRoom();
 
@@ -50,31 +58,13 @@ public class DungeonGenerator : MonoBehaviour
             }
             yield return new WaitForSeconds(generationInterval);
         }
-
-        /**for (int i = 0; i < splitDepth; i++)
-        {
-            int _biggestRoom = GetBiggestRoom();
-
-            RandomizeFraction();
-            if (rooms[_biggestRoom].width > rooms[_biggestRoom].height)
-            {
-                rooms.Add(SplitVertical(rooms[_biggestRoom], fraction).Item1);
-                rooms[_biggestRoom] = SplitVertical(rooms[_biggestRoom], fraction).Item2;
-            }
-            else
-            {
-                rooms.Add(SplitHorizontal(rooms[_biggestRoom], fraction).Item1);
-                rooms[_biggestRoom] = SplitHorizontal(rooms[_biggestRoom], fraction).Item2;
-            }
-            yield return new WaitForSeconds(0.1f);
-        }**/
         foreach (var room in rooms) { dungeonGraph.AddNode(room.center); }
         originRoom = rooms[GetNearestToOrigin()];
 
         Debug.Log($"Generated all rooms, from {this}");
 
         // Door generation
-        int _tolerance = 3;
+        int _tolerance = 3; // variable for determining if a door is too close to the edge of its room
         for (int i = 0;i < rooms.Count; i++)
         {
             for (int j = i; j < rooms.Count; j++)
@@ -144,16 +134,19 @@ public class DungeonGenerator : MonoBehaviour
             foreach (Vector2 door in dungeonGraph.adjacencyList[room])
             {
                 doors.Remove(GetDoorByCenter(door));
-                //dungeonGraph.adjacencyList.Remove(door);
             }
 
             rooms.Remove(GetRoomByCenter(room));
             dungeonGraph.adjacencyList.Remove(room);
             yield return new WaitForSeconds(generationInterval);
         }
-
-
         Debug.Log($"Removed {_doorsRemoved} inaccessible rooms, from {this}");
+
+        // Reset seed to random after generation
+        _random = new System.Random((int)DateTime.Now.Ticks);
+
+        Debug.Log("Room generation done!");
+        yield return new();
     }
     int GetBiggestRoom()
     {
@@ -162,7 +155,7 @@ public class DungeonGenerator : MonoBehaviour
 
         for (int i = 0;i < rooms.Count; i++)
         {
-            if (rooms[i].width * rooms[i].height > biggestRoom.width * biggestRoom.height)
+            if (rooms[i].size.magnitude > biggestRoom.size.magnitude)
             {
                 biggestIndex = i;
                 biggestRoom = rooms[i];
@@ -188,7 +181,7 @@ public class DungeonGenerator : MonoBehaviour
         return new(0, 0, 0, 0);
     }
 
-    void RandomizeFraction() => fraction = (float)Random.Range(35, 66) / 100f;
+    void RandomizeFraction() => fraction = (float)_random.Next(35, 66) / 100f;
 
     (RectInt, RectInt) SplitHorizontal(RectInt _origianalRoom, float _fraction)
     {
