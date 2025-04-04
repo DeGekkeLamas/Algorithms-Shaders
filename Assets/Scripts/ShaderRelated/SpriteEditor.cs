@@ -57,10 +57,9 @@ public class SpriteEditor
 
                     foreach (int _point in _pointsToCheck)
                     {
-                        if (_point > 0 && _point < colors.Length && !IsColorClose(colors[_point], colors[_index], 0.31f))//!(colors[_point] == colors[_index]))
+                        if (_point > 0 && _point < colors.Length && !IsColorClose(colors[_point], colors[_index], 0.31f))
                         {
                             isEdge = true;
-                            //colors[Mathf.Clamp(_point, 0, colors.Length - 1)] *= 0.5f;
                             break;
                         }
                     }

@@ -8,20 +8,21 @@ public class DungeonGenerator : MonoBehaviour
     [Tooltip("Leave as 0 to use a random seed")]
     public int seed;
 
+    [Header("Generation properties")]
+    public bool shouldRemoveSmallestRooms;
+
     public RectInt initialRoom = new(0, 0, 100, 100);
     RectInt originRoom;
     public float height = 5;
 
     public List<RectInt> rooms = new(1);
     public List<RectInt> doors = new(1);
-
     public List<RectInt> removedDoors = new(1);
 
     float fraction = 0.5f;
     public float roomMaxSize = 1000;
     public int splitOffset = 2;
     public float generationInterval = .1f;
-
     public int doorWidth = 1;
     public int maxDoorsPerRoom = 3;
     public int maxDoorsForOriginRoom = 1;
@@ -41,10 +42,8 @@ public class DungeonGenerator : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         // Room generation
-        while (rooms[GetBiggestRoom()].size.magnitude > roomMaxSize)
+        while (rooms[GetBiggestRoom(out int _biggestRoom)].size.magnitude > roomMaxSize)
         {
-            int _biggestRoom = GetBiggestRoom();
-
             RandomizeFraction();
             if (rooms[_biggestRoom].width > rooms[_biggestRoom].height)
             {
@@ -145,13 +144,22 @@ public class DungeonGenerator : MonoBehaviour
         // Reset seed to random after generation
         _random = new System.Random((int)DateTime.Now.Ticks);
 
+        // Removes smallest rooms
+        if (shouldRemoveSmallestRooms)
+        {
+            // Sorts rooms from biggest to smallest
+            rooms = SortListFromSmallToBig(rooms);
+
+
+        }
+
         Debug.Log("Room generation done!");
-        yield return new();
+
     }
-    int GetBiggestRoom()
+    int GetBiggestRoom(out int biggestIndex)
     {
-        int biggestIndex = 0;
-        RectInt biggestRoom = new(0,0,0,0);
+        biggestIndex = 0;
+        RectInt biggestRoom = new();
 
         for (int i = 0;i < rooms.Count; i++)
         {
@@ -163,6 +171,21 @@ public class DungeonGenerator : MonoBehaviour
         }
         return biggestIndex;
     }
+    int GetSmallestRoom(out int smallesttIndex)
+    {
+        smallesttIndex = 0;
+        RectInt smallestRoom = originRoom;
+
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            if (rooms[i].size.magnitude < smallestRoom.size.magnitude)
+            {
+                smallesttIndex = i;
+                smallestRoom = rooms[i];
+            }
+        }
+        return smallesttIndex;
+    }
     int GetNearestToOrigin()
     {
         int _origin = 0;
@@ -173,12 +196,12 @@ public class DungeonGenerator : MonoBehaviour
     RectInt GetRoomByCenter(Vector2 center)
     {
         foreach(RectInt room in rooms) if (room.center == center) return room;
-        return new(0, 0, 0, 0);
+        return new();
     }
     RectInt GetDoorByCenter(Vector2 center)
     {
         foreach (RectInt door in doors) if (door.center == center) return door;
-        return new(0, 0, 0, 0);
+        return new();
     }
 
     void RandomizeFraction() => fraction = (float)_random.Next(35, 66) / 100f;
@@ -208,6 +231,19 @@ public class DungeonGenerator : MonoBehaviour
                                     _origianalRoom.width - _roomA.width,
                                     _origianalRoom.height);
         return (_roomA, _roomB);
+    }
+    List<RectInt> SortListFromSmallToBig(List<RectInt> originalList)
+    {
+        List<RectInt> newList = new();
+        while (originalList.Count > 0)
+        {
+            GetSmallestRoom(out int _smallesttIndex);
+
+            newList.Add(originalList[_smallesttIndex]);
+            originalList.RemoveAt(_smallesttIndex);
+        }
+
+        return newList;
     }
 
     void Update()
