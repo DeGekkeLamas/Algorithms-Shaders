@@ -20,6 +20,7 @@ public class DungeonGenerator : MonoBehaviour
     public List<RectInt> removedDoors = new(1);
 
     float fraction = 0.5f;
+    public Vector2Int splitFractionRange = new(35, 66);
     public float roomMaxSize = 1000;
     public int splitOffset = 2;
     public float generationInterval = .1f;
@@ -27,8 +28,18 @@ public class DungeonGenerator : MonoBehaviour
     public int maxDoorsPerRoom = 3;
     public int maxDoorsForOriginRoom = 1;
 
+    public bool showDeletedDoors = true;
+
     Graph<Vector2> dungeonGraph = new();
     System.Random _random = new System.Random();
+
+    private void OnValidate()
+    {
+        splitFractionRange = new(
+            splitFractionRange.x,
+            Mathf.Max(splitFractionRange.x, splitFractionRange.y)
+            );
+    }
     private void Awake()
     {
         if (seed != 0) _random = new System.Random(seed);
@@ -47,13 +58,15 @@ public class DungeonGenerator : MonoBehaviour
             RandomizeFraction();
             if (rooms[_biggestRoom].width > rooms[_biggestRoom].height)
             {
-                rooms.Add(SplitVertical(rooms[_biggestRoom], fraction).Item1);
-                rooms[_biggestRoom] = SplitVertical(rooms[_biggestRoom], fraction).Item2;
+                SplitVertical(rooms[_biggestRoom], fraction, out RectInt newRoomA, out RectInt newRoomB);
+                rooms.Add(newRoomA);
+                rooms[_biggestRoom] = newRoomB;
             }
             else
             {
-                rooms.Add(SplitHorizontal(rooms[_biggestRoom], fraction).Item1);
-                rooms[_biggestRoom] = SplitHorizontal(rooms[_biggestRoom], fraction).Item2;
+                SplitHorizontal(rooms[_biggestRoom], fraction, out RectInt newRoomA, out RectInt newRoomB);
+                rooms.Add(newRoomA);
+                rooms[_biggestRoom] = newRoomB;
             }
             yield return new WaitForSeconds(generationInterval);
         }
@@ -64,6 +77,7 @@ public class DungeonGenerator : MonoBehaviour
 
         // Door generation
         int _tolerance = 3; // variable for determining if a door is too close to the edge of its room
+
         for (int i = 0;i < rooms.Count; i++)
         {
             for (int j = i; j < rooms.Count; j++)
@@ -204,33 +218,31 @@ public class DungeonGenerator : MonoBehaviour
         return new();
     }
 
-    void RandomizeFraction() => fraction = (float)_random.Next(35, 66) / 100f;
+    void RandomizeFraction() => fraction = (float)_random.Next(splitFractionRange.x, splitFractionRange.y) / 100f;
 
-    (RectInt, RectInt) SplitHorizontal(RectInt _origianalRoom, float _fraction)
+    void SplitHorizontal(RectInt _origianalRoom, float _fraction, out RectInt _roomA, out RectInt _roomB)
     {
-        RectInt _roomA = new(_origianalRoom.xMin, 
+        _roomA = new(_origianalRoom.xMin, 
                                     _origianalRoom.yMin, 
                                     _origianalRoom.width, 
                                     (int)(_origianalRoom.height * _fraction));
 
-        RectInt _roomB = new(_origianalRoom.xMin,
+        _roomB = new(_origianalRoom.xMin,
                                     _origianalRoom.yMin + (int)(_origianalRoom.height * _fraction),
                                     _origianalRoom.width, 
                                     _origianalRoom.height - _roomA.height);
-        return (_roomA, _roomB);
     }
-    (RectInt, RectInt) SplitVertical(RectInt _origianalRoom, float _fraction)
+    void SplitVertical(RectInt _origianalRoom, float _fraction, out RectInt _roomA, out RectInt _roomB)
     {
-        RectInt _roomA = new(_origianalRoom.xMin, 
+        _roomA = new(_origianalRoom.xMin, 
                                     _origianalRoom.yMin, 
                                     (int)(_origianalRoom.width * _fraction),
                                     _origianalRoom.height);
 
-        RectInt _roomB = new((int)(_origianalRoom.xMin + _origianalRoom.width * _fraction),
+        _roomB = new((int)(_origianalRoom.xMin + _origianalRoom.width * _fraction),
                                     _origianalRoom.yMin,
                                     _origianalRoom.width - _roomA.width,
                                     _origianalRoom.height);
-        return (_roomA, _roomB);
     }
     List<RectInt> SortListFromSmallToBig(List<RectInt> originalList)
     {
@@ -267,11 +279,14 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         // Draws removed doors
-        foreach (RectInt _door in removedDoors)
+        if (showDeletedDoors)
         {
-            DrawRectangle(new(_door.xMin, _door.yMin,
-            _door.width, _door.height),
-            height, Color.black);
+            foreach (RectInt _door in removedDoors)
+            {
+                DrawRectangle(new(_door.xMin, _door.yMin,
+                _door.width, _door.height),
+                height, Color.black);
+            }
         }
 
         // Draws graph lines
