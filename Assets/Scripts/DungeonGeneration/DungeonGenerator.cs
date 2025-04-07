@@ -5,16 +5,13 @@ using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
 {
+    [Header("Generation properties")]
     [Tooltip("Leave as 0 to use a random seed")]
     public int seed;
-
-    [Header("Generation properties")]
     public bool shouldRemoveSmallestRooms;
-
     public RectInt initialRoom = new(0, 0, 100, 100);
     RectInt originRoom;
     public float height = 5;
-
 
     float fraction = 0.5f;
     public Vector2Int splitFractionRange = new(35, 66);
@@ -23,15 +20,25 @@ public class DungeonGenerator : MonoBehaviour
     public int maxDoorsPerRoom = 3;
 
     [Header("Display properties")]
+    public bool displayVisualDebugging = true;
     public float generationInterval = .1f;
     public int splitOffset = 2;
     public int doorWidth = 1;
     public bool showDeletedDoors = true;
 
+    [Header("Asset generation properties")]
+    public bool disableVisualDebuggingAfterAssetGeneration = true;
+    public GameObject wall;
+    public GameObject wallBound;
+    public float wallHeight = 5;
+    public float wallBoundHeight = 1;
+    public GameObject floor;
+
     [Header("Generated stuff")]
     public List<RectInt> rooms = new(1);
     public List<RectInt> doors = new(1);
     public List<RectInt> removedDoors = new(1);
+    List<GameObject> wallsGenerated = new();
     Graph<Vector2> dungeonGraph = new();
     System.Random _random = new System.Random();
 
@@ -57,16 +64,17 @@ public class DungeonGenerator : MonoBehaviour
         // Room generation
         while (rooms[GetBiggestRoom(out int _biggestRoom)].size.magnitude > roomMaxSize)
         {
+            RectInt biggestRoom = rooms[_biggestRoom];
             RandomizeFraction();
-            if (rooms[_biggestRoom].width > rooms[_biggestRoom].height)
+            if (biggestRoom.width > biggestRoom.height)
             {
-                SplitVertical(rooms[_biggestRoom], fraction, out RectInt newRoomA, out RectInt newRoomB);
+                SplitVertical(biggestRoom, fraction, out RectInt newRoomA, out RectInt newRoomB);
                 rooms.Add(newRoomA);
                 rooms[_biggestRoom] = newRoomB;
             }
             else
             {
-                SplitHorizontal(rooms[_biggestRoom], fraction, out RectInt newRoomA, out RectInt newRoomB);
+                SplitHorizontal(biggestRoom, fraction, out RectInt newRoomA, out RectInt newRoomB);
                 rooms.Add(newRoomA);
                 rooms[_biggestRoom] = newRoomB;
             }
@@ -76,25 +84,29 @@ public class DungeonGenerator : MonoBehaviour
         originRoom = rooms[GetNearestToOrigin()];
 
         Debug.Log($"Generated all rooms, from {this}");
-
+        StartCoroutine(GenerateDoors());
+    }
+    IEnumerator GenerateDoors()
+    {
         // Door generation
         int _tolerance = 3; // variable for determining if a door is too close to the edge of its room
 
-        for (int i = 0;i < rooms.Count; i++)
+        for (int i = 0; i < rooms.Count; i++)
         {
-            for (int j = i; j < rooms.Count; j++)
+            for (int j = i+1; j < rooms.Count; j++)
             {
-                if (i != j && AlgorithmsUtils.Intersects(rooms[i], rooms[j]) && 
-                    (rooms[i] != originRoom && dungeonGraph.adjacencyList[rooms[i].center].Count < maxDoorsPerRoom || 
-                    rooms[i] == originRoom && dungeonGraph.adjacencyList[rooms[i].center].Count < maxDoorsForOriginRoom) &&
-                    (rooms[j] != originRoom && dungeonGraph.adjacencyList[rooms[j].center].Count < maxDoorsPerRoom ||
-                    rooms[j] == originRoom && dungeonGraph.adjacencyList[rooms[j].center].Count < maxDoorsForOriginRoom))
+                int roomsConnected = dungeonGraph.adjacencyList[rooms[i].center].Count;
+                if (AlgorithmsUtils.Intersects(rooms[i], rooms[j]) &&
+                    (rooms[i] != originRoom && roomsConnected < maxDoorsPerRoom ||
+                    rooms[i] == originRoom && roomsConnected < maxDoorsForOriginRoom) &&
+                    (rooms[j] != originRoom && roomsConnected < maxDoorsPerRoom ||
+                    rooms[j] == originRoom && roomsConnected < maxDoorsForOriginRoom))
                 {
                     var _newDoor = AlgorithmsUtils.Intersect(rooms[i], rooms[j]);
 
                     _newDoor = new(
-                        (_newDoor.width <= 0) ? _newDoor.xMin - doorWidth/2 : (_newDoor.xMin) + _newDoor.width/2,
-                        (_newDoor.height <= 0) ? _newDoor.yMin - doorWidth/2 : (_newDoor.yMin) + _newDoor.height/2,
+                        (_newDoor.width <= 0) ? _newDoor.xMin - doorWidth / 2 : (_newDoor.xMin) + _newDoor.width / 2,
+                        (_newDoor.height <= 0) ? _newDoor.yMin - doorWidth / 2 : (_newDoor.yMin) + _newDoor.height / 2,
                         (_newDoor.width <= 0) ? _newDoor.width + doorWidth : doorWidth,
                         (_newDoor.height <= 0) ? _newDoor.height + doorWidth : doorWidth);
 
@@ -119,9 +131,11 @@ public class DungeonGenerator : MonoBehaviour
                 }
             }
         }
-
         Debug.Log($"Generated all doors, from {this}");
-
+        StartCoroutine(RemoveRooms());
+    }
+    IEnumerator RemoveRooms()
+    {
         // Removes rooms with 0 doors
         int _doorsRemoved = 0;
         for (int i = 0; i < rooms.Count; i++)
@@ -144,7 +158,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             if (!_accessibleRooms.Contains(point.Key)) _roomsToRemove.Add(point.Key);
         }
-        foreach(Vector2 room in _roomsToRemove)
+        foreach (Vector2 room in _roomsToRemove)
         {
             foreach (Vector2 door in dungeonGraph.adjacencyList[room])
             {
@@ -170,7 +184,163 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         Debug.Log("Room generation done!");
+        if (disableVisualDebuggingAfterAssetGeneration) displayVisualDebugging = false;
+        StartCoroutine(GenerateInitialWalls());
+    }
+    IEnumerator GenerateInitialWalls()
+    {
+        // Generate walls
+        GameObject wallContainer = new("WallContainer");
 
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            GameObject roomWallContainer = new($"Room{i}WallContainer");
+            roomWallContainer.transform.parent = wallContainer.transform;
+
+            Vector3 _center = new(rooms[i].center.x, 0, rooms[i].center.y);
+
+            GameObject wallXPlus = Instantiate(wall, _center + new Vector3(rooms[i].width * 0.5f, 0, 0),
+                Quaternion.identity, roomWallContainer.transform);
+            GameObject wallXMin = Instantiate(wall, _center + new Vector3(-rooms[i].width * 0.5f, 0, 0),
+                Quaternion.identity, roomWallContainer.transform);
+            GameObject wallYPlus = Instantiate(wall, _center + new Vector3(0, 0, rooms[i].height * 0.5f),
+                Quaternion.identity, roomWallContainer.transform);
+            GameObject wallYMin = Instantiate(wall, _center + new Vector3(0, 0, -rooms[i].height * 0.5f),
+                Quaternion.identity, roomWallContainer.transform);
+
+            wallXPlus.transform.localScale = new(1, wallHeight, rooms[i].height);
+            wallXMin.transform.localScale = new(1, wallHeight, rooms[i].height);
+            wallYPlus.transform.localScale = new(rooms[i].width, wallHeight, 1);
+            wallYMin.transform.localScale = new(rooms[i].width, wallHeight, 1);
+
+            wallsGenerated.Add(wallXPlus);
+            wallsGenerated.Add(wallYPlus);
+            wallsGenerated.Add(wallXMin);
+            wallsGenerated.Add(wallYMin);
+        }
+        StartCoroutine(ModifyWalls());
+        yield return new();
+    }
+    IEnumerator ModifyWalls()
+    { 
+        // Check for door intersections
+        for (int i = 0; i < wallsGenerated.Count; i++)
+        {
+            RectInt wallRect = new(
+                (int)(wallsGenerated[i].transform.position.x - .5f * wallsGenerated[i].transform.localScale.x),
+                (int)(wallsGenerated[i].transform.position.z - .5f * wallsGenerated[i].transform.localScale.z),
+                (int)wallsGenerated[i].transform.localScale.x,
+                (int)wallsGenerated[i].transform.localScale.z
+                );
+            for (int j = 0; j < doors.Count; j++)
+            {
+                if (AlgorithmsUtils.Intersects(doors[j], wallRect))
+                {
+                    GameObject wallDupe = Instantiate(wallsGenerated[i], wallsGenerated[i].transform.position,
+                        Quaternion.identity, wallsGenerated[i].transform.parent);
+                    wallDupe.name = "WallB";
+
+                    RectInt newWallA;
+                    RectInt newWallB;
+                    RectInt intersectDoor = doors[j];
+                    if (wallRect.width < wallRect.height)
+                    {
+                        newWallA = new(
+                            wallRect.xMin,
+                            wallRect.yMin,
+                            wallRect.width,
+                            intersectDoor.yMin - wallRect.yMin
+                            );
+                        newWallB = new(
+                            wallRect.xMin,
+                            intersectDoor.yMin + intersectDoor.height,
+                            wallRect.width,
+                            wallRect.height - newWallA.height - intersectDoor.height
+                            );
+                    }
+                    else
+                    {
+                        newWallA = new(
+                            wallRect.xMin,
+                            wallRect.yMin,
+                            intersectDoor.xMin - wallRect.xMin,
+                            wallRect.height
+                            );
+                        newWallB = new(
+                            intersectDoor.xMin + intersectDoor.width,
+                            wallRect.yMin,
+                            wallRect.width - newWallA.width - intersectDoor.width,
+                            wallRect.height
+                            );
+                    }
+                    yield return new WaitForSeconds(generationInterval);
+
+                    wallsGenerated[i].transform.position = new Vector3(newWallA.center.x, 0, newWallA.center.y);
+                    wallDupe.transform.position = new Vector3(newWallB.center.x, 0, newWallB.center.y);
+                    wallsGenerated[i].transform.localScale = new Vector3(newWallA.width, wallHeight, newWallA.height);
+                    wallDupe.transform.localScale = new Vector3(newWallB.width, wallHeight, newWallB.height);                }
+            }
+            yield return new();
+        }
+
+        // Remove fully overlapping walls
+        for (int i = 0; i < wallsGenerated.Count; i++)
+        {
+            for (int j = i; j < wallsGenerated.Count - 1; j++)
+            {
+                if (i == j) continue;
+                if (wallsGenerated[i].transform.position == wallsGenerated[j].transform.position)
+                {
+                    Destroy(wallsGenerated[i]);
+                    wallsGenerated.RemoveAt(i);
+                }
+            }
+        }
+        /**
+        // Generate bounds on top of and below walls
+        GameObject wallBoundContainer = new("WallBoundContainer");
+        foreach (GameObject wall in wallsGenerated)
+        {
+            GameObject wallboundTop = Instantiate(wallBound,
+                new Vector3(wall.transform.position.x, 
+        wall.transform.position.y + 0.5f * wall.transform.localScale.y, wall.transform.position.z), 
+                Quaternion.identity, wallBoundContainer.transform);
+            wallboundTop.transform.localScale = new Vector3(wall.transform.localScale.x, wallBoundHeight, wall.transform.localScale.z);
+            GameObject wallboundBottom = Instantiate(wallBound,
+                new Vector3(wall.transform.position.x, 
+        wall.transform.position.y - 0.5f * wall.transform.localScale.y, wall.transform.position.z), 
+                Quaternion.identity, wallBoundContainer.transform);
+            wallboundBottom.transform.localScale = new Vector3(wall.transform.localScale.x, wallBoundHeight, wall.transform.localScale.z);
+        }
+        **/
+        //StartCoroutine(GenerateFloor());
+    }
+    IEnumerator GenerateFloor()
+    {
+        // Generate floor
+        GameObject floorContainer = new GameObject("FloorContainer");
+        foreach (RectInt room in rooms)
+        {
+            GameObject _floor = Instantiate(floor, new Vector3(room.center.x, -wallHeight * .5f, room.center.y),
+                Quaternion.identity, floorContainer.transform);
+            _floor.transform.localScale = new Vector3(room.width - 1, 1, room.height - 1) / 10;
+        }
+        foreach (RectInt door in doors)
+        {
+            GameObject doorFloor = Instantiate(floor, new Vector3(door.center.x, -wallHeight * .5f, door.center.y),
+                Quaternion.identity, floorContainer.transform);
+            doorFloor.transform.localScale = new Vector3(door.width, 1, door.height) / 10;
+        }
+        StartCoroutine(Brickify());
+        yield return new();
+
+    }
+    IEnumerator Brickify()
+    {
+        // Brickifies generated walls
+        foreach (var wall in wallsGenerated) wall.AddComponent<WallGenerator>();
+        Debug.Log("Generated all room assets!");
+        yield return new();
     }
     int GetBiggestRoom(out int biggestIndex)
     {
@@ -262,6 +432,8 @@ public class DungeonGenerator : MonoBehaviour
 
     void Update()
     {
+        if (!displayVisualDebugging) return;
+
         DrawRectangle(initialRoom, height + 1, Color.red);
 
         // Draws rooms
@@ -299,10 +471,10 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    public static void DrawRectangle(RectInt _room, float _height, Color _color)
+    public static void DrawRectangle(RectInt _room, float _height, Color _color, float duration = 0.1f)
     {
         DebugExtension.DebugBounds(new Bounds(new Vector3(_room.center.x, 0, _room.center.y), 
             new Vector3(_room.width, _height, _room.height)),
-            _color, 0.1f);
+            _color, duration);
     }
 }

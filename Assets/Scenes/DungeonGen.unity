@@ -160,10 +160,17 @@ MonoBehaviour:
   roomMaxSize: 45
   maxDoorsForOriginRoom: 1
   maxDoorsPerRoom: 3
+  displayVisualDebugging: 1
   generationInterval: 0.1
   splitOffset: 2
   doorWidth: 4
   showDeletedDoors: 1
+  disableVisualDebuggingAfterAssetGeneration: 1
+  wall: {fileID: 7248190965236874754, guid: d6f869f665bace843b6a22279a706c14, type: 3}
+  wallBound: {fileID: 7248190965236874754, guid: 89625b0a31f3cb8409f3bcb8429268fb, type: 3}
+  wallHeight: 6
+  wallBoundHeight: 1
+  floor: {fileID: 330691455853550617, guid: 8b06f6812a5def0409a7b0029d150f07, type: 3}
   rooms: []
   doors: []
   removedDoors: []

@@ -79,6 +79,11 @@ public class MeshBuilder {
                 , _vertices[i].x * Mathf.Sin(rotation) + _vertices[i].z * Mathf.Cos(rotation));
 		}
 	}
+	public void ClampVerticesX(float rangeStart, float rangeEnd)
+	{
+		for(int i =0; i < _vertices.Count; ++i)
+            _vertices[i] = new(Mathf.Clamp(_vertices[i].x, rangeStart, rangeEnd), _vertices[i].y, _vertices[i].z);
+    }
 
 	/// <summary>
 	/// Creates the mesh. Note: this will not reset any of the internal lists. (Use Clear to do that)

@@ -44,7 +44,7 @@ public class WallGenerator : MonoBehaviour
             for (int i = 0; i < Mathf.Ceil(originalScale.y / height); i++)
             {
                 // continue generation horizontally
-                for (int j = 0; j < Mathf.Ceil(originalScale.x / width); j++)
+                for (int j = 0; j < Mathf.Ceil(originalScale.x / width) + (i % 2 != 0 ? 1 : 0); j++)
                 {
                     //side left
                     int v0 = builder.AddVertex(origin + offset + new Vector3(0, 0, 0));
@@ -92,6 +92,7 @@ public class WallGenerator : MonoBehaviour
                 }
                 offset = new((i % 2 != 0) ? 0 : (-0.5f * width), offset.y + height, offset.z);
             }
+            builder.ClampVerticesX(origin.x, origin.x + originalScale.x);
             offset = new(0, 0, originalScale.z * 0.25f);
             builder.RotateVertices(180);
         }

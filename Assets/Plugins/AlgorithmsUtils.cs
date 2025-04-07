@@ -10,7 +10,7 @@ public class AlgorithmsUtils
                a.yMin <= b.yMax &&
                a.yMax >= b.yMin;
     }
-    
+
     public static RectInt Intersect(RectInt a, RectInt b)
     {
         int x = Mathf.Max(a.xMin, b.xMin);
