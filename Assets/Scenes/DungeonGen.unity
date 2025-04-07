@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afd42dcf8a837e44ba65d59a21f6aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 0
+  seed: 10
   shouldRemoveSmallestRooms: 1
   initialRoom:
     x: 0
@@ -156,15 +156,17 @@ MonoBehaviour:
     width: 100
     height: 100
   height: 5
+  splitFractionRange: {x: 35, y: 66}
+  roomMaxSize: 45
+  maxDoorsForOriginRoom: 1
+  maxDoorsPerRoom: 3
+  generationInterval: 0.1
+  splitOffset: 2
+  doorWidth: 4
+  showDeletedDoors: 1
   rooms: []
   doors: []
   removedDoors: []
-  roomMaxSize: 45
-  splitOffset: 2
-  generationInterval: 0.1
-  doorWidth: 4
-  maxDoorsPerRoom: 3
-  maxDoorsForOriginRoom: 1
 --- !u!4 &1256635334
 Transform:
   m_ObjectHideFlags: 0

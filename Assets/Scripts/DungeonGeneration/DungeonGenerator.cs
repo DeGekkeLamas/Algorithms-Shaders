@@ -15,21 +15,23 @@ public class DungeonGenerator : MonoBehaviour
     RectInt originRoom;
     public float height = 5;
 
-    public List<RectInt> rooms = new(1);
-    public List<RectInt> doors = new(1);
-    public List<RectInt> removedDoors = new(1);
 
     float fraction = 0.5f;
     public Vector2Int splitFractionRange = new(35, 66);
-    public float roomMaxSize = 1000;
-    public int splitOffset = 2;
-    public float generationInterval = .1f;
-    public int doorWidth = 1;
-    public int maxDoorsPerRoom = 3;
+    public float roomMaxSize = 45;
     public int maxDoorsForOriginRoom = 1;
+    public int maxDoorsPerRoom = 3;
 
+    [Header("Display properties")]
+    public float generationInterval = .1f;
+    public int splitOffset = 2;
+    public int doorWidth = 1;
     public bool showDeletedDoors = true;
 
+    [Header("Generated stuff")]
+    public List<RectInt> rooms = new(1);
+    public List<RectInt> doors = new(1);
+    public List<RectInt> removedDoors = new(1);
     Graph<Vector2> dungeonGraph = new();
     System.Random _random = new System.Random();
 
