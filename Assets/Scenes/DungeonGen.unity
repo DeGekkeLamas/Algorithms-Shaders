@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afd42dcf8a837e44ba65d59a21f6aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 10
+  seed: 0
   shouldRemoveSmallestRooms: 1
   initialRoom:
     x: 0
