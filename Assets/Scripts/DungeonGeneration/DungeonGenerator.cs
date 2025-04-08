@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -30,11 +31,14 @@ public class DungeonGenerator : MonoBehaviour
     public bool disableVisualDebuggingAfterAssetGeneration = true;
     public GameObject wall;
     public GameObject wallBound;
+    public GameObject floor;
+    public GameObject player;
+    public GameObject enemy;
     public float wallHeight = 5;
     public float wallBoundHeight = 1;
-    public GameObject floor;
 
     [Header("Generated stuff")]
+    GameObject AssetContainer;
     public List<RectInt> rooms = new(1);
     public List<RectInt> doors = new(1);
     public List<RectInt> removedDoors = new(1);
@@ -53,7 +57,36 @@ public class DungeonGenerator : MonoBehaviour
     {
         if (seed != 0) _random = new System.Random(seed);
 
+        StartCoroutine(GenerateDungeon());
+    }
+    bool coroutineIsDone;
+    IEnumerator GenerateDungeon()
+    {
+        AssetContainer = new GameObject("AssetContainer");
+
+        coroutineIsDone = false;
         StartCoroutine(GenerateRooms());
+        yield return new WaitUntil(() => coroutineIsDone);
+        coroutineIsDone = false;
+        StartCoroutine(GenerateDoors());
+        yield return new WaitUntil(() => coroutineIsDone);
+        coroutineIsDone = false;
+        StartCoroutine(RemoveRooms());
+        yield return new WaitUntil(() => coroutineIsDone);
+        coroutineIsDone = false;
+        StartCoroutine(GenerateInitialWalls());
+        yield return new WaitUntil(() => coroutineIsDone);
+        coroutineIsDone = false;
+        StartCoroutine(ModifyWalls());
+        yield return new WaitUntil(() => coroutineIsDone);
+        coroutineIsDone = false;
+        StartCoroutine(GenerateFloor());
+        yield return new WaitUntil(() => coroutineIsDone);
+        coroutineIsDone = false;
+        StartCoroutine(Brickify());
+        yield return new WaitUntil(() => coroutineIsDone);
+        coroutineIsDone = false;
+        StartCoroutine(SpawnObjects());
     }
     IEnumerator GenerateRooms()
     {
@@ -84,7 +117,7 @@ public class DungeonGenerator : MonoBehaviour
         originRoom = rooms[GetNearestToOrigin()];
 
         Debug.Log($"Generated all rooms, from {this}");
-        StartCoroutine(GenerateDoors());
+        coroutineIsDone = true;
     }
     IEnumerator GenerateDoors()
     {
@@ -132,7 +165,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
         Debug.Log($"Generated all doors, from {this}");
-        StartCoroutine(RemoveRooms());
+        coroutineIsDone = true;
     }
     IEnumerator RemoveRooms()
     {
@@ -185,12 +218,13 @@ public class DungeonGenerator : MonoBehaviour
 
         Debug.Log("Room generation done!");
         if (disableVisualDebuggingAfterAssetGeneration) displayVisualDebugging = false;
-        StartCoroutine(GenerateInitialWalls());
+        coroutineIsDone = true;
     }
     IEnumerator GenerateInitialWalls()
     {
         // Generate walls
         GameObject wallContainer = new("WallContainer");
+        wallContainer.transform.parent = AssetContainer.transform;
 
         for (int i = 0; i < rooms.Count; i++)
         {
@@ -219,7 +253,7 @@ public class DungeonGenerator : MonoBehaviour
             wallsGenerated.Add(wallYMin);
             yield return null;
         }
-        StartCoroutine(ModifyWalls());
+        coroutineIsDone = true;
         yield return new();
     }
     IEnumerator ModifyWalls()
@@ -227,6 +261,7 @@ public class DungeonGenerator : MonoBehaviour
         // Check for door intersections
         int wallsQTY = wallsGenerated.Count;
         GameObject doorBoundsContainer = new("DoorBounds");
+        doorBoundsContainer.transform.parent = AssetContainer.transform;
         for (int i = 0; i < wallsQTY; i++)
         {
             RectInt wallRect = new(
@@ -328,6 +363,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         // Generate bounds on top of and below walls
         GameObject wallBoundContainer = new("WallBoundContainer");
+        wallBoundContainer.transform.parent = AssetContainer.transform;
         foreach (GameObject wall in wallsGenerated)
         {
             GameObject wallboundTop = Instantiate(wallBound,
@@ -344,18 +380,18 @@ public class DungeonGenerator : MonoBehaviour
                 wallBoundHeight, wall.transform.localScale.z);
         yield return null;
         }
-        StartCoroutine(GenerateFloor());
+        coroutineIsDone = true;
     }
     IEnumerator GenerateFloor()
     {
         // Generate floor
         GameObject floorContainer = new GameObject("FloorContainer");
+        floorContainer.transform.parent = AssetContainer.transform;
         foreach (RectInt room in rooms)
         {
             GameObject _floor = Instantiate(floor, new Vector3(room.center.x, -wallHeight * .5f, room.center.y),
                 Quaternion.identity, floorContainer.transform);
             _floor.transform.localScale = new Vector3(room.width - 1, 1, room.height - 1) / 10;
-            yield return new WaitForSeconds(generationInterval);
             yield return null;
         }
         foreach (RectInt door in doors)
@@ -363,10 +399,9 @@ public class DungeonGenerator : MonoBehaviour
             GameObject doorFloor = Instantiate(floor, new Vector3(door.center.x, -wallHeight * .5f, door.center.y),
                 Quaternion.identity, floorContainer.transform);
             doorFloor.transform.localScale = new Vector3(door.width, 1, door.height) / 10;
-            yield return new WaitForSeconds(generationInterval);
             yield return null;
         }
-        StartCoroutine(Brickify());
+        coroutineIsDone = true;
         yield return new();
 
     }
@@ -379,8 +414,17 @@ public class DungeonGenerator : MonoBehaviour
             yield return null;
         }
         Debug.Log("Generated all room assets!");
+        coroutineIsDone = true;
         yield return new();
     }
+    IEnumerator SpawnObjects()
+    {
+        Destroy(Camera.main.gameObject);
+        Instantiate(player, new Vector3(originRoom.center.x, -wallHeight * .5f, originRoom.center.y), Quaternion.identity);
+        coroutineIsDone = true;
+        yield return null;
+    }
+
     int GetBiggestRoom(out int biggestIndex)
     {
         biggestIndex = 0;
