@@ -12,9 +12,9 @@ public class VectorMath
                 , start.x * Mathf.Sin(rotation) + start.z * Mathf.Cos(rotation)
             );
     }
-    public static float GetAngleBetweenVectors(Vector3 start, Vector3 end)
+    public static float GetAngleBetweenVectors(Vector3 dir1, Vector3 dir2)
     {
-        float _angle = Mathf.Acos(Vector3.Dot(end, end - start) / (end.magnitude * (end - start).magnitude)) * (180 / Mathf.PI);
+        float _angle = Mathf.Acos(Vector3.Dot(dir2, dir1) / (dir2.magnitude * dir1.magnitude)) * (180 / Mathf.PI);
         return _angle;
     }
 }

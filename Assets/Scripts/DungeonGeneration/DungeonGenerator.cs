@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,10 +35,12 @@ public class DungeonGenerator : MonoBehaviour
     public GameObject floor;
     public GameObject player;
     public GameObject enemy;
+    public EnemyProbabilities[] enemiesPerRoom;
     public float wallHeight = 5;
     public float wallBoundHeight = 1;
 
     [Header("Generated stuff")]
+    public NavMeshSurface navMeshSurface;
     GameObject AssetContainer;
     public List<RectInt> rooms = new(1);
     public List<RectInt> doors = new(1);
@@ -401,6 +404,7 @@ public class DungeonGenerator : MonoBehaviour
             doorFloor.transform.localScale = new Vector3(door.width, 1, door.height) / 10;
             yield return null;
         }
+
         coroutineIsDone = true;
         yield return new();
 
@@ -419,6 +423,32 @@ public class DungeonGenerator : MonoBehaviour
     }
     IEnumerator SpawnObjects()
     {
+        GameObject enemyContainer = new("EnemyContainer");
+        enemyContainer.transform.parent = AssetContainer.transform;
+        navMeshSurface.BuildNavMesh();
+        // Spawn enemies
+        foreach (RectInt room in rooms)
+        {
+            if (room == originRoom) continue;
+            int enemiesToSpawn = 0;
+            int enemyroll = _random.Next(0, 100);
+            for (int i = enemiesPerRoom.Length-1; i >= 0; i--)
+            {
+                if (enemyroll > 100 - enemiesPerRoom[i].probability)
+                {
+                    enemiesToSpawn = enemiesPerRoom[i].Quantity;
+                    break;
+                }
+            }
+            for (int j = 0; j < enemiesToSpawn; j++)
+            {
+                Instantiate(enemy, new Vector3(room.center.x, -wallHeight * .5f, room.center.y),
+                    Quaternion.identity, enemyContainer.transform);
+            }
+            yield return null;
+        }
+
+        // Spawn Player
         Destroy(Camera.main.gameObject);
         Instantiate(player, new Vector3(originRoom.center.x, -wallHeight * .5f, originRoom.center.y), Quaternion.identity);
         coroutineIsDone = true;
@@ -560,4 +590,10 @@ public class DungeonGenerator : MonoBehaviour
             new Vector3(_room.width, _height, _room.height)),
             _color, duration);
     }
+}
+[System.Serializable]
+public struct EnemyProbabilities
+{
+    public int Quantity;
+    [Range(0, 100)] public int probability;
 }

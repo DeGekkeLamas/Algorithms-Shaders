@@ -27,24 +27,25 @@ public class EnemyFollower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (PlayerController.playerReference == null) return;
         // shows vision range
         DebugExtension.DebugCircle(this.transform.position, Color.green, maxDistance);
         Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * maxDistance, visionAngle), Color.green);
         Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * maxDistance, -visionAngle), Color.green);
 
         // start following player if player has been seen before
-        float playerEnemyDistance = (PlayerController.playerReference.transform.position - this.transform.position).magnitude;
+        Vector3 playerPos = PlayerController.playerReference.transform.position;
+        float playerEnemyDistance = (playerPos - this.transform.position).magnitude;
 
         if (playerEnemyDistance > .5f && (hasSeenPlayer ||
-            (PlayerController.playerReference != null && 
-            playerEnemyDistance < maxDistance &&
-            VectorMath.GetAngleBetweenVectors(this.transform.position - PlayerController.playerReference.transform.position, this.transform.forward) 
+            (playerEnemyDistance < maxDistance &&
+            VectorMath.GetAngleBetweenVectors(playerPos - transform.position, this.transform.forward) 
                 < visionAngle)))
         {
             hasSeenPlayer = true;
             this.transform.position += moveSpeed * Time.deltaTime * 
-                (PlayerController.playerReference.transform.position - this.transform.position).normalized;
-            transform.LookAt(PlayerController.playerReference.transform.position);
+                (playerPos - this.transform.position).normalized;
+            transform.LookAt(playerPos);
 
             // Start battle if too close
             if (playerEnemyDistance < battleStartDistance)

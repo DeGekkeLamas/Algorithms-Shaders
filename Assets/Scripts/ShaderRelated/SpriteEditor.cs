@@ -31,12 +31,16 @@ public class SpriteEditor
         if (!originSprite.isReadable) colors = DuplicateTexture(originSprite).GetPixels();
         else colors =originSprite.GetPixels();
 
-        Color[] newColors = colors;
+        Color[] newColors = new Color[colors.Length]; //  (Color[])(colors.Clone());
         Texture2D newSprite = new(originSprite.width, originSprite.height);
 
+        for(int i = 0; i < colors.Length; i++)
+        {
+            if (colors[i] == bgColor) colors[i] = bgColor;
+        }
         for (int y = 0; y < originSprite.height; y++)
         {
-            for (int x = 0; x < originSprite.width; x++)
+            for (int x = originSprite.width-1; x>=0 ; x--)
             {
                 int _index = y * originSprite.width + x;
                 Color output = colors[_index];
@@ -57,14 +61,14 @@ public class SpriteEditor
 
                     foreach (int _point in _pointsToCheck)
                     {
-                        if (_point > 0 && _point < colors.Length && !IsColorClose(colors[_point], colors[_index], 0.31f))
+                        if (_point > 0 && _point < newColors.Length && !IsColorClose(colors[_point], colors[_index], 0.31f))
                         {
                             isEdge = true;
                             break;
                         }
                     }
 
-                    if (isEdge) output = Color.black;
+                    if (isEdge) output = Color.red;
                 }
                 newColors[_index] = output;
             }

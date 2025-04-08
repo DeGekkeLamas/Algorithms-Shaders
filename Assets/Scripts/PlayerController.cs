@@ -1,5 +1,5 @@
 using UnityEngine;
-using static UnityEditor.Progress;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public float projectileForce = 5;
 
     public Rigidbody pickupSpawned;
-    public static PlayerController playerReference;
+    public static PlayerController playerReference; 
+    NavMeshAgent navMeshAgent;
 
     Inventory inventory;
     private void Awake()
@@ -16,13 +17,14 @@ public class PlayerController : MonoBehaviour
         playerDestination = transform.position;
         inventory = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Inventory>();
         playerReference = this;
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
     void Update()
     {
         bool canUseItem = true;
 
         // Set destination on click
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             //Translates mouse 2D position
             float _posX = Remap(0, 1, -1, 1, Input.mousePosition.x / Screen.width);
@@ -34,7 +36,8 @@ public class PlayerController : MonoBehaviour
                 , out RaycastHit rayHit, 1000, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore))
             {
                 //Debug.DrawLine(Camera.main.transform.position, rayHit.point, Color.red, 1);
-                playerDestination = rayHit.point;
+                navMeshAgent.SetDestination(rayHit.point);
+                ///playerDestination = rayHit.point;
             }
         }
 
@@ -104,13 +107,13 @@ public class PlayerController : MonoBehaviour
             droppedItem.gameObject.GetComponent<PickupItem>().itemToGive = inventory.currentInventory[Inventory.itemSelected];
             inventory.RemoveFromStack(Inventory.itemSelected);
         }
-
+        /**
         // Move to destination
         if ((playerDestination - transform.position).magnitude > 1)
         {
             Vector3 movement = (playerDestination - transform.position).normalized;
             this.transform.position += Time.deltaTime * moveSpeed * movement;
-        }
+        }**/
     }
 
     Vector3 GetMousePosition()
