@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         bool canUseItem = true;
 
         // Set destination on click
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             //Translates mouse 2D position
             float _posX = Remap(0, 1, -1, 1, Input.mousePosition.x / Screen.width);

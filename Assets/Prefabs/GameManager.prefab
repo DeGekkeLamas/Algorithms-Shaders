@@ -2370,7 +2370,7 @@ MonoBehaviour:
   hotBar: {fileID: 4886532645219844462}
   itemDescription: {fileID: 5001704730604281708}
   battleUIPosition: {x: 342.5, y: 195, z: 0}
-  overworldUIPosition: {x: 180, y: 480, z: 0}
+  overworldUIPosition: {x: 180, y: 520, z: 0}
 --- !u!114 &5293728399048542619
 MonoBehaviour:
   m_ObjectHideFlags: 0

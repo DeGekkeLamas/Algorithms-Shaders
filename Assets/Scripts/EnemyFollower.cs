@@ -33,19 +33,25 @@ public class EnemyFollower : MonoBehaviour
         Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * maxDistance, visionAngle), Color.green);
         Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * maxDistance, -visionAngle), Color.green);
 
-        // start following player if player has been seen before
         Vector3 playerPos = PlayerController.playerReference.transform.position;
         float playerEnemyDistance = (playerPos - this.transform.position).magnitude;
 
-        if (playerEnemyDistance > .5f && (hasSeenPlayer ||
-            (playerEnemyDistance < maxDistance &&
-            VectorMath.GetAngleBetweenVectors(playerPos - transform.position, this.transform.forward) 
-                < visionAngle)))
+        // start following player if player has been seen before
+        Debug.DrawRay(this.transform.position + Vector3.up, playerPos + Vector3.up - (this.transform.position + transform.forward));
+
+        if (playerEnemyDistance > .5f && playerEnemyDistance < maxDistance &&
+            VectorMath.GetAngleBetweenVectors(playerPos - this.transform.position, this.transform.forward) 
+                < visionAngle &&
+                Physics.Raycast(this.transform.position + Vector3.up, playerPos + Vector3.up - (this.transform.position),
+            out RaycastHit visionHit) && visionHit.collider.transform == PlayerController.playerReference.transform.GetChild(0))
         {
             hasSeenPlayer = true;
+            Vector3 lastSeenPlayerPos = playerPos;
+
+            // Move to player
             this.transform.position += moveSpeed * Time.deltaTime * 
-                (playerPos - this.transform.position).normalized;
-            transform.LookAt(playerPos);
+                (lastSeenPlayerPos - this.transform.position).normalized;
+            transform.LookAt(lastSeenPlayerPos);
 
             // Start battle if too close
             if (playerEnemyDistance < battleStartDistance)
@@ -54,10 +60,28 @@ public class EnemyFollower : MonoBehaviour
                 manager.StartBattle();
             }
         }
+        else
+        {
+            hasSeenPlayer = false;
+            if (!coroutineIsRunning) StartCoroutine(RandomMovements());
+        }
+        /**
+        // Stop following player if object in between
+        if (hasSeenPlayer && Physics.Raycast(this.transform.position, playerPos - (this.transform.position - transform.forward), 
+            out RaycastHit visionHit))
+            if (visionHit.collider.gameObject != PlayerController.playerReference.gameObject)
+            {
+                hasSeenPlayer = false;
+                StopAllCoroutines();
+                StartCoroutine(RandomMovements());
+            }
+        Debug.DrawRay(this.transform.position, playerPos - (this.transform.position + transform.forward));
+        **/
     }
-
+    bool coroutineIsRunning;
     IEnumerator RandomMovements()
     {
+        coroutineIsRunning = true;
         while(!hasSeenPlayer)
         {
             // Rotate enemy at random
@@ -85,16 +109,17 @@ public class EnemyFollower : MonoBehaviour
             // Moves enemy forward
             Vector3 _destination = this.transform.position + this.transform.forward * moveDistance;
 
-            while ((this.transform.position - _destination).magnitude > .25f)
+            while ((this.transform.position - _destination).magnitude > .25f && (this.transform.position - _destination).magnitude < 7)
             {
                 this.transform.position += moveSpeed * Time.deltaTime * transform.forward;
                 yield return null;
 
             }
 
-            Debug.Log($"Movement done, from {this}");
+            //Debug.Log($"Movement done, from {this}");
             yield return new WaitForSeconds(delayBetweenMovements);
         }
+        coroutineIsRunning = false;
     }
     // Determines which direction is shorter for rotation
     static bool CloserToPlusSide(float currentRotation, float destination)

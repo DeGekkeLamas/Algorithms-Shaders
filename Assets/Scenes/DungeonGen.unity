@@ -158,8 +158,8 @@ MonoBehaviour:
   height: 5
   splitFractionRange: {x: 35, y: 66}
   roomMaxSize: 45
-  maxDoorsForOriginRoom: 1
-  maxDoorsPerRoom: 3
+  maxDoorsForOriginRoom: 2
+  maxDoorsPerRoom: 4
   displayVisualDebugging: 1
   generationInterval: 0
   splitOffset: 2
@@ -328,13 +328,13 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.25
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -428,6 +428,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1413741798407944745, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5001704730604281708, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7148870164262935656, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
@@ -648,7 +652,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.75
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2

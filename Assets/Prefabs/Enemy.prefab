@@ -50,12 +50,11 @@ MonoBehaviour:
   maxDistance: 15
   moveSpeed: 5
   battleStartDistance: 1
-  visionAngle: 45
+  visionAngle: 75
   rotationSpeed: 100
-  maxRotationPerSpin: 60
+  RotationRange: {x: 30, y: 45}
   delayBetweenMovements: 0.75
   moveDistance: 2
-  debugText: {fileID: 0}
 --- !u!136 &6232500598109979020
 CapsuleCollider:
   m_ObjectHideFlags: 0

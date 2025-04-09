@@ -254,7 +254,7 @@ public class DungeonGenerator : MonoBehaviour
             wallsGenerated.Add(wallYPlus);
             wallsGenerated.Add(wallXMin);
             wallsGenerated.Add(wallYMin);
-            yield return null;
+            yield return new WaitForSeconds(generationInterval);
         }
         coroutineIsDone = true;
         yield return new();
@@ -318,7 +318,7 @@ public class DungeonGenerator : MonoBehaviour
                             wallRect.height
                             );
                     }
-                    yield return null;
+                    yield return new WaitForSeconds(generationInterval);
 
                     wallsGenerated[i].transform.position = new Vector3(newWallA.center.x, 0, newWallA.center.y);
                     wallDupe.transform.position = new Vector3(newWallB.center.x, 0, newWallB.center.y);
@@ -394,15 +394,8 @@ public class DungeonGenerator : MonoBehaviour
         {
             GameObject _floor = Instantiate(floor, new Vector3(room.center.x, -wallHeight * .5f, room.center.y),
                 Quaternion.identity, floorContainer.transform);
-            _floor.transform.localScale = new Vector3(room.width - 1, 1, room.height - 1) / 10;
-            yield return null;
-        }
-        foreach (RectInt door in doors)
-        {
-            GameObject doorFloor = Instantiate(floor, new Vector3(door.center.x, -wallHeight * .5f, door.center.y),
-                Quaternion.identity, floorContainer.transform);
-            doorFloor.transform.localScale = new Vector3(door.width, 1, door.height) / 10;
-            yield return null;
+            _floor.transform.localScale = new Vector3(room.width, 1, room.height) / 10;
+            yield return new WaitForSeconds(generationInterval);
         }
 
         coroutineIsDone = true;
@@ -415,7 +408,7 @@ public class DungeonGenerator : MonoBehaviour
         foreach (var wall in wallsGenerated)
         {
             wall.AddComponent<WallGenerator>();
-            yield return null;
+            yield return new WaitForSeconds(generationInterval);
         }
         Debug.Log("Generated all room assets!");
         coroutineIsDone = true;
@@ -440,19 +433,20 @@ public class DungeonGenerator : MonoBehaviour
                     break;
                 }
             }
-            for (int j = 0; j < enemiesToSpawn; j++)
+            for (int i = 0; i < enemiesToSpawn; i++)
             {
-                Instantiate(enemy, new Vector3(room.center.x, -wallHeight * .5f, room.center.y),
+                Instantiate(enemy, new Vector3(room.center.x + i, -wallHeight * .5f, room.center.y + i),
                     Quaternion.identity, enemyContainer.transform);
+                yield return new WaitForSeconds(generationInterval);
             }
-            yield return null;
+            yield return new();
         }
 
         // Spawn Player
         Destroy(Camera.main.gameObject);
         Instantiate(player, new Vector3(originRoom.center.x, -wallHeight * .5f, originRoom.center.y), Quaternion.identity);
         coroutineIsDone = true;
-        yield return null;
+        yield return new WaitForSeconds(generationInterval);
     }
 
     int GetBiggestRoom(out int biggestIndex)

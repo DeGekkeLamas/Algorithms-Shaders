@@ -33,11 +33,6 @@ public class SpriteEditor
 
         Color[] newColors = new Color[colors.Length]; //  (Color[])(colors.Clone());
         Texture2D newSprite = new(originSprite.width, originSprite.height);
-
-        for(int i = 0; i < colors.Length; i++)
-        {
-            if (colors[i] == bgColor) colors[i] = bgColor;
-        }
         for (int y = 0; y < originSprite.height; y++)
         {
             for (int x = originSprite.width-1; x>=0 ; x--)
@@ -68,7 +63,7 @@ public class SpriteEditor
                         }
                     }
 
-                    if (isEdge) output = Color.red;
+                    if (isEdge) output = Color.black;
                 }
                 newColors[_index] = output;
             }
