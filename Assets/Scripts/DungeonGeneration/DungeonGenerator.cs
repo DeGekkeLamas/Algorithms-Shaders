@@ -38,6 +38,7 @@ public class DungeonGenerator : MonoBehaviour
     public EnemyProbabilities[] enemiesPerRoom;
     public float wallHeight = 5;
     public float wallBoundHeight = 1;
+    public float wallBoundThickness = 1.25f;
 
     [Header("Generated stuff")]
     public NavMeshSurface navMeshSurface;
@@ -90,6 +91,7 @@ public class DungeonGenerator : MonoBehaviour
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;
         StartCoroutine(SpawnObjects());
+        Debug.Log("Generated all room assets!");
     }
     IEnumerator GenerateRooms()
     {
@@ -234,21 +236,38 @@ public class DungeonGenerator : MonoBehaviour
             GameObject roomWallContainer = new($"Room{i}WallContainer");
             roomWallContainer.transform.parent = wallContainer.transform;
 
-            Vector3 _center = new(rooms[i].center.x, 0, rooms[i].center.y);
+            RectInt room = rooms[i];
+            Vector3 _center = new(room.center.x, 0, room.center.y);
 
-            GameObject wallXPlus = Instantiate(wall, _center + new Vector3(rooms[i].width * 0.5f, 0, 0),
+            GameObject wallXPlus = Instantiate(wall, _center + new Vector3(room.width * 0.5f, 0, 0),
                 Quaternion.identity, roomWallContainer.transform);
-            GameObject wallXMin = Instantiate(wall, _center + new Vector3(-rooms[i].width * 0.5f, 0, 0),
+            GameObject wallXMin = Instantiate(wall, _center + new Vector3(-room.width * 0.5f, 0, 0),
                 Quaternion.identity, roomWallContainer.transform);
-            GameObject wallYPlus = Instantiate(wall, _center + new Vector3(0, 0, rooms[i].height * 0.5f),
+            GameObject wallYPlus = Instantiate(wall, _center + new Vector3(0, 0, room.height * 0.5f),
                 Quaternion.identity, roomWallContainer.transform);
-            GameObject wallYMin = Instantiate(wall, _center + new Vector3(0, 0, -rooms[i].height * 0.5f),
+            GameObject wallYMin = Instantiate(wall, _center + new Vector3(0, 0, -room.height * 0.5f),
                 Quaternion.identity, roomWallContainer.transform);
 
-            wallXPlus.transform.localScale = new(1, wallHeight, rooms[i].height);
-            wallXMin.transform.localScale = new(1, wallHeight, rooms[i].height);
-            wallYPlus.transform.localScale = new(rooms[i].width, wallHeight, 1);
-            wallYMin.transform.localScale = new(rooms[i].width, wallHeight, 1);
+            wallXPlus.name = "wallXPlus";
+            wallXMin.name = "wallXMin";
+            wallYPlus.name = "wallYPlus";
+            wallYMin.name = "wallYMin";
+
+            wallXPlus.transform.localScale = new(1, wallHeight, room.height);
+            wallXMin.transform.localScale = new(1, wallHeight, room.height);
+            wallYPlus.transform.localScale = new(room.width, wallHeight, 1);
+            wallYMin.transform.localScale = new(room.width, wallHeight, 1);
+
+            WallGenerator wallXPlusGen = wallXPlus.AddComponent<WallGenerator>(); 
+            wallXPlusGen.zMin = true;
+            WallGenerator wallXMinGen = wallXMin.AddComponent<WallGenerator>();
+            wallXMinGen.zPlus = true;
+            if (room.xMin == 0) wallXMinGen.zMin = true;
+            WallGenerator wallYPlusGen = wallYPlus.AddComponent<WallGenerator>();
+            wallYPlusGen.xPlus = true;
+            WallGenerator wallYMinGen = wallYMin.AddComponent<WallGenerator>();
+            wallYMinGen.xMin = true;
+            if (room.yMin == 0) wallYMinGen.xPlus = true;
 
             wallsGenerated.Add(wallXPlus);
             wallsGenerated.Add(wallYPlus);
@@ -344,26 +363,15 @@ public class DungeonGenerator : MonoBehaviour
                             intersectDoor.xMax, wallDupe.transform.position.y, wallDupe.transform.position.z
                             ), Quaternion.identity, doorBoundsContainer.transform);
                     }
-                    doorBoundA.transform.localScale = new Vector3(1, wallHeight + wallBoundHeight, 1);
-                    doorBoundB.transform.localScale = new Vector3(1, wallHeight + wallBoundHeight, 1);
+                    doorBoundA.transform.localScale = new Vector3(1 + wallBoundThickness, 
+                        wallHeight + wallBoundHeight, 1 + wallBoundThickness);
+                    doorBoundB.transform.localScale = new Vector3(1 + wallBoundThickness, 
+                        wallHeight + wallBoundHeight, 1 + wallBoundThickness);
                 }
             }
             yield return new();
         }
 
-        // Remove fully overlapping walls
-        for (int i = 0; i < wallsGenerated.Count; i++)
-        {
-            for (int j = i; j < wallsGenerated.Count - 1; j++)
-            {
-                if (i == j) continue;
-                if (wallsGenerated[i].transform.position == wallsGenerated[j].transform.position)
-                {
-                    Destroy(wallsGenerated[i]);
-                    wallsGenerated.RemoveAt(i);
-                }
-            }
-        }
         // Generate bounds on top of and below walls
         GameObject wallBoundContainer = new("WallBoundContainer");
         wallBoundContainer.transform.parent = AssetContainer.transform;
@@ -373,14 +381,19 @@ public class DungeonGenerator : MonoBehaviour
                 new Vector3(wall.transform.position.x, 
         wall.transform.position.y + 0.5f * wall.transform.localScale.y, wall.transform.position.z), 
                 Quaternion.identity, wallBoundContainer.transform);
-            wallboundTop.transform.localScale = new Vector3(wall.transform.localScale.x, 
-                wallBoundHeight, wall.transform.localScale.z);
+
+            Vector3 wallScale = wall.transform.localScale;
+            wallboundTop.transform.localScale = new Vector3(
+                wallScale.x + (wallScale.x < wallScale.z ? wallBoundThickness : 0), 
+                wallBoundHeight,
+                wallScale.z + (wallScale.x > wallScale.z ? wallBoundThickness : 0));
+
             GameObject wallboundBottom = Instantiate(wallBound,
                 new Vector3(wall.transform.position.x, 
         wall.transform.position.y - 0.5f * wall.transform.localScale.y, wall.transform.position.z), 
                 Quaternion.identity, wallBoundContainer.transform);
-            wallboundBottom.transform.localScale = new Vector3(wall.transform.localScale.x, 
-                wallBoundHeight, wall.transform.localScale.z);
+
+            wallboundBottom.transform.localScale = wallboundTop.transform.localScale;
         yield return null;
         }
         coroutineIsDone = true;
@@ -405,12 +418,12 @@ public class DungeonGenerator : MonoBehaviour
     IEnumerator Brickify()
     {
         // Brickifies generated walls
-        foreach (var wall in wallsGenerated)
+        WallGenerator[] walls = GameObject.FindObjectsByType<WallGenerator>(FindObjectsSortMode.None);
+        foreach (WallGenerator wall in walls)
         {
-            wall.AddComponent<WallGenerator>();
-            yield return new WaitForSeconds(generationInterval);
+            wall.GenerateWalls();
         }
-        Debug.Log("Generated all room assets!");
+
         coroutineIsDone = true;
         yield return new();
     }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,100 +8,110 @@ public class WallGenerator : MonoBehaviour
     public float width = 4;
     public float depth = 0.2f;
 
+    [Header("Sides to brickify")]
+    public bool xPlus;
+    public bool xMin;
+    public bool zPlus;
+    public bool zMin;
+
     Vector3 originalScale;
 
     MeshBuilder builder = new();
-    private void Awake()
+
+    [ContextMenu("Generate walls")]
+    public void GenerateWalls()
     {
         originalScale = transform.localScale;
-        GenerateWalls();
-    }
-    /**private void OnValidate()
-    {
-        if (UnityEditor.EditorApplication.isPlaying && didAwake)
-            GenerateWalls();
-    }**/
-    void GenerateWalls()
-    {
-        bool wallOverZAxis = originalScale.x < originalScale.z;
-        originalScale = new(
-            (wallOverZAxis) ? originalScale.z : originalScale.x,
-            originalScale.y,
-            (wallOverZAxis) ? originalScale.x : originalScale.z);
 
-        Vector3 origin = new(
-            - (0.5f * originalScale.x),
-            - (0.5f * originalScale.y),
-            - (0.5f * originalScale.z)
-            );
+        List<Mesh> sides = new();
+        if (xPlus) sides.Add(AddSide(0, true));
+        if (xMin) sides.Add(AddSide(180, true));
+        if (zPlus) sides.Add(AddSide(90, false));
+        if (zMin) sides.Add(AddSide(-90, false));
+
+        CombineInstance[] combines = new CombineInstance[sides.Count];
+        for(int i = 0; i < sides.Count; i++)
+        {
+            combines[i].mesh = sides[i];
+            combines[i].transform = Matrix4x4.identity;
+        }
+        Mesh wall = new Mesh();
+        wall.CombineMeshes(combines);
+
+        GetComponent<MeshFilter>().mesh = wall;
 
         transform.localScale = Vector3.one;
-        Vector3 offset = new(0,0, originalScale.z * 0.25f);
-
-        // generate on both sides
-        for(int h = 0; h < 2; h++)
-        {
-            // continue generation vertically
-            for (int i = 0; i < Mathf.Ceil(originalScale.y / height); i++)
-            {
-                // continue generation horizontally
-                for (int j = 0; j < Mathf.Ceil(originalScale.x / width) + (i % 2 != 0 ? 1 : 0); j++)
-                {
-                    //side left
-                    int v0 = builder.AddVertex(origin + offset + new Vector3(0, 0, 0));
-                    int v1 = builder.AddVertex(origin + offset + new Vector3(0, height, 0));
-                    int v2 = builder.AddVertex(origin + offset + new Vector3(depth, depth, -depth));
-                    int v3 = builder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth));
-                    // side right
-                    int v4 = builder.AddVertex(origin + offset + new Vector3(width, 0, 0));
-                    int v5 = builder.AddVertex(origin + offset + new Vector3(width, height, 0));
-                    int v6 = builder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth));
-                    int v7 = builder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth));
-                    // bottom
-                    int v8 = builder.AddVertex(origin + offset + new Vector3(0, 0, 0));
-                    int v9 = builder.AddVertex(origin + offset + new Vector3(depth, depth, -depth));
-                    int v10 = builder.AddVertex(origin + offset + new Vector3(width, 0, 0));
-                    int v11 = builder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth));
-                    // top
-                    int v12 = builder.AddVertex(origin + offset + new Vector3(0, height, 0));
-                    int v13 = builder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth));
-                    int v14 = builder.AddVertex(origin + offset + new Vector3(width, height, 0));
-                    int v15 = builder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth));
-                    // front
-                    int v16 = builder.AddVertex(origin + offset + new Vector3(depth, depth, -depth));
-                    int v17 = builder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth));
-                    int v18 = builder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth));
-                    int v19 = builder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth));
-
-                    //side left
-                    builder.AddTriangle(v1, v2, v0);
-                    builder.AddTriangle(v3, v2, v1);
-                    //side right
-                    builder.AddTriangle(v5, v4, v6);
-                    builder.AddTriangle(v7, v5, v6);
-                    // bottom
-                    builder.AddTriangle(v8, v9, v11);
-                    builder.AddTriangle(v8, v11, v10);
-                    // top
-                    builder.AddTriangle(v13, v12, v14);
-                    builder.AddTriangle(v13, v14, v15);
-                    // front
-                    builder.AddTriangle(v16, v17, v18);
-                    builder.AddTriangle(v16, v18, v19);
-
-                    offset.x += width;
-                }
-                offset = new((i % 2 != 0) ? 0 : (-0.5f * width), offset.y + height, offset.z);
-            }
-            builder.ClampVerticesX(origin.x, origin.x + originalScale.x);
-            offset = new(0, 0, originalScale.z * 0.25f);
-            builder.RotateVertices(180);
-        }
-        if (wallOverZAxis) builder.RotateVertices(90);
-        GetComponent<MeshFilter>().mesh = builder.CreateMesh(true);
-
         this.AddComponent<BoxCollider>();
 
         //Debug.Log($"Generated wall, from {this}");
+    }
+    Mesh AddSide(float angle, bool generateOverX)
+    {
+        MeshBuilder sideBuilder = new();
+        Vector3 offset = new(0, 0, (!generateOverX ? originalScale.x : originalScale.z) * 0.25f);
+        Vector3 origin = new(
+            -(0.5f * (generateOverX ? originalScale.x : originalScale.z)),
+            -(0.5f * originalScale.y),
+            -(0.5f * (!generateOverX ? originalScale.x : originalScale.z))
+            );
+        List<Vector3> vertices = new();
+        List<List<int>> triangles = new();
+
+        // continue generation vertically
+        for (int i = 0; i < Mathf.Ceil(originalScale.y / height); i++)
+        {
+            // continue generation horizontally
+            for (int j = 0; j < Mathf.Ceil(generateOverX ? originalScale.x : originalScale.z / width) + (i % 2 != 0 ? 1 : 0); j++)
+            {
+                //side left
+                int v0 = sideBuilder.AddVertex(origin + offset + new Vector3(0, 0, 0));
+                int v1 = sideBuilder.AddVertex(origin + offset + new Vector3(0, height, 0));
+                int v2 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth));
+                int v3 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth));
+                // side right
+                int v4 = sideBuilder.AddVertex(origin + offset + new Vector3(width, 0, 0));
+                int v5 = sideBuilder.AddVertex(origin + offset + new Vector3(width, height, 0));
+                int v6 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth));
+                int v7 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth));
+                // bottom
+                int v8 = sideBuilder.AddVertex(origin + offset + new Vector3(0, 0, 0));
+                int v9 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth));
+                int v10 = sideBuilder.AddVertex(origin + offset + new Vector3(width, 0, 0));
+                int v11 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth));
+                // top
+                int v12 = sideBuilder.AddVertex(origin + offset + new Vector3(0, height, 0));
+                int v13 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth));
+                int v14 = sideBuilder.AddVertex(origin + offset + new Vector3(width, height, 0));
+                int v15 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth));
+                // front
+                int v16 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth));
+                int v17 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth));
+                int v18 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth));
+                int v19 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth));
+
+                //side left
+                sideBuilder.AddTriangle(v1, v2, v0);
+                sideBuilder.AddTriangle(v3, v2, v1);
+                //side right
+                sideBuilder.AddTriangle(v5, v4, v6);
+                sideBuilder.AddTriangle(v7, v5, v6);
+                // bottom
+                sideBuilder.AddTriangle(v8, v9, v11);
+                sideBuilder.AddTriangle(v8, v11, v10);
+                // top
+                sideBuilder.AddTriangle(v13, v12, v14);
+                sideBuilder.AddTriangle(v13, v14, v15);
+                // front
+                sideBuilder.AddTriangle(v16, v17, v18);
+                sideBuilder.AddTriangle(v16, v18, v19);
+
+                offset.x += width;
+            }
+            offset = new((i % 2 != 0) ? 0 : (-0.5f * width), offset.y + height, offset.z);
+        }
+        sideBuilder.ClampVerticesX(origin.x, origin.x + (generateOverX ? originalScale.x : originalScale.z));
+        sideBuilder.RotateAllVertices(angle);
+
+        return sideBuilder.CreateMesh(true);
     }
 }

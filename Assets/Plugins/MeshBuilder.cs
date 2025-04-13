@@ -68,7 +68,7 @@ public class MeshBuilder {
 	/// RotateVertices was added by me and is not part of the original script
 	/// </summary>
 	/// <param name="rotation"></param>
-	public void RotateVertices(float rotation)
+	public void RotateAllVertices(float rotation)
 	{
 		rotation *= (Mathf.PI / 180);
 		for(int i = 0; i < _vertices.Count; i++)

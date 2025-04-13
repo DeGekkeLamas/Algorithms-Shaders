@@ -173,11 +173,12 @@ MonoBehaviour:
   enemy: {fileID: 18489271436508005, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
   enemiesPerRoom:
   - Quantity: 1
-    probability: 50
+    probability: 75
   - Quantity: 2
     probability: 20
   wallHeight: 6
   wallBoundHeight: 1
+  wallBoundThickness: 0.25
   navMeshSurface: {fileID: 1545061833}
   rooms: []
   doors: []
@@ -254,12 +255,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545061832}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 86.34839, y: 6.5, z: 88.04238}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 90.34839, y: 5.5, z: 67.65779}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2058333338}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1647628411
 GameObject:
@@ -612,6 +613,7 @@ Transform:
   - {fileID: 2010996966}
   - {fileID: 2135426733}
   - {fileID: 1647628412}
+  - {fileID: 1545061834}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2135426731
@@ -742,4 +744,3 @@ SceneRoots:
   - {fileID: 2058333338}
   - {fileID: 1256635334}
   - {fileID: 1867934152}
-  - {fileID: 1545061834}
