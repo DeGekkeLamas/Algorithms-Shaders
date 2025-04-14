@@ -7,6 +7,7 @@ public class WallGenerator : MonoBehaviour
     public float height = 2;
     public float width = 4;
     public float depth = 0.2f;
+    public bool generateOnAwake;
 
     [Header("Sides to brickify")]
     public bool xPlus;
@@ -17,6 +18,8 @@ public class WallGenerator : MonoBehaviour
     Vector3 originalScale;
 
     MeshBuilder builder = new();
+
+    private void Awake() { if (generateOnAwake) GenerateWalls(); }
 
     [ContextMenu("Generate walls")]
     public void GenerateWalls()

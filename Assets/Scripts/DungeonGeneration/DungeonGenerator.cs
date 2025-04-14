@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,6 +40,26 @@ public class DungeonGenerator : MonoBehaviour
     public float wallHeight = 5;
     public float wallBoundHeight = 1;
     public float wallBoundThickness = 1.25f;
+    [System.Serializable]
+    public struct RoomSpecificAssets
+    {
+        [Header("Break room")]
+        public Material breakRoomWall;
+        public Material breakRoomFloor;
+        [Header("Kitchen")]
+        public Material kitchenWall;
+        public Material kitchenFloor;
+        [Header("Bakery")]
+        public Material bakeryWall;
+        public Material bakeryFloor;
+        [Header("Storage")]
+        public Material storageWall;
+        public Material storageFloor;
+        [Header("Seating")]
+        public Material seatingWall;
+        public Material seatingFloor;
+    }
+    public RoomSpecificAssets roomSpecificAssets;
 
     [Header("Generated stuff")]
     public NavMeshSurface navMeshSurface;
@@ -46,6 +67,8 @@ public class DungeonGenerator : MonoBehaviour
     public List<RectInt> rooms = new(1);
     public List<RectInt> doors = new(1);
     public List<RectInt> removedDoors = new(1);
+    public enum RoomType {bakery, breakRoom, kitchen, seating, storage };
+    public RoomType[] roomTypes;
     List<GameObject> wallsGenerated = new();
     Graph<Vector2> dungeonGraph = new();
     System.Random _random = new System.Random();
@@ -76,6 +99,9 @@ public class DungeonGenerator : MonoBehaviour
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;
         StartCoroutine(RemoveRooms());
+        yield return new WaitUntil(() => coroutineIsDone);
+        coroutineIsDone = false;
+        StartCoroutine(AssignRoomTypes());
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;
         StartCoroutine(GenerateInitialWalls());
@@ -133,12 +159,13 @@ public class DungeonGenerator : MonoBehaviour
         {
             for (int j = i+1; j < rooms.Count; j++)
             {
-                int roomsConnected = dungeonGraph.adjacencyList[rooms[i].center].Count;
+                int roomsConnectedI = dungeonGraph.adjacencyList[rooms[i].center].Count;
+                int roomsConnectedJ = dungeonGraph.adjacencyList[rooms[j].center].Count;
                 if (AlgorithmsUtils.Intersects(rooms[i], rooms[j]) &&
-                    (rooms[i] != originRoom && roomsConnected < maxDoorsPerRoom ||
-                    rooms[i] == originRoom && roomsConnected < maxDoorsForOriginRoom) &&
-                    (rooms[j] != originRoom && roomsConnected < maxDoorsPerRoom ||
-                    rooms[j] == originRoom && roomsConnected < maxDoorsForOriginRoom))
+                    (rooms[i] != originRoom && roomsConnectedI < maxDoorsPerRoom ||
+                    rooms[i] == originRoom && roomsConnectedI < maxDoorsForOriginRoom) &&
+                    (rooms[j] != originRoom && roomsConnectedJ < maxDoorsPerRoom ||
+                    rooms[j] == originRoom && roomsConnectedJ < maxDoorsForOriginRoom))
                 {
                     var _newDoor = AlgorithmsUtils.Intersect(rooms[i], rooms[j]);
 
@@ -225,6 +252,46 @@ public class DungeonGenerator : MonoBehaviour
         if (disableVisualDebuggingAfterAssetGeneration) displayVisualDebugging = false;
         coroutineIsDone = true;
     }
+    IEnumerator AssignRoomTypes()
+    {
+        roomTypes = new RoomType[rooms.Count];
+        Debug.Log(roomTypes.Length);
+        int bakeries = 0;
+        int kitchens = 0;
+        int seatings = 0;
+        int storages = 0;
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            if (rooms[i] == originRoom)
+            {
+                roomTypes[i] = RoomType.breakRoom;
+                continue;
+            }
+            int lowestQTY = Mathf.Min(bakeries,kitchens,seatings,storages);
+            if (lowestQTY == bakeries)
+            {
+                roomTypes[i] = RoomType.bakery;
+                bakeries++;
+            }
+            else if (lowestQTY == kitchens)
+            {
+                roomTypes[i] = RoomType.kitchen;
+                kitchens++;
+            }
+            else if (lowestQTY == seatings)
+            {
+                roomTypes[i] = RoomType.seating;
+                seatings++;
+            }
+            else if (lowestQTY == storages)
+            {
+                roomTypes[i] = RoomType.storage;
+                storages++;
+            }
+        }
+        yield return new();
+        coroutineIsDone = true;
+    }
     IEnumerator GenerateInitialWalls()
     {
         // Generate walls
@@ -273,6 +340,37 @@ public class DungeonGenerator : MonoBehaviour
             wallsGenerated.Add(wallYPlus);
             wallsGenerated.Add(wallXMin);
             wallsGenerated.Add(wallYMin);
+
+            Material materialToAssign;
+            if (room == originRoom)
+                materialToAssign = roomSpecificAssets.breakRoomWall;
+            else switch(roomTypes[i])
+                {
+                    case RoomType.bakery:
+                        materialToAssign = roomSpecificAssets.bakeryWall;
+                        break;
+                    case RoomType.breakRoom:
+                        materialToAssign = roomSpecificAssets.breakRoomWall;
+                        break;
+                    case RoomType.kitchen:
+                        materialToAssign = roomSpecificAssets.kitchenWall;
+                        break;
+                    case RoomType.seating:
+                        materialToAssign = roomSpecificAssets.seatingWall;
+                        break;
+                    case RoomType.storage:
+                        materialToAssign = roomSpecificAssets.storageWall;
+                        break;
+                    default:
+                        materialToAssign = roomSpecificAssets.kitchenWall;
+                        break;
+                }
+
+            wallXPlus.GetComponent<MeshRenderer>().sharedMaterial = materialToAssign;
+            wallYPlus.GetComponent<MeshRenderer>().sharedMaterial = materialToAssign;
+            wallXMin.GetComponent<MeshRenderer>().sharedMaterial = materialToAssign;
+            wallYMin.GetComponent<MeshRenderer>().sharedMaterial = materialToAssign;
+
             yield return new WaitForSeconds(generationInterval);
         }
         coroutineIsDone = true;
@@ -363,10 +461,10 @@ public class DungeonGenerator : MonoBehaviour
                             intersectDoor.xMax, wallDupe.transform.position.y, wallDupe.transform.position.z
                             ), Quaternion.identity, doorBoundsContainer.transform);
                     }
-                    doorBoundA.transform.localScale = new Vector3(1 + wallBoundThickness, 
-                        wallHeight + wallBoundHeight, 1 + wallBoundThickness);
-                    doorBoundB.transform.localScale = new Vector3(1 + wallBoundThickness, 
-                        wallHeight + wallBoundHeight, 1 + wallBoundThickness);
+                    doorBoundA.transform.localScale = new Vector3(wallBoundThickness, 
+                        wallHeight + wallBoundHeight, wallBoundThickness);
+                    doorBoundB.transform.localScale = new Vector3(wallBoundThickness, 
+                        wallHeight + wallBoundHeight, wallBoundThickness);
                 }
             }
             yield return new();
@@ -384,9 +482,9 @@ public class DungeonGenerator : MonoBehaviour
 
             Vector3 wallScale = wall.transform.localScale;
             wallboundTop.transform.localScale = new Vector3(
-                wallScale.x + (wallScale.x < wallScale.z ? wallBoundThickness : 0), 
+                wallScale.x + (wallScale.x < wallScale.z ? wallBoundThickness - 1 : 0), 
                 wallBoundHeight,
-                wallScale.z + (wallScale.x > wallScale.z ? wallBoundThickness : 0));
+                wallScale.z + (wallScale.x > wallScale.z ? wallBoundThickness - 1 : 0));
 
             GameObject wallboundBottom = Instantiate(wallBound,
                 new Vector3(wall.transform.position.x, 
@@ -403,12 +501,39 @@ public class DungeonGenerator : MonoBehaviour
         // Generate floor
         GameObject floorContainer = new GameObject("FloorContainer");
         floorContainer.transform.parent = AssetContainer.transform;
-        foreach (RectInt room in rooms)
+        for(int i = 0; i < rooms.Count; i++)
         {
+            RectInt room = rooms[i];
             GameObject _floor = Instantiate(floor, new Vector3(room.center.x, -wallHeight * .5f, room.center.y),
                 Quaternion.identity, floorContainer.transform);
             _floor.transform.localScale = new Vector3(room.width, 1, room.height) / 10;
             yield return new WaitForSeconds(generationInterval);
+
+            Material materialToAssign;
+            if (room == originRoom)
+                materialToAssign = roomSpecificAssets.breakRoomFloor;
+            else switch (roomTypes[i])
+                {
+                    case RoomType.bakery:
+                        materialToAssign = roomSpecificAssets.bakeryFloor;
+                        break;
+                    case RoomType.breakRoom:
+                        materialToAssign = roomSpecificAssets.breakRoomFloor;
+                        break;
+                    case RoomType.kitchen:
+                        materialToAssign = roomSpecificAssets.kitchenFloor;
+                        break;
+                    case RoomType.seating:
+                        materialToAssign = roomSpecificAssets.seatingFloor;
+                        break;
+                    case RoomType.storage:
+                        materialToAssign = roomSpecificAssets.storageFloor;
+                        break;
+                    default:
+                        materialToAssign = roomSpecificAssets.kitchenFloor;
+                        break;
+                }
+            _floor.GetComponent<MeshRenderer>().sharedMaterial = materialToAssign;
         }
 
         coroutineIsDone = true;

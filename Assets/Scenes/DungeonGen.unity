@@ -179,6 +179,17 @@ MonoBehaviour:
   wallHeight: 6
   wallBoundHeight: 1
   wallBoundThickness: 0.25
+  roomSpecificAssets:
+    breakRoomWall: {fileID: 2100000, guid: 82dd1a98db12c1248807306861c7bb2c, type: 2}
+    breakRoomFloor: {fileID: 2100000, guid: 53d2936232dafbf4d96c3c24edf80026, type: 2}
+    kitchenWall: {fileID: 2100000, guid: 1ab9e6f8862bc974382a464b2c82cd17, type: 2}
+    kitchenFloor: {fileID: 2100000, guid: 780327bd687707545bfd796c41dd6b64, type: 2}
+    bakeryWall: {fileID: 2100000, guid: 76eb3196b24bb7f45b56b521a190c072, type: 2}
+    bakeryFloor: {fileID: 2100000, guid: 780327bd687707545bfd796c41dd6b64, type: 2}
+    storageWall: {fileID: 2100000, guid: 30dd79882bfd2184c917c921bea895d5, type: 2}
+    storageFloor: {fileID: 0}
+    seatingWall: {fileID: 2100000, guid: 7d6c515d697756346991b43290867dbb, type: 2}
+    seatingFloor: {fileID: 0}
   navMeshSurface: {fileID: 1545061833}
   rooms: []
   doors: []
