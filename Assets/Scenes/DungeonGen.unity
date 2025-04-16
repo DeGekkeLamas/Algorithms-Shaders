@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1256635334}
   - component: {fileID: 1256635333}
+  - component: {fileID: 1256635335}
   m_Layer: 0
   m_Name: DungeonManager
   m_TagString: Untagged
@@ -155,6 +156,11 @@ MonoBehaviour:
     y: 0
     width: 100
     height: 100
+  originRoom:
+    x: 0
+    y: 0
+    width: 0
+    height: 0
   height: 5
   splitFractionRange: {x: 35, y: 66}
   roomMaxSize: 45
@@ -250,10 +256,13 @@ MonoBehaviour:
     seatingTotalItemChance: 0
     seatingItemSpawns: []
   navMeshSurface: {fileID: 1545061833}
+  assetContainer: {fileID: 0}
   rooms: []
   doors: []
   removedDoors: []
   roomTypes: 
+  wallsGenerated: []
+  coroutineIsDone: 0
 --- !u!4 &1256635334
 Transform:
   m_ObjectHideFlags: 0
@@ -269,6 +278,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1256635335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256635332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b508703ccb44244ca275563d7b12212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1545061832
 GameObject:
   m_ObjectHideFlags: 0
