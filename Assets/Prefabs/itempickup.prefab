@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4136551304667188481}
   - component: {fileID: 3020829154051356937}
   - component: {fileID: 2400643790871167767}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: itempickup
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -148,6 +148,7 @@ MonoBehaviour:
     autoFire: 0
     cooldown: 0
     cooldownLeft: 0
+  placeholderModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
 --- !u!54 &2400643790871167767
 Rigidbody:
   m_ObjectHideFlags: 0

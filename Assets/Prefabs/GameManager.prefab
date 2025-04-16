@@ -2398,6 +2398,7 @@ MonoBehaviour:
   - {fileID: 919132149155446097, guid: a8fd15390e7ff9245804f9cd77a49fa9, type: 3}
   - {fileID: 919132149155446097, guid: 25f3956d6acf477478bb1e1ed105a35b, type: 3}
   - {fileID: 919132149155446097, guid: b6e7d8da7dd773c4ea0f6fc7cb943f49, type: 3}
+  - {fileID: 919132149155446097, guid: c9fff288cca057e488c486bccf19c463, type: 3}
   placeholderModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
   projectiles:
   - {fileID: -8806985211751940049, guid: 5f701301407c6644f996319132fd3a8e, type: 3}

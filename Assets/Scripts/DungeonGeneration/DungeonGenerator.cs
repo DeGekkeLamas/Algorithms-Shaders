@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -41,29 +40,55 @@ public class DungeonGenerator : MonoBehaviour
     public float wallBoundHeight = 1;
     public float wallBoundThickness = 1.25f;
     [System.Serializable]
+    public struct ItemLootLable
+    {
+        public string itemName;
+        public int probability;
+    }
+    [System.Serializable]
     public struct RoomSpecificAssets
     {
-        [Header("Break room")]
-        public Material breakRoomWall;
-        public Material breakRoomFloor;
-        [Header("Kitchen")]
-        public Material kitchenWall;
-        public Material kitchenFloor;
+        public PickupItem itemPickup;
         [Header("Bakery")]
         public Material bakeryWall;
         public Material bakeryFloor;
+        [Space]
+        public int bakeryTotalItemChance;
+        public ItemLootLable[] bakeryItemSpawns;
+        [Header("Break room")]
+        public Material breakRoomWall;
+        public Material breakRoomFloor;
+        [Space]
+        public int breakTotalItemChance;
+        public ItemLootLable[] breakItemSpawns;
+        [Header("Kitchen")]
+        public Material kitchenWall;
+        public Material kitchenFloor;
+        public int counterLength;
+        public GameObject counter;
+        public GameObject counterCornerL;
+        public GameObject counterCornerR;
+        [Space]
+        public int kitchenTotalItemChance;
+        public ItemLootLable[] kitchenItemSpawns;
         [Header("Storage")]
         public Material storageWall;
         public Material storageFloor;
+        [Space]
+        public int storageTotalItemChance;
+        public ItemLootLable[] storageItemSpawns;
         [Header("Seating")]
         public Material seatingWall;
         public Material seatingFloor;
+        [Space]
+        public int seatingTotalItemChance;
+        public ItemLootLable[] seatingItemSpawns;
     }
     public RoomSpecificAssets roomSpecificAssets;
 
     [Header("Generated stuff")]
     public NavMeshSurface navMeshSurface;
-    GameObject AssetContainer;
+    GameObject assetContainer;
     public List<RectInt> rooms = new(1);
     public List<RectInt> doors = new(1);
     public List<RectInt> removedDoors = new(1);
@@ -79,6 +104,11 @@ public class DungeonGenerator : MonoBehaviour
             splitFractionRange.x,
             Mathf.Max(splitFractionRange.x, splitFractionRange.y)
             );
+        roomSpecificAssets.bakeryTotalItemChance = GetTotalItemProbability(roomSpecificAssets.bakeryItemSpawns);
+        roomSpecificAssets.breakTotalItemChance = GetTotalItemProbability(roomSpecificAssets.breakItemSpawns);
+        roomSpecificAssets.kitchenTotalItemChance = GetTotalItemProbability(roomSpecificAssets.kitchenItemSpawns);
+        roomSpecificAssets.storageTotalItemChance = GetTotalItemProbability(roomSpecificAssets.storageItemSpawns);
+        roomSpecificAssets.seatingTotalItemChance = GetTotalItemProbability(roomSpecificAssets.seatingItemSpawns);
     }
     private void Awake()
     {
@@ -89,7 +119,7 @@ public class DungeonGenerator : MonoBehaviour
     bool coroutineIsDone;
     IEnumerator GenerateDungeon()
     {
-        AssetContainer = new GameObject("AssetContainer");
+        assetContainer = new GameObject("AssetContainer");
 
         coroutineIsDone = false;
         StartCoroutine(GenerateRooms());
@@ -255,7 +285,6 @@ public class DungeonGenerator : MonoBehaviour
     IEnumerator AssignRoomTypes()
     {
         roomTypes = new RoomType[rooms.Count];
-        Debug.Log(roomTypes.Length);
         int bakeries = 0;
         int kitchens = 0;
         int seatings = 0;
@@ -296,7 +325,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         // Generate walls
         GameObject wallContainer = new("WallContainer");
-        wallContainer.transform.parent = AssetContainer.transform;
+        wallContainer.transform.parent = assetContainer.transform;
 
         for (int i = 0; i < rooms.Count; i++)
         {
@@ -381,7 +410,7 @@ public class DungeonGenerator : MonoBehaviour
         // Check for door intersections
         int wallsQTY = wallsGenerated.Count;
         GameObject doorBoundsContainer = new("DoorBounds");
-        doorBoundsContainer.transform.parent = AssetContainer.transform;
+        doorBoundsContainer.transform.parent = assetContainer.transform;
         for (int i = 0; i < wallsQTY; i++)
         {
             RectInt wallRect = new(
@@ -467,12 +496,11 @@ public class DungeonGenerator : MonoBehaviour
                         wallHeight + wallBoundHeight, wallBoundThickness);
                 }
             }
-            yield return new();
         }
 
         // Generate bounds on top of and below walls
         GameObject wallBoundContainer = new("WallBoundContainer");
-        wallBoundContainer.transform.parent = AssetContainer.transform;
+        wallBoundContainer.transform.parent = assetContainer.transform;
         foreach (GameObject wall in wallsGenerated)
         {
             GameObject wallboundTop = Instantiate(wallBound,
@@ -492,15 +520,25 @@ public class DungeonGenerator : MonoBehaviour
                 Quaternion.identity, wallBoundContainer.transform);
 
             wallboundBottom.transform.localScale = wallboundTop.transform.localScale;
-        yield return null;
+            yield return new WaitForSeconds(generationInterval);
         }
+        // Generate bounds in map corners
+        GameObject cornerOrigin = Instantiate(wallBound, new(initialRoom.xMin, 0, initialRoom.yMin),Quaternion.identity, wallBoundContainer.transform);
+        GameObject cornerOriginPlusX = Instantiate(wallBound, new(initialRoom.xMax, 0, initialRoom.yMin),Quaternion.identity, wallBoundContainer.transform);
+        GameObject cornerOriginPlusY = Instantiate(wallBound, new(initialRoom.xMin, 0, initialRoom.yMax),Quaternion.identity, wallBoundContainer.transform);
+        GameObject cornerOriginPlusXY = Instantiate(wallBound, new(initialRoom.xMax, 0, initialRoom.yMax),Quaternion.identity, wallBoundContainer.transform);
+        cornerOrigin.transform.localScale = new(wallBoundThickness, wallHeight + wallBoundHeight, wallBoundThickness);
+        cornerOriginPlusX.transform.localScale = new(wallBoundThickness, wallHeight + wallBoundHeight, wallBoundThickness);
+        cornerOriginPlusY.transform.localScale = new(wallBoundThickness, wallHeight + wallBoundHeight, wallBoundThickness);
+        cornerOriginPlusXY.transform.localScale = new(wallBoundThickness, wallHeight + wallBoundHeight, wallBoundThickness);
+
         coroutineIsDone = true;
     }
     IEnumerator GenerateFloor()
     {
         // Generate floor
         GameObject floorContainer = new GameObject("FloorContainer");
-        floorContainer.transform.parent = AssetContainer.transform;
+        floorContainer.transform.parent = assetContainer.transform;
         for(int i = 0; i < rooms.Count; i++)
         {
             RectInt room = rooms[i];
@@ -554,10 +592,69 @@ public class DungeonGenerator : MonoBehaviour
     }
     IEnumerator SpawnObjects()
     {
-        GameObject enemyContainer = new("EnemyContainer");
-        enemyContainer.transform.parent = AssetContainer.transform;
-        navMeshSurface.BuildNavMesh();
+
+        // Place objects in rooms
+        GameObject roomAssetContainer = new("RoomAssetContainer");
+        roomAssetContainer.transform.parent = assetContainer.transform;
+        GameObject itemSpawnsContainer = new("ItemSpawnsContainer");
+        itemSpawnsContainer.transform.parent = roomAssetContainer.transform;
+
+        GameObject counterContainer = new("CounterContainer");
+        counterContainer.transform.parent = roomAssetContainer.transform;
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            // Place assets based on room type
+            switch (roomTypes[i])
+            {
+                case RoomType.bakery:
+                    break;
+                case RoomType.kitchen:
+                    RectInt room = rooms[i];
+                    // Kitchen island
+                    Vector2 offset = new(-.5f * roomSpecificAssets.counterLength, -0.5f);
+                    bool roomvertical = room.height > room.width;
+                    float counterSize = roomSpecificAssets.counter.transform.lossyScale.x;
+
+                    if (roomvertical) offset = new(offset.y, offset.x);
+                    for (int j = 0; j < 2; j++)
+                    {   for (int k = 0; k < roomSpecificAssets.counterLength; k++)
+                        {
+                            Transform counter = Instantiate(roomSpecificAssets.counter, new( 
+                                room.center.x + offset.x,
+                                -wallHeight * .5f + counterSize * .5f,
+                                room.center.y + offset.y
+                                ), 
+                                j == 1 ? Quaternion.Euler(0, !roomvertical ? 0 : 90, 0) : Quaternion.Euler(0, !roomvertical ? 180 : 270, 0), 
+                                counterContainer.transform).transform;
+                            if (roomvertical) offset.y += counterSize;
+                            else offset.x += counterSize;
+
+                            string itemToSpawn = GetItemFromLoottable(roomSpecificAssets.kitchenItemSpawns);
+                            if (itemToSpawn != string.Empty)
+                            {
+                                PickupItem itemSpawned = Instantiate(roomSpecificAssets.itemPickup, new(
+                                    counter.position.x, wallHeight, counter.position.z
+                                    ), Quaternion.identity, itemSpawnsContainer.transform);
+                                itemSpawned.itemToGive = ItemPresets.presets[itemToSpawn];
+                            }
+                        }
+                        if (roomvertical) offset = new(offset.x + counterSize, -.5f * roomSpecificAssets.counterLength);
+                        else offset = new(-.5f * roomSpecificAssets.counterLength, offset.y + counterSize);
+                    }
+
+                    break;
+                case RoomType.seating:
+                    break;
+                case RoomType.storage:
+                    break;
+            }
+            yield return new WaitForSeconds(generationInterval);
+        }
+
         // Spawn enemies
+        GameObject enemyContainer = new("EnemyContainer");
+        enemyContainer.transform.parent = assetContainer.transform;
+        navMeshSurface.BuildNavMesh();
         foreach (RectInt room in rooms)
         {
             if (room == originRoom) continue;
@@ -573,7 +670,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             for (int i = 0; i < enemiesToSpawn; i++)
             {
-                Instantiate(enemy, new Vector3(room.center.x + i, -wallHeight * .5f, room.center.y + i),
+                Instantiate(enemy, new Vector3(room.center.x + i, -wallHeight * .5f, room.center.y + i + 3),
                     Quaternion.identity, enemyContainer.transform);
                 yield return new WaitForSeconds(generationInterval);
             }
@@ -633,6 +730,24 @@ public class DungeonGenerator : MonoBehaviour
     {
         foreach (RectInt door in doors) if (door.center == center) return door;
         return new();
+    }
+
+    string GetItemFromLoottable(ItemLootLable[] lootTable)
+    {
+        int probabilityPassed = lootTable[0].probability;
+        int lootRoll = _random.Next(0, 100);
+        for (int i = 0; i < lootTable.Length; i++)
+        {
+            if (lootRoll < probabilityPassed) return lootTable[i].itemName;
+            else probabilityPassed += lootTable[i].probability;
+        }
+        return string.Empty;
+    }
+    public static int GetTotalItemProbability(ItemLootLable[] lootTable)
+    {
+        int probability = 0;
+        foreach(var loot in lootTable) probability += loot.probability;
+        return probability;
     }
 
     void RandomizeFraction() => fraction = (float)_random.Next(splitFractionRange.x, splitFractionRange.y) / 100f;

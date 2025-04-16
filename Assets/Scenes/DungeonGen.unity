@@ -158,8 +158,8 @@ MonoBehaviour:
   height: 5
   splitFractionRange: {x: 35, y: 66}
   roomMaxSize: 45
-  maxDoorsForOriginRoom: 2
-  maxDoorsPerRoom: 4
+  maxDoorsForOriginRoom: 1
+  maxDoorsPerRoom: 3
   displayVisualDebugging: 1
   generationInterval: 0
   splitOffset: 2
@@ -178,22 +178,82 @@ MonoBehaviour:
     probability: 20
   wallHeight: 6
   wallBoundHeight: 1
-  wallBoundThickness: 0.25
+  wallBoundThickness: 1.25
   roomSpecificAssets:
-    breakRoomWall: {fileID: 2100000, guid: 82dd1a98db12c1248807306861c7bb2c, type: 2}
-    breakRoomFloor: {fileID: 2100000, guid: 53d2936232dafbf4d96c3c24edf80026, type: 2}
-    kitchenWall: {fileID: 2100000, guid: 1ab9e6f8862bc974382a464b2c82cd17, type: 2}
-    kitchenFloor: {fileID: 2100000, guid: 780327bd687707545bfd796c41dd6b64, type: 2}
+    itemPickup: {fileID: 3020829154051356937, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
     bakeryWall: {fileID: 2100000, guid: 76eb3196b24bb7f45b56b521a190c072, type: 2}
     bakeryFloor: {fileID: 2100000, guid: 780327bd687707545bfd796c41dd6b64, type: 2}
+    bakeryTotalItemChance: 0
+    bakeryItemSpawns: []
+    breakRoomWall: {fileID: 2100000, guid: 82dd1a98db12c1248807306861c7bb2c, type: 2}
+    breakRoomFloor: {fileID: 2100000, guid: 53d2936232dafbf4d96c3c24edf80026, type: 2}
+    breakTotalItemChance: 100
+    breakItemSpawns:
+    - itemName: FryingPan
+      probability: 25
+    - itemName: Cheese
+      probability: 25
+    - itemName: Egg
+      probability: 25
+    - itemName: Fork
+      probability: 25
+    kitchenWall: {fileID: 2100000, guid: 1ab9e6f8862bc974382a464b2c82cd17, type: 2}
+    kitchenFloor: {fileID: 2100000, guid: 780327bd687707545bfd796c41dd6b64, type: 2}
+    counterLength: 5
+    counter: {fileID: 9011421418820237759, guid: 0d413d8ccf516d74bb2fa084514f420d, type: 3}
+    counterCornerL: {fileID: 2101207922729177578, guid: c27b16d52413df147afcbd103875382f, type: 3}
+    counterCornerR: {fileID: 8202259783184369343, guid: 9b4e8dccf73aade43b3cf1fb0c161018, type: 3}
+    kitchenTotalItemChance: 49
+    kitchenItemSpawns:
+    - itemName: FryingPan
+      probability: 8
+    - itemName: Towel
+      probability: 3
+    - itemName: Apron
+      probability: 2
+    - itemName: ChefHat
+      probability: 2
+    - itemName: CuttingBoard
+      probability: 2
+    - itemName: Tomato
+      probability: 5
+    - itemName: EmptyMicrowave
+      probability: 2
+    - itemName: Fork
+      probability: 3
+    - itemName: Spoon
+      probability: 3
+    - itemName: Fork
+      probability: 3
+    - itemName: Jalapeno
+      probability: 2
+    - itemName: Pizza
+      probability: 2
+    - itemName: RawChicken
+      probability: 2
+    - itemName: Cheese
+      probability: 2
+    - itemName: Butter
+      probability: 2
+    - itemName: StainlessSteelPot
+      probability: 2
+    - itemName: Sausage
+      probability: 2
+    - itemName: Toaster
+      probability: 2
     storageWall: {fileID: 2100000, guid: 30dd79882bfd2184c917c921bea895d5, type: 2}
-    storageFloor: {fileID: 0}
+    storageFloor: {fileID: 2100000, guid: 30dd79882bfd2184c917c921bea895d5, type: 2}
+    storageTotalItemChance: 0
+    storageItemSpawns: []
     seatingWall: {fileID: 2100000, guid: 7d6c515d697756346991b43290867dbb, type: 2}
-    seatingFloor: {fileID: 0}
+    seatingFloor: {fileID: 2100000, guid: c7c5a3c71cbe13c48a2073fd9a1607c4, type: 2}
+    seatingTotalItemChance: 0
+    seatingItemSpawns: []
   navMeshSurface: {fileID: 1545061833}
   rooms: []
   doors: []
   removedDoors: []
+  roomTypes: 
 --- !u!4 &1256635334
 Transform:
   m_ObjectHideFlags: 0
@@ -245,7 +305,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 511
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -440,10 +500,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1413741798407944745, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5001704730604281708, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7148870164262935656, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
