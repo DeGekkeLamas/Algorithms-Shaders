@@ -30,6 +30,7 @@ public class DungeonGenerator : MonoBehaviour
     public int doorWidth = 1;
     public bool showDeletedDoors = true;
 
+    #region Asset generation properties
     [Header("Asset generation properties")]
     public bool disableVisualDebuggingAfterAssetGeneration = true;
     public GameObject wall;
@@ -47,8 +48,7 @@ public class DungeonGenerator : MonoBehaviour
         public string itemName;
         public int probability;
     }
-    [System.Serializable]
-    public struct RoomSpecificAssets
+    [Serializable] public struct RoomSpecificAssets
     {
         public PickupItem itemPickup;
         [Header("Bakery")]
@@ -87,6 +87,7 @@ public class DungeonGenerator : MonoBehaviour
         public ItemLootLable[] seatingItemSpawns;
     }
     public RoomSpecificAssets roomSpecificAssets;
+    #endregion
 
     [Header("Generated stuff")]
     public NavMeshSurface navMeshSurface;

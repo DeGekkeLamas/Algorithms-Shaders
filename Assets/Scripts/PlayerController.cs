@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
             Vector3 _mousePosition = new(_posX, _posY, 0);
 
             // Casts in direction of mouse position
-            if (Physics.Raycast(Camera.main.transform.position, RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles) 
+            if (Physics.Raycast(Camera.main.transform.position, VectorMath.RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles) 
                 , out RaycastHit rayHit, 1000, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore))
             {
                 //Debug.DrawLine(Camera.main.transform.position, rayHit.point, Color.red, 1);
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             Vector3 _mousePosition = new(_posX, _posY, 0);
 
             // Casts in direction of mouse position
-            if (Physics.Raycast(Camera.main.transform.position, RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
+            if (Physics.Raycast(Camera.main.transform.position, VectorMath.RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
                 out RaycastHit otherRayHit, 1000, ~LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Collide))
             {
                 Debug.DrawLine(Camera.main.transform.position, otherRayHit.point, Color.blue, 1);
@@ -123,17 +123,12 @@ public class PlayerController : MonoBehaviour
         float _posY = Remap(0, 1, -0.667f, 0.667f, Input.mousePosition.y / Screen.height);
         Vector3 _mousePosition = new(_posX, _posY, 0);
 
-        if (Physics.Raycast(Camera.main.transform.position, RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
+        if (Physics.Raycast(Camera.main.transform.position, VectorMath.RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
             out RaycastHit rayHit, 1000, ~LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore))
         {
 
         }
         return rayHit.point;
-    }
-    static Vector3 RotateVector3(Vector3 originalVector, Vector3 rotation)
-    {
-        Vector3 newVector = Quaternion.Euler(rotation) * originalVector;
-        return newVector;
     }
 
     static float Remap(float oldRangeX, float oldRangeY, float newRangeX, float newRangeY, float value)
