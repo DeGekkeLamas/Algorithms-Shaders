@@ -87,6 +87,7 @@ public class DungeonGenerator : MonoBehaviour
         public ItemLootLable[] seatingItemSpawns;
     }
     public RoomSpecificAssets roomSpecificAssets;
+    public RoomSpecificAssets rsa;
     #endregion
 
     [Header("Generated stuff")]
@@ -112,6 +113,7 @@ public class DungeonGenerator : MonoBehaviour
         roomSpecificAssets.kitchenTotalItemChance = GetTotalItemProbability(roomSpecificAssets.kitchenItemSpawns);
         roomSpecificAssets.storageTotalItemChance = GetTotalItemProbability(roomSpecificAssets.storageItemSpawns);
         roomSpecificAssets.seatingTotalItemChance = GetTotalItemProbability(roomSpecificAssets.seatingItemSpawns);
+        rsa = roomSpecificAssets;
     }
     private void Awake()
     {
