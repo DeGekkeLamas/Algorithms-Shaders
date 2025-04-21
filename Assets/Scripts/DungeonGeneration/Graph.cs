@@ -19,6 +19,19 @@ public class Graph<T>
         adjacencyList[fromNode].Add(toNode);
         adjacencyList[toNode].Add(fromNode);
     }
+    public void RemoveNode(T nodeToRemove)
+    {
+        if (!adjacencyList.ContainsKey(nodeToRemove))
+        {
+            Debug.Log($"Node {nodeToRemove} is alreadu deleted dumbass");
+            return;
+        }
+        adjacencyList.Remove(nodeToRemove);
+        foreach(KeyValuePair<T, List<T>> node in adjacencyList)
+        {
+            if (node.Value.Contains(nodeToRemove)) node.Value.Remove(nodeToRemove);
+        }
+    }
 
     public void PrintGraph()
     {

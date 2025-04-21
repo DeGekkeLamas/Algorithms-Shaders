@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -86,7 +86,6 @@ public class DungeonGenerator : MonoBehaviour
         public int seatingTotalItemChance;
         public ItemLootLable[] seatingItemSpawns;
     }
-    public RoomSpecificAssets roomSpecificAssets;
     public RoomSpecificAssets rsa;
     #endregion
 
@@ -100,7 +99,7 @@ public class DungeonGenerator : MonoBehaviour
     [HideInInspector] public RoomType[] roomTypes;
     [HideInInspector]  public List<GameObject> wallsGenerated = new();
     [HideInInspector] public Graph<Vector2> dungeonGraph = new();
-    [HideInInspector] public System.Random _random = new System.Random();
+    [HideInInspector] public System.Random _random = new();
 
     private void OnValidate()
     {
@@ -108,17 +107,21 @@ public class DungeonGenerator : MonoBehaviour
             splitFractionRange.x,
             Mathf.Max(splitFractionRange.x, splitFractionRange.y)
             );
-        roomSpecificAssets.bakeryTotalItemChance = GetTotalItemProbability(roomSpecificAssets.bakeryItemSpawns);
-        roomSpecificAssets.breakTotalItemChance = GetTotalItemProbability(roomSpecificAssets.breakItemSpawns);
-        roomSpecificAssets.kitchenTotalItemChance = GetTotalItemProbability(roomSpecificAssets.kitchenItemSpawns);
-        roomSpecificAssets.storageTotalItemChance = GetTotalItemProbability(roomSpecificAssets.storageItemSpawns);
-        roomSpecificAssets.seatingTotalItemChance = GetTotalItemProbability(roomSpecificAssets.seatingItemSpawns);
-        rsa = roomSpecificAssets;
+        rsa.bakeryTotalItemChance = GetTotalItemProbability(rsa.bakeryItemSpawns);
+        rsa.breakTotalItemChance = GetTotalItemProbability(rsa.breakItemSpawns);
+        rsa.kitchenTotalItemChance = GetTotalItemProbability(rsa.kitchenItemSpawns);
+        rsa.storageTotalItemChance = GetTotalItemProbability(rsa.storageItemSpawns);
+        rsa.seatingTotalItemChance = GetTotalItemProbability(rsa.seatingItemSpawns);
     }
     private void Awake()
     {
         da = this.GetComponent<DungeonAssetGenerator>();
-        if (seed != 0) _random = new System.Random(seed);
+        if (seed == 0)
+        {
+            seed = _random.Next(int.MinValue, int.MaxValue);
+            Debug.Log($"Randoml chosen seed is {seed}");
+        }
+        _random = new System.Random(seed);
 
         StartCoroutine(GenerateDungeon());
     }
@@ -259,15 +262,10 @@ public class DungeonGenerator : MonoBehaviour
         {
             if (!_accessibleRooms.Contains(point.Key)) _roomsToRemove.Add(point.Key);
         }
+
         foreach (Vector2 room in _roomsToRemove)
         {
-            foreach (Vector2 door in dungeonGraph.adjacencyList[room])
-            {
-                doors.Remove(GetDoorByCenter(door));
-            }
-
-            rooms.Remove(GetRoomByCenter(room));
-            dungeonGraph.adjacencyList.Remove(room);
+            RemoveRoom(GetRoomByCenter(room));
             yield return new WaitForSeconds(generationInterval);
         }
         Debug.Log($"Removed {_doorsRemoved} inaccessible rooms, from {this}");
@@ -281,15 +279,54 @@ public class DungeonGenerator : MonoBehaviour
             // Sorts rooms from biggest to smallest
             rooms = SortListFromSmallToBig(rooms);
 
+            int roomsRemoved = 0;
+            int roomsToRemove = (int)(rooms.Count * 0.1f);
 
+            // Checks if all rooms remain accessible with this room removed
+            for(int i = 0; i < rooms.Count && roomsRemoved < roomsToRemove; i++)
+            {
+                RectInt room = rooms[i];
+                // Skip if originroom, remove without graphcheck if 1 door
+                if (room == originRoom) continue;
+                if (dungeonGraph.adjacencyList[room.center].Count <= 1)
+                {
+                    RemoveRoom(room);
+                    roomsRemoved++;
+                    continue;
+                }
+
+                List<Vector2> roomsWoThis = new(_accessibleRooms);
+                roomsWoThis.Remove(room.center);
+
+                Graph<Vector2> dungeonGraphWoThis = dungeonGraph;
+
+                List<Vector2> accessibleRoomsWoThis = dungeonGraphWoThis.BFS(originRoom.center);
+                if (accessibleRoomsWoThis == _accessibleRooms)
+                {
+
+                }
+            }
+            Debug.Log($"Removed smallest {roomsRemoved} rooms");
         }
 
-        Debug.Log("Room generation done!");
+        Debug.Log("Dungeon drawing done!");
         if (disableVisualDebuggingAfterAssetGeneration) displayVisualDebugging = false;
         coroutineIsDone = true;
     }
     
+    void RemoveRoom(RectInt roomToRemove)
+    {
+        if (!dungeonGraph.adjacencyList.ContainsKey(roomToRemove.center))
+        {
+            Debug.Log($"Node {roomToRemove.center} is alreadu deleted dumbass");
+            return;
+        }
 
+        rooms.Remove(roomToRemove);
+        foreach (Vector2 door in dungeonGraph.adjacencyList[roomToRemove.center])
+            doors.Remove(GetDoorByCenter(door));
+        dungeonGraph.RemoveNode(roomToRemove.center);
+    }
     int GetBiggestRoom(out int biggestIndex)
     {
         biggestIndex = 0;
@@ -323,8 +360,18 @@ public class DungeonGenerator : MonoBehaviour
     int GetNearestToOrigin()
     {
         int _origin = 0;
-        for(int i = 0; i < rooms.Count; i++)
-            if (rooms[i].center.magnitude < rooms[_origin].center.magnitude) _origin = i;
+        Vector2Int offset = new(initialRoom.xMin, initialRoom.yMin);
+
+        float latestDistance = float.MaxValue;
+        for (int i = 0; i < rooms.Count; i++)
+        {
+            float distanceFromOrigin = (rooms[i].center - offset).magnitude;
+            if (distanceFromOrigin < latestDistance)
+            {
+                _origin = i;
+                latestDistance = distanceFromOrigin;
+            }
+        }
         return _origin;
     }
     RectInt GetRoomByCenter(Vector2 center)

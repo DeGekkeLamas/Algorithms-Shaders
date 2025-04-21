@@ -85,12 +85,12 @@ public class DungeonAssetGenerator : MonoBehaviour
             wallXPlusGen.zMin = true;
             WallGenerator wallXMinGen = wallXMin.AddComponent<WallGenerator>();
             wallXMinGen.zPlus = true;
-            if (room.xMin == 0) wallXMinGen.zMin = true;
+            if (room.xMin == d.initialRoom.xMin) wallXMinGen.zMin = true;
             WallGenerator wallYPlusGen = wallYPlus.AddComponent<WallGenerator>();
             wallYPlusGen.xPlus = true;
             WallGenerator wallYMinGen = wallYMin.AddComponent<WallGenerator>();
             wallYMinGen.xMin = true;
-            if (room.yMin == 0) wallYMinGen.xPlus = true;
+            if (room.yMin == d.initialRoom.yMin) wallYMinGen.xPlus = true;
 
             d.wallsGenerated.Add(wallXPlus);
             d.wallsGenerated.Add(wallYPlus);
@@ -99,26 +99,26 @@ public class DungeonAssetGenerator : MonoBehaviour
 
             Material materialToAssign;
             if (room == d.originRoom)
-                materialToAssign = d.roomSpecificAssets.breakRoomWall;
+                materialToAssign = d.rsa.breakRoomWall;
             else switch (d.roomTypes[i])
                 {
                     case RoomType.bakery:
-                        materialToAssign = d.roomSpecificAssets.bakeryWall;
+                        materialToAssign = d.rsa.bakeryWall;
                         break;
                     case RoomType.breakRoom:
-                        materialToAssign = d.roomSpecificAssets.breakRoomWall;
+                        materialToAssign = d.rsa.breakRoomWall;
                         break;
                     case RoomType.kitchen:
-                        materialToAssign = d.roomSpecificAssets.kitchenWall;
+                        materialToAssign = d.rsa.kitchenWall;
                         break;
                     case RoomType.seating:
-                        materialToAssign = d.roomSpecificAssets.seatingWall;
+                        materialToAssign = d.rsa.seatingWall;
                         break;
                     case RoomType.storage:
-                        materialToAssign = d.roomSpecificAssets.storageWall;
+                        materialToAssign = d.rsa.storageWall;
                         break;
                     default:
-                        materialToAssign = d.roomSpecificAssets.kitchenWall;
+                        materialToAssign = d.rsa.kitchenWall;
                         break;
                 }
 
@@ -276,26 +276,26 @@ public class DungeonAssetGenerator : MonoBehaviour
 
             Material materialToAssign;
             if (room == d.originRoom)
-                materialToAssign = d.roomSpecificAssets.breakRoomFloor;
+                materialToAssign = d.rsa.breakRoomFloor;
             else switch (d.roomTypes[i])
                 {
                     case RoomType.bakery:
-                        materialToAssign = d.roomSpecificAssets.bakeryFloor;
+                        materialToAssign = d.rsa.bakeryFloor;
                         break;
                     case RoomType.breakRoom:
-                        materialToAssign = d.roomSpecificAssets.breakRoomFloor;
+                        materialToAssign = d.rsa.breakRoomFloor;
                         break;
                     case RoomType.kitchen:
-                        materialToAssign = d.roomSpecificAssets.kitchenFloor;
+                        materialToAssign = d.rsa.kitchenFloor;
                         break;
                     case RoomType.seating:
-                        materialToAssign = d.roomSpecificAssets.seatingFloor;
+                        materialToAssign = d.rsa.seatingFloor;
                         break;
                     case RoomType.storage:
-                        materialToAssign = d.roomSpecificAssets.storageFloor;
+                        materialToAssign = d.rsa.storageFloor;
                         break;
                     default:
-                        materialToAssign = d.roomSpecificAssets.kitchenFloor;
+                        materialToAssign = d.rsa.kitchenFloor;
                         break;
                 }
             _floor.GetComponent<MeshRenderer>().sharedMaterial = materialToAssign;
@@ -338,16 +338,16 @@ public class DungeonAssetGenerator : MonoBehaviour
                 case RoomType.kitchen:
                     RectInt room = d.rooms[i];
                     // Kitchen island
-                    Vector2 offset = new(-.5f * d.roomSpecificAssets.counterLength, -0.5f);
+                    Vector2 offset = new(-.5f * d.rsa.counterLength, -0.5f);
                     bool roomvertical = room.height > room.width;
-                    float counterSize = d.roomSpecificAssets.counter.transform.lossyScale.x;
+                    float counterSize = d.rsa.counter.transform.lossyScale.x;
 
                     if (roomvertical) offset = new(offset.y, offset.x);
                     for (int j = 0; j < 2; j++)
                     {
-                        for (int k = 0; k < d.roomSpecificAssets.counterLength; k++)
+                        for (int k = 0; k < d.rsa.counterLength; k++)
                         {
-                            Transform counter = Instantiate(d.roomSpecificAssets.counter, new(
+                            Transform counter = Instantiate(d.rsa.counter, new(
                                 room.center.x + offset.x,
                                 -d.wallHeight * .5f + counterSize * .5f,
                                 room.center.y + offset.y
@@ -357,17 +357,17 @@ public class DungeonAssetGenerator : MonoBehaviour
                             if (roomvertical) offset.y += counterSize;
                             else offset.x += counterSize;
 
-                            string itemToSpawn = GetItemFromLoottable(d.roomSpecificAssets.kitchenItemSpawns);
+                            string itemToSpawn = GetItemFromLoottable(d.rsa.kitchenItemSpawns);
                             if (itemToSpawn != string.Empty)
                             {
-                                PickupItem itemSpawned = Instantiate(d.roomSpecificAssets.itemPickup, new(
+                                PickupItem itemSpawned = Instantiate(d.rsa.itemPickup, new(
                                     counter.position.x, d.wallHeight, counter.position.z
                                     ), Quaternion.identity, itemSpawnsContainer.transform);
                                 itemSpawned.itemToGive = ItemPresets.presets[itemToSpawn];
                             }
                         }
-                        if (roomvertical) offset = new(offset.x + counterSize, -.5f * d.roomSpecificAssets.counterLength);
-                        else offset = new(-.5f * d.roomSpecificAssets.counterLength, offset.y + counterSize);
+                        if (roomvertical) offset = new(offset.x + counterSize, -.5f * d.rsa.counterLength);
+                        else offset = new(-.5f * d.rsa.counterLength, offset.y + counterSize);
                     }
 
                     break;

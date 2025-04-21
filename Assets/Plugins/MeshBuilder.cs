@@ -105,6 +105,7 @@ public class MeshBuilder {
 			mesh.RecalculateTangents();
 		}
 		mesh.RecalculateBounds();
+		mesh.UploadMeshData(false);
 		return mesh;
 	}
 }
