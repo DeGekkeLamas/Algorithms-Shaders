@@ -23,7 +23,7 @@ public class Graph<T>
     {
         if (!adjacencyList.ContainsKey(nodeToRemove))
         {
-            Debug.Log($"Node {nodeToRemove} is alreadu deleted dumbass");
+            Debug.LogWarning($"Node {nodeToRemove} is alreadu deleted dumbass");
             return;
         }
         adjacencyList.Remove(nodeToRemove);

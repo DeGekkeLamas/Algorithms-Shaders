@@ -119,7 +119,7 @@ public class DungeonGenerator : MonoBehaviour
         if (seed == 0)
         {
             seed = _random.Next(int.MinValue, int.MaxValue);
-            Debug.Log($"Randoml chosen seed is {seed}");
+            Debug.Log($"Random chosen seed is {seed}");
         }
         _random = new System.Random(seed);
 

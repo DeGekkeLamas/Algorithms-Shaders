@@ -12,6 +12,12 @@ public class PassToVelocityStretch : MonoBehaviour
     }
     void Update()
     {
-        velocityStretch.SetVector("_Velocity", this.transform.InverseTransformDirection(r.linearVelocity));
+        velocityStretch.SetVector("_Velocity", r.linearVelocity);
+
+        Vector3 rotationRadians = VectorMath.EulerToRadians(this.transform.eulerAngles);
+        velocityStretch.SetVector("_Rotation", VectorMath.EulerToRadians(this.transform.eulerAngles));
+
+        Vector3 velocityAngle = Quaternion.LookRotation(r.linearVelocity).eulerAngles;
+        velocityStretch.SetVector("_VelocityRotation", -VectorMath.EulerToRadians(velocityAngle));
     }
 }
