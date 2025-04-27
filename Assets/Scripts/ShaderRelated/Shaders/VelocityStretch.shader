@@ -5,7 +5,7 @@ Shader "Custom/VelocityStretch"
 		_Color("Color", Color) = (1,1,1,1)
 		_Velocity ("Velocity", Vector) = (0, 0, 0)
 		_Rotation ("Rotation", Vector) = (0, 0, 0)
-		_VelocityRotation ("Position", Vector) = (0, 0, 0)
+		_VelocityRotation ("VelocityRotation", Vector) = (0, 0, 0)
 		_Ambient("Ambient", Float) = 0
 		_Intensity("Intensity", Float) = 1
 	}
@@ -38,22 +38,18 @@ Shader "Custom/VelocityStretch"
 
 			struct Functions 
 			{
-				static const float PI = 3.14159265f;
-				float PingPongAngle(float value) 
-				{
-					return (abs(fmod(value + 180, 360)-180) / 180);
-				}
+				// float4 RotateVectorOverZ(float4 original, float angle) 
+				// {
 
-				float PingPongVelocity(float value) 
-				{
-					return 90 - 90 * value;
-				}
+				// }
+				// float4 RotateVectorOverX(float4 original, float angle) 
+				// {
 
-				float GetAngleBetweenVectors(float4 dir1, float4 dir2)
-				{
-					float _angle = acos( dot(dir2, dir1) / (length(dir2) * length(dir1) ) ) * (180 / PI );
-					return _angle;
-				}
+				// }
+				// float4 RotateVectorOverY(float4 original, float angle) 
+				// {
+
+				// }
 			};
 
 			float4 _Color;
@@ -70,27 +66,29 @@ Shader "Custom/VelocityStretch"
 				newVertex.z = (newVertex.z < 0) ? newVertex.z : v.vertex.z;
 
 				Functions f;
-				_Rotation = _VelocityRotation;
-				_Rotation.x = -_Rotation.x;
+				_VelocityRotation.x = -_VelocityRotation.x;
+				_Rotation = _Rotation;
+				_Rotation.y = -_Rotation.y;
+				_VelocityRotation += _Rotation;
 
 
 				// Rotate over Z
 				newVertex = float4(
-                newVertex.x * cos(_Rotation.z) - newVertex.y * sin(_Rotation.z)
-                , newVertex.x * sin(_Rotation.z) + newVertex.y * cos(_Rotation.z)
+                newVertex.x * cos(_VelocityRotation.z) - newVertex.y * sin(_VelocityRotation.z)
+                , newVertex.x * sin(_VelocityRotation.z) + newVertex.y * cos(_VelocityRotation.z)
                 , newVertex.z, 1
 				 );
 				// Rotate over X
 				newVertex = float4(
                 newVertex.x,
-                newVertex.y * cos(_Rotation.x) - newVertex.z * sin(_Rotation.x)
-                , newVertex.y * sin(_Rotation.x) + newVertex.z * cos(_Rotation.x)
+                newVertex.y * cos(_VelocityRotation.x) - newVertex.z * sin(_VelocityRotation.x)
+                , newVertex.y * sin(_VelocityRotation.x) + newVertex.z * cos(_VelocityRotation.x)
 				, 1);
 				// Rotate over Y
 				newVertex = float4(
-                newVertex.x * cos(_Rotation.y) - newVertex.z * sin(_Rotation.y)
+                newVertex.x * cos(_VelocityRotation.y) - newVertex.z * sin(_VelocityRotation.y)
                 , newVertex.y
-                , newVertex.x * sin(_Rotation.y) + newVertex.z * cos(_Rotation.y)
+                , newVertex.x * sin(_VelocityRotation.y) + newVertex.z * cos(_VelocityRotation.y)
 				, 1);
 
 

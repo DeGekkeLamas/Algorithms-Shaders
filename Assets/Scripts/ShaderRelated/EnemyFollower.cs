@@ -14,6 +14,7 @@ public class EnemyFollower : MonoBehaviour
     public Vector2 RotationRange = new(30, 45);
     public float delayBetweenMovements = .5f;
     public float moveDistance = 2;
+    public GameObject corpse;
 
     bool hasSeenPlayer;
 
@@ -145,8 +146,15 @@ public class EnemyFollower : MonoBehaviour
         {
             Debug.Log($"Hit by projecile {other.gameObject.name}");
             GameManager manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-            if (manager != null) manager.StartBattle(hitProjectile);
+            if (hitProjectile != null) Death();
             else manager.StartBattle();
         }
+    }
+    void Death()
+    {
+        Destroy(this.transform.GetChild(0).gameObject);
+        Instantiate(corpse, transform.position, Quaternion.identity, this.transform);
+        StopAllCoroutines();
+        Destroy(this);
     }
 }

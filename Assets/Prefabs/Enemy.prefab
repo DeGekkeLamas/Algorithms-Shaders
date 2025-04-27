@@ -55,6 +55,7 @@ MonoBehaviour:
   RotationRange: {x: 30, y: 45}
   delayBetweenMovements: 0.75
   moveDistance: 2
+  corpse: {fileID: 8120454217808119696, guid: 275cfdf6fcabefb4380cafd02cfad82a, type: 3}
 --- !u!136 &6232500598109979020
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -75,9 +76,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 3
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!54 &2123825402581610809
 Rigidbody:
   m_ObjectHideFlags: 0
