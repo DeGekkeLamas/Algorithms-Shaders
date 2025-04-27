@@ -82,7 +82,7 @@ public class ItemPresets : MonoBehaviour
             itemName = "Cheese",
             isConsumedOnUse = true,
             hpHealed = 40,
-            toolTip = "Say cheese when taking a picture",
+            toolTip = "Say cheese when taking a picture!",
             canConsume = true,
             isStoveIngredient = true,
             hasOverworldUses = true,
@@ -104,7 +104,7 @@ public class ItemPresets : MonoBehaviour
         {
             itemName = "Chef hat",
             foodBoost = true,
-            toolTip = ""
+            toolTip = "A crown, only effective in the kitchen."
         };
         presets["CryingPan"] = new InventoryItem
         {
@@ -123,7 +123,7 @@ public class ItemPresets : MonoBehaviour
             itemName = "Cutting board",
             durability = 50,
             knifeBoost = true,
-            toolTip = "",
+            toolTip = "Great for cutting, or as a shield, depends on how good you are at cooking.",
             canBlock = true
         };
         presets["DryingPan"] = new InventoryItem
@@ -166,7 +166,7 @@ public class ItemPresets : MonoBehaviour
         {
             itemName = "Empty microwave",
             isEmptyMicrowave = true,
-            toolTip = "",
+            toolTip = "Great for storing your favorite metal objects!",
         };
         presets["Fork"] = new InventoryItem
         {
@@ -203,7 +203,7 @@ public class ItemPresets : MonoBehaviour
         {
             itemName = "Grilled chicken",
             hpHealed = 60,
-            toolTip = "",
+            toolTip = "CHICKEN JOCKEY!!!",
             canConsume = true,
             hasOverworldUses = true,
         };
@@ -237,7 +237,6 @@ public class ItemPresets : MonoBehaviour
         {
             itemName = "Ketchup bottle",
             isConsumedOnUse = true,
-            inflictFakeBlood = true,
             hpHealed = 30,
             damage = 30,
             toolTip = "Reminds you of the dentist...",
@@ -266,7 +265,7 @@ public class ItemPresets : MonoBehaviour
             healingBoost = 20,
             isMetal = true,
             isKnife = true,
-            toolTip = "",
+            toolTip = "YOU KNOR'D YOUR LAST KNORK!",
             isStoveIngredient = true,
         };
         presets["LoadedMicrowave"] = new InventoryItem
@@ -312,7 +311,7 @@ public class ItemPresets : MonoBehaviour
             itemName = "Piping bag",
             damage = 25,
             amountOfTargets = 3,
-            toolTip = "",
+            toolTip = "It's pipin' hot, or should I say, pipin' fresh.",
             canAttack = true,
             hasOverworldUses = true,
             cooldown = 0.3f,
@@ -362,7 +361,7 @@ public class ItemPresets : MonoBehaviour
             itemName = "Rolling pin",
             damage = 50,
             durability = 15,
-            toolTip = "",
+            toolTip = "On a roll!",
             canAttack = true,
         };
         presets["SaltShaker"] = new InventoryItem
@@ -383,7 +382,7 @@ public class ItemPresets : MonoBehaviour
             amountOfHits = 2,
             inflictOnFire = true,
             isFood = true,
-            toolTip = "",
+            toolTip = "Not suitable for those under the age of 18, might contain spicy content.",
             canAttack = true,
             hasOverworldUses = true,
             cooldown = 0.5f,
@@ -397,7 +396,7 @@ public class ItemPresets : MonoBehaviour
             healingBoost = 20,
             isMetal = true,
             isKnife = true,
-            toolTip = "",
+            toolTip = "Spife will take your life.",
             isStoveIngredient = true,
         };
         presets["Spoon"] = new InventoryItem
@@ -430,7 +429,7 @@ public class ItemPresets : MonoBehaviour
             canAttack = true,
             healingBoost = 20,
             isMetal = true,
-            toolTip = "",
+            toolTip = "Also a place in germany!",
             isStoveIngredient = true,
         };
         presets["StainlessSteelPot"] = new InventoryItem
@@ -446,7 +445,7 @@ public class ItemPresets : MonoBehaviour
             damage = 50,
             durability = 15,
             isFood = true,
-            toolTip = "",
+            toolTip = "Remind me of the events from last night...",
             canAttack = true,
         };
         presets["Toaster"] = new InventoryItem
@@ -472,18 +471,6 @@ public class ItemPresets : MonoBehaviour
             isStoveIngredient = true,
             hasOverworldUses = true,
             cooldown = 0.3f,
-        };
-        presets["TomatoPizza"] = new InventoryItem
-        {
-            itemName = "Tomato pizza",
-            damage = 25,
-            durability = 10,
-            amountOfHits = 2,
-            inflictFakeBlood = true,
-            isFood = true,
-            toolTip = "",
-            canAttack = true,
-            cooldown = 0.5f,
         };
         presets["Towel"] = new InventoryItem
         {
@@ -519,7 +506,6 @@ public class ItemPresets : MonoBehaviour
             isMetal = true,
             inflictOnFire = true,
             inflictBlindness = true,
-            inflictFakeBlood = true,
             inflictPoisoned = true,
             inflictStuck = true,
             isFood = true,

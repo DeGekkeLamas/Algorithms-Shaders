@@ -28,7 +28,6 @@ public struct InventoryItem
     public bool inflictOnFire;
     public bool inflictPoisoned;
     public bool inflictBlindness;
-    public bool inflictFakeBlood;
     public bool onAttackHealHP;
     public bool inflictStuck;
     public bool damageScalesWithHP;

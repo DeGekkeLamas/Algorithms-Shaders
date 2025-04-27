@@ -1,14 +1,24 @@
 
-Shader "Custom/Triplanar"
+Shader "Custom/CellShadeOutline"
 {
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		_Ambient("Ambient", Float) = 0.05
+		_Ambient("Ambient", Float) = 0.5
+		_Color("Color", Color) = (0,0,0,0)
+		_CellShadeLoops("Cell shade loops", Integer) = 3
+
+		_Transparency("Transparency", Range(0.0, 1.0)) = 0
 	}
 	SubShader
 	{
-		Tags { "RenderType" = "Opaque" }
+		Blend SrcAlpha OneMinusSrcAlpha
+		Cull Back
+
+		Tags {
+			"RenderType" = "Opaque"
+			"Queue" = "Transparent"
+			}
 		LOD 100
 
 		Pass
@@ -24,36 +34,33 @@ Shader "Custom/Triplanar"
 			{
 				float4 vertex : POSITION;
 				float4 normal : NORMAL;
-				half3 objNormal : TEXCOORD0;
-                float3 coords : TEXCOORD1;
+				float2 uv : TEXCOORD0;
 			};
 
 			struct v2f
 			{
 				float4 vertex : SV_POSITION;
 				float4 normal : NORMAL;
-				half3 objNormal : TEXCOORD0;
-                float3 coords : TEXCOORD1;
+				float2 uv : TEXCOORD0;
 			};
 
 			float4 _MainTex_ST;
 			sampler2D _MainTex;
 			float _Ambient;
+			float4 _Color;
+			int _CellShadeLoops;
+			float _Transparency;
 
 			v2f vert(appdata v)
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
-				// In this case, we pass the *world normal* to the fragment shader:
-				//  (This will be explained in Bootcamp 7)
+				o.uv = v.uv;
 
 				float4 noTranslate = v.normal;
 				noTranslate.w = 0;
 				float4 mat = mul(UNITY_MATRIX_M, noTranslate);
 				o.normal = normalize(mat);
-
-				o.coords =  mul(UNITY_MATRIX_M, v.vertex);
-				o.objNormal = v.normal;
 
 				return o;
 			}
@@ -62,13 +69,7 @@ Shader "Custom/Triplanar"
 			{
 				float4 col;
 
-				float4 colX = tex2D(_MainTex, i.coords.yz / _MainTex_ST.y);
-				float4 colY = tex2D(_MainTex, i.coords.xz / _MainTex_ST.xy);
-				float4 colZ = tex2D(_MainTex, i.coords.xy / _MainTex_ST.x);
-				float3 blendWeight = abs(i.objNormal);
-				blendWeight /= dot(blendWeight, 1);
-
-				col = colX * blendWeight.x + colY * blendWeight.y + colZ * blendWeight.z;
+				col = tex2D(_MainTex, i.uv / _MainTex_ST.xy + _MainTex_ST.zw) * _Color;
 
 				//Lighting
 				float4 lightDir = _WorldSpaceLightPos0;
@@ -78,11 +79,11 @@ Shader "Custom/Triplanar"
 
 				float diffuse = saturate(dot(lightDir, i.normal));
 
-				//float cartoonLoops = 3;
-				//diffuse = ceil(diffuse * cartoonLoops) / cartoonLoops;
+				diffuse = ceil(diffuse * _CellShadeLoops) / _CellShadeLoops;
 				float reflection = saturate( lightDir - dot(2*dot(lightDir, cameraDir), cameraDir) );
 
 				col *= diffuse * lightColor + ambientColor;
+				col.a = 1 * _Transparency;
 
 				return col;
 			}
