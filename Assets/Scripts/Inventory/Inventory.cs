@@ -54,7 +54,8 @@ public class Inventory : MonoBehaviour
         {
             for (int i = 0; i < currentInventory.Length; i++)
             {
-                if (currentInventory[i].isStackable && currentInventory[i].amountLeft < currentInventory[i].maxStack)
+                if (currentInventory[i].isStackable && currentInventory[i].amountLeft < currentInventory[i].maxStack
+                    && currentInventory[i].itemName == itemToAdd.itemName)
                 {
                     currentInventory[i].amountLeft++;
                     UpdateInventoryTexts();
