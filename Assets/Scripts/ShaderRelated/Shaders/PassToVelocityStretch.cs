@@ -16,7 +16,8 @@ public class PassToVelocityStretch : MonoBehaviour
 
         velocityStretch.SetVector("_Rotation", VectorMath.EulerToRadians(this.transform.eulerAngles));
 
-        Vector3 velocityAngle = Quaternion.LookRotation(r.linearVelocity).eulerAngles;
+        Vector3 velocityAngle = new();
+        if (r.linearVelocity != Vector3.zero) velocityAngle = Quaternion.LookRotation(r.linearVelocity).eulerAngles;
         velocityStretch.SetVector("_VelocityRotation", -VectorMath.EulerToRadians(velocityAngle));
     }
 }

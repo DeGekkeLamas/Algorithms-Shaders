@@ -152,8 +152,9 @@ public class EnemyFollower : MonoBehaviour
     }
     void Death()
     {
-        Destroy(this.transform.GetChild(0).gameObject);
-        Instantiate(corpse, transform.position, Quaternion.identity, this.transform);
+        GameObject oldModel = this.transform.GetChild(0).gameObject;
+        Instantiate(corpse, this.transform.position, Quaternion.identity, this.transform);
+        Destroy(oldModel);
         StopAllCoroutines();
         Destroy(this);
     }

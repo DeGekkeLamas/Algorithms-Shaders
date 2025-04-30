@@ -4,7 +4,6 @@ Shader "Custom/CellShadeOutline"
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		_Ambient("Ambient", Float) = 0.5
 		_Color("Color", Color) = (0,0,0,0)
 		_Reflectiveness("Reflectiveness", Float) = 16
 		_CellShadeLoops("Cell shade loops", Integer) = 3
@@ -48,7 +47,6 @@ Shader "Custom/CellShadeOutline"
 
 			float4 _MainTex_ST;
 			sampler2D _MainTex;
-			float _Ambient;
 			float4 _Color;
 			float _Reflectiveness;
 			int _CellShadeLoops;
@@ -78,7 +76,7 @@ Shader "Custom/CellShadeOutline"
 				// Lighting
 				float4 lightDir = _WorldSpaceLightPos0;
 				float4 lightColor = _LightColor0;
-				float4 ambientColor = (float4(1,1,1,1) - lightColor) * _Ambient;
+				float4 ambientColor = (float4(1,1,1,1) - lightColor);
 				float3 cameraDir = _WorldSpaceCameraPos;
 				// Diffuse
 				float diffuse = saturate(dot(lightDir, i.normal));
@@ -88,11 +86,11 @@ Shader "Custom/CellShadeOutline"
 				float specular = dot(reflection, lightDir);
 				specular = pow( specular, _Reflectiveness);
 				float4 specular4 = saturate( float4(specular.xxx, 0) * lightColor );
+				diffuse += specular4;
 				// Cell shade conversion
 				diffuse = ceil(diffuse * _CellShadeLoops + pow(_CellShadeLoops, -1)) / _CellShadeLoops;
-				specular4 = ceil(specular4 * _CellShadeLoops + pow(_CellShadeLoops, -1)) / _CellShadeLoops;
 				 
-				col *= diffuse * lightColor + ambientColor + specular4;
+				col *= (diffuse + ambientColor) * lightColor;
 				col.a = 1 * _Transparency;
 
 				return col;
