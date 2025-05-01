@@ -79,13 +79,13 @@ public class SpriteEditor
         if (!originSprite.isReadable) colors = DuplicateTexture(originSprite).GetPixels();
         else colors = originSprite.GetPixels();
 
-        Color[] newColors = colors;
+        Color[] newColors = new Color[colors.Length];
         Texture2D newSprite = new(originSprite.width, originSprite.height);
 
         for(int i = 0; i < colors.Length; i++)
         {
-            Color.RGBToHSV(colors[i], out float H, out float S, out float V);
-            newColors[i] = Color.HSVToRGB(H, 0, V);
+            float average = (colors[i].r + colors[i].g + colors[i].b) / 3;
+            newColors[i] = new(average, average, average, 1);
         }
 
         newSprite.SetPixels(newColors);
@@ -93,11 +93,8 @@ public class SpriteEditor
         return newSprite;
     }
 
-    static bool IsColorClose(Color color1, Color color2, float tolerance)
+    static bool IsColorClose(Vector4 color1, Vector4 color2, float tolerance)
     {
-        return Mathf.Abs(color1.r - color2.r) < tolerance &&
-               Mathf.Abs(color1.g - color2.g) < tolerance &&
-               Mathf.Abs(color1.b - color2.b) < tolerance &&
-               Mathf.Abs(color1.a - color2.a) < tolerance;
+        return color1.magnitude - color2.magnitude < tolerance;
     }
 }

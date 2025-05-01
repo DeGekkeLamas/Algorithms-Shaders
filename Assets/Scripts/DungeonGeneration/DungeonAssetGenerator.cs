@@ -226,7 +226,7 @@ public class DungeonAssetGenerator : MonoBehaviour
         }
 
         // Generate bounds on top of and below walls
-        GameObject wallBoundContainer = new("d.wallBoundContainer");
+        GameObject wallBoundContainer = new("WallBoundContainer");
         wallBoundContainer.transform.parent = d.assetContainer.transform;
         foreach (GameObject wall in d.wallsGenerated)
         {

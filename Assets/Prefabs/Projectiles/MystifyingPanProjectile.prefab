@@ -136,7 +136,7 @@ MonoBehaviour:
   destroyOnGround: 0
   expands: 1
   expansionFactor: 1.15
-  maxExpansion: 0.008
+  maxExpansion: 0.02
 --- !u!64 &7214948073872953894
 MeshCollider:
   m_ObjectHideFlags: 0

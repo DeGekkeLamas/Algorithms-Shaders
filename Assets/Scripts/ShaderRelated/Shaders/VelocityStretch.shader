@@ -38,18 +38,14 @@ Shader "Custom/VelocityStretch"
 
 			struct Functions 
 			{
-				// float4 RotateVectorOverZ(float4 original, float angle) 
-				// {
-
-				// }
-				// float4 RotateVectorOverX(float4 original, float angle) 
-				// {
-
-				// }
-				// float4 RotateVectorOverY(float4 original, float angle) 
-				// {
-
-				// }
+				float4x4 identity() 
+				{
+					return float4x4(1,0,0,0,
+						0,1,0,0,
+						0,0,1,0,
+						0,0,0,1
+						);
+				}
 			};
 
 			float4 _Color;
@@ -62,14 +58,12 @@ Shader "Custom/VelocityStretch"
 			v2f vert(appdata v)
 			{
 				v2f o;
-				float4 newVertex = float4(v.vertex.x, v.vertex.y, v.vertex.z * max(length(_Velocity * _Intensity), 1) , 1);
+				float4 newVertex = float4(v.vertex.x, v.vertex.y, v.vertex.z * max(length(_Velocity * _Intensity), 1) , 0);
 				newVertex.z = (newVertex.z < 0) ? newVertex.z : v.vertex.z;
 
-				Functions f;
 				_VelocityRotation.x = -_VelocityRotation.x;
-				_Rotation = _Rotation;
-				_Rotation.y = -_Rotation.y;
-				_VelocityRotation += _Rotation;
+				//_Rotation.y = -_Rotation.y;
+				//_VelocityRotation += _Rotation;
 
 
 				// Rotate over Z
@@ -91,8 +85,17 @@ Shader "Custom/VelocityStretch"
                 , newVertex.x * sin(_VelocityRotation.y) + newVertex.z * cos(_VelocityRotation.y)
 				, 1);
 
-
-				o.vertex = UnityObjectToClipPos(newVertex);
+				// Ignore original object rotation
+				Functions f;
+				float4x4 mvp = UNITY_MATRIX_MVP;
+				float4x4 iden = f.identity();
+				//iden._m01 = mvp._m01;
+				//iden._m10 = mvp._m10;
+				//iden._m00 = 2;
+				mvp = mul(mvp, iden);
+				//mvp._m10 = 0;
+				//mvp._m01 = 0;
+				o.vertex = mul(mvp, newVertex);
 				return o;
 			}
 

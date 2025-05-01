@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour
                 currentInventory[i].cooldownLeft -= Time.deltaTime;
     }
 
-    public void AddItem(InventoryItem itemToAdd)
+    public bool AddItem(InventoryItem itemToAdd)
     {
         if (itemToAdd.isStackable)
         {
@@ -59,7 +59,7 @@ public class Inventory : MonoBehaviour
                 {
                     currentInventory[i].amountLeft++;
                     UpdateInventoryTexts();
-                    return;
+                    return true;
                 }
             }
         }
@@ -70,10 +70,11 @@ public class Inventory : MonoBehaviour
                 currentInventory[i] = itemToAdd;
                 UpdateInventory(i);
                 Debug.Log("Added " + itemToAdd.itemName + ", from " + this);
-                return;
+                return true;
             }
         }
         Debug.Log("Inventory full, from " + this);
+        return false;
     }
     public bool InventoryHasSpace()
     {

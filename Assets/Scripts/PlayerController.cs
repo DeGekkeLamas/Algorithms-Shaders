@@ -57,12 +57,8 @@ public class PlayerController : MonoBehaviour
 
                 if (otherRayHit.collider.gameObject.TryGetComponent<PickupItem>(out PickupItem item))
                 {
-                    if (inventory.InventoryHasSpace())
-                    {
-                        inventory.AddItem(item.itemToGive);
-                        Destroy(otherRayHit.collider.gameObject);
-                    }
-                    else Debug.Log($"No space in inventory, from {this}");
+                    bool couldAdd = inventory.AddItem(item.itemToGive);
+                    if (couldAdd) Destroy(otherRayHit.collider.gameObject);
                     canUseItem = false;
                 }
             }
