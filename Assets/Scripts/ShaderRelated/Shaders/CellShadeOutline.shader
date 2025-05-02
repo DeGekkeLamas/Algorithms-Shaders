@@ -12,13 +12,12 @@ Shader "Custom/CellShadeOutline"
 	}
 	SubShader
 	{
-		Blend SrcAlpha OneMinusSrcAlpha
-		Cull Back
-
 		Tags {
-			"RenderType" = "Opaque"
+			"RenderType" = "Transparent"
 			"Queue" = "Transparent"
 			}
+		Blend SrcAlpha OneMinusSrcAlpha
+		Cull Back
 		LOD 100
 
 		Pass
@@ -92,6 +91,11 @@ Shader "Custom/CellShadeOutline"
 				 
 				col *= (diffuse + ambientColor) * lightColor;
 				col.a = 1 * _Transparency;
+
+				//float4 depth = mul(i.vertex, UNITY_MATRIX_MV);
+				//depth.w = 1;
+				//depth = sign(depth);
+				//return depth;
 
 				return col;
 			}

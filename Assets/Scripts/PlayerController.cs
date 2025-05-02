@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public float projectileForce = 5;
 
     public Rigidbody pickupSpawned;
+    public MeshRenderer projectileChart;
+    Material projectileChartMat;
     public static PlayerController playerReference; 
     NavMeshAgent navMeshAgent;
 
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Inventory>();
         playerReference = this;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        projectileChartMat = projectileChart.material;
     }
     void Update()
     {
@@ -26,17 +29,11 @@ public class PlayerController : MonoBehaviour
         // Set destination on click
         if (Input.GetMouseButton(0))
         {
-            //Translates mouse 2D position
-            float _posX = Remap(0, 1, -1, 1, Input.mousePosition.x / Screen.width);
-            float _posY = Remap(0, 1, -0.667f, 0.667f, Input.mousePosition.y / Screen.height);
-            Vector3 _mousePosition = new(_posX, _posY, 0);
-
-            // Casts in direction of mouse position
-            if (Physics.Raycast(Camera.main.transform.position, VectorMath.RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles) 
-                , out RaycastHit rayHit, 1000, LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Ignore))
+            (bool, RaycastHit) rayHit = GetCamCast(LayerMask.GetMask("Terrain"));
+            if (rayHit.Item1)
             {
                 //Debug.DrawLine(Camera.main.transform.position, rayHit.point, Color.red, 1);
-                navMeshAgent.SetDestination(rayHit.point);
+                navMeshAgent.SetDestination(rayHit.Item2.point);
                 ///playerDestination = rayHit.point;
             }
         }
@@ -44,21 +41,15 @@ public class PlayerController : MonoBehaviour
         // Checks for mouse position on right mouse click for interaction
         if (Input.GetMouseButtonDown(1))
         {
-            //Translates mouse 2D position
-            float _posX = Remap(0, 1, -1, 1, Input.mousePosition.x / Screen.width);
-            float _posY = Remap(0, 1, -0.667f, 0.667f, Input.mousePosition.y / Screen.height);
-            Vector3 _mousePosition = new(_posX, _posY, 0);
-
-            // Casts in direction of mouse position
-            if (Physics.Raycast(Camera.main.transform.position, VectorMath.RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
-                out RaycastHit otherRayHit, 1000, ~LayerMask.GetMask("Terrain"), QueryTriggerInteraction.Collide))
+            (bool, RaycastHit) otherRayHit = GetCamCast(~LayerMask.GetMask("Terrain"));
+            if (otherRayHit.Item1)
             {
-                Debug.DrawLine(Camera.main.transform.position, otherRayHit.point, Color.blue, 1);
+                Debug.DrawLine(Camera.main.transform.position, otherRayHit.Item2.point, Color.blue, 1);
 
-                if (otherRayHit.collider.gameObject.TryGetComponent<PickupItem>(out PickupItem item))
+                if (otherRayHit.Item2.collider.gameObject.TryGetComponent<PickupItem>(out PickupItem item))
                 {
                     bool couldAdd = inventory.AddItem(item.itemToGive);
-                    if (couldAdd) Destroy(otherRayHit.collider.gameObject);
+                    if (couldAdd) Destroy(otherRayHit.Item2.collider.gameObject);
                     canUseItem = false;
                 }
             }
@@ -110,21 +101,34 @@ public class PlayerController : MonoBehaviour
             Vector3 movement = (playerDestination - transform.position).normalized;
             this.transform.position += Time.deltaTime * moveSpeed * movement;
         }**/
+        // Set projectile chart data
+        Vector3 relMousePos = GetMousePosition() - this.transform.position;
+        projectileChartMat.SetVector("_Target", relMousePos);
+        relMousePos.y = 0;
+        projectileChart.transform.position = this.transform.position + new Vector3(
+            (relMousePos.normalized * 0.5f * projectileChart.transform.localScale.x).x,
+            projectileChart.transform.localScale.y * 0.5f,
+            (relMousePos.normalized * 0.5f * projectileChart.transform.localScale.z).z);
+
+        var rotation = Quaternion.LookRotation(relMousePos.normalized, Vector3.up).eulerAngles + new Vector3(0,-90,0);
+        projectileChart.transform.eulerAngles = rotation;
     }
 
     Vector3 GetMousePosition()
+    {
+        (bool, RaycastHit) rayHit = GetCamCast(~LayerMask.GetMask("Player"));
+        return rayHit.Item2.point;
+    }
+    (bool, RaycastHit) GetCamCast(int layermask)
     {
         //Translates mouse 2D position
         float _posX = Remap(0, 1, -1, 1, Input.mousePosition.x / Screen.width);
         float _posY = Remap(0, 1, -0.667f, 0.667f, Input.mousePosition.y / Screen.height);
         Vector3 _mousePosition = new(_posX, _posY, 0);
 
-        if (Physics.Raycast(Camera.main.transform.position, VectorMath.RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
-            out RaycastHit rayHit, 1000, ~LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore))
-        {
-
-        }
-        return rayHit.point;
+        bool hitSomething = Physics.Raycast(Camera.main.transform.position, VectorMath.RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
+            out RaycastHit rayHit, 1000, layermask, QueryTriggerInteraction.Ignore);
+        return (hitSomething, rayHit);
     }
 
     static float Remap(float oldRangeX, float oldRangeY, float newRangeX, float newRangeY, float value)
