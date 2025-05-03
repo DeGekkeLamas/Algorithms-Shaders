@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0995d91cc4baa49b647456bbb59d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 1.2
-  upForce: 300
+  projectileSpeed: 1.3
+  upForce: 400
   useGravity: 1
   startRotationForce: {x: -30, y: -30, z: -30}
   onlyDestroyOnTerrain: 0

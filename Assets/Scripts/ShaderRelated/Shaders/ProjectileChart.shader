@@ -15,7 +15,6 @@ Shader "Custom/ProjectileChart"
 			}
 		Blend SrcAlpha OneMinusSrcAlpha
 		Cull Off
-		//ZWrite Off
 		LOD 100
 
 		Pass
@@ -58,10 +57,11 @@ Shader "Custom/ProjectileChart"
 			fixed4 frag(v2f i) : SV_Target
 			{
 				float4 col;
+				float size = 30;
 
-				float distance = length(_Target) / 20;
+				float distance = length(_Target.xz) / size;
 				col = float4(i.uv.xy, 1, 1);
-				float value = pow((1 - abs(i.uv.x / distance -.5) * 2), .5) * _Height;
+				float value = (pow((1 - abs(i.uv.x / distance -.5) * 2), .5) * _Height) + (i.uv.x * _Target.y/size / distance);
 				bool isColored = value > i.uv.y - _Thickness && value < i.uv.y + _Thickness;
 				col = isColored ? _Color : 0;
 
