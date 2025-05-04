@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b5d1d86a9cf2e0a4a99cf88ebefcb76e, type: 2}
+  - {fileID: 2100000, guid: 7b03d3aa28172cd4d87a235184df8fc5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,8 +135,8 @@ MonoBehaviour:
   onlyDestroyOnTerrain: 1
   destroyOnGround: 0
   expands: 1
-  expansionFactor: 1.15
-  maxExpansion: 0.02
+  expansionFactor: 1.1
+  maxExpansion: 0.025
 --- !u!64 &7214948073872953894
 MeshCollider:
   m_ObjectHideFlags: 0

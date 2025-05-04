@@ -20,7 +20,7 @@ Shader "Custom/Triplanar"
 			#include "UnityCG.cginc"
 			#include "UnityLightingCommon.cginc"
 
-			struct appdata
+			struct input
 			{
 				float4 vertex : POSITION;
 				float4 normal : NORMAL;
@@ -28,7 +28,7 @@ Shader "Custom/Triplanar"
                 float3 coords : TEXCOORD1;
 			};
 
-			struct v2f
+			struct output
 			{
 				float4 vertex : SV_POSITION;
 				float4 normal : NORMAL;
@@ -40,9 +40,9 @@ Shader "Custom/Triplanar"
 			sampler2D _MainTex;
 			float _Ambient;
 
-			v2f vert(appdata v)
+			output vert(input v)
 			{
-				v2f o;
+				output o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				// In this case, we pass the *world normal* to the fragment shader:
 				//  (This will be explained in Bootcamp 7)
@@ -58,7 +58,7 @@ Shader "Custom/Triplanar"
 				return o;
 			}
 
-			fixed4 frag(v2f i) : SV_Target
+			fixed4 frag(output i) : SV_Target
 			{
 				float4 col;
 

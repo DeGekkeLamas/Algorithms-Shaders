@@ -22,14 +22,14 @@ Shader "Custom/VelocityStretch"
 
 			#include "UnityCG.cginc"
 
-			struct appdata
+			struct input
 			{
 				float4 vertex : POSITION;
 				float4 normal : NORMAL;
 				float2 uv : TEXCOORD0;
 			};
 
-			struct v2f
+			struct output
 			{
 				float2 uv : TEXCOORD0;
 				float4 vertex : SV_POSITION;
@@ -55,15 +55,15 @@ Shader "Custom/VelocityStretch"
 			float _Ambient;
 			float _Intensity;
 
-			v2f vert(appdata v)
+			output vert(input v)
 			{
-				v2f o;
+				output o;
 				float4 newVertex = float4(v.vertex.x, v.vertex.y, v.vertex.z * max(length(_Velocity * _Intensity), 1) , 0);
 				newVertex.z = (newVertex.z < 0) ? newVertex.z : v.vertex.z;
 
 				_VelocityRotation.x = -_VelocityRotation.x;
-				//_Rotation.y = -_Rotation.y;
-				//_VelocityRotation += _Rotation;
+				_Rotation.x = -_Rotation.x;
+				_VelocityRotation += _Rotation;
 
 
 				// Rotate over Z
@@ -99,7 +99,7 @@ Shader "Custom/VelocityStretch"
 				return o;
 			}
 
-			fixed4 frag(v2f i) : SV_Target
+			fixed4 frag(output i) : SV_Target
 			{
 				fixed4 col = _Color;
 				col = col *	(_Ambient + (1 - _Ambient) * saturate(i.normal.y)); // VERY basic lighting. TODO LATER: improve

@@ -1,9 +1,11 @@
-Shader "CustomRenderTexture/Flames"
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Custom/Flames"
 {
 	Properties
 	{
 		_Color("Color", Color) = (1,1,1,1)
-        _MainTex("InputText", 2D) = "white" {}
+        _MainTex("InputTexture", 2D) = "white" {}
 
 	}
 
@@ -13,24 +15,43 @@ Shader "CustomRenderTexture/Flames"
 
         Pass
         {
-            Name "Flames"
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
 
-            CGPROGRAM
-            #include "UnityCustomRenderTexture.cginc"
-            #pragma vertex CustomRenderTextureVertexShader
-            #pragma fragment frag
-            #pragma target 3.0
+			#include "UnityCG.cginc"
+
+            struct input
+			{
+				float4 vertex : POSITION;
+				float2 uv : TEXCOORD0;
+			};
+
+			struct output
+			{
+				float2 uv : TEXCOORD0;
+				float4 vertex : SV_POSITION;
+			};
 
             float4      _Color;
             sampler2D _MainTex;
 
-            float4 frag(v2f_customrendertexture IN) : SV_Target
+            output vert(input v) 
             {
-                float2 uv = IN.localTexcoord.xy;
+                output o;
+
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                
+                return o;
+            }
+
+            float4 frag(output i) : SV_Target
+            {
                 float2 center = float2(0.5, 0.5);
                 float4 color = _Color;
 
-                color = fmod(tex2D(_MainTex,uv), fmod(_Time.x,1));
+                color = fmod(tex2D(_MainTex,i.uv), fmod(_Time.x,1));
 
 				return color;
             }

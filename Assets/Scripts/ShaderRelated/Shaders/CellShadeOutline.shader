@@ -7,18 +7,21 @@ Shader "Custom/CellShadeOutline"
 		_Color("Color", Color) = (0,0,0,0)
 		_Reflectiveness("Reflectiveness", Float) = 16
 		_CellShadeLoops("Cell shade loops", Integer) = 3
+		_Emissiveness("Emissiveness", Float) = 0
 
+		//_SrcBlendAlpha("__SrcBlendAlpha", Float) = 0
 		_Transparency("Transparency", Range(0.0, 1.0)) = 1
 	}
 	SubShader
 	{
-		Tags {
-			"RenderType" = "Transparent"
-			"Queue" = "Transparent"
-			}
-		Blend SrcAlpha OneMinusSrcAlpha
-		Cull Back
+		// Tags {
+		// 	"RenderType" = "Transparent"
+		// 	"Queue" = "Transparent"
+		// 	}
+		// Blend SrcAlpha OneMinusSrcAlpha
+		// Cull Back
 		LOD 100
+		//ZWrite Off
 
 		Pass
 		{
@@ -29,14 +32,14 @@ Shader "Custom/CellShadeOutline"
 			#include "UnityCG.cginc"
 			#include "UnityLightingCommon.cginc"
 
-			struct appdata
+			struct input
 			{
 				float4 vertex : POSITION;
 				float4 normal : NORMAL;
 				float2 uv : TEXCOORD0;
 			};
 
-			struct v2f
+			struct output
 			{
 				float4 vertex : SV_POSITION;
 				float4 normal : NORMAL;
@@ -50,10 +53,11 @@ Shader "Custom/CellShadeOutline"
 			float _Reflectiveness;
 			int _CellShadeLoops;
 			float _Transparency;
+			float _Emissiveness;
 
-			v2f vert(appdata v)
+			output vert(input v)
 			{
-				v2f o;
+				output o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = v.uv;
 
@@ -66,7 +70,7 @@ Shader "Custom/CellShadeOutline"
 				return o;
 			}
 
-			fixed4 frag(v2f i) : SV_Target
+			fixed4 frag(output i) : SV_Target
 			{
 				float4 col;
 
@@ -91,6 +95,7 @@ Shader "Custom/CellShadeOutline"
 				 
 				col *= (diffuse + ambientColor) * lightColor;
 				col.a = 1 * _Transparency;
+				col *= 1 + _Emissiveness;
 
 				//float4 depth = mul(i.vertex, UNITY_MATRIX_MV);
 				//depth.w = 1;

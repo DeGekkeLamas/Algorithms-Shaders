@@ -79,7 +79,7 @@ public class ItemCheats : MonoBehaviour
                 case "v":
                     inventory.AddItem(ItemPresets.presets["Knife"]);
                     break;
-                case "bb":
+                case "b":
                     inventory.AddItem(ItemPresets.presets["Knork"]);
                     break;
                 case "n":
@@ -135,9 +135,6 @@ public class ItemCheats : MonoBehaviour
                     break;
                 case "H":
                     inventory.AddItem(ItemPresets.presets["Tomato"]);
-                    break;
-                case "J":
-                    inventory.AddItem(ItemPresets.presets["TomatoPizza"]);
                     break;
                 case "K":
                     inventory.AddItem(ItemPresets.presets["Towel"]);

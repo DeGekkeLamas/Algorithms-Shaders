@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         bool canUseItem = true;
+        Vector3 relMousePos = GetMousePosition() - this.transform.position;
 
         // Set destination on click
         if (Input.GetMouseButton(0))
@@ -65,16 +66,16 @@ public class PlayerController : MonoBehaviour
             {
                 // shot projectiles
                 Rigidbody spawnedProjectile = Instantiate(inventory.currentInventory[Inventory.itemSelected].projectile,
-                    transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                    transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(relMousePos));
                 if (!spawnedProjectile.GetComponent<Projectile>().useGravity)
                 { // Straight projectile
-                    spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position).normalized *
+                    spawnedProjectile.linearVelocity = relMousePos.normalized *
                         spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
                     spawnedProjectile.linearVelocity = new(spawnedProjectile.linearVelocity.x, 0, spawnedProjectile.linearVelocity.z);
                 }
                 else // Lobbed projectile
                 {
-                    spawnedProjectile.linearVelocity = (GetMousePosition() - this.transform.position) *
+                    spawnedProjectile.linearVelocity = relMousePos *
                         spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
                 }
 
@@ -102,7 +103,6 @@ public class PlayerController : MonoBehaviour
             this.transform.position += Time.deltaTime * moveSpeed * movement;
         }**/
         // Set projectile chart data
-        Vector3 relMousePos = GetMousePosition() - this.transform.position;
         projectileChartMat.SetVector("_Target", relMousePos);
         relMousePos.y = 0;
         projectileChart.transform.position = this.transform.position + new Vector3(

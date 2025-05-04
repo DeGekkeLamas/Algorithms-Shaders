@@ -16,6 +16,7 @@ Shader "Custom/ProjectileChart"
 		Blend SrcAlpha OneMinusSrcAlpha
 		Cull Off
 		LOD 100
+		ZWrite Off
 
 		Pass
 		{
@@ -26,13 +27,13 @@ Shader "Custom/ProjectileChart"
 			#include "UnityCG.cginc"
 			#include "UnityLightingCommon.cginc"
 
-			struct appdata
+			struct input
 			{
 				float4 vertex : POSITION;
 				float2 uv : TEXCOORD0;
 			};
 
-			struct v2f
+			struct output
 			{
 				float4 vertex : SV_POSITION;
 				float2 uv : TEXCOORD0;
@@ -45,16 +46,16 @@ Shader "Custom/ProjectileChart"
 			float _Height;
 			float3 _Target;
 
-			v2f vert(appdata v)
+			output vert(input v)
 			{
-				v2f o;
+				output o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = v.uv;
 
 				return o;
 			}
 
-			fixed4 frag(v2f i) : SV_Target
+			fixed4 frag(output i) : SV_Target
 			{
 				float4 col;
 				float size = 30;
@@ -62,6 +63,7 @@ Shader "Custom/ProjectileChart"
 				float distance = length(_Target.xz) / size;
 				col = float4(i.uv.xy, 1, 1);
 				float value = (pow((1 - abs(i.uv.x / distance -.5) * 2), .5) * _Height) + (i.uv.x * _Target.y/size / distance);
+
 				bool isColored = value > i.uv.y - _Thickness && value < i.uv.y + _Thickness;
 				col = isColored ? _Color : 0;
 
