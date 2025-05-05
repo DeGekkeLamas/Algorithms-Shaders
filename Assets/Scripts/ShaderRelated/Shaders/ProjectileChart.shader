@@ -6,6 +6,7 @@ Shader "Custom/ProjectileChart"
 		_Color("Color", Color) = (0,0,0,0)
 		_Thickness("Thickness", Float) = 0.05
 		_Height("Height", Float) = 0.5
+		_Scale("Scale", Float) = 30
 	}
 	SubShader
 	{
@@ -45,6 +46,7 @@ Shader "Custom/ProjectileChart"
 			float _Thickness;
 			float _Height;
 			float3 _Target;
+			float _Scale;
 
 			output vert(input v)
 			{
@@ -58,11 +60,10 @@ Shader "Custom/ProjectileChart"
 			fixed4 frag(output i) : SV_Target
 			{
 				float4 col;
-				float size = 30;
 
-				float distance = length(_Target.xz) / size;
+				float distance = length(_Target.xz) / _Scale;
 				col = float4(i.uv.xy, 1, 1);
-				float value = (pow((1 - abs(i.uv.x / distance -.5) * 2), .5) * _Height) + (i.uv.x * _Target.y/size / distance);
+				float value = (pow((1 - abs(i.uv.x / distance -.5) * 2), .5) * _Height) + (i.uv.x * _Target.y/_Scale / distance);
 
 				bool isColored = value > i.uv.y - _Thickness && value < i.uv.y + _Thickness;
 				col = isColored ? _Color : 0;

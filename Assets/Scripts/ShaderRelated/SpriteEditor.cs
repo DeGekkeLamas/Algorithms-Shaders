@@ -56,7 +56,7 @@ public class SpriteEditor
 
                     foreach (int _point in _pointsToCheck)
                     {
-                        if (_point > 0 && _point < newColors.Length && !IsColorClose(colors[_point], colors[_index], 0.31f))
+                        if (_point > 0 && _point < newColors.Length && colors[_point] != colors[_index])
                         {
                             isEdge = true;
                             break;
@@ -91,10 +91,5 @@ public class SpriteEditor
         newSprite.SetPixels(newColors);
         newSprite.Apply();
         return newSprite;
-    }
-
-    static bool IsColorClose(Vector4 color1, Vector4 color2, float tolerance)
-    {
-        return color1.magnitude - color2.magnitude < tolerance;
     }
 }

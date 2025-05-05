@@ -16,6 +16,7 @@ public class DungeonGenerator : MonoBehaviour
     public RectInt initialRoom = new(0, 0, 100, 100);
     [HideInInspector] public RectInt originRoom;
     public float height = 5;
+    public bool oldGeneration;
 
     float fraction = 0.5f;
     public Vector2Int splitFractionRange = new(35, 66);
@@ -143,19 +144,27 @@ public class DungeonGenerator : MonoBehaviour
         StartCoroutine(da.AssignRoomTypes());
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;
-        StartCoroutine(da.GenerateInitialWalls());
-        yield return new WaitUntil(() => coroutineIsDone);
-        coroutineIsDone = false;
-        StartCoroutine(da.ModifyWalls());
-        yield return new WaitUntil(() => coroutineIsDone);
-        coroutineIsDone = false;
-        StartCoroutine(da.GenerateFloor());
-        yield return new WaitUntil(() => coroutineIsDone);
-        coroutineIsDone = false;
-        StartCoroutine(da.Brickify());
-        yield return new WaitUntil(() => coroutineIsDone);
-        coroutineIsDone = false;
-        StartCoroutine(da.SpawnObjects());
+        if (oldGeneration)
+        {
+            StartCoroutine(da.GenerateInitialWalls());
+            yield return new WaitUntil(() => coroutineIsDone);
+            coroutineIsDone = false;
+            StartCoroutine(da.ModifyWalls());
+            yield return new WaitUntil(() => coroutineIsDone);
+            coroutineIsDone = false;
+            StartCoroutine(da.GenerateFloor());
+            yield return new WaitUntil(() => coroutineIsDone);
+            coroutineIsDone = false;
+            StartCoroutine(da.Brickify());
+            yield return new WaitUntil(() => coroutineIsDone);
+            coroutineIsDone = false;
+            StartCoroutine(da.SpawnObjects());
+            yield return new WaitUntil(() => coroutineIsDone);
+        }
+        else
+        {
+
+        }
         Debug.Log("Generated all room assets!");
     }
     IEnumerator GenerateRooms()

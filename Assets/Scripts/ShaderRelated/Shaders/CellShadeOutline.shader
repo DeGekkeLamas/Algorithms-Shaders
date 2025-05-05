@@ -9,22 +9,33 @@ Shader "Custom/CellShadeOutline"
 		_CellShadeLoops("Cell shade loops", Integer) = 3
 		_Emissiveness("Emissiveness", Float) = 0
 
-		//_SrcBlendAlpha("__SrcBlendAlpha", Float) = 0
 		_Transparency("Transparency", Range(0.0, 1.0)) = 1
 	}
 	SubShader
 	{
-		// Tags {
-		// 	"RenderType" = "Transparent"
-		// 	"Queue" = "Transparent"
-		// 	}
-		// Blend SrcAlpha OneMinusSrcAlpha
-		// Cull Back
+		//s#if _Emissiveness != 1
+			// Tags {
+			// 	"RenderType" = "Transparent"
+			// 	"Queue" = "Transparent"
+			// 	}
+			// Blend SrcAlpha OneMinusSrcAlpha
+			// Cull Back
+		//#endif
 		LOD 100
 		//ZWrite Off
 
 		Pass
 		{
+			/**
+			#if _Emissiveness != 1
+				 Tags {
+			 		"RenderType" = "Transparent"
+			 		"Queue" = "Transparent"
+				 	}
+				 Blend SrcAlpha OneMinusSrcAlpha
+				 Cull Back
+			#endif **/
+
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag

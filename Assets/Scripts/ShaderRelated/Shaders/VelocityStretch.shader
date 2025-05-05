@@ -38,6 +38,10 @@ Shader "Custom/VelocityStretch"
 
 			struct Functions 
 			{
+				float pi() 
+				{
+					return 3.14159;
+				}
 				float4x4 identity() 
 				{
 					return float4x4(1,0,0,0,
@@ -58,11 +62,17 @@ Shader "Custom/VelocityStretch"
 			output vert(input v)
 			{
 				output o;
+				Functions f;
 				float4 newVertex = float4(v.vertex.x, v.vertex.y, v.vertex.z * max(length(_Velocity * _Intensity), 1) , 0);
 				newVertex.z = (newVertex.z < 0) ? newVertex.z : v.vertex.z;
 
-				_VelocityRotation.x = -_VelocityRotation.x;
-				_Rotation.x = -_Rotation.x;
+				float pi = f.pi();
+				// _Rotation.x = (abs(fmod(_Rotation.x + pi, 2 * pi) ) )/pi + (_Rotation.x > pi) ? pi : 0;
+				// _Rotation.z = (abs(fmod(_Rotation.z + pi, 2 * pi) ) )/pi + (_Rotation.z > pi) ? pi : 0;
+				// _VelocityRotation.x = -_VelocityRotation.x;
+				// float rx = _Rotation.x;
+				// _Rotation.z = _Rotation.z;
+				// _Rotation.x = rx;
 				_VelocityRotation += _Rotation;
 
 
@@ -86,7 +96,6 @@ Shader "Custom/VelocityStretch"
 				, 1);
 
 				// Ignore original object rotation
-				Functions f;
 				float4x4 mvp = UNITY_MATRIX_MVP;
 				float4x4 iden = f.identity();
 				//iden._m01 = mvp._m01;

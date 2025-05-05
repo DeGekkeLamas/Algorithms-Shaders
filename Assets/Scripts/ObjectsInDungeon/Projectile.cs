@@ -36,6 +36,11 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.TryGetComponent<Crate>(out Crate crate)) 
             crate.SubtractHP(1);
 
+        if (other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        {
+            rb.AddExplosionForce(projectileSpeed, this.transform.position, 5);
+        }
+
         // destroys on terrain collision or wall collision or any collision
         if (other.gameObject.layer != 3 && !onlyDestroyOnTerrain || 
             onlyDestroyOnTerrain && other.gameObject.layer == 8 || 
