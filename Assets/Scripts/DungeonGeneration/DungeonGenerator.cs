@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
 {
     DungeonAssetGenerator da;
+    BetterDungeonAssetGenerator bda;
 
     [Header("Generation properties")]
     [Tooltip("Leave as 0 to use a random seed")]
@@ -32,8 +32,8 @@ public class DungeonGenerator : MonoBehaviour
     public bool showDeletedDoors = true;
 
     #region Asset generation properties
-    [Header("Asset generation properties")]
-    public bool disableVisualDebuggingAfterAssetGeneration = true;
+    [Header("Asset generation properties (old)")]
+    public bool disableVisualDebuggingAfterRoomGeneration = true;
     public GameObject wall;
     public GameObject wallBound;
     public GameObject floor;
@@ -108,6 +108,8 @@ public class DungeonGenerator : MonoBehaviour
             splitFractionRange.x,
             Mathf.Max(splitFractionRange.x, splitFractionRange.y)
             );
+        initialRoom.xMin = Mathf.Max(initialRoom.xMin, 0);
+        initialRoom.yMin = Mathf.Max(initialRoom.yMin, 0);
         rsa.bakeryTotalItemChance = GetTotalItemProbability(rsa.bakeryItemSpawns);
         rsa.breakTotalItemChance = GetTotalItemProbability(rsa.breakItemSpawns);
         rsa.kitchenTotalItemChance = GetTotalItemProbability(rsa.kitchenItemSpawns);
@@ -117,6 +119,7 @@ public class DungeonGenerator : MonoBehaviour
     private void Awake()
     {
         da = this.GetComponent<DungeonAssetGenerator>();
+        bda = this.GetComponent<BetterDungeonAssetGenerator>();
         if (seed == 0)
         {
             seed = _random.Next(int.MinValue, int.MaxValue);
@@ -163,7 +166,9 @@ public class DungeonGenerator : MonoBehaviour
         }
         else
         {
-
+            StartCoroutine(bda.GenerateTileMap());
+            yield return new WaitUntil(() => coroutineIsDone);
+            coroutineIsDone = false;
         }
         Debug.Log("Generated all room assets!");
     }
@@ -319,7 +324,7 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         Debug.Log("Dungeon drawing done!");
-        if (disableVisualDebuggingAfterAssetGeneration) displayVisualDebugging = false;
+        if (disableVisualDebuggingAfterRoomGeneration) displayVisualDebugging = false;
         coroutineIsDone = true;
     }
     
@@ -487,6 +492,12 @@ public class DungeonGenerator : MonoBehaviour
         DebugExtension.DebugBounds(new Bounds(new Vector3(_room.center.x, 0, _room.center.y), 
             new Vector3(_room.width, _height, _room.height)),
             _color, duration);
+    }
+    [ContextMenu("Cancel generation")]
+    void CancelGeneration()
+    {
+        StopAllCoroutines();
+        Debug.Log("Cancelled dungeon generation");
     }
 }
 [System.Serializable]

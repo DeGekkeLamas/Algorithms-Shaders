@@ -38,7 +38,7 @@ public class Projectile : MonoBehaviour
 
         if (other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
-            rb.AddExplosionForce(projectileSpeed, this.transform.position, 5);
+            rb.AddExplosionForce(projectileSpeed + 0.1f*upForce, this.transform.position, 5);
         }
 
         // destroys on terrain collision or wall collision or any collision
