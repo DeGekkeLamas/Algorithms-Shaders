@@ -31,7 +31,7 @@ public class DrawTilemap : MonoBehaviour
         renderer = this.GetComponent<MeshRenderer>();
         renderer.sharedMaterial.mainTexture = drawnMap;
 
-        Debug.Log("Drew tilemap");
+        //Debug.Log("Drew tilemap");
     }
 
     [ContextMenu("Export tilemap")]

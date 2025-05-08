@@ -169,6 +169,12 @@ public class DungeonGenerator : MonoBehaviour
             StartCoroutine(bda.GenerateTileMap());
             yield return new WaitUntil(() => coroutineIsDone);
             coroutineIsDone = false;
+            StartCoroutine(bda.GenerateWalls());
+            yield return new WaitUntil(() => coroutineIsDone);
+            coroutineIsDone = false;
+            StartCoroutine(da.Brickify());
+            yield return new WaitUntil(() => coroutineIsDone);
+            coroutineIsDone = false;
         }
         Debug.Log("Generated all room assets!");
     }

@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1256635333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,8 +155,8 @@ MonoBehaviour:
   initialRoom:
     x: 0
     y: 0
-    width: 100
-    height: 100
+    width: 50
+    height: 50
   originRoom:
     x: 0
     y: 0
@@ -166,10 +166,10 @@ MonoBehaviour:
   oldGeneration: 0
   splitFractionRange: {x: 35, y: 66}
   roomMaxSize: 45
-  maxDoorsForOriginRoom: 2
+  maxDoorsForOriginRoom: 1
   maxDoorsPerRoom: 3
   displayVisualDebugging: 1
-  generationInterval: 0.1
+  generationInterval: 0
   splitOffset: 0
   doorWidth: 4
   showDeletedDoors: 1
@@ -304,6 +304,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54cfbdf57f540ff46ab73cb797f13b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  marchingSquareAssets:
+  - {fileID: 0}
+  - {fileID: 7412300762330279516, guid: 31adb43e4f98b0349a026a63fe2e1080, type: 3}
+  - {fileID: 7412300762330279516, guid: 47c7c4fdfc9cb0f42998c508ae19869d, type: 3}
+  - {fileID: 7412300762330279516, guid: fee24f1859a06594e91ecfe30b3e9bc3, type: 3}
+  - {fileID: 7412300762330279516, guid: da4ed7565ef21cb4d9f4e10b3369192f, type: 3}
+  - {fileID: 7412300762330279516, guid: 3a68d1aff8f7b29499f626cb79a79ddf, type: 3}
+  - {fileID: 7412300762330279516, guid: 6bfcf42d4dbc34d4394c3f71ff7e0c82, type: 3}
+  - {fileID: 7412300762330279516, guid: 55b074d3a297a5a4c962d2d244f2ca28, type: 3}
+  - {fileID: 7412300762330279516, guid: f35bb183be90533478303ad58998f65a, type: 3}
+  - {fileID: 7412300762330279516, guid: 1dcf581d43954f144bf88d5cf31f4e76, type: 3}
+  - {fileID: 7412300762330279516, guid: 00241677f64d32a47a4ea7dea6e1b286, type: 3}
+  - {fileID: 7412300762330279516, guid: eef91825e9b0afb4e8782848ca6dd38e, type: 3}
+  - {fileID: 7412300762330279516, guid: a6ac25ab037ca2a479892a7b58648f28, type: 3}
+  - {fileID: 7412300762330279516, guid: 701caf6ea798b5c478cb0dd19d26dcd0, type: 3}
+  - {fileID: 7412300762330279516, guid: 29a12571a8f14a34ab26c4d60094a99b, type: 3}
+  - {fileID: 7412300762330279516, guid: a1f3da4dbd463214ea3d68e6dc009592, type: 3}
 --- !u!1 &1545061832
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,13 +621,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1696973452}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 8, y: 10, z: 18}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &1867934152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -668,191 +685,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
---- !u!1 &1900928816
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1900928820}
-  - component: {fileID: 1900928819}
-  - component: {fileID: 1900928818}
-  - component: {fileID: 1900928817}
-  m_Layer: 0
-  m_Name: DungeonManager (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1900928817
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900928816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54cfbdf57f540ff46ab73cb797f13b91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1900928818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900928816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b508703ccb44244ca275563d7b12212, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1900928819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900928816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9afd42dcf8a837e44ba65d59a21f6aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seed: -2124469117
-  shouldRemoveSmallestRooms: 0
-  initialRoom:
-    x: 0
-    y: 0
-    width: 200
-    height: 200
-  originRoom:
-    x: 0
-    y: 0
-    width: 0
-    height: 0
-  height: 5
-  oldGeneration: 0
-  splitFractionRange: {x: 35, y: 66}
-  roomMaxSize: 20
-  maxDoorsForOriginRoom: 2
-  maxDoorsPerRoom: 3
-  displayVisualDebugging: 1
-  generationInterval: 0.1
-  splitOffset: 0
-  doorWidth: 2
-  showDeletedDoors: 1
-  disableVisualDebuggingAfterRoomGeneration: 0
-  wall: {fileID: 7248190965236874754, guid: d6f869f665bace843b6a22279a706c14, type: 3}
-  wallBound: {fileID: 7248190965236874754, guid: 89625b0a31f3cb8409f3bcb8429268fb, type: 3}
-  floor: {fileID: 330691455853550617, guid: 8b06f6812a5def0409a7b0029d150f07, type: 3}
-  player: {fileID: 8608250485412360592, guid: ae030c0492dc41d41bebee18da5be51d, type: 3}
-  enemy: {fileID: 18489271436508005, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-  enemiesPerRoom:
-  - Quantity: 1
-    probability: 75
-  - Quantity: 2
-    probability: 20
-  wallHeight: 6
-  wallBoundHeight: 1
-  wallBoundThickness: 1.25
-  rsa:
-    itemPickup: {fileID: 3020829154051356937, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
-    bakeryWall: {fileID: 2100000, guid: 76eb3196b24bb7f45b56b521a190c072, type: 2}
-    bakeryFloor: {fileID: 2100000, guid: 780327bd687707545bfd796c41dd6b64, type: 2}
-    bakeryTotalItemChance: 0
-    bakeryItemSpawns: []
-    breakRoomWall: {fileID: 2100000, guid: 82dd1a98db12c1248807306861c7bb2c, type: 2}
-    breakRoomFloor: {fileID: 2100000, guid: 53d2936232dafbf4d96c3c24edf80026, type: 2}
-    breakTotalItemChance: 100
-    breakItemSpawns:
-    - itemName: FryingPan
-      probability: 25
-    - itemName: Cheese
-      probability: 25
-    - itemName: Egg
-      probability: 25
-    - itemName: Fork
-      probability: 25
-    kitchenWall: {fileID: 2100000, guid: 1ab9e6f8862bc974382a464b2c82cd17, type: 2}
-    kitchenFloor: {fileID: 2100000, guid: 780327bd687707545bfd796c41dd6b64, type: 2}
-    counterLength: 5
-    counter: {fileID: 9011421418820237759, guid: 0d413d8ccf516d74bb2fa084514f420d, type: 3}
-    counterCornerL: {fileID: 2101207922729177578, guid: c27b16d52413df147afcbd103875382f, type: 3}
-    counterCornerR: {fileID: 8202259783184369343, guid: 9b4e8dccf73aade43b3cf1fb0c161018, type: 3}
-    kitchenTotalItemChance: 49
-    kitchenItemSpawns:
-    - itemName: FryingPan
-      probability: 8
-    - itemName: Towel
-      probability: 3
-    - itemName: Apron
-      probability: 2
-    - itemName: ChefHat
-      probability: 2
-    - itemName: CuttingBoard
-      probability: 2
-    - itemName: Tomato
-      probability: 5
-    - itemName: EmptyMicrowave
-      probability: 2
-    - itemName: Fork
-      probability: 3
-    - itemName: Spoon
-      probability: 3
-    - itemName: Fork
-      probability: 3
-    - itemName: Jalapeno
-      probability: 2
-    - itemName: Pizza
-      probability: 2
-    - itemName: RawChicken
-      probability: 2
-    - itemName: Cheese
-      probability: 2
-    - itemName: Butter
-      probability: 2
-    - itemName: StainlessSteelPot
-      probability: 2
-    - itemName: Sausage
-      probability: 2
-    - itemName: Toaster
-      probability: 2
-    storageWall: {fileID: 2100000, guid: 30dd79882bfd2184c917c921bea895d5, type: 2}
-    storageFloor: {fileID: 2100000, guid: 30dd79882bfd2184c917c921bea895d5, type: 2}
-    storageTotalItemChance: 0
-    storageItemSpawns: []
-    seatingWall: {fileID: 2100000, guid: 7d6c515d697756346991b43290867dbb, type: 2}
-    seatingFloor: {fileID: 2100000, guid: c7c5a3c71cbe13c48a2073fd9a1607c4, type: 2}
-    seatingTotalItemChance: 0
-    seatingItemSpawns: []
-  navMeshSurface: {fileID: 1545061833}
-  assetContainer: {fileID: 0}
-  rooms: []
-  doors: []
-  removedDoors: []
-  roomTypes: 
-  wallsGenerated: []
-  coroutineIsDone: 0
---- !u!4 &1900928820
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1900928816}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2010996963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,6 +984,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 2058333338}
   - {fileID: 1256635334}
-  - {fileID: 1900928820}
   - {fileID: 1867934152}
   - {fileID: 1696973457}
