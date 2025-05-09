@@ -231,11 +231,22 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     var _newDoor = AlgorithmsUtils.Intersect(rooms[i], rooms[j]);
 
-                    _newDoor = new(
-                        (_newDoor.width <= 0) ? _newDoor.xMin - doorWidth / 2 : (_newDoor.xMin) + _newDoor.width / 2,
-                        (_newDoor.height <= 0) ? _newDoor.yMin - doorWidth / 2 : (_newDoor.yMin) + _newDoor.height / 2,
-                        (_newDoor.width <= 0) ? _newDoor.width + doorWidth : doorWidth,
-                        (_newDoor.height <= 0) ? _newDoor.height + doorWidth : doorWidth);
+                    // _newDoor = new(
+                    //     (_newDoor.width <= 0) ? _newDoor.xMin - doorWidth / 2 : (_newDoor.xMin) + _newDoor.width / 2,
+                    //     (_newDoor.height <= 0) ? _newDoor.yMin - doorWidth / 2 : (_newDoor.yMin) + _newDoor.height / 2,
+                    //     (_newDoor.width <= 0) ? _newDoor.width + doorWidth : doorWidth,
+                    //     (_newDoor.height <= 0) ? _newDoor.height + doorWidth : doorWidth);
+                    if (_newDoor.width > _newDoor.height)
+                    {
+                        _newDoor.xMin += (int)(_newDoor.width * .5f - doorWidth * .5f);
+                        _newDoor.width = doorWidth;
+                    }
+                    else
+                    {
+                        _newDoor.yMin += (int)(_newDoor.height * .5f - doorWidth * .5f);
+                        _newDoor.height = doorWidth;
+                    }
+
 
                     if (Mathf.Abs(rooms[i].center.x - _newDoor.center.x) > rooms[i].width / _tolerance &&
                         Mathf.Abs(rooms[i].center.y - _newDoor.center.y) > rooms[i].height / _tolerance ||
@@ -422,7 +433,7 @@ public class DungeonGenerator : MonoBehaviour
         _roomA = new(_origianalRoom.xMin, 
                                     _origianalRoom.yMin, 
                                     _origianalRoom.width, 
-                                    (int)(_origianalRoom.height * _fraction));
+                                    (int)(_origianalRoom.height * _fraction) + 1);
 
         _roomB = new(_origianalRoom.xMin,
                                     _origianalRoom.yMin + (int)(_origianalRoom.height * _fraction),
@@ -433,7 +444,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         _roomA = new(_origianalRoom.xMin, 
                                     _origianalRoom.yMin, 
-                                    (int)(_origianalRoom.width * _fraction),
+                                    (int)(_origianalRoom.width * _fraction) + 1,
                                     _origianalRoom.height);
 
         _roomB = new((int)(_origianalRoom.xMin + _origianalRoom.width * _fraction),

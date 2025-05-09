@@ -59,7 +59,7 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
                 int tileBinary = localGroup[0] * 1 + localGroup[1] * 2 + localGroup[2] * 4 + localGroup[3] * 8;
                 if (marchingSquareAssets[tileBinary] != null)
                 {
-                    Instantiate(marchingSquareAssets[tileBinary], new(y, 0, x), Quaternion.identity, wallContainer.transform);
+                    Instantiate(marchingSquareAssets[tileBinary], new(y + 1, 0, x + 1), Quaternion.identity, wallContainer.transform);
                     assetsDone++;
                     if (assetsDone >= assetsPerDelay)
                     {
@@ -83,14 +83,15 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
 
         while (queue.Count > 0)
         {
+            int floorSize = (int)floor.transform.lossyScale.x;
             Vector2Int point = queue.Dequeue();
             visitedList.Add(point);
             Vector2Int[] pointsToAdd = new Vector2Int[4]
             {
-                point + new Vector2Int(1, 0),
-                point + new Vector2Int(-1, 0),
-                point + new Vector2Int(0, 1),
-                point + new Vector2Int(0, -1)
+                point + new Vector2Int(floorSize, 0),
+                point + new Vector2Int(-floorSize, 0),
+                point + new Vector2Int(0, floorSize),
+                point + new Vector2Int(0, -floorSize)
             };
             foreach (Vector2Int pointToFill in pointsToAdd)
             {
@@ -98,7 +99,7 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
                     queue.Enqueue(pointToFill);
             }
 
-            Instantiate(floor, new(point.x - .5f, 0, point.y - .5f), Quaternion.identity, floorContainer.transform);
+            Instantiate(floor, new(point.x + .5f, 0, point.y + .5f), Quaternion.identity, floorContainer.transform);
             assetsDone++;
             if (assetsDone >= assetsPerDelay)
             {
