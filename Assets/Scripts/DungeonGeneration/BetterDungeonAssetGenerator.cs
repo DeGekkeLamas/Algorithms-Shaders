@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -6,8 +7,12 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
 {
     DungeonGenerator d;
     int[,] tilemap;
-    private void Awake() => d = this.GetComponent<DungeonGenerator>();
     public GameObject[] marchingSquareAssets = new GameObject[16];
+    public GameObject floor;
+    public int assetsPerDelay = 20;
+    private int assetsDone;
+
+    private void Awake() => d = this.GetComponent<DungeonGenerator>();
 
     public IEnumerator GenerateTileMap()
     {
@@ -55,9 +60,50 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
                 if (marchingSquareAssets[tileBinary] != null)
                 {
                     Instantiate(marchingSquareAssets[tileBinary], new(y, 0, x), Quaternion.identity, wallContainer.transform);
-                    //yield return new WaitForSeconds(d.generationInterval);
+                    assetsDone++;
+                    if (assetsDone >= assetsPerDelay)
+                    {
+                        yield return new WaitForSeconds(d.generationInterval);
+                        assetsDone = 0;
+                    }
                 }
 
+            }
+        }
+        yield return new();
+        d.coroutineIsDone = true;
+    }
+    public IEnumerator GenerateFloor(Vector2Int start)
+    {
+        GameObject floorContainer = new("FloorContainer");
+        floorContainer.transform.parent = d.assetContainer.transform;
+        List<Vector2Int> visitedList = new();
+        Queue<Vector2Int> queue = new();
+        queue.Enqueue(start);
+
+        while (queue.Count > 0)
+        {
+            Vector2Int point = queue.Dequeue();
+            visitedList.Add(point);
+            Vector2Int[] pointsToAdd = new Vector2Int[4]
+            {
+                point + new Vector2Int(1, 0),
+                point + new Vector2Int(-1, 0),
+                point + new Vector2Int(0, 1),
+                point + new Vector2Int(0, -1)
+            };
+            foreach (Vector2Int pointToFill in pointsToAdd)
+            {
+                if (!visitedList.Contains(pointToFill) && !queue.Contains(pointToFill) && (tilemap[pointToFill.y, pointToFill.x] == 0))
+                    queue.Enqueue(pointToFill);
+            }
+
+            Instantiate(floor, new(point.x - .5f, 0, point.y - .5f), Quaternion.identity, floorContainer.transform);
+            assetsDone++;
+            if (assetsDone >= assetsPerDelay)
+            {
+                yield return new WaitForSeconds(d.generationInterval);
+                assetsDone = 0;
             }
         }
         yield return new();
