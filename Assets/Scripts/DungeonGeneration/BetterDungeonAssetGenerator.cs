@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
     int[,] tilemap;
     public GameObject[] marchingSquareAssets = new GameObject[16];
     public GameObject floor;
-    public int assetsPerDelay = 20;
+    public int assetsPerDelayWalls = 20;
+    public int assetsPerDelayFloor = 50;
     private int assetsDone;
 
     private void Awake() => d = this.GetComponent<DungeonGenerator>();
@@ -28,6 +30,24 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         {
             AlgorithmsUtils.FillRectangle(tilemap, RectIntAddition(door, offset), 0);
         }
+
+        // Add empty edges at the outside so walls generate on the dungeon exterior
+        int[,] newTilemap = new int[bounds.height + 2, bounds.width + 2];
+        for (int y = 0; y < newTilemap.GetLength(0); y++)
+        {
+            for (int x = 0; x < newTilemap.GetLength(1); x++)
+            {
+                if (y == 0 || x == 0 || y == newTilemap.GetLength(0)-1 || x == newTilemap.GetLength(1)-1)
+                {
+                    newTilemap[y,x] = 0;
+                }
+                else
+                {
+                    newTilemap[y, x] = tilemap[y-1,x-1];
+                }
+            }
+        }
+        tilemap = newTilemap;
 
         // Draw tilemap onto plane for debugging
         DrawTilemap tilemapDebugger = FindAnyObjectByType<DrawTilemap>();
@@ -61,7 +81,7 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
                 {
                     Instantiate(marchingSquareAssets[tileBinary], new(y + 1, 0, x + 1), Quaternion.identity, wallContainer.transform);
                     assetsDone++;
-                    if (assetsDone >= assetsPerDelay)
+                    if (assetsDone >= assetsPerDelayWalls)
                     {
                         yield return new WaitForSeconds(d.generationInterval);
                         assetsDone = 0;
@@ -79,11 +99,12 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         floorContainer.transform.parent = d.assetContainer.transform;
         List<Vector2Int> visitedList = new();
         Queue<Vector2Int> queue = new();
+        //queue.Initialize();
         queue.Enqueue(start);
+        int floorSize = (int)floor.transform.lossyScale.x;
 
         while (queue.Count > 0)
         {
-            int floorSize = (int)floor.transform.lossyScale.x;
             Vector2Int point = queue.Dequeue();
             visitedList.Add(point);
             Vector2Int[] pointsToAdd = new Vector2Int[4]
@@ -95,13 +116,17 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
             };
             foreach (Vector2Int pointToFill in pointsToAdd)
             {
-                if (!visitedList.Contains(pointToFill) && !queue.Contains(pointToFill) && (tilemap[pointToFill.y, pointToFill.x] == 0))
+                if (!visitedList.Contains(pointToFill) && 
+                    !queue.Contains(pointToFill) && 
+                    (tilemap[
+                        Mathf.Clamp(pointToFill.y, 1, tilemap.GetLength(0)-2), 
+                        Mathf.Clamp(pointToFill.x, 1, tilemap.GetLength(1)-2)] == 0))
                     queue.Enqueue(pointToFill);
             }
 
             Instantiate(floor, new(point.x + .5f, 0, point.y + .5f), Quaternion.identity, floorContainer.transform);
             assetsDone++;
-            if (assetsDone >= assetsPerDelay)
+            if (assetsDone >= assetsPerDelayFloor)
             {
                 yield return new WaitForSeconds(d.generationInterval);
                 assetsDone = 0;
@@ -110,7 +135,28 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         yield return new();
         d.coroutineIsDone = true;
     }
-
+    public struct HashQueue<T>
+    {
+        HashSet<T> hashset;
+        public int Count;
+        public void Initialize()
+        {
+            hashset = new();
+            Count = hashset.Count;
+        }
+        public void Enqueue(T toAdd) 
+        { 
+            hashset.Add(toAdd);
+            Count = hashset.Count;
+        }
+        public T Dequeue()
+        {
+            T removed = hashset.ElementAt(0);
+            hashset.Remove(removed);
+            Count = hashset.Count;
+            return removed;
+        }
+    }
 
 
     static RectInt RectIntAddition(RectInt A, RectInt B)

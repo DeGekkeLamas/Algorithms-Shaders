@@ -231,11 +231,6 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     var _newDoor = AlgorithmsUtils.Intersect(rooms[i], rooms[j]);
 
-                    // _newDoor = new(
-                    //     (_newDoor.width <= 0) ? _newDoor.xMin - doorWidth / 2 : (_newDoor.xMin) + _newDoor.width / 2,
-                    //     (_newDoor.height <= 0) ? _newDoor.yMin - doorWidth / 2 : (_newDoor.yMin) + _newDoor.height / 2,
-                    //     (_newDoor.width <= 0) ? _newDoor.width + doorWidth : doorWidth,
-                    //     (_newDoor.height <= 0) ? _newDoor.height + doorWidth : doorWidth);
                     if (_newDoor.width > _newDoor.height)
                     {
                         _newDoor.xMin += (int)(_newDoor.width * .5f - doorWidth * .5f);
@@ -438,7 +433,7 @@ public class DungeonGenerator : MonoBehaviour
         _roomB = new(_origianalRoom.xMin,
                                     _origianalRoom.yMin + (int)(_origianalRoom.height * _fraction),
                                     _origianalRoom.width, 
-                                    _origianalRoom.height - _roomA.height);
+                                    _origianalRoom.height - _roomA.height + 1);
     }
     void SplitVertical(RectInt _origianalRoom, float _fraction, out RectInt _roomA, out RectInt _roomB)
     {
@@ -449,7 +444,7 @@ public class DungeonGenerator : MonoBehaviour
 
         _roomB = new((int)(_origianalRoom.xMin + _origianalRoom.width * _fraction),
                                     _origianalRoom.yMin,
-                                    _origianalRoom.width - _roomA.width,
+                                    _origianalRoom.width - _roomA.width + 1,
                                     _origianalRoom.height);
     }
     List<RectInt> SortListFromSmallToBig(List<RectInt> originalList)
