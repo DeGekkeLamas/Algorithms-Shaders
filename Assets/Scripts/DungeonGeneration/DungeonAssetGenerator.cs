@@ -7,11 +7,33 @@ using static DungeonGenerator;
 
 public class DungeonAssetGenerator : MonoBehaviour
 {
+    public GameObject wall;
+    public GameObject wallBound;
+    public GameObject floor;
+    public GameObject player;
+    public GameObject enemy;
+    public EnemyProbabilities[] enemiesPerRoom;
+    public float wallHeight = 5;
+    public float wallBoundHeight = 1;
+    public float wallBoundThickness = 1.25f;
+    public RoomSpecificAssets rsa;
+    RoomType[] roomTypes;
+
     DungeonGenerator d;
+
+    private void OnValidate()
+    {
+        rsa.bakeryTotalItemChance = GetTotalItemProbability(rsa.bakeryItemSpawns);
+        rsa.breakTotalItemChance = GetTotalItemProbability(rsa.breakItemSpawns);
+        rsa.kitchenTotalItemChance = GetTotalItemProbability(rsa.kitchenItemSpawns);
+        rsa.storageTotalItemChance = GetTotalItemProbability(rsa.storageItemSpawns);
+        rsa.seatingTotalItemChance = GetTotalItemProbability(rsa.seatingItemSpawns);
+    }
+
     private void Awake() => d = this.GetComponent<DungeonGenerator>();
     public IEnumerator AssignRoomTypes()
     {
-        d.roomTypes = new RoomType[d.rooms.Count];
+        roomTypes = new RoomType[d.rooms.Count];
         int bakeries = 0;
         int kitchens = 0;
         int seatings = 0;
@@ -20,28 +42,28 @@ public class DungeonAssetGenerator : MonoBehaviour
         {
             if (d.rooms[i] == d.originRoom)
             {
-                d.roomTypes[i] = RoomType.breakRoom;
+                roomTypes[i] = RoomType.breakRoom;
                 continue;
             }
             int lowestQTY = Mathf.Min(bakeries, kitchens, seatings, storages);
             if (lowestQTY == bakeries)
             {
-                d.roomTypes[i] = RoomType.bakery;
+                roomTypes[i] = RoomType.bakery;
                 bakeries++;
             }
             else if (lowestQTY == kitchens)
             {
-                d.roomTypes[i] = RoomType.kitchen;
+                roomTypes[i] = RoomType.kitchen;
                 kitchens++;
             }
             else if (lowestQTY == seatings)
             {
-                d.roomTypes[i] = RoomType.seating;
+                roomTypes[i] = RoomType.seating;
                 seatings++;
             }
             else if (lowestQTY == storages)
             {
-                d.roomTypes[i] = RoomType.storage;
+                roomTypes[i] = RoomType.storage;
                 storages++;
             }
         }
@@ -62,13 +84,13 @@ public class DungeonAssetGenerator : MonoBehaviour
             RectInt room = d.rooms[i];
             Vector3 _center = new(room.center.x, 0, room.center.y);
 
-            GameObject wallXPlus = Instantiate(d.wall, _center + new Vector3(room.width * 0.5f, 0, 0),
+            GameObject wallXPlus = Instantiate(wall, _center + new Vector3(room.width * 0.5f, 0, 0),
                 Quaternion.identity, roomWallContainer.transform);
-            GameObject wallXMin = Instantiate(d.wall, _center + new Vector3(-room.width * 0.5f, 0, 0),
+            GameObject wallXMin = Instantiate(wall, _center + new Vector3(-room.width * 0.5f, 0, 0),
                 Quaternion.identity, roomWallContainer.transform);
-            GameObject wallYPlus = Instantiate(d.wall, _center + new Vector3(0, 0, room.height * 0.5f),
+            GameObject wallYPlus = Instantiate(wall, _center + new Vector3(0, 0, room.height * 0.5f),
                 Quaternion.identity, roomWallContainer.transform);
-            GameObject wallYMin = Instantiate(d.wall, _center + new Vector3(0, 0, -room.height * 0.5f),
+            GameObject wallYMin = Instantiate(wall, _center + new Vector3(0, 0, -room.height * 0.5f),
                 Quaternion.identity, roomWallContainer.transform);
 
             wallXPlus.name = "wallXPlus";
@@ -76,10 +98,10 @@ public class DungeonAssetGenerator : MonoBehaviour
             wallYPlus.name = "wallYPlus";
             wallYMin.name = "wallYMin";
 
-            wallXPlus.transform.localScale = new(1, d.wallHeight, room.height);
-            wallXMin.transform.localScale = new(1, d.wallHeight, room.height);
-            wallYPlus.transform.localScale = new(room.width, d.wallHeight, 1);
-            wallYMin.transform.localScale = new(room.width, d.wallHeight, 1);
+            wallXPlus.transform.localScale = new(1, wallHeight, room.height);
+            wallXMin.transform.localScale = new(1, wallHeight, room.height);
+            wallYPlus.transform.localScale = new(room.width, wallHeight, 1);
+            wallYMin.transform.localScale = new(room.width, wallHeight, 1);
 
             WallGenerator wallXPlusGen = wallXPlus.AddComponent<WallGenerator>();
             wallXPlusGen.zMin = true;
@@ -99,26 +121,26 @@ public class DungeonAssetGenerator : MonoBehaviour
 
             Material materialToAssign;
             if (room == d.originRoom)
-                materialToAssign = d.rsa.breakRoomWall;
-            else switch (d.roomTypes[i])
+                materialToAssign = rsa.breakRoomWall;
+            else switch (roomTypes[i])
                 {
                     case RoomType.bakery:
-                        materialToAssign = d.rsa.bakeryWall;
+                        materialToAssign = rsa.bakeryWall;
                         break;
                     case RoomType.breakRoom:
-                        materialToAssign = d.rsa.breakRoomWall;
+                        materialToAssign = rsa.breakRoomWall;
                         break;
                     case RoomType.kitchen:
-                        materialToAssign = d.rsa.kitchenWall;
+                        materialToAssign = rsa.kitchenWall;
                         break;
                     case RoomType.seating:
-                        materialToAssign = d.rsa.seatingWall;
+                        materialToAssign = rsa.seatingWall;
                         break;
                     case RoomType.storage:
-                        materialToAssign = d.rsa.storageWall;
+                        materialToAssign = rsa.storageWall;
                         break;
                     default:
-                        materialToAssign = d.rsa.kitchenWall;
+                        materialToAssign = rsa.kitchenWall;
                         break;
                 }
 
@@ -195,32 +217,32 @@ public class DungeonAssetGenerator : MonoBehaviour
 
                     d.wallsGenerated[i].transform.position = new Vector3(newWallA.center.x, 0, newWallA.center.y);
                     wallDupe.transform.position = new Vector3(newWallB.center.x, 0, newWallB.center.y);
-                    d.wallsGenerated[i].transform.localScale = new Vector3(newWallA.width, d.wallHeight, newWallA.height);
-                    wallDupe.transform.localScale = new Vector3(newWallB.width, d.wallHeight, newWallB.height);
+                    d.wallsGenerated[i].transform.localScale = new Vector3(newWallA.width, wallHeight, newWallA.height);
+                    wallDupe.transform.localScale = new Vector3(newWallB.width, wallHeight, newWallB.height);
                     d.wallsGenerated.Add(wallDupe);
 
                     if (intersectOverHeight)
                     {
-                        doorBoundA = Instantiate(d.wallBound, new Vector3(
+                        doorBoundA = Instantiate(wallBound, new Vector3(
                             wallDupe.transform.position.x, wallDupe.transform.position.y, intersectDoor.yMin
                             ), Quaternion.identity, doorBoundsContainer.transform);
-                        doorBoundB = Instantiate(d.wallBound, new Vector3(
+                        doorBoundB = Instantiate(wallBound, new Vector3(
                             wallDupe.transform.position.x, wallDupe.transform.position.y, intersectDoor.yMax
                             ), Quaternion.identity, doorBoundsContainer.transform);
                     }
                     else
                     {
-                        doorBoundA = Instantiate(d.wallBound, new Vector3(
+                        doorBoundA = Instantiate(wallBound, new Vector3(
                             intersectDoor.xMin, wallDupe.transform.position.y, wallDupe.transform.position.z
                             ), Quaternion.identity, doorBoundsContainer.transform);
-                        doorBoundB = Instantiate(d.wallBound, new Vector3(
+                        doorBoundB = Instantiate(wallBound, new Vector3(
                             intersectDoor.xMax, wallDupe.transform.position.y, wallDupe.transform.position.z
                             ), Quaternion.identity, doorBoundsContainer.transform);
                     }
-                    doorBoundA.transform.localScale = new Vector3(d.wallBoundThickness,
-                        d.wallHeight + d.wallBoundHeight, d.wallBoundThickness);
-                    doorBoundB.transform.localScale = new Vector3(d.wallBoundThickness,
-                        d.wallHeight + d.wallBoundHeight, d.wallBoundThickness);
+                    doorBoundA.transform.localScale = new Vector3(wallBoundThickness,
+                        wallHeight + wallBoundHeight, wallBoundThickness);
+                    doorBoundB.transform.localScale = new Vector3(wallBoundThickness,
+                        wallHeight + wallBoundHeight, wallBoundThickness);
                 }
             }
         }
@@ -230,18 +252,18 @@ public class DungeonAssetGenerator : MonoBehaviour
         wallBoundContainer.transform.parent = d.assetContainer.transform;
         foreach (GameObject wall in d.wallsGenerated)
         {
-            GameObject wallBoundTop = Instantiate(d.wallBound,
+            GameObject wallBoundTop = Instantiate(wallBound,
                 new Vector3(wall.transform.position.x,
         wall.transform.position.y + 0.5f * wall.transform.localScale.y, wall.transform.position.z),
                 Quaternion.identity, wallBoundContainer.transform);
 
             Vector3 wallScale = wall.transform.localScale;
             wallBoundTop.transform.localScale = new Vector3(
-                wallScale.x + (wallScale.x < wallScale.z ? d.wallBoundThickness - 1 : 0),
-                d.wallBoundHeight,
-                wallScale.z + (wallScale.x > wallScale.z ? d.wallBoundThickness - 1 : 0));
+                wallScale.x + (wallScale.x < wallScale.z ? wallBoundThickness - 1 : 0),
+                wallBoundHeight,
+                wallScale.z + (wallScale.x > wallScale.z ? wallBoundThickness - 1 : 0));
 
-            GameObject wallBoundBottom = Instantiate(d.wallBound,
+            GameObject wallBoundBottom = Instantiate(wallBound,
                 new Vector3(wall.transform.position.x,
         wall.transform.position.y - 0.5f * wall.transform.localScale.y, wall.transform.position.z),
                 Quaternion.identity, wallBoundContainer.transform);
@@ -250,14 +272,14 @@ public class DungeonAssetGenerator : MonoBehaviour
             yield return new WaitForSeconds(d.generationInterval);
         }
         // Generate bounds in map corners
-        GameObject cornerOrigin = Instantiate(d.wallBound, new(d.initialRoom.xMin, 0, d.initialRoom.yMin), Quaternion.identity, wallBoundContainer.transform);
-        GameObject cornerOriginPlusX = Instantiate(d.wallBound, new(d.initialRoom.xMax, 0, d.initialRoom.yMin), Quaternion.identity, wallBoundContainer.transform);
-        GameObject cornerOriginPlusY = Instantiate(d.wallBound, new(d.initialRoom.xMin, 0, d.initialRoom.yMax), Quaternion.identity, wallBoundContainer.transform);
-        GameObject cornerOriginPlusXY = Instantiate(d.wallBound, new(d.initialRoom.xMax, 0, d.initialRoom.yMax), Quaternion.identity, wallBoundContainer.transform);
-        cornerOrigin.transform.localScale = new(d.wallBoundThickness, d.wallHeight + d.wallBoundHeight, d.wallBoundThickness);
-        cornerOriginPlusX.transform.localScale = new(d.wallBoundThickness, d.wallHeight + d.wallBoundHeight, d.wallBoundThickness);
-        cornerOriginPlusY.transform.localScale = new(d.wallBoundThickness, d.wallHeight + d.wallBoundHeight, d.wallBoundThickness);
-        cornerOriginPlusXY.transform.localScale = new(d.wallBoundThickness, d.wallHeight + d.wallBoundHeight, d.wallBoundThickness);
+        GameObject cornerOrigin = Instantiate(wallBound, new(d.initialRoom.xMin, 0, d.initialRoom.yMin), Quaternion.identity, wallBoundContainer.transform);
+        GameObject cornerOriginPlusX = Instantiate(wallBound, new(d.initialRoom.xMax, 0, d.initialRoom.yMin), Quaternion.identity, wallBoundContainer.transform);
+        GameObject cornerOriginPlusY = Instantiate(wallBound, new(d.initialRoom.xMin, 0, d.initialRoom.yMax), Quaternion.identity, wallBoundContainer.transform);
+        GameObject cornerOriginPlusXY = Instantiate(wallBound, new(d.initialRoom.xMax, 0, d.initialRoom.yMax), Quaternion.identity, wallBoundContainer.transform);
+        cornerOrigin.transform.localScale = new(wallBoundThickness, wallHeight + wallBoundHeight, wallBoundThickness);
+        cornerOriginPlusX.transform.localScale = new(wallBoundThickness, wallHeight + wallBoundHeight, wallBoundThickness);
+        cornerOriginPlusY.transform.localScale = new(wallBoundThickness, wallHeight + wallBoundHeight, wallBoundThickness);
+        cornerOriginPlusXY.transform.localScale = new(wallBoundThickness, wallHeight + wallBoundHeight, wallBoundThickness);
 
         d.coroutineIsDone = true;
     }
@@ -269,33 +291,33 @@ public class DungeonAssetGenerator : MonoBehaviour
         for (int i = 0; i < d.rooms.Count; i++)
         {
             RectInt room = d.rooms[i];
-            GameObject _floor = Instantiate(d.floor, new Vector3(room.center.x, -d.wallHeight * .5f, room.center.y),
+            GameObject _floor = Instantiate(floor, new Vector3(room.center.x, -wallHeight * .5f, room.center.y),
                 Quaternion.identity, floorContainer.transform);
             _floor.transform.localScale = new Vector3(room.width, 1, room.height) / 10;
             yield return new WaitForSeconds(d.generationInterval);
 
             Material materialToAssign;
             if (room == d.originRoom)
-                materialToAssign = d.rsa.breakRoomFloor;
-            else switch (d.roomTypes[i])
+                materialToAssign = rsa.breakRoomFloor;
+            else switch (roomTypes[i])
                 {
                     case RoomType.bakery:
-                        materialToAssign = d.rsa.bakeryFloor;
+                        materialToAssign = rsa.bakeryFloor;
                         break;
                     case RoomType.breakRoom:
-                        materialToAssign = d.rsa.breakRoomFloor;
+                        materialToAssign = rsa.breakRoomFloor;
                         break;
                     case RoomType.kitchen:
-                        materialToAssign = d.rsa.kitchenFloor;
+                        materialToAssign = rsa.kitchenFloor;
                         break;
                     case RoomType.seating:
-                        materialToAssign = d.rsa.seatingFloor;
+                        materialToAssign = rsa.seatingFloor;
                         break;
                     case RoomType.storage:
-                        materialToAssign = d.rsa.storageFloor;
+                        materialToAssign = rsa.storageFloor;
                         break;
                     default:
-                        materialToAssign = d.rsa.kitchenFloor;
+                        materialToAssign = rsa.kitchenFloor;
                         break;
                 }
             _floor.GetComponent<MeshRenderer>().sharedMaterial = materialToAssign;
@@ -331,25 +353,25 @@ public class DungeonAssetGenerator : MonoBehaviour
         for (int i = 0; i < d.rooms.Count; i++)
         {
             // Place assets based on room type
-            switch (d.roomTypes[i])
+            switch (roomTypes[i])
             {
                 case RoomType.bakery:
                     break;
                 case RoomType.kitchen:
                     RectInt room = d.rooms[i];
                     // Kitchen island
-                    Vector2 offset = new(-.5f * d.rsa.counterLength, -0.5f);
+                    Vector2 offset = new(-.5f * rsa.counterLength, -0.5f);
                     bool roomvertical = room.height > room.width;
-                    float counterSize = d.rsa.counter.transform.lossyScale.x;
+                    float counterSize = rsa.counter.transform.lossyScale.x;
 
                     if (roomvertical) offset = new(offset.y, offset.x);
                     for (int j = 0; j < 2; j++)
                     {
-                        for (int k = 0; k < d.rsa.counterLength; k++)
+                        for (int k = 0; k < rsa.counterLength; k++)
                         {
-                            Transform counter = Instantiate(d.rsa.counter, new(
+                            Transform counter = Instantiate(rsa.counter, new(
                                 room.center.x + offset.x,
-                                -d.wallHeight * .5f + counterSize * .5f,
+                                -wallHeight * .5f + counterSize * .5f,
                                 room.center.y + offset.y
                                 ),
                                 j == 1 ? Quaternion.Euler(0, !roomvertical ? 0 : 90, 0) : Quaternion.Euler(0, !roomvertical ? 180 : 270, 0),
@@ -357,17 +379,17 @@ public class DungeonAssetGenerator : MonoBehaviour
                             if (roomvertical) offset.y += counterSize;
                             else offset.x += counterSize;
 
-                            string itemToSpawn = GetItemFromLoottable(d.rsa.kitchenItemSpawns);
+                            string itemToSpawn = GetItemFromLoottable(rsa.kitchenItemSpawns);
                             if (itemToSpawn != string.Empty)
                             {
-                                PickupItem itemSpawned = Instantiate(d.rsa.itemPickup, new(
-                                    counter.position.x, d.wallHeight, counter.position.z
+                                PickupItem itemSpawned = Instantiate(rsa.itemPickup, new(
+                                    counter.position.x, wallHeight, counter.position.z
                                     ), Quaternion.identity, itemSpawnsContainer.transform);
                                 itemSpawned.itemToGive = ItemPresets.presets[itemToSpawn];
                             }
                         }
-                        if (roomvertical) offset = new(offset.x + counterSize, -.5f * d.rsa.counterLength);
-                        else offset = new(-.5f * d.rsa.counterLength, offset.y + counterSize);
+                        if (roomvertical) offset = new(offset.x + counterSize, -.5f * rsa.counterLength);
+                        else offset = new(-.5f * rsa.counterLength, offset.y + counterSize);
                     }
 
                     break;
@@ -388,17 +410,17 @@ public class DungeonAssetGenerator : MonoBehaviour
             if (room == d.originRoom) continue;
             int enemiesToSpawn = 0;
             int enemyroll = d._random.Next(0, 100);
-            for (int i = d.enemiesPerRoom.Length - 1; i >= 0; i--)
+            for (int i = enemiesPerRoom.Length - 1; i >= 0; i--)
             {
-                if (enemyroll > 100 - d.enemiesPerRoom[i].probability)
+                if (enemyroll > 100 - enemiesPerRoom[i].probability)
                 {
-                    enemiesToSpawn = d.enemiesPerRoom[i].Quantity;
+                    enemiesToSpawn = enemiesPerRoom[i].Quantity;
                     break;
                 }
             }
             for (int i = 0; i < enemiesToSpawn; i++)
             {
-                Instantiate(d.enemy, new Vector3(room.center.x + i, -d.wallHeight * .5f, room.center.y + i + 3),
+                Instantiate(enemy, new Vector3(room.center.x + i, -wallHeight * .5f, room.center.y + i + 3),
                     Quaternion.identity, enemyContainer.transform);
                 yield return new WaitForSeconds(d.generationInterval);
             }
@@ -407,7 +429,7 @@ public class DungeonAssetGenerator : MonoBehaviour
 
         // Spawn Player
         Destroy(Camera.main.gameObject);
-        Instantiate(d.player, new Vector3(d.originRoom.center.x, -d.wallHeight * .5f, d.originRoom.center.y), Quaternion.identity);
+        Instantiate(player, new Vector3(d.originRoom.center.x, -wallHeight * .5f, d.originRoom.center.y), Quaternion.identity);
         d.coroutineIsDone = true;
         yield return new WaitForSeconds(d.generationInterval);
     }
@@ -422,4 +444,66 @@ public class DungeonAssetGenerator : MonoBehaviour
         }
         return string.Empty;
     }
+    public static int GetTotalItemProbability(ItemLootLable[] lootTable)
+    {
+        int probability = 0;
+        foreach (var loot in lootTable) probability += loot.probability;
+        return probability;
+    }
 }
+
+[System.Serializable]
+public struct ItemLootLable
+{
+    public string itemName;
+    public int probability;
+}
+
+[Serializable]
+public struct RoomSpecificAssets
+{
+    public PickupItem itemPickup;
+    [Header("Bakery")]
+    public Material bakeryWall;
+    public Material bakeryFloor;
+    [Space]
+    public int bakeryTotalItemChance;
+    public ItemLootLable[] bakeryItemSpawns;
+    [Header("Break room")]
+    public Material breakRoomWall;
+    public Material breakRoomFloor;
+    [Space]
+    public int breakTotalItemChance;
+    public ItemLootLable[] breakItemSpawns;
+    [Header("Kitchen")]
+    public Material kitchenWall;
+    public Material kitchenFloor;
+    public int counterLength;
+    public GameObject counter;
+    public GameObject counterCornerL;
+    public GameObject counterCornerR;
+    [Space]
+    public int kitchenTotalItemChance;
+    public ItemLootLable[] kitchenItemSpawns;
+    [Header("Storage")]
+    public Material storageWall;
+    public Material storageFloor;
+    [Space]
+    public int storageTotalItemChance;
+    public ItemLootLable[] storageItemSpawns;
+    [Header("Seating")]
+    public Material seatingWall;
+    public Material seatingFloor;
+    [Space]
+    public int seatingTotalItemChance;
+    public ItemLootLable[] seatingItemSpawns;
+}
+
+[System.Serializable]
+public struct EnemyProbabilities
+{
+    public int Quantity;
+    [Range(0, 100)] public int probability;
+}
+public enum RoomType { bakery, breakRoom, kitchen, seating, storage };
+

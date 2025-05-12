@@ -173,7 +173,7 @@ MonoBehaviour:
   splitOffset: 0
   doorWidth: 4
   showDeletedDoors: 1
-  disableVisualDebuggingAfterRoomGeneration: 1
+  disableVisualDebuggingAfterRoomGeneration: 0
   wall: {fileID: 7248190965236874754, guid: d6f869f665bace843b6a22279a706c14, type: 3}
   wallBound: {fileID: 7248190965236874754, guid: 89625b0a31f3cb8409f3bcb8429268fb, type: 3}
   floor: {fileID: 330691455853550617, guid: cbae025bc70e7d14292ff810bc5f2bb6, type: 3}
@@ -292,6 +292,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b508703ccb44244ca275563d7b12212, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wall: {fileID: 7248190965236874754, guid: d6f869f665bace843b6a22279a706c14, type: 3}
+  wallBound: {fileID: 7248190965236874754, guid: 89625b0a31f3cb8409f3bcb8429268fb, type: 3}
+  floor: {fileID: 330691455853550617, guid: cbae025bc70e7d14292ff810bc5f2bb6, type: 3}
+  player: {fileID: 8608250485412360592, guid: ae030c0492dc41d41bebee18da5be51d, type: 3}
+  enemy: {fileID: 18489271436508005, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
+  enemiesPerRoom:
+  - Quantity: 1
+    probability: 75
+  - Quantity: 2
+    probability: 20
+  wallHeight: 6
+  wallBoundHeight: 1
+  wallBoundThickness: 1.25
+  rsa:
+    itemPickup: {fileID: 3020829154051356937, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
+    bakeryWall: {fileID: 2100000, guid: 86dbadbfd371c634190a2b4c9b33dd63, type: 2}
+    bakeryFloor: {fileID: 2100000, guid: 02d201850671c8846b80ee6821141424, type: 2}
+    bakeryTotalItemChance: 0
+    bakeryItemSpawns: []
+    breakRoomWall: {fileID: 2100000, guid: 5146f8904d76ad04f88ddc2374d7c103, type: 2}
+    breakRoomFloor: {fileID: 2100000, guid: d63d80da7fd8835469b589ec0de59d3d, type: 2}
+    breakTotalItemChance: 100
+    breakItemSpawns:
+    - itemName: FryingPan
+      probability: 25
+    - itemName: Cheese
+      probability: 25
+    - itemName: Egg
+      probability: 25
+    - itemName: Fork
+      probability: 25
+    kitchenWall: {fileID: 2100000, guid: 3f44c65f842535740b33da7fd7689af9, type: 2}
+    kitchenFloor: {fileID: 2100000, guid: 02d201850671c8846b80ee6821141424, type: 2}
+    counterLength: 5
+    counter: {fileID: 9011421418820237759, guid: 0d413d8ccf516d74bb2fa084514f420d, type: 3}
+    counterCornerL: {fileID: 2101207922729177578, guid: c27b16d52413df147afcbd103875382f, type: 3}
+    counterCornerR: {fileID: 8202259783184369343, guid: 9b4e8dccf73aade43b3cf1fb0c161018, type: 3}
+    kitchenTotalItemChance: 49
+    kitchenItemSpawns:
+    - itemName: FryingPan
+      probability: 8
+    - itemName: Towel
+      probability: 3
+    - itemName: Apron
+      probability: 2
+    - itemName: ChefHat
+      probability: 2
+    - itemName: CuttingBoard
+      probability: 2
+    - itemName: Tomato
+      probability: 5
+    - itemName: EmptyMicrowave
+      probability: 2
+    - itemName: Fork
+      probability: 3
+    - itemName: Spoon
+      probability: 3
+    - itemName: Fork
+      probability: 3
+    - itemName: Jalapeno
+      probability: 2
+    - itemName: Pizza
+      probability: 2
+    - itemName: RawChicken
+      probability: 2
+    - itemName: Cheese
+      probability: 2
+    - itemName: Butter
+      probability: 2
+    - itemName: StainlessSteelPot
+      probability: 2
+    - itemName: Sausage
+      probability: 2
+    - itemName: Toaster
+      probability: 2
+    storageWall: {fileID: 2100000, guid: c9d55ecc4a07e034d8af8df890f4ff5c, type: 2}
+    storageFloor: {fileID: 2100000, guid: c9d55ecc4a07e034d8af8df890f4ff5c, type: 2}
+    storageTotalItemChance: 0
+    storageItemSpawns: []
+    seatingWall: {fileID: 2100000, guid: c5f241d37642651419ab7dde9824d747, type: 2}
+    seatingFloor: {fileID: 2100000, guid: 633a079473efa8c4bbb0198c35d8ee95, type: 2}
+    seatingTotalItemChance: 0
+    seatingItemSpawns: []
 --- !u!114 &1256635336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,7 +587,7 @@ Transform:
   m_GameObject: {fileID: 1696973452}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 25, y: 10, z: -25}
+  m_LocalPosition: {x: 25, y: 0, z: -25}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []

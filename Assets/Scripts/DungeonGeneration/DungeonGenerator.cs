@@ -30,65 +30,7 @@ public class DungeonGenerator : MonoBehaviour
     public int splitOffset = 2;
     public int doorWidth = 1;
     public bool showDeletedDoors = true;
-
-    #region Asset generation properties
-    [Header("Asset generation properties (old)")]
     public bool disableVisualDebuggingAfterRoomGeneration = true;
-    public GameObject wall;
-    public GameObject wallBound;
-    public GameObject floor;
-    public GameObject player;
-    public GameObject enemy;
-    public EnemyProbabilities[] enemiesPerRoom;
-    public float wallHeight = 5;
-    public float wallBoundHeight = 1;
-    public float wallBoundThickness = 1.25f;
-    [System.Serializable]
-    public struct ItemLootLable
-    {
-        public string itemName;
-        public int probability;
-    }
-    [Serializable] public struct RoomSpecificAssets
-    {
-        public PickupItem itemPickup;
-        [Header("Bakery")]
-        public Material bakeryWall;
-        public Material bakeryFloor;
-        [Space]
-        public int bakeryTotalItemChance;
-        public ItemLootLable[] bakeryItemSpawns;
-        [Header("Break room")]
-        public Material breakRoomWall;
-        public Material breakRoomFloor;
-        [Space]
-        public int breakTotalItemChance;
-        public ItemLootLable[] breakItemSpawns;
-        [Header("Kitchen")]
-        public Material kitchenWall;
-        public Material kitchenFloor;
-        public int counterLength;
-        public GameObject counter;
-        public GameObject counterCornerL;
-        public GameObject counterCornerR;
-        [Space]
-        public int kitchenTotalItemChance;
-        public ItemLootLable[] kitchenItemSpawns;
-        [Header("Storage")]
-        public Material storageWall;
-        public Material storageFloor;
-        [Space]
-        public int storageTotalItemChance;
-        public ItemLootLable[] storageItemSpawns;
-        [Header("Seating")]
-        public Material seatingWall;
-        public Material seatingFloor;
-        [Space]
-        public int seatingTotalItemChance;
-        public ItemLootLable[] seatingItemSpawns;
-    }
-    public RoomSpecificAssets rsa;
-    #endregion
 
     [Header("Generated stuff")]
     public NavMeshSurface navMeshSurface;
@@ -96,7 +38,6 @@ public class DungeonGenerator : MonoBehaviour
     public List<RectInt> rooms = new(1);
     public List<RectInt> doors = new(1);
     public List<RectInt> removedDoors = new(1);
-    public enum RoomType {bakery, breakRoom, kitchen, seating, storage };
     [HideInInspector] public RoomType[] roomTypes;
     [HideInInspector]  public List<GameObject> wallsGenerated = new();
     [HideInInspector] public Graph<Vector2> dungeonGraph = new();
@@ -110,11 +51,6 @@ public class DungeonGenerator : MonoBehaviour
             );
         initialRoom.xMin = Mathf.Max(initialRoom.xMin, 0);
         initialRoom.yMin = Mathf.Max(initialRoom.yMin, 0);
-        rsa.bakeryTotalItemChance = GetTotalItemProbability(rsa.bakeryItemSpawns);
-        rsa.breakTotalItemChance = GetTotalItemProbability(rsa.breakItemSpawns);
-        rsa.kitchenTotalItemChance = GetTotalItemProbability(rsa.kitchenItemSpawns);
-        rsa.storageTotalItemChance = GetTotalItemProbability(rsa.storageItemSpawns);
-        rsa.seatingTotalItemChance = GetTotalItemProbability(rsa.seatingItemSpawns);
     }
     private void Awake()
     {
@@ -414,13 +350,6 @@ public class DungeonGenerator : MonoBehaviour
         return new();
     }
 
-    public static int GetTotalItemProbability(ItemLootLable[] lootTable)
-    {
-        int probability = 0;
-        foreach(var loot in lootTable) probability += loot.probability;
-        return probability;
-    }
-
     void RandomizeFraction() => fraction = (float)_random.Next(splitFractionRange.x, splitFractionRange.y) / 100f;
 
     void SplitHorizontal(RectInt _origianalRoom, float _fraction, out RectInt _roomA, out RectInt _roomB)
@@ -514,10 +443,4 @@ public class DungeonGenerator : MonoBehaviour
         StopAllCoroutines();
         Debug.Log("Cancelled dungeon generation");
     }
-}
-[System.Serializable]
-public struct EnemyProbabilities
-{
-    public int Quantity;
-    [Range(0, 100)] public int probability;
 }

@@ -79,7 +79,7 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
                 int tileBinary = localGroup[0] * 1 + localGroup[1] * 2 + localGroup[2] * 4 + localGroup[3] * 8;
                 if (marchingSquareAssets[tileBinary] != null)
                 {
-                    Instantiate(marchingSquareAssets[tileBinary], new(y + 1, 0, x + 1), Quaternion.identity, wallContainer.transform);
+                    Instantiate(marchingSquareAssets[tileBinary], new(y, 0, x), Quaternion.identity, wallContainer.transform);
                     assetsDone++;
                     if (assetsDone >= assetsPerDelayWalls)
                     {
@@ -124,7 +124,7 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
                     queue.Enqueue(pointToFill);
             }
 
-            Instantiate(floor, new(point.x + .5f, 0, point.y + .5f), Quaternion.identity, floorContainer.transform);
+            Instantiate(floor, new(point.x - .5f, 0, point.y - .5f), Quaternion.identity, floorContainer.transform);
             assetsDone++;
             if (assetsDone >= assetsPerDelayFloor)
             {
