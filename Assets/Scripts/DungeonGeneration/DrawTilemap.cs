@@ -38,6 +38,6 @@ public class DrawTilemap : MonoBehaviour
     void Export()
     {
         Texture2D texture = (Texture2D)renderer.sharedMaterial.mainTexture;
-        TextureExporter.ExportTexture(texture);
+        TextureExporter.ExportTexture(texture, "tilemap");
     }
 }

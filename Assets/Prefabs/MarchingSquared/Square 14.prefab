@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2352208211654024850}
   - component: {fileID: 2801840299714656429}
   - component: {fileID: 3273802620471493682}
-  - component: {fileID: 3163053971535109493}
   - component: {fileID: 958473601090425926}
   m_Layer: 0
   m_Name: Wall
@@ -88,27 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3163053971535109493
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1572425616294518550}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &958473601090425926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +103,7 @@ MonoBehaviour:
   width: 4
   depth: 0.2
   generateOnAwake: 0
+  useWorldSpace: 1
   xPlus: 1
   xMin: 0
   zPlus: 0
@@ -140,7 +119,6 @@ GameObject:
   - component: {fileID: 33107160186701555}
   - component: {fileID: 446706040294858956}
   - component: {fileID: 990726006763691091}
-  - component: {fileID: 807352673453688084}
   - component: {fileID: 3286511208022395943}
   m_Layer: 0
   m_Name: Wall
@@ -217,27 +195,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &807352673453688084
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3819974883297970039}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3286511208022395943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +211,7 @@ MonoBehaviour:
   width: 4
   depth: 0.2
   generateOnAwake: 0
+  useWorldSpace: 1
   xPlus: 0
   xMin: 0
   zPlus: 0

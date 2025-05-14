@@ -38,7 +38,6 @@ public class DungeonGenerator : MonoBehaviour
     public List<RectInt> rooms = new(1);
     public List<RectInt> doors = new(1);
     public List<RectInt> removedDoors = new(1);
-    [HideInInspector] public RoomType[] roomTypes;
     [HideInInspector]  public List<GameObject> wallsGenerated = new();
     [HideInInspector] public Graph<Vector2> dungeonGraph = new();
     [HideInInspector] public System.Random _random = new();

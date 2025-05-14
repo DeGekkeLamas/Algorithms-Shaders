@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter))]
 public class WallGenerator : MonoBehaviour
 {
     public float height = 2;
     public float width = 4;
     public float depth = 0.2f;
     public bool generateOnAwake;
+    public bool useWorldSpace;
 
     [Header("Sides to brickify")]
     public bool xPlus;
@@ -16,8 +18,6 @@ public class WallGenerator : MonoBehaviour
     public bool zMin;
 
     Vector3 originalScale;
-
-    MeshBuilder builder = new();
 
     private void Awake() { if (generateOnAwake) GenerateWalls(); }
 
@@ -48,23 +48,28 @@ public class WallGenerator : MonoBehaviour
 
         //Debug.Log($"Generated wall, from {this}");
     }
-    Mesh AddSide(float angle, bool generateOverX)
+    Mesh AddSide(float angle, bool generateOverXAxis)
     {
         MeshBuilder sideBuilder = new();
-        Vector3 offset = new(0, 0, (!generateOverX ? originalScale.x : originalScale.z) * 0.25f);
+        Vector3 offset = new(0, 0, (!generateOverXAxis ? originalScale.x : originalScale.z) * 0.25f);
         Vector3 origin = new(
-            -(0.5f * (generateOverX ? originalScale.x : originalScale.z)),
+            -(0.5f * (generateOverXAxis ? originalScale.x : originalScale.z)),
             -(0.5f * originalScale.y),
-            -(0.5f * (!generateOverX ? originalScale.x : originalScale.z))
+            -(0.5f * (!generateOverXAxis ? originalScale.x : originalScale.z))
             );
-        List<Vector3> vertices = new();
-        List<List<int>> triangles = new();
+
+        if (useWorldSpace)
+        {
+            if (generateOverXAxis) offset.x -= Mathf.Abs(this.transform.position.x % width);
+            else offset.x -= Mathf.Abs(this.transform.position.z % width);
+        }
+        Vector3 initialOffset = offset;
 
         // continue generation vertically
         for (int i = 0; i < Mathf.Ceil(originalScale.y / height); i++)
         {
             // continue generation horizontally
-            for (int j = 0; j < Mathf.Ceil(generateOverX ? originalScale.x : originalScale.z / width) + (i % 2 != 0 ? 1 : 0); j++)
+            for (int j = 0; j < Mathf.Ceil((generateOverXAxis ? originalScale.x : originalScale.z) / width) + (i % 2 != 0 ? 1 : 0); j++)
             {
                 //side left
                 int v0 = sideBuilder.AddVertex(origin + offset + new Vector3(0, 0, 0));
@@ -110,9 +115,9 @@ public class WallGenerator : MonoBehaviour
 
                 offset.x += width;
             }
-            offset = new((i % 2 != 0) ? 0 : (-0.5f * width), offset.y + height, offset.z);
+            offset = new((i % 2 != 0) ? initialOffset.x : initialOffset.x + (-0.5f * width), offset.y + height, offset.z);
         }
-        sideBuilder.ClampVerticesX(origin.x, origin.x + (generateOverX ? originalScale.x : originalScale.z));
+        sideBuilder.ClampVerticesX(origin.x, origin.x + (generateOverXAxis ? originalScale.x : originalScale.z));
         sideBuilder.RotateAllVertices(angle);
 
         return sideBuilder.CreateMesh(true);

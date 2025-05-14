@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2189890471932102458}
   - component: {fileID: 1739119289559818501}
   - component: {fileID: 1418166644405034394}
-  - component: {fileID: 1523863724943639773}
   - component: {fileID: 3714796269734333934}
   m_Layer: 0
   m_Name: Wall
@@ -88,27 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1523863724943639773
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3103778301308962494}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3714796269734333934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +103,7 @@ MonoBehaviour:
   width: 4
   depth: 0.2
   generateOnAwake: 0
+  useWorldSpace: 1
   xPlus: 0
   xMin: 1
   zPlus: 0
@@ -248,7 +227,6 @@ GameObject:
   - component: {fileID: 5770354047844219805}
   - component: {fileID: 6220298333031062946}
   - component: {fileID: 6763897204264051005}
-  - component: {fileID: 6581375736679364730}
   - component: {fileID: 9078689644845822281}
   m_Layer: 0
   m_Name: Wall
@@ -325,27 +303,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6581375736679364730
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7305597587894925849}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &9078689644845822281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,6 +319,7 @@ MonoBehaviour:
   width: 4
   depth: 0.2
   generateOnAwake: 0
+  useWorldSpace: 1
   xPlus: 0
   xMin: 0
   zPlus: 0

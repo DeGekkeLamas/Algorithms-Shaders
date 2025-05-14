@@ -229,7 +229,6 @@ GameObject:
   - component: {fileID: 5501517962621728466}
   - component: {fileID: 5341211432757694701}
   - component: {fileID: 4725133305855929458}
-  - component: {fileID: 5122991102041240885}
   - component: {fileID: 7039345290264919046}
   m_Layer: 0
   m_Name: Wall
@@ -306,27 +305,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5122991102041240885
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8732349196179289942}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7039345290264919046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +321,7 @@ MonoBehaviour:
   width: 4
   depth: 0.2
   generateOnAwake: 0
+  useWorldSpace: 1
   xPlus: 0
   xMin: 0
   zPlus: 0
