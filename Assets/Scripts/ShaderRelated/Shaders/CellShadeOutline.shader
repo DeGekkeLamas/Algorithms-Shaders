@@ -13,28 +13,17 @@ Shader "Custom/CellShadeOutline"
 	}
 	SubShader
 	{
-		//s#if _Emissiveness != 1
-			// Tags {
-			// 	"RenderType" = "Transparent"
-			// 	"Queue" = "Transparent"
-			// 	}
-			// Blend SrcAlpha OneMinusSrcAlpha
-			// Cull Back
-		//#endif
+		// Tags {
+		// 	"RenderType" = "Transparent"
+		// 	"Queue" = "Transparent"
+		// 	}
+		// Blend SrcAlpha OneMinusSrcAlpha
+		// Cull Back
 		LOD 100
 		//ZWrite Off
 
 		Pass
 		{
-			/**
-			#if _Emissiveness != 1
-				 Tags {
-			 		"RenderType" = "Transparent"
-			 		"Queue" = "Transparent"
-				 	}
-				 Blend SrcAlpha OneMinusSrcAlpha
-				 Cull Back
-			#endif **/
 
 			CGPROGRAM
 			#pragma vertex vert

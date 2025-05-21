@@ -2,14 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 public class BetterDungeonAssetGenerator : MonoBehaviour
 {
     DungeonGenerator d;
     int[,] tilemap;
+    [Header("Assets")]
     public GameObject[] marchingSquareAssets = new GameObject[16];
     public GameObject floor;
+    public GameObject player;
+    [Header("Coroutine speed")]
     public int assetsPerDelayWalls = 20;
     public int assetsPerDelayFloor = 50;
     private int assetsDone;
@@ -107,21 +111,25 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         {
             Vector2Int point = queue.Dequeue();
             visitedList.Add(point);
-            Vector2Int[] pointsToAdd = new Vector2Int[4]
+            Vector2Int[] pointsToAdd = new Vector2Int[4 * floorSize];
+            for(int i = 0; i < floorSize; i++)
             {
-                point + new Vector2Int(floorSize, 0),
-                point + new Vector2Int(-floorSize, 0),
-                point + new Vector2Int(0, floorSize),
-                point + new Vector2Int(0, -floorSize)
-            };
+                pointsToAdd[i] = point + new Vector2Int(floorSize + i, 0);
+                pointsToAdd[i + 1] = point + new Vector2Int(-floorSize + i, 0);
+                pointsToAdd[i + 2] = point + new Vector2Int(0, floorSize + i);
+                pointsToAdd[i + 3] = point + new Vector2Int(0, -floorSize + i);
+            }
             foreach (Vector2Int pointToFill in pointsToAdd)
             {
-                if (!visitedList.Contains(pointToFill) && 
-                    !queue.Contains(pointToFill) && 
+                Vector2Int realPoint = pointToFill / floorSize * floorSize;
+                if (!visitedList.Contains(realPoint) && 
+                    !queue.Contains(realPoint) && 
                     (tilemap[
-                        Mathf.Clamp(pointToFill.y, 1, tilemap.GetLength(0)-2), 
-                        Mathf.Clamp(pointToFill.x, 1, tilemap.GetLength(1)-2)] == 0))
-                    queue.Enqueue(pointToFill);
+                        Mathf.Clamp(realPoint.y, 1, tilemap.GetLength(0)-2), 
+                        Mathf.Clamp(realPoint.x, 1, tilemap.GetLength(1)-2)] == 0))
+                {
+                    queue.Enqueue(realPoint);
+                }
             }
 
             Instantiate(floor, new(point.x - .5f, 0, point.y - .5f), Quaternion.identity, floorContainer.transform);
@@ -132,6 +140,15 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
                 assetsDone = 0;
             }
         }
+        yield return new();
+        d.coroutineIsDone = true;
+    }
+    public IEnumerator SpawnPlayer()
+    {
+        d.navMeshSurface.BuildNavMesh();
+        Destroy(Camera.main.gameObject);
+        Instantiate(player, new(d.originRoom.center.x, 0, d.originRoom.center.y), Quaternion.identity);
+
         yield return new();
         d.coroutineIsDone = true;
     }

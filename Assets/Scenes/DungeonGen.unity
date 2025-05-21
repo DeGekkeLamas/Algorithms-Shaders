@@ -179,7 +179,6 @@ MonoBehaviour:
   rooms: []
   doors: []
   removedDoors: []
-  roomTypes: 
   wallsGenerated: []
   coroutineIsDone: 0
 --- !u!4 &1256635334
@@ -322,6 +321,7 @@ MonoBehaviour:
   - {fileID: 7412300762330279516, guid: 29a12571a8f14a34ab26c4d60094a99b, type: 3}
   - {fileID: 7412300762330279516, guid: a1f3da4dbd463214ea3d68e6dc009592, type: 3}
   floor: {fileID: 330691455853550617, guid: 8b06f6812a5def0409a7b0029d150f07, type: 3}
+  player: {fileID: 8608250485412360592, guid: ae030c0492dc41d41bebee18da5be51d, type: 3}
   assetsPerDelayWalls: 20
   assetsPerDelayFloor: 50
 --- !u!1 &1545061832
