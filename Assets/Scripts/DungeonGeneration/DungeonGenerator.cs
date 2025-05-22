@@ -8,6 +8,7 @@ public class DungeonGenerator : MonoBehaviour
 {
     DungeonAssetGenerator da;
     BetterDungeonAssetGenerator bda;
+    LameDungeonAssetGenerator lda;
 
     [Header("Generation properties")]
     [Tooltip("Leave as 0 to use a random seed")]
@@ -16,7 +17,8 @@ public class DungeonGenerator : MonoBehaviour
     public RectInt initialRoom = new(0, 0, 100, 100);
     [HideInInspector] public RectInt originRoom;
     public float height = 5;
-    public bool oldGeneration;
+    public enum GenerationType { Old, Cool, Lame} // Cool is for good requirements, lame is for sufficient requirements
+    public GenerationType generationType = GenerationType.Cool;
 
     float fraction = 0.5f;
     public Vector2Int splitFractionRange = new(35, 66);
@@ -50,11 +52,17 @@ public class DungeonGenerator : MonoBehaviour
             );
         initialRoom.xMin = Mathf.Max(initialRoom.xMin, 0);
         initialRoom.yMin = Mathf.Max(initialRoom.yMin, 0);
+
+        if (generationType == GenerationType.Lame && doorWidth%2 == 0)
+        {
+            doorWidth += 1;
+        }
     }
     private void Awake()
     {
         da = this.GetComponent<DungeonAssetGenerator>();
         bda = this.GetComponent<BetterDungeonAssetGenerator>();
+        lda = this.GetComponent<LameDungeonAssetGenerator>();
         if (seed == 0)
         {
             seed = _random.Next(int.MinValue, int.MaxValue);
@@ -82,40 +90,52 @@ public class DungeonGenerator : MonoBehaviour
         StartCoroutine(da.AssignRoomTypes());
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;
-        if (oldGeneration)
+        switch(generationType)
         {
-            StartCoroutine(da.GenerateInitialWalls());
-            yield return new WaitUntil(() => coroutineIsDone);
-            coroutineIsDone = false;
-            StartCoroutine(da.ModifyWalls());
-            yield return new WaitUntil(() => coroutineIsDone);
-            coroutineIsDone = false;
-            StartCoroutine(da.GenerateFloor());
-            yield return new WaitUntil(() => coroutineIsDone);
-            coroutineIsDone = false;
-            StartCoroutine(da.Brickify());
-            yield return new WaitUntil(() => coroutineIsDone);
-            coroutineIsDone = false;
-            StartCoroutine(da.SpawnObjects());
-            yield return new WaitUntil(() => coroutineIsDone);
-        }
-        else
-        {
-            StartCoroutine(bda.GenerateTileMap());
-            yield return new WaitUntil(() => coroutineIsDone);
-            coroutineIsDone = false;
-            StartCoroutine(bda.GenerateWalls());
-            yield return new WaitUntil(() => coroutineIsDone);
-            coroutineIsDone = false;
-            StartCoroutine(bda.GenerateFloor(Vector2Int.RoundToInt(originRoom.center)));
-            yield return new WaitUntil(() => coroutineIsDone);
-            coroutineIsDone = false;
-            StartCoroutine(da.Brickify());
-            yield return new WaitUntil(() => coroutineIsDone);
-            coroutineIsDone = false;
-            StartCoroutine(bda.SpawnPlayer());
-            yield return new WaitUntil(() => coroutineIsDone);
-            coroutineIsDone = false;
+            case GenerationType.Old:
+                StartCoroutine(da.GenerateInitialWalls());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(da.ModifyWalls());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(da.GenerateFloor());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(da.Brickify());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(da.SpawnObjects());
+                yield return new WaitUntil(() => coroutineIsDone);
+                break;
+            case GenerationType.Cool:
+                StartCoroutine(bda.GenerateTileMap());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(bda.GenerateWalls());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(bda.GenerateFloor(Vector2Int.RoundToInt(originRoom.center)));
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(da.Brickify());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(bda.SpawnPlayer());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                break;
+            case GenerationType.Lame:
+                StartCoroutine(lda.GenerateWalls());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(lda.GenerateFloor());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(lda.SpawnPlayer());
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                break;
         }
         Debug.Log("Generated all room assets!");
     }
