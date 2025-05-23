@@ -111,14 +111,13 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         {
             Vector2Int point = queue.Dequeue();
             visitedList.Add(point);
-            Vector2Int[] pointsToAdd = new Vector2Int[4 * floorSize];
-            for(int i = 0; i < floorSize; i++)
+            Vector2Int[] pointsToAdd = new Vector2Int[4]
             {
-                pointsToAdd[i] = point + new Vector2Int(floorSize + i, 0);
-                pointsToAdd[i + 1] = point + new Vector2Int(-floorSize + i, 0);
-                pointsToAdd[i + 2] = point + new Vector2Int(0, floorSize + i);
-                pointsToAdd[i + 3] = point + new Vector2Int(0, -floorSize + i);
-            }
+                point + new Vector2Int(floorSize, 0),
+                point + new Vector2Int(-floorSize, 0),
+                point + new Vector2Int(0, floorSize),
+                point + new Vector2Int(0, -floorSize)
+            };
             foreach (Vector2Int pointToFill in pointsToAdd)
             {
                 Vector2Int realPoint = pointToFill / floorSize * floorSize;

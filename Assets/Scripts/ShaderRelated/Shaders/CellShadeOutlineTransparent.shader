@@ -1,5 +1,5 @@
 
-Shader "Custom/CellShadeOutline"
+Shader "Custom/CellShadeOutlineTransparent"
 {
 	Properties
 	{
@@ -13,14 +13,14 @@ Shader "Custom/CellShadeOutline"
 	}
 	SubShader
 	{
-		// Tags {
-		// 	"RenderType" = "Transparent"
-		// 	"Queue" = "Transparent"
-		// 	}
-		// Blend SrcAlpha OneMinusSrcAlpha
-		// Cull Back
+		Tags {
+			"RenderType" = "Transparent"
+			"Queue" = "Transparent"
+			}
+		Blend SrcAlpha OneMinusSrcAlpha
+		Cull Back
 		LOD 100
-		//ZWrite Off
+		ZWrite Off
 
 		Pass
 		{

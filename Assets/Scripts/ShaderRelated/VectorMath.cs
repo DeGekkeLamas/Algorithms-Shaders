@@ -59,4 +59,9 @@ public class VectorMath
     {
         return eulerAngles * Mathf.PI / 180;
     }
+    public static float Truncate(float value)
+    {
+        if (value < 0) return Mathf.Floor(value);
+        else return Mathf.Ceil(value);
+    }
 }
