@@ -151,13 +151,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afd42dcf8a837e44ba65d59a21f6aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 646553051
+  seed: 0
   shouldRemoveSmallestRooms: 0
   initialRoom:
     x: 0
     y: 0
-    width: 100
-    height: 100
+    width: 50
+    height: 50
   originRoom:
     x: 0
     y: 0
@@ -166,12 +166,11 @@ MonoBehaviour:
   height: 5
   generationType: 1
   splitFractionRange: {x: 35, y: 66}
-  roomMaxSize: 45
-  maxDoorsForOriginRoom: 2
-  maxDoorsPerRoom: 1
+  roomMaxSize: 22.5
+  maxDoorsForOriginRoom: 1
+  maxDoorsPerRoom: 3
   displayVisualDebugging: 1
-  generationInterval: 0
-  splitOffset: 0
+  generationInterval: 0.1
   doorWidth: 5
   showDeletedDoors: 1
   disableVisualDebuggingAfterRoomGeneration: 1
@@ -340,7 +339,7 @@ MonoBehaviour:
   wall: {fileID: 7248190965236874754, guid: d6f869f665bace843b6a22279a706c14, type: 3}
   floor: {fileID: 330691455853550617, guid: cbae025bc70e7d14292ff810bc5f2bb6, type: 3}
   player: {fileID: 8608250485412360592, guid: ae030c0492dc41d41bebee18da5be51d, type: 3}
-  assetsPerDelayWalls: 40
+  assetsPerDelayWalls: 80
 --- !u!1 &1545061832
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,6 @@ public class DungeonGenerator : MonoBehaviour
     [Header("Display properties")]
     public bool displayVisualDebugging = true;
     public float generationInterval = .1f;
-    public int splitOffset = 2;
     public int doorWidth = 1;
     public bool showDeletedDoors = true;
     public bool disableVisualDebuggingAfterRoomGeneration = true;
@@ -419,12 +418,12 @@ public class DungeonGenerator : MonoBehaviour
         DrawRectangle(initialRoom, height + 1, Color.red);
 
         // Draws rooms
-        foreach (RectInt _room in rooms) { DrawRectangle(new(_room.xMin + splitOffset, _room.yMin + splitOffset, 
-            _room.width - splitOffset, _room.height - splitOffset), 
+        foreach (RectInt _room in rooms) { DrawRectangle(new(_room.xMin, _room.yMin, 
+            _room.width, _room.height), 
             height, Color.magenta);
         }
-        if (originRoom != new RectInt(0,0,0,0)) DrawRectangle(new(originRoom.xMin + splitOffset, originRoom.yMin + splitOffset,
-            originRoom.width - splitOffset, originRoom.height - splitOffset), height + 1, Color.cyan);
+        if (originRoom != new RectInt(0,0,0,0)) DrawRectangle(new(originRoom.xMin, originRoom.yMin,
+            originRoom.width, originRoom.height), height + 1, Color.cyan);
 
         // Draws doors
         foreach (RectInt _door in doors)

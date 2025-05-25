@@ -8,8 +8,6 @@ Shader "Custom/CellShadeOutline"
 		_Reflectiveness("Reflectiveness", Float) = 16
 		_CellShadeLoops("Cell shade loops", Integer) = 3
 		_Emissiveness("Emissiveness", Float) = 0
-
-		_Transparency("Transparency", Range(0.0, 1.0)) = 1
 	}
 	SubShader
 	{
@@ -94,7 +92,6 @@ Shader "Custom/CellShadeOutline"
 				diffuse = ceil(diffuse * _CellShadeLoops + pow(_CellShadeLoops, -1)) / _CellShadeLoops;
 				 
 				col *= (diffuse + ambientColor) * lightColor;
-				col.a = 1 * _Transparency;
 				col *= 1 + _Emissiveness;
 
 				return col;
