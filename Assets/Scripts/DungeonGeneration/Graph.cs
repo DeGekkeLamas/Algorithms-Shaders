@@ -94,5 +94,15 @@ public class Graph<T>
             }
         }
     }
+    public Graph<T> CloneGraph()
+    {
+        Graph<T> graph = new();
+        graph.adjacencyList = new();
+        foreach(KeyValuePair<T, List<T>> kvp in adjacencyList)
+        {
+            graph.adjacencyList[kvp.Key] = new(kvp.Value);
+        }
+        return graph;
+    }
 }
 

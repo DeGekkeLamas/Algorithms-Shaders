@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DungeonGenerator : MonoBehaviour
@@ -15,8 +17,7 @@ public class DungeonGenerator : MonoBehaviour
     public int seed;
     public bool shouldRemoveSmallestRooms;
     public RectInt initialRoom = new(0, 0, 100, 100);
-    [HideInInspector] public RectInt originRoom;
-    public float height = 5;
+    RectInt originRoom;
     public enum GenerationType { Old, Cool, Lame} // Cool is for good requirements, lame is for sufficient requirements
     public GenerationType generationType = GenerationType.Cool;
 
@@ -30,7 +31,7 @@ public class DungeonGenerator : MonoBehaviour
     public bool displayVisualDebugging = true;
     public float generationInterval = .1f;
     public int doorWidth = 1;
-    public bool showDeletedDoors = true;
+    public bool showDeletedObjects = true;
     public bool disableVisualDebuggingAfterRoomGeneration = true;
 
     [Header("Generated stuff")]
@@ -38,10 +39,9 @@ public class DungeonGenerator : MonoBehaviour
     [HideInInspector] public GameObject assetContainer;
     public List<RectInt> rooms = new(1);
     public List<RectInt> doors = new(1);
-    public List<RectInt> removedDoors = new(1);
-    [HideInInspector]  public List<GameObject> wallsGenerated = new();
-    [HideInInspector] public Graph<Vector2> dungeonGraph = new();
-    [HideInInspector] public System.Random _random = new();
+    public List<RectInt> removedObjects = new(1);
+    Graph<Vector2> dungeonGraph = new();
+    System.Random _random = new();
 
     private void OnValidate()
     {
@@ -206,7 +206,7 @@ public class DungeonGenerator : MonoBehaviour
                         Mathf.Abs(rooms[j].center.y - _newDoor.center.y) > rooms[j].height / _tolerance)
                     {
                         Debug.Log($"Removed corner door, from {this}");
-                        removedDoors.Add(_newDoor);
+                        removedObjects.Add(_newDoor);
                         yield return new WaitForSeconds(generationInterval);
                         continue;
                     }
@@ -227,16 +227,15 @@ public class DungeonGenerator : MonoBehaviour
     IEnumerator RemoveRooms()
     {
         // Removes rooms with 0 doors
-        int _doorsRemoved = 0;
+        int _roomsRemoved = 0;
         for (int i = 0; i < rooms.Count; i++)
         {
             if (dungeonGraph.adjacencyList[rooms[i].center].Count == 0)
             {
-                dungeonGraph.adjacencyList.Remove(rooms[i].center);
-                rooms.RemoveAt(i);
-                _doorsRemoved++;
+                RemoveRoom(rooms[i]);
+                _roomsRemoved++;
                 i--;
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(generationInterval);
             }
         }
 
@@ -254,7 +253,7 @@ public class DungeonGenerator : MonoBehaviour
             RemoveRoom(GetRoomByCenter(room));
             yield return new WaitForSeconds(generationInterval);
         }
-        Debug.Log($"Removed {_doorsRemoved} inaccessible rooms, from {this}");
+        Debug.Log($"Removed {_roomsRemoved} inaccessible rooms, from {this}");
 
         // Reset seed to random after generation
         _random = new System.Random((int)DateTime.Now.Ticks);
@@ -263,33 +262,40 @@ public class DungeonGenerator : MonoBehaviour
         if (shouldRemoveSmallestRooms)
         {
             // Sorts rooms from biggest to smallest
-            rooms = SortListFromSmallToBig(rooms);
+            rooms = rooms.OrderByDescending(x => x.size.magnitude).ToList();
+            rooms = InvertList(rooms);
 
             int roomsRemoved = 0;
-            int roomsToRemove = (int)(rooms.Count * 0.1f);
+            int roomsToRemove = rooms.Count / 10;
 
             // Checks if all rooms remain accessible with this room removed
             for(int i = 0; i < rooms.Count && roomsRemoved < roomsToRemove; i++)
             {
                 RectInt room = rooms[i];
+                DrawRectangle(room, 5, Color.white, .5f);
+                yield return new WaitForSeconds(.1f);
+
                 // Skip if originroom, remove without graphcheck if 1 door
                 if (room == originRoom) continue;
                 if (dungeonGraph.adjacencyList[room.center].Count <= 1)
                 {
-                    RemoveRoom(room);
-                    roomsRemoved++;
+                    //RemoveRoom(room);
+                    //roomsRemoved++;
                     continue;
                 }
 
                 List<Vector2> roomsWoThis = new(_accessibleRooms);
                 roomsWoThis.Remove(room.center);
 
-                Graph<Vector2> dungeonGraphWoThis = dungeonGraph;
+                Graph<Vector2> dungeonGraphWoThis = dungeonGraph.CloneGraph();
+                dungeonGraphWoThis.RemoveNode(room.center);
 
                 List<Vector2> accessibleRoomsWoThis = dungeonGraphWoThis.BFS(originRoom.center);
-                if (accessibleRoomsWoThis == _accessibleRooms)
+                if (ListsAreEqual(accessibleRoomsWoThis, roomsWoThis))
                 {
-
+                    RemoveRoom(room);
+                    roomsRemoved++;
+                    continue;
                 }
             }
             Debug.Log($"Removed smallest {roomsRemoved} rooms");
@@ -299,7 +305,21 @@ public class DungeonGenerator : MonoBehaviour
         if (disableVisualDebuggingAfterRoomGeneration) displayVisualDebugging = false;
         coroutineIsDone = true;
     }
-    
+    bool ListsAreEqual<T>(List<T> list1, List<T> list2)
+    {
+        if (list1.Count == list2.Count)
+        {
+            for (int i = 0; i < list1.Count; i++)
+            {
+                if (!list1[i].Equals(list2[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
+    }
     void RemoveRoom(RectInt roomToRemove)
     {
         if (!dungeonGraph.adjacencyList.ContainsKey(roomToRemove.center))
@@ -308,9 +328,15 @@ public class DungeonGenerator : MonoBehaviour
             return;
         }
 
+        removedObjects.Add(roomToRemove);
         rooms.Remove(roomToRemove);
         foreach (Vector2 door in dungeonGraph.adjacencyList[roomToRemove.center])
-            doors.Remove(GetDoorByCenter(door));
+        {
+            RectInt doorRect = GetDoorByCenter(door);
+            removedObjects.Add(doorRect);
+            doors.Remove(doorRect);
+        }
+            
         dungeonGraph.RemoveNode(roomToRemove.center);
     }
     int GetBiggestRoom(out int biggestIndex)
@@ -397,50 +423,49 @@ public class DungeonGenerator : MonoBehaviour
                                     _origianalRoom.width - _roomA.width + 1,
                                     _origianalRoom.height);
     }
-    List<RectInt> SortListFromSmallToBig(List<RectInt> originalList)
+    List<T> InvertList<T>(List<T> originalList)
     {
-        List<RectInt> newList = new();
-        while (originalList.Count > 0)
+        List<T> newList = new(originalList);
+        for(int i = 0; i < originalList.Count; i++)
         {
-            GetSmallestRoom(out int _smallesttIndex);
-
-            newList.Add(originalList[_smallesttIndex]);
-            originalList.RemoveAt(_smallesttIndex);
+            newList[originalList.Count-1-i] = originalList[i];
         }
 
         return newList;
     }
+    public RectInt GetOriginRoom() { return originRoom; }
+    public System.Random GetSeed() { return _random; }
 
     void Update()
     {
         if (!displayVisualDebugging) return;
 
-        DrawRectangle(initialRoom, height + 1, Color.red);
+        DrawRectangle(initialRoom, 4 + 1, Color.red);
 
         // Draws rooms
         foreach (RectInt _room in rooms) { DrawRectangle(new(_room.xMin, _room.yMin, 
             _room.width, _room.height), 
-            height, Color.magenta);
+            4, Color.magenta);
         }
         if (originRoom != new RectInt(0,0,0,0)) DrawRectangle(new(originRoom.xMin, originRoom.yMin,
-            originRoom.width, originRoom.height), height + 1, Color.cyan);
+            originRoom.width, originRoom.height), 4 + 1, Color.cyan);
 
         // Draws doors
         foreach (RectInt _door in doors)
         {
             DrawRectangle(new(_door.xMin, _door.yMin,
             _door.width, _door.height),
-            height, Color.blue);
+            4, Color.blue);
         }
 
         // Draws removed doors
-        if (showDeletedDoors)
+        if (showDeletedObjects)
         {
-            foreach (RectInt _door in removedDoors)
+            foreach (RectInt _obj in removedObjects)
             {
-                DrawRectangle(new(_door.xMin, _door.yMin,
-                _door.width, _door.height),
-                height, Color.black);
+                DrawRectangle(new(_obj.xMin, _obj.yMin,
+                _obj.width, _obj.height),
+                4, Color.black);
             }
         }
 

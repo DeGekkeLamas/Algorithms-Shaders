@@ -114,7 +114,7 @@ public class LameDungeonAssetGenerator : MonoBehaviour
     {
         d.navMeshSurface.BuildNavMesh();
         Destroy(Camera.main.gameObject);
-        Instantiate(player, new(d.originRoom.center.x, 0, d.originRoom.center.y), Quaternion.identity);
+        Instantiate(player, new(d.GetOriginRoom().center.x, 0, d.GetOriginRoom().center.y), Quaternion.identity);
 
         yield return new();
         d.coroutineIsDone = true;

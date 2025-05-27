@@ -98,7 +98,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Ambient: 0.3
+    - _Ambient: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -114,7 +114,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Intensity: 0.3
+    - _Intensity: 0.15
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -130,12 +130,12 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.690566, g: 0.07166243, b: 0.07166243, a: 1}
+    - _Color: {r: 1, g: 0.9803922, b: 0.91372555, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Position: {r: 0, g: 0, b: 0, a: 1}
-    - _Rotation: {r: 0, g: 0, b: 0, a: 1}
+    - _Rotation: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Velocity: {r: 0, g: 0, b: 0, a: 1}
-    - _VelocityRotation: {r: 0, g: 0, b: 0, a: 1}
+    - _Velocity: {r: 0, g: 0, b: 0, a: 0}
+    - _VelocityRotation: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

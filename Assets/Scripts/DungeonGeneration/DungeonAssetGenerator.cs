@@ -18,6 +18,7 @@ public class DungeonAssetGenerator : MonoBehaviour
     public float wallBoundThickness = 1.25f;
     public RoomSpecificAssets rsa;
     RoomType[] roomTypes;
+    List<GameObject> wallsGenerated = new();
 
     DungeonGenerator d;
 
@@ -40,7 +41,7 @@ public class DungeonAssetGenerator : MonoBehaviour
         int storages = 0;
         for (int i = 0; i < d.rooms.Count; i++)
         {
-            if (d.rooms[i] == d.originRoom)
+            if (d.rooms[i] == d.GetOriginRoom())
             {
                 roomTypes[i] = RoomType.breakRoom;
                 continue;
@@ -114,13 +115,13 @@ public class DungeonAssetGenerator : MonoBehaviour
             wallYMinGen.xMin = true;
             if (room.yMin == d.initialRoom.yMin) wallYMinGen.xPlus = true;
 
-            d.wallsGenerated.Add(wallXPlus);
-            d.wallsGenerated.Add(wallYPlus);
-            d.wallsGenerated.Add(wallXMin);
-            d.wallsGenerated.Add(wallYMin);
+            wallsGenerated.Add(wallXPlus);
+            wallsGenerated.Add(wallYPlus);
+            wallsGenerated.Add(wallXMin);
+            wallsGenerated.Add(wallYMin);
 
             Material materialToAssign;
-            if (room == d.originRoom)
+            if (room == d.GetOriginRoom())
                 materialToAssign = rsa.breakRoomWall;
             else switch (roomTypes[i])
                 {
@@ -157,23 +158,23 @@ public class DungeonAssetGenerator : MonoBehaviour
     public IEnumerator ModifyWalls()
     {
         // Check for door intersections
-        int wallsQTY = d.wallsGenerated.Count;
+        int wallsQTY = wallsGenerated.Count;
         GameObject doorBoundsContainer = new("DoorBounds");
         doorBoundsContainer.transform.parent = d.assetContainer.transform;
         for (int i = 0; i < wallsQTY; i++)
         {
             RectInt wallRect = new(
-                (int)(d.wallsGenerated[i].transform.position.x - .5f * d.wallsGenerated[i].transform.localScale.x),
-                (int)(d.wallsGenerated[i].transform.position.z - .5f * d.wallsGenerated[i].transform.localScale.z),
-                (int)d.wallsGenerated[i].transform.localScale.x,
-                (int)d.wallsGenerated[i].transform.localScale.z
+                (int)(wallsGenerated[i].transform.position.x - .5f * wallsGenerated[i].transform.localScale.x),
+                (int)(wallsGenerated[i].transform.position.z - .5f * wallsGenerated[i].transform.localScale.z),
+                (int)wallsGenerated[i].transform.localScale.x,
+                (int)wallsGenerated[i].transform.localScale.z
                 );
             for (int j = 0; j < d.doors.Count; j++)
             {
                 if (AlgorithmsUtils.Intersects(d.doors[j], wallRect))
                 {
-                    GameObject wallDupe = Instantiate(d.wallsGenerated[i], d.wallsGenerated[i].transform.position,
-                        Quaternion.identity, d.wallsGenerated[i].transform.parent);
+                    GameObject wallDupe = Instantiate(wallsGenerated[i], wallsGenerated[i].transform.position,
+                        Quaternion.identity, wallsGenerated[i].transform.parent);
                     wallDupe.name = "WallB";
                     GameObject doorBoundA;
                     GameObject doorBoundB;
@@ -215,11 +216,11 @@ public class DungeonAssetGenerator : MonoBehaviour
                     }
                     yield return new WaitForSeconds(d.generationInterval);
 
-                    d.wallsGenerated[i].transform.position = new Vector3(newWallA.center.x, 0, newWallA.center.y);
+                    wallsGenerated[i].transform.position = new Vector3(newWallA.center.x, 0, newWallA.center.y);
                     wallDupe.transform.position = new Vector3(newWallB.center.x, 0, newWallB.center.y);
-                    d.wallsGenerated[i].transform.localScale = new Vector3(newWallA.width, wallHeight, newWallA.height);
+                    wallsGenerated[i].transform.localScale = new Vector3(newWallA.width, wallHeight, newWallA.height);
                     wallDupe.transform.localScale = new Vector3(newWallB.width, wallHeight, newWallB.height);
-                    d.wallsGenerated.Add(wallDupe);
+                    wallsGenerated.Add(wallDupe);
 
                     if (intersectOverHeight)
                     {
@@ -250,7 +251,7 @@ public class DungeonAssetGenerator : MonoBehaviour
         // Generate bounds on top of and below walls
         GameObject wallBoundContainer = new("WallBoundContainer");
         wallBoundContainer.transform.parent = d.assetContainer.transform;
-        foreach (GameObject wall in d.wallsGenerated)
+        foreach (GameObject wall in wallsGenerated)
         {
             GameObject wallBoundTop = Instantiate(wallBound,
                 new Vector3(wall.transform.position.x,
@@ -297,7 +298,7 @@ public class DungeonAssetGenerator : MonoBehaviour
             yield return new WaitForSeconds(d.generationInterval);
 
             Material materialToAssign;
-            if (room == d.originRoom)
+            if (room == d.GetOriginRoom())
                 materialToAssign = rsa.breakRoomFloor;
             else switch (roomTypes[i])
                 {
@@ -407,9 +408,9 @@ public class DungeonAssetGenerator : MonoBehaviour
         d.navMeshSurface.BuildNavMesh();
         foreach (RectInt room in d.rooms)
         {
-            if (room == d.originRoom) continue;
+            if (room == d.GetOriginRoom()) continue;
             int enemiesToSpawn = 0;
-            int enemyroll = d._random.Next(0, 100);
+            int enemyroll = d.GetSeed().Next(0, 100);
             for (int i = enemiesPerRoom.Length - 1; i >= 0; i--)
             {
                 if (enemyroll > 100 - enemiesPerRoom[i].probability)
@@ -429,14 +430,14 @@ public class DungeonAssetGenerator : MonoBehaviour
 
         // Spawn Player
         Destroy(Camera.main.gameObject);
-        Instantiate(player, new Vector3(d.originRoom.center.x, -wallHeight * .5f, d.originRoom.center.y), Quaternion.identity);
+        Instantiate(player, new Vector3(d.GetOriginRoom().center.x, -wallHeight * .5f, d.GetOriginRoom().center.y), Quaternion.identity);
         d.coroutineIsDone = true;
         yield return new WaitForSeconds(d.generationInterval);
     }
     string GetItemFromLoottable(ItemLootLable[] lootTable)
     {
         int probabilityPassed = lootTable[0].probability;
-        int lootRoll = d._random.Next(0, 100);
+        int lootRoll = d.GetSeed().Next(0, 100);
         for (int i = 0; i < lootTable.Length; i++)
         {
             if (lootRoll < probabilityPassed) return lootTable[i].itemName;

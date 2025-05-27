@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7528561750448232290}
   - component: {fileID: 7195147529499261380}
   - component: {fileID: 4938539399548947679}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6298525577723437536}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}

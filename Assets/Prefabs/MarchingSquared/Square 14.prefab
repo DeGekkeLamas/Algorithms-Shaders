@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2801840299714656429}
   - component: {fileID: 3273802620471493682}
   - component: {fileID: 958473601090425926}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311e4faa74839914cba3b7168e60c849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 2
-  width: 4
+  height: 1
+  width: 2
   depth: 0.2
   generateOnAwake: 0
   useWorldSpace: 1
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 446706040294858956}
   - component: {fileID: 990726006763691091}
   - component: {fileID: 3286511208022395943}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,8 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311e4faa74839914cba3b7168e60c849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 2
-  width: 4
+  height: 1
+  width: 2
   depth: 0.2
   generateOnAwake: 0
   useWorldSpace: 1
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 4618167844530718784}
   - component: {fileID: 7238853070356653306}
   - component: {fileID: 1501824951377884224}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 6664646680121224773}
   - component: {fileID: 6032827171160909359}
   - component: {fileID: 6932556775820138349}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square 14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
