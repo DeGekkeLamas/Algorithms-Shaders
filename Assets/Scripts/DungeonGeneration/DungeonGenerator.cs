@@ -305,6 +305,7 @@ public class DungeonGenerator : MonoBehaviour
         if (disableVisualDebuggingAfterRoomGeneration) displayVisualDebugging = false;
         coroutineIsDone = true;
     }
+
     bool ListsAreEqual<T>(List<T> list1, List<T> list2)
     {
         if (list1.Count == list2.Count)

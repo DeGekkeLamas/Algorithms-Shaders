@@ -72,7 +72,7 @@ Shader "Custom/CellShadeOutline"
 			{
 				float4 col;
 
-				col = tex2D(_MainTex, i.uv / _MainTex_ST.xy + _MainTex_ST.zw) * _Color;
+				col = tex2D(_MainTex, i.uv) * _Color;
 
 				// Lighting
 				float4 lightDir = _WorldSpaceLightPos0;

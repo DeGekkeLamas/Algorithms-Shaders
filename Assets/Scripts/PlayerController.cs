@@ -75,8 +75,10 @@ public class PlayerController : MonoBehaviour
                 }
                 else // Lobbed projectile
                 {
+                    Projectile spawned = spawnedProjectile.GetComponent<Projectile>();
                     spawnedProjectile.linearVelocity = relMousePos *
-                        spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
+                        spawned.projectileSpeed;
+                    spawnedProjectile.angularVelocity = Vector3.Cross(spawnedProjectile.linearVelocity, Vector3.up) * -spawned.rotationIntensity;
                 }
 
                 inventory.currentInventory[Inventory.itemSelected].cooldownLeft =

@@ -70,7 +70,6 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 38d055b6a62bd2a46a8d38a65a8d24c5, type: 2}
-  - {fileID: 2100000, guid: 38d055b6a62bd2a46a8d38a65a8d24c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,6 +155,7 @@ MonoBehaviour:
   upForce: 400
   useGravity: 1
   startRotationForce: {x: -50, y: -50, z: -50}
+  rotationIntensity: 1
   onlyDestroyOnTerrain: 0
   destroyOnGround: 1
   expands: 0

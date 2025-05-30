@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
 Shader "Custom/VelocityStretch"
 {
 	Properties
@@ -36,22 +38,6 @@ Shader "Custom/VelocityStretch"
 				float4 normal : NORMAL;
 			};
 
-			struct Functions 
-			{
-				float pi() 
-				{
-					return 3.14159;
-				}
-				float4x4 identity() 
-				{
-					return float4x4(1,0,0,0,
-						0,1,0,0,
-						0,0,1,0,
-						0,0,0,1
-						);
-				}
-			};
-
 			float4 _Color;
 			float4 _Velocity;
 			float4 _Rotation;
@@ -62,49 +48,19 @@ Shader "Custom/VelocityStretch"
 			output vert(input v)
 			{
 				output o;
-				Functions f;
-				float4 newVertex = float4(v.vertex.x, v.vertex.y, v.vertex.z * max(length(_Velocity * _Intensity), 1) , 0);
-				newVertex.z = (newVertex.z < 0) ? newVertex.z : v.vertex.z;
 
-				float pi = f.pi();
-				// _Rotation.x = (abs(fmod(_Rotation.x + pi, 2 * pi) ) )/pi + (_Rotation.x > pi) ? pi : 0;
-				// _Rotation.z = (abs(fmod(_Rotation.z + pi, 2 * pi) ) )/pi + (_Rotation.z > pi) ? pi : 0;
-				// _VelocityRotation.x = -_VelocityRotation.x;
-				// float rx = _Rotation.x;
-				// _Rotation.z = _Rotation.z;
-				// _Rotation.x = rx;
-				_VelocityRotation += _Rotation;
+				float translate = v.vertex.w;
+				v.vertex.w = 0;
+				float4 world = mul(UNITY_MATRIX_M, v.vertex);
 
+				float4 velocityDir = normalize(_Velocity);
+				float4 reflection = reflect(velocityDir, world) * _Intensity;
 
-				// Rotate over Z
-				newVertex = float4(
-                newVertex.x * cos(_VelocityRotation.z) - newVertex.y * sin(_VelocityRotation.z)
-                , newVertex.x * sin(_VelocityRotation.z) + newVertex.y * cos(_VelocityRotation.z)
-                , newVertex.z, 1
-				 );
-				// Rotate over X
-				newVertex = float4(
-                newVertex.x,
-                newVertex.y * cos(_VelocityRotation.x) - newVertex.z * sin(_VelocityRotation.x)
-                , newVertex.y * sin(_VelocityRotation.x) + newVertex.z * cos(_VelocityRotation.x)
-				, 1);
-				// Rotate over Y
-				newVertex = float4(
-                newVertex.x * cos(_VelocityRotation.y) - newVertex.z * sin(_VelocityRotation.y)
-                , newVertex.y
-                , newVertex.x * sin(_VelocityRotation.y) + newVertex.z * cos(_VelocityRotation.y)
-				, 1);
+				world *= .5/(2*length(reflection)) * length(_Velocity);
 
-				// Ignore original object rotation
-				float4x4 mvp = UNITY_MATRIX_MVP;
-				float4x4 iden = f.identity();
-				//iden._m01 = mvp._m01;
-				//iden._m10 = mvp._m10;
-				//iden._m00 = 2;
-				mvp = mul(mvp, iden);
-				//mvp._m10 = 0;
-				//mvp._m01 = 0;
-				o.vertex = mul(mvp, newVertex);
+				world += mul(UNITY_MATRIX_M, float4(0,0,0,translate));
+				o.vertex = mul(UNITY_MATRIX_VP, world);
+
 				return o;
 			}
 

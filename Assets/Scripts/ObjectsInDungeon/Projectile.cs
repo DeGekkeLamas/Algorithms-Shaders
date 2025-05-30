@@ -5,7 +5,7 @@ public class Projectile : MonoBehaviour
     public float projectileSpeed = 20;
     public float upForce;
     public bool useGravity;
-    public Vector3 startRotationForce;
+    public float rotationIntensity = 1;
 
     public bool onlyDestroyOnTerrain;
     public bool destroyOnGround;
@@ -22,7 +22,6 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (useGravity) rb.useGravity = true;
         rb.AddForce(new(0, upForce, 0));
-        rb.AddTorque(startRotationForce);
         existingProjectiles.Add(this);
     }
     void FixedUpdate()

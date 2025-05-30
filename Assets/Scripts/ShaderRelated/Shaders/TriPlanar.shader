@@ -24,7 +24,6 @@ Shader "Custom/Triplanar"
 			{
 				float4 vertex : POSITION;
 				float4 normal : NORMAL;
-				half3 objNormal : TEXCOORD0;
                 float3 coords : TEXCOORD1;
 			};
 
@@ -32,7 +31,6 @@ Shader "Custom/Triplanar"
 			{
 				float4 vertex : SV_POSITION;
 				float4 normal : NORMAL;
-				half3 objNormal : TEXCOORD0;
                 float3 coords : TEXCOORD1;
 			};
 
@@ -53,7 +51,6 @@ Shader "Custom/Triplanar"
 				o.normal = normalize(mat);
 
 				o.coords =  mul(UNITY_MATRIX_M, v.vertex);
-				o.objNormal = v.normal;
 
 				return o;
 			}
@@ -62,12 +59,17 @@ Shader "Custom/Triplanar"
 			{
 				float4 col;
 
-				float4 colX = tex2D(_MainTex, i.coords.yz / _MainTex_ST.y);
+				float4 colX = tex2D(_MainTex, i.coords.yz / _MainTex_ST.xy); // tiling hm,...
 				float4 colY = tex2D(_MainTex, i.coords.xz / _MainTex_ST.xy);
-				float4 colZ = tex2D(_MainTex, i.coords.xy / _MainTex_ST.x);
-				float3 blendWeight = abs(i.objNormal);
-				blendWeight /= dot(blendWeight, 1);
+				float4 colZ = tex2D(_MainTex, i.coords.xy / _MainTex_ST.xy);
+				float3 blendWeight = abs(i.normal);
+				//blendWeight = pow(blendWeight,50); // ?
 
+				// suppose normal = (0.7,0.7,0)
+				blendWeight /= dot(blendWeight, 1); // WHAT IS HAPPENING HERE???
+				// dot = 0.7+0.7+0 = 1.4
+				// now normal = (0.5,0.5,0)
+				
 				col = colX * blendWeight.x + colY * blendWeight.y + colZ * blendWeight.z;
 
 				//Lighting
@@ -80,7 +82,7 @@ Shader "Custom/Triplanar"
 
 				//float cartoonLoops = 3;
 				//diffuse = ceil(diffuse * cartoonLoops) / cartoonLoops;
-				float reflection = saturate( lightDir - dot(2*dot(lightDir, cameraDir), cameraDir) );
+				float reflection = saturate( lightDir - dot(2*dot(lightDir, cameraDir), cameraDir) ); // ????
 
 				col *= diffuse * lightColor + ambientColor;
 
