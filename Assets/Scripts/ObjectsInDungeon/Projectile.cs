@@ -14,6 +14,10 @@ public class Projectile : MonoBehaviour
     public float expansionFactor = 1.05f;
     public float maxExpansion = 2;
 
+    [Header("Splat")]
+    public bool leaveSplat;
+    public GameObject splat;
+
     public static List<Projectile> existingProjectiles = new();
 
     Rigidbody rb;
@@ -46,6 +50,13 @@ public class Projectile : MonoBehaviour
             destroyOnGround && other.gameObject.layer == 3)
         {
             Destroy(this.gameObject);
+        }
+
+        if (leaveSplat)
+        {
+            Vector3 point = other.ClosestPoint(transform.position);
+            Physics.Raycast(point, point-other.transform.position, out RaycastHit hitInfo);
+            Instantiate(splat, point, Quaternion.LookRotation(hitInfo.normal));
         }
     }
     private void OnDestroy() => existingProjectiles.Remove(this);

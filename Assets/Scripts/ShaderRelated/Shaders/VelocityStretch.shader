@@ -54,9 +54,10 @@ Shader "Custom/VelocityStretch"
 				float4 world = mul(UNITY_MATRIX_M, v.vertex);
 
 				float4 velocityDir = normalize(_Velocity);
-				float4 reflection = reflect(velocityDir, world) * _Intensity;
+				float4 reflection = reflect(velocityDir, world);
 
-				world *= .5/(2*length(reflection)) * length(_Velocity);
+				float radius = .75/2;
+				world *= (1-sqrt(length(reflection/radius) ) + 1) * length(_Velocity);
 
 				world += mul(UNITY_MATRIX_M, float4(0,0,0,translate));
 				o.vertex = mul(UNITY_MATRIX_VP, world);

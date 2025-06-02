@@ -281,7 +281,7 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     //RemoveRoom(room);
                     //roomsRemoved++;
-                    continue;
+                    //continue;
                 }
 
                 List<Vector2> roomsWoThis = new(_accessibleRooms);
@@ -291,7 +291,7 @@ public class DungeonGenerator : MonoBehaviour
                 dungeonGraphWoThis.RemoveNode(room.center);
 
                 List<Vector2> accessibleRoomsWoThis = dungeonGraphWoThis.BFS(originRoom.center);
-                if (ListsAreEqual(accessibleRoomsWoThis, roomsWoThis))
+                if (accessibleRoomsWoThis.Count == roomsWoThis.Count)
                 {
                     RemoveRoom(room);
                     roomsRemoved++;
@@ -306,13 +306,17 @@ public class DungeonGenerator : MonoBehaviour
         coroutineIsDone = true;
     }
 
-    bool ListsAreEqual<T>(List<T> list1, List<T> list2)
+    /// <summary>
+    /// Also works if lists contain same values in a different order
+    /// </summary>
+    static bool ListsAreEqual<T>(List<T> list1, List<T> list2)
     {
         if (list1.Count == list2.Count)
         {
+            return true;
             for (int i = 0; i < list1.Count; i++)
             {
-                if (!list1[i].Equals(list2[i]))
+                if (!list1.Contains(list2[i]))
                 {
                     return false;
                 }

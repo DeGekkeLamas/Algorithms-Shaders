@@ -154,13 +154,14 @@ MonoBehaviour:
   projectileSpeed: 1.3
   upForce: 400
   useGravity: 1
-  startRotationForce: {x: -50, y: -50, z: -50}
   rotationIntensity: 1
   onlyDestroyOnTerrain: 0
   destroyOnGround: 1
   expands: 0
   expansionFactor: 1.1
   maxExpansion: 5
+  leaveSplat: 1
+  splat: {fileID: 966423011128645671, guid: 12141ac9eae3ad8428d53249e5653f16, type: 3}
 --- !u!114 &8069094821143367999
 MonoBehaviour:
   m_ObjectHideFlags: 0
