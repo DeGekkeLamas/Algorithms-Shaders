@@ -15,6 +15,7 @@ public class EnemyFollower : MonoBehaviour
     public float delayBetweenMovements = .5f;
     public float moveDistance = 2;
     public GameObject corpse;
+    public GameObject tomatoSplat;
 
     bool hasSeenPlayer;
 
@@ -153,8 +154,10 @@ public class EnemyFollower : MonoBehaviour
     void Death()
     {
         GameObject oldModel = this.transform.GetChild(0).gameObject;
-        Instantiate(corpse, this.transform.position, Quaternion.identity, this.transform);
         Destroy(oldModel);
+        Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hitInfo);
+        Instantiate(tomatoSplat, hitInfo.point + new Vector3(0,0.01f,0), Quaternion.identity, Projectile.projectileContainer.transform);
+        Instantiate(corpse, this.transform.position, Quaternion.identity, this.transform);
         StopAllCoroutines();
         Destroy(this);
     }

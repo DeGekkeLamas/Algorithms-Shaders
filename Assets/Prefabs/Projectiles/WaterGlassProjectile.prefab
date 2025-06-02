@@ -161,7 +161,7 @@ MonoBehaviour:
   expansionFactor: 1.1
   maxExpansion: 5
   leaveSplat: 1
-  splat: {fileID: 330691455853550617, guid: 8b06f6812a5def0409a7b0029d150f07, type: 3}
+  splat: {fileID: 966423011128645671, guid: ad1c75ba6bec2c343946273f0f179617, type: 3}
 --- !u!136 &7891199860114195892
 CapsuleCollider:
   m_ObjectHideFlags: 0

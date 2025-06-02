@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 925794234542846575}
   - component: {fileID: 4419478199851565409}
   m_Layer: 9
-  m_Name: TomatoSplat
+  m_Name: WaterSplat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5b822c592face8d4b917ea59d8a6c3d5, type: 2}
+  - {fileID: 2100000, guid: 29a3ff390d2552d468da29c0aed0ac0b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -19,6 +19,7 @@ public class Projectile : MonoBehaviour
     public GameObject splat;
 
     public static List<Projectile> existingProjectiles = new();
+    public static GameObject projectileContainer;
 
     Rigidbody rb;
     void Start()
@@ -27,6 +28,8 @@ public class Projectile : MonoBehaviour
         if (useGravity) rb.useGravity = true;
         rb.AddForce(new(0, upForce, 0));
         existingProjectiles.Add(this);
+        if (projectileContainer == null) projectileContainer = new("ProjectileContainer");
+        this.transform.parent = projectileContainer.transform;
     }
     void FixedUpdate()
     {
@@ -54,9 +57,12 @@ public class Projectile : MonoBehaviour
 
         if (leaveSplat)
         {
-            Vector3 point = other.ClosestPoint(transform.position);
-            Physics.Raycast(point, point-other.transform.position, out RaycastHit hitInfo);
-            Instantiate(splat, point, Quaternion.LookRotation(hitInfo.normal));
+            Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hitInfo);
+            Instantiate(splat, hitInfo.point + new Vector3(0, 0.01f, 0), Quaternion.identity, Projectile.projectileContainer.transform);
+
+            //Vector3 point = other.ClosestPoint(transform.position);
+            //Physics.Raycast(point, point-other.transform.position, out RaycastHit hitInfo);
+            //Instantiate(splat, point, Quaternion.LookRotation(hitInfo.normal), projectileContainer.transform);
         }
     }
     private void OnDestroy() => existingProjectiles.Remove(this);

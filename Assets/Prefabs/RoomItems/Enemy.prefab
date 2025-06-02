@@ -56,6 +56,7 @@ MonoBehaviour:
   delayBetweenMovements: 0.75
   moveDistance: 2
   corpse: {fileID: 8120454217808119696, guid: 275cfdf6fcabefb4380cafd02cfad82a, type: 3}
+  tomatoSplat: {fileID: 966423011128645671, guid: 12141ac9eae3ad8428d53249e5653f16, type: 3}
 --- !u!136 &6232500598109979020
 CapsuleCollider:
   m_ObjectHideFlags: 0
