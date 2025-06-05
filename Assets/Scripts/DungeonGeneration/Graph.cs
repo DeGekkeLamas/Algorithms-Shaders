@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Graph<T>
@@ -31,6 +32,18 @@ public class Graph<T>
         {
             if (node.Value.Contains(nodeToRemove)) node.Value.Remove(nodeToRemove);
         }
+    }
+    public void RemoveNodeAndConnectedNodes(T nodeToRemove)
+    {
+        for (int i = adjacencyList[nodeToRemove].Count; i > 0; i--)
+        {
+            RemoveNode(adjacencyList[nodeToRemove][i-1]);
+        }
+        RemoveNode(nodeToRemove);
+    }
+    public List<T> GetNeighbours(T node)
+    {
+        return adjacencyList[node];
     }
 
     public void PrintGraph()

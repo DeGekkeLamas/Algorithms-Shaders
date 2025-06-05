@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -285,6 +286,10 @@ public class DungeonGenerator : MonoBehaviour
                 }
 
                 List<Vector2> roomsWoThis = new(_accessibleRooms);
+                //foreach(Vector2 door in dungeonGraph.GetNeighbours(room.center))
+                //{
+                //    roomsWoThis.Remove(door);
+                //}
                 roomsWoThis.Remove(room.center);
 
                 Graph<Vector2> dungeonGraphWoThis = dungeonGraph.CloneGraph();
@@ -297,6 +302,16 @@ public class DungeonGenerator : MonoBehaviour
                     roomsRemoved++;
                     continue;
                 }
+
+                foreach(var node in accessibleRoomsWoThis)
+                {
+                    DrawRectangle(room, 10, new Color(1, .3f, 0,0), 1);
+                }
+                foreach(var node in roomsWoThis)
+                {
+                    DrawRectangle(room, 12, new Color(1, 0, 0, .5f), 1);
+                }
+                Debug.Log($"{accessibleRoomsWoThis.Count}, {roomsWoThis.Count}");
             }
             Debug.Log($"Removed smallest {roomsRemoved} rooms");
         }
@@ -313,7 +328,6 @@ public class DungeonGenerator : MonoBehaviour
     {
         if (list1.Count == list2.Count)
         {
-            return true;
             for (int i = 0; i < list1.Count; i++)
             {
                 if (!list1.Contains(list2[i]))
@@ -335,11 +349,13 @@ public class DungeonGenerator : MonoBehaviour
 
         removedObjects.Add(roomToRemove);
         rooms.Remove(roomToRemove);
-        foreach (Vector2 door in dungeonGraph.adjacencyList[roomToRemove.center])
+        for(int i = dungeonGraph.adjacencyList[roomToRemove.center].Count; i > 0; i--)
         {
+            Vector2 door = dungeonGraph.adjacencyList[roomToRemove.center][i - 1];
             RectInt doorRect = GetDoorByCenter(door);
             removedObjects.Add(doorRect);
             doors.Remove(doorRect);
+            dungeonGraph.RemoveNode(door);
         }
             
         dungeonGraph.RemoveNode(roomToRemove.center);
