@@ -45,6 +45,7 @@ Shader "Custom/VelocityStretch"
 
 			output vert(input v)
 			{
+				const float pi = 3.14159;
 				output o;
 
 				float translate = v.vertex.w;
@@ -55,7 +56,8 @@ Shader "Custom/VelocityStretch"
 				float4 velocityDir = normalize(_Velocity);
 				float4 reflection = reflect(velocityDir, world);
 
-				world *= (1- (length(reflection/_Radius)/_Radius)) * length(_Velocity) + 1;
+				float x = length(reflection/_Radius)/_Radius;
+				world *= pow( ( sin( (x+.5)*pi)+1)/2, 1 ) * length(_Velocity) + 1;
 
 				world += mul(UNITY_MATRIX_M, float4(0,0,0,translate));
 				o.vertex = mul(UNITY_MATRIX_VP, world);
