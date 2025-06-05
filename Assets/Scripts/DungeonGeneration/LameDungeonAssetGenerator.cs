@@ -87,7 +87,7 @@ public class LameDungeonAssetGenerator : MonoBehaviour
         d.coroutineIsDone = true;
     }
 
-    public IEnumerator GenerateFloor()
+    public IEnumerator GenerateFloor(GameObject floor)
     { 
         // Generate floor
         GameObject floorContainer = new GameObject("FloorContainer");
@@ -95,7 +95,7 @@ public class LameDungeonAssetGenerator : MonoBehaviour
         {
             GameObject _floor = Instantiate(floor, new Vector3(room.center.x, 0, room.center.y),
                 Quaternion.identity, floorContainer.transform);
-            _floor.transform.localScale = new Vector3(room.width - 2, 1, room.height - 2) / 10;
+            _floor.transform.localScale = new Vector3(room.width - 2, 1, room.height - 2);
             yield return new WaitForSeconds(d.generationInterval);
         }
 
@@ -103,7 +103,7 @@ public class LameDungeonAssetGenerator : MonoBehaviour
         {
             GameObject doorFloor = Instantiate(floor, new Vector3(door.center.x, 0, door.center.y),
             Quaternion.identity, floorContainer.transform);
-            doorFloor.transform.localScale = new Vector3(door.width, 1, door.height) / 10;
+            doorFloor.transform.localScale = new Vector3(door.width, 1, door.height);
             yield return new WaitForSeconds(d.generationInterval);
         }
 

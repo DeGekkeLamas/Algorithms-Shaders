@@ -13,6 +13,7 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
     public GameObject[] marchingSquareAssets = new GameObject[16];
     public GameObject floor;
     public GameObject player;
+    public GameObject floorCollider;
     [Header("Coroutine speed")]
     public int assetsPerDelayWalls = 20;
     public int assetsPerDelayFloor = 50;

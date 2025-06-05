@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afd42dcf8a837e44ba65d59a21f6aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: -761334617
+  seed: 150410157
   shouldRemoveSmallestRooms: 1
   initialRoom:
     x: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   generationInterval: 0
   doorWidth: 3
   showDeletedObjects: 1
-  disableVisualDebuggingAfterRoomGeneration: 0
+  disableVisualDebuggingAfterRoomGeneration: 1
   navMeshSurface: {fileID: 1545061833}
   assetContainer: {fileID: 0}
   rooms: []
@@ -315,6 +315,7 @@ MonoBehaviour:
   - {fileID: 7412300762330279516, guid: a1f3da4dbd463214ea3d68e6dc009592, type: 3}
   floor: {fileID: 330691455853550617, guid: 8b06f6812a5def0409a7b0029d150f07, type: 3}
   player: {fileID: 8608250485412360592, guid: ae030c0492dc41d41bebee18da5be51d, type: 3}
+  floorCollider: {fileID: 330691455853550617, guid: d6ff99c3c070d3a48b0c4c109502ebc4, type: 3}
   assetsPerDelayWalls: 20
   assetsPerDelayFloor: 50
 --- !u!114 &1256635337
@@ -370,7 +371,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 511
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
