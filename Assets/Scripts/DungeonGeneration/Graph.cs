@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Graph<T>
@@ -43,7 +42,8 @@ public class Graph<T>
     }
     public List<T> GetNeighbours(T node)
     {
-        return adjacencyList[node];
+        if (adjacencyList.ContainsKey(node)) return adjacencyList[node];
+        else return null;
     }
 
     public void PrintGraph()
@@ -79,6 +79,36 @@ public class Graph<T>
         }
         return visitedList;
     }
+    public List<T> BFSWithout(T _start, T _exclude)
+    {
+        if (!adjacencyList.ContainsKey(_start)) {
+            Debug.LogWarning($"{_start} doesn't exist dumbass, from {this}");
+            return new();
+        }
+
+        List<T> visitedList = new();
+        Queue<T> queue = new();
+        queue.Enqueue(_start);
+        visitedList.Add(_start);
+
+        while(queue.Count > 0)
+        {
+            _start = queue.Dequeue();
+            //Debug.Log(_start);
+
+            foreach (T w in adjacencyList[_start]) 
+            {
+                if (w.Equals(_exclude)) { continue; }
+                if (!visitedList.Contains(w))
+                {
+                    queue.Enqueue(w);
+                    visitedList.Add(w);
+                }
+            }
+        }
+        return visitedList;
+    }
+
     public void DFS(T _start)
     {
         if (!adjacencyList.ContainsKey(_start))

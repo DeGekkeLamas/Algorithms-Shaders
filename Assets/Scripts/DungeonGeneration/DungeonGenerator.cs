@@ -252,6 +252,7 @@ public class DungeonGenerator : MonoBehaviour
         foreach (Vector2 room in _roomsToRemove)
         {
             RemoveRoom(GetRoomByCenter(room));
+            _roomsRemoved++;
             yield return new WaitForSeconds(generationInterval);
         }
         Debug.Log($"Removed {_roomsRemoved} inaccessible rooms, from {this}");
@@ -280,36 +281,25 @@ public class DungeonGenerator : MonoBehaviour
                 if (room == originRoom) continue;
                 if (dungeonGraph.adjacencyList[room.center].Count <= 1)
                 {
-                    //RemoveRoom(room);
-                    //roomsRemoved++;
-                    //continue;
-                }
-
-                List<Vector2> roomsWoThis = new(_accessibleRooms);
-                //foreach(Vector2 door in dungeonGraph.GetNeighbours(room.center))
-                //{
-                //    roomsWoThis.Remove(door);
-                //}
-                roomsWoThis.Remove(room.center);
-
-                Graph<Vector2> dungeonGraphWoThis = dungeonGraph.CloneGraph();
-                dungeonGraphWoThis.RemoveNode(room.center);
-
-                List<Vector2> accessibleRoomsWoThis = dungeonGraphWoThis.BFS(originRoom.center);
-                if (accessibleRoomsWoThis.Count == roomsWoThis.Count)
-                {
                     RemoveRoom(room);
                     roomsRemoved++;
                     continue;
                 }
 
-                foreach(var node in accessibleRoomsWoThis)
+                List<Vector2> roomsWoThis = new(_accessibleRooms);
+                roomsWoThis.Remove(room.center);
+                List<Vector2> accessibleRoomsWoThis = dungeonGraph.BFSWithout(originRoom.center, room.center);
+
+                if (accessibleRoomsWoThis.Count == roomsWoThis.Count)
                 {
-                    DrawRectangle(room, 10, new Color(1, .3f, 0,0), 1);
-                }
-                foreach(var node in roomsWoThis)
-                {
-                    DrawRectangle(room, 12, new Color(1, 0, 0, .5f), 1);
+                    foreach (var door in dungeonGraph.GetNeighbours(room.center))
+                    {
+                        _accessibleRooms.Remove(door);
+                    }
+                    _accessibleRooms.Remove(room.center);
+                    RemoveRoom(room);
+                    roomsRemoved++;
+                    continue;
                 }
                 Debug.Log($"{accessibleRoomsWoThis.Count}, {roomsWoThis.Count}");
             }
