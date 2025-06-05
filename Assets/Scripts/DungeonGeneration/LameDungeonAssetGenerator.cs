@@ -12,13 +12,16 @@ public class LameDungeonAssetGenerator : MonoBehaviour
     [Header("Coroutine speed")]
     public int assetsPerDelayWalls = 40;
     public int assetsPerDelayFloors = 5;
-    private int assetsDone;
+    private int _assetsDone;
 
     private void Awake() => d = this.GetComponent<DungeonGenerator>();
 
+    /// <summary>
+    /// Generates lame walls
+    /// </summary>
     public IEnumerator GenerateWalls()
     {
-        GameObject wallContainer = new GameObject("WallContainer");
+        GameObject wallContainer = new("WallContainer");
 
         // Generate walls
         Dictionary<Vector3, GameObject> spawnedWalls = new();
@@ -44,11 +47,11 @@ public class LameDungeonAssetGenerator : MonoBehaviour
                     Destroy(wallB);
                 else spawnedWalls[wallB.transform.position] = wallB;
 
-                assetsDone++;
-                if (assetsDone >= assetsPerDelayWalls)
+                _assetsDone++;
+                if (_assetsDone >= assetsPerDelayWalls)
                 {
                     yield return new WaitForSeconds(d.generationInterval);
-                    assetsDone = 0;
+                    _assetsDone = 0;
                 }
             }
             // Over height
@@ -66,11 +69,11 @@ public class LameDungeonAssetGenerator : MonoBehaviour
                     Destroy(wallB);
                 else spawnedWalls[wallB.transform.position] = wallB;
 
-                assetsDone++;
-                if (assetsDone >= assetsPerDelayWalls)
+                _assetsDone++;
+                if (_assetsDone >= assetsPerDelayWalls)
                 {
                     yield return new WaitForSeconds(d.generationInterval);
-                    assetsDone = 0;
+                    _assetsDone = 0;
                 }
             }
         }
@@ -82,13 +85,16 @@ public class LameDungeonAssetGenerator : MonoBehaviour
             yield return new WaitForSeconds(d.generationInterval);
         }
 
+        Debug.Log("Placed all walls");
         yield return new();
         d.coroutineIsDone = true;
     }
-
+    /// <summary>
+    /// Generates a quad the size of the room for every room at floorheight
+    /// </summary>
     public IEnumerator GenerateFloor(GameObject floor)
     { 
-        assetsDone = 0;
+        _assetsDone = 0;
         // room floors
         GameObject floorContainer = new GameObject("FloorContainer");
         foreach (RectInt room in d.rooms)
@@ -97,7 +103,12 @@ public class LameDungeonAssetGenerator : MonoBehaviour
                 Quaternion.identity, floorContainer.transform);
             _floor.transform.localScale = new Vector3(room.width - 2, 1, room.height - 2);
             DungeonGenerator.DrawRectangle(room, .2f, Color.white, .5f);
-            yield return new WaitForSeconds(d.generationInterval);
+            _assetsDone++;
+            if (_assetsDone >= assetsPerDelayWalls)
+            {
+                yield return new WaitForSeconds(d.generationInterval);
+                _assetsDone = 0;
+            }
         }
         // door flooors
         foreach (RectInt door in d.doors)
@@ -107,14 +118,15 @@ public class LameDungeonAssetGenerator : MonoBehaviour
             doorFloor.transform.localScale = new Vector3(door.width, 1, door.height);
             DungeonGenerator.DrawRectangle(door, .2f, Color.white, .5f);
             
-            assetsDone++;
-            if (assetsDone >= assetsPerDelayWalls)
+            _assetsDone++;
+            if (_assetsDone >= assetsPerDelayWalls)
             {
                 yield return new WaitForSeconds(d.generationInterval);
-                assetsDone = 0;
+                _assetsDone = 0;
             }
         }
 
+        Debug.Log("Generated floor");
         yield return new();
         d.coroutineIsDone = true;
     }

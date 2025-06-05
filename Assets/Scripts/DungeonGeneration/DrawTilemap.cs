@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent (typeof(MeshRenderer), typeof(MeshFilter))]
 public class DrawTilemap : MonoBehaviour
 {
-    new MeshRenderer renderer;
+    MeshRenderer _renderer;
     public void DrawMap(int[,] tilemap)
     {
         // Get colors from tilemap
@@ -26,8 +26,8 @@ public class DrawTilemap : MonoBehaviour
         drawnMap.filterMode = FilterMode.Point;
 
         // Apply texture to object
-        renderer = this.GetComponent<MeshRenderer>();
-        renderer.sharedMaterial.mainTexture = drawnMap;
+        _renderer = this.GetComponent<MeshRenderer>();
+        _renderer.sharedMaterial.mainTexture = drawnMap;
 
         //Debug.Log("Drew tilemap");
     }
@@ -35,7 +35,7 @@ public class DrawTilemap : MonoBehaviour
     [ContextMenu("Export tilemap")]
     void Export()
     {
-        Texture2D texture = (Texture2D)renderer.sharedMaterial.mainTexture;
+        Texture2D texture = (Texture2D)_renderer.sharedMaterial.mainTexture;
         TextureExporter.ExportTexture(texture, "tilemap");
     }
 }

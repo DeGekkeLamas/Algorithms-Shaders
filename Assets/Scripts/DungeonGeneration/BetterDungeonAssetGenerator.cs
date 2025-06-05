@@ -7,7 +7,7 @@ using UnityEngine;
 public class BetterDungeonAssetGenerator : MonoBehaviour
 {
     DungeonGenerator d;
-    int[,] tilemap;
+    int[,] _tilemap;
     [Header("Assets")]
     public GameObject[] marchingSquareAssets = new GameObject[16];
     public GameObject floor;
@@ -16,23 +16,26 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
     [Header("Coroutine speed")]
     public int assetsPerDelayWalls = 20;
     public int assetsPerDelayFloor = 50;
-    private int assetsDone;
+    private int _assetsDone;
 
     private void Awake() => d = this.GetComponent<DungeonGenerator>();
 
+    /// <summary>
+    /// Creates tilemap
+    /// </summary>
     public IEnumerator GenerateTileMap()
     {
         RectInt bounds = d.initialRoom;
         RectInt offset = new(-d.initialRoom.xMin, -d.initialRoom.yMin, 0, 0);
-        tilemap = new int[bounds.height, bounds.width];
+        _tilemap = new int[bounds.height, bounds.width];
         // fill tilemap
         foreach (RectInt room in d.rooms)
         {
-            AlgorithmsUtils.FillRectangleOutline(tilemap, RectIntAddition(room, offset), 1);
+            AlgorithmsUtils.FillRectangleOutline(_tilemap, RectIntAddition(room, offset), 1);
         }
         foreach (RectInt door in d.doors)
         {
-            AlgorithmsUtils.FillRectangle(tilemap, RectIntAddition(door, offset), 0);
+            AlgorithmsUtils.FillRectangle(_tilemap, RectIntAddition(door, offset), 0);
         }
 
         // Add empty edges at the outside so walls generate on the dungeon exterior
@@ -47,56 +50,64 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
                 }
                 else
                 {
-                    newTilemap[y, x] = tilemap[y-1,x-1];
+                    newTilemap[y, x] = _tilemap[y-1,x-1];
                 }
             }
         }
-        tilemap = newTilemap;
+        _tilemap = newTilemap;
 
         // Draw tilemap onto plane for debugging
         DrawTilemap tilemapDebugger = FindAnyObjectByType<DrawTilemap>();
         //PrintTileMap();
         if (tilemapDebugger != null)
         {
-            tilemapDebugger.DrawMap(tilemap);
+            tilemapDebugger.DrawMap(_tilemap);
         }
 
+        Debug.Log("Generated tilemap");
         yield return new();
         d.coroutineIsDone = true;
     }
+    /// <summary>
+    /// Generate walls with marching squares
+    /// </summary>
     public IEnumerator GenerateWalls()
     {
         GameObject wallContainer = new("WallContainer");
         wallContainer.transform.parent = d.assetContainer.transform;
-        int rows = tilemap.GetLength(0);
-        int columns = tilemap.GetLength(1);
+        int rows = _tilemap.GetLength(0);
+        int columns = _tilemap.GetLength(1);
         for (int y = 0; y < columns-1; y++)
         {
             for (int x = 0; x < rows-1; x++)
             {
                 int[] localGroup = new int[4];
-                localGroup[0] = tilemap[Mathf.Clamp(x, 0, rows - 1), Mathf.Clamp(y, 0, columns - 1)];
-                localGroup[1] = tilemap[Mathf.Clamp(x + 1, 0, rows - 1), Mathf.Clamp(y, 0, columns - 1)];
-                localGroup[2] = tilemap[Mathf.Clamp(x, 0, rows - 1), Mathf.Clamp(y + 1, 0, columns - 1)];
-                localGroup[3] = tilemap[Mathf.Clamp(x + 1, 0, rows - 1), Mathf.Clamp(y + 1, 0, columns - 1)];
+                localGroup[0] = _tilemap[Mathf.Clamp(x, 0, rows - 1), Mathf.Clamp(y, 0, columns - 1)];
+                localGroup[1] = _tilemap[Mathf.Clamp(x + 1, 0, rows - 1), Mathf.Clamp(y, 0, columns - 1)];
+                localGroup[2] = _tilemap[Mathf.Clamp(x, 0, rows - 1), Mathf.Clamp(y + 1, 0, columns - 1)];
+                localGroup[3] = _tilemap[Mathf.Clamp(x + 1, 0, rows - 1), Mathf.Clamp(y + 1, 0, columns - 1)];
 
                 int tileBinary = localGroup[0] * 1 + localGroup[1] * 2 + localGroup[2] * 4 + localGroup[3] * 8;
                 if (marchingSquareAssets[tileBinary] != null)
                 {
                     Instantiate(marchingSquareAssets[tileBinary], new(y, 0, x), Quaternion.identity, wallContainer.transform);
-                    assetsDone++;
-                    if (assetsDone >= assetsPerDelayWalls)
+                    _assetsDone++;
+                    if (_assetsDone >= assetsPerDelayWalls)
                     {
                         yield return new WaitForSeconds(d.generationInterval);
-                        assetsDone = 0;
+                        _assetsDone = 0;
                     }
                 }
 
             }
         }
+        Debug.Log("Placed all walls");
         yield return new();
         d.coroutineIsDone = true;
     }
+    /// <summary>
+    /// Generates floor with floodfill
+    /// </summary>
     public IEnumerator GenerateFloor(Vector2Int start)
     {
         GameObject floorContainer = new("FloorContainer");
@@ -122,31 +133,36 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
             {
                 Vector2Int realPoint = pointToFill / floorSize * floorSize;
                 if (!visitedList.Contains(realPoint) && 
-                    (tilemap[
-                        Mathf.Clamp(realPoint.y, 1, tilemap.GetLength(0)-2), 
-                        Mathf.Clamp(realPoint.x, 1, tilemap.GetLength(1)-2)] == 0))
+                    (_tilemap[
+                        Mathf.Clamp(realPoint.y, 1, _tilemap.GetLength(0)-2), 
+                        Mathf.Clamp(realPoint.x, 1, _tilemap.GetLength(1)-2)] == 0))
                 {
                     queue.Enqueue(realPoint);
                 }
             }
 
             Instantiate(floor, new(point.x - .5f, 0, point.y - .5f), Quaternion.identity, floorContainer.transform);
-            assetsDone++;
-            if (assetsDone >= assetsPerDelayFloor)
+            _assetsDone++;
+            if (_assetsDone >= assetsPerDelayFloor)
             {
                 yield return new WaitForSeconds(d.generationInterval);
-                assetsDone = 0;
+                _assetsDone = 0;
             }
         }
+        Debug.Log("Generated floor");
         yield return new();
         d.coroutineIsDone = true;
     }
+    /// <summary>
+    /// Spawns player and bakes navmesh
+    /// </summary>
     public IEnumerator SpawnPlayer()
     {
         d.navMeshSurface.BuildNavMesh();
         Destroy(Camera.main.gameObject);
         Instantiate(player, new(d.GetOriginRoom().center.x, 0, d.GetOriginRoom().center.y), Quaternion.identity);
 
+        Debug.Log("Spawned player and generated navmesh");
         yield return new();
         d.coroutineIsDone = true;
     }
@@ -157,10 +173,10 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
 
     public string ToString(bool flip)
     {
-        if (tilemap == null) return "Tile map not generated yet.";
+        if (_tilemap == null) return "Tile map not generated yet.";
 
-        int rows = tilemap.GetLength(0);
-        int cols = tilemap.GetLength(1);
+        int rows = _tilemap.GetLength(0);
+        int cols = _tilemap.GetLength(1);
 
         var sb = new StringBuilder();
 
@@ -172,7 +188,7 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         {
             for (int j = 0; j < cols; j++)
             {
-                sb.Append((tilemap[i, j] == 0 ? '0' : '#')); //Replaces 1 with '#' making it easier to visualize
+                sb.Append((_tilemap[i, j] == 0 ? '0' : '#')); //Replaces 1 with '#' making it easier to visualize
             }
             sb.AppendLine();
         }
@@ -184,6 +200,9 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         Debug.Log(ToString(true));
     }
 }
+/// <summary>
+/// Frankensteined combination of a hashset and a queu
+/// </summary>
 public struct HashQueue<T>
 {
     HashSet<T> hashSet;
