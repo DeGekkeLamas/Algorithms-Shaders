@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.AI.Navigation;
 using UnityEngine;
-using static DungeonGenerator;
 
 public class DungeonAssetGenerator : MonoBehaviour
 {
@@ -294,7 +292,7 @@ public class DungeonAssetGenerator : MonoBehaviour
             RectInt room = d.rooms[i];
             GameObject _floor = Instantiate(floor, new Vector3(room.center.x, -wallHeight * .5f, room.center.y),
                 Quaternion.identity, floorContainer.transform);
-            _floor.transform.localScale = new Vector3(room.width, 1, room.height) / 10;
+            _floor.transform.localScale = new Vector3(room.width, 1, room.height);
             yield return new WaitForSeconds(d.generationInterval);
 
             Material materialToAssign;

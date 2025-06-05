@@ -153,6 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed: 150410157
   shouldRemoveSmallestRooms: 1
+  percentSmallestRoomsToRemove: 15
   initialRoom:
     x: 0
     y: 0
@@ -160,7 +161,7 @@ MonoBehaviour:
     height: 100
   generationType: 1
   splitFractionRange: {x: 35, y: 66}
-  roomMaxSize: 22.5
+  roomMaxSize: 30
   maxDoorsForOriginRoom: 1
   maxDoorsPerRoom: 3
   displayVisualDebugging: 1
@@ -334,6 +335,7 @@ MonoBehaviour:
   floor: {fileID: 330691455853550617, guid: cbae025bc70e7d14292ff810bc5f2bb6, type: 3}
   player: {fileID: 8608250485412360592, guid: ae030c0492dc41d41bebee18da5be51d, type: 3}
   assetsPerDelayWalls: 80
+  assetsPerDelayFloors: 5
 --- !u!1 &1545061832
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Unity.AI.Navigation;
 using UnityEngine;
 
 public class BetterDungeonAssetGenerator : MonoBehaviour
@@ -38,11 +37,11 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
 
         // Add empty edges at the outside so walls generate on the dungeon exterior
         int[,] newTilemap = new int[bounds.height + 2, bounds.width + 2];
-        for (int y = 0; y < newTilemap.GetLength(0); y++)
+        for (int y = 1; y < newTilemap.GetLength(0); y++)
         {
-            for (int x = 0; x < newTilemap.GetLength(1); x++)
+            for (int x = 1; x < newTilemap.GetLength(1); x++)
             {
-                if (y == 0 || x == 0 || y == newTilemap.GetLength(0)-1 || x == newTilemap.GetLength(1)-1)
+                if (y == newTilemap.GetLength(0)-1 || x == newTilemap.GetLength(1)-1)
                 {
                     newTilemap[y,x] = 0;
                 }
@@ -103,8 +102,8 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         GameObject floorContainer = new("FloorContainer");
         floorContainer.transform.parent = d.assetContainer.transform;
         List<Vector2Int> visitedList = new();
-        Queue<Vector2Int> queue = new();
-        //queue.Initialize();
+        HashQueue<Vector2Int> queue = new();
+        queue.Initialize();
         queue.Enqueue(start);
         int floorSize = (int)floor.transform.lossyScale.x;
 
@@ -123,7 +122,6 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
             {
                 Vector2Int realPoint = pointToFill / floorSize * floorSize;
                 if (!visitedList.Contains(realPoint) && 
-                    !queue.Contains(realPoint) && 
                     (tilemap[
                         Mathf.Clamp(realPoint.y, 1, tilemap.GetLength(0)-2), 
                         Mathf.Clamp(realPoint.x, 1, tilemap.GetLength(1)-2)] == 0))
@@ -152,35 +150,10 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         yield return new();
         d.coroutineIsDone = true;
     }
-    public struct HashQueue<T>
-    {
-        HashSet<T> hashset;
-        public int Count;
-        public void Initialize()
-        {
-            hashset = new();
-            Count = hashset.Count;
-        }
-        public void Enqueue(T toAdd) 
-        { 
-            hashset.Add(toAdd);
-            Count = hashset.Count;
-        }
-        public T Dequeue()
-        {
-            T removed = hashset.ElementAt(0);
-            hashset.Remove(removed);
-            Count = hashset.Count;
-            return removed;
-        }
-    }
-
-
     static RectInt RectIntAddition(RectInt A, RectInt B)
     {
         return new(A.xMin + B.xMin, A.yMin + B.yMin, A.width + B.width, A.height + B.height);
     }
-
 
     public string ToString(bool flip)
     {
@@ -209,5 +182,28 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
     public void PrintTileMap()
     {
         Debug.Log(ToString(true));
+    }
+}
+public struct HashQueue<T>
+{
+    HashSet<T> hashSet;
+    public int Count;
+
+    public void Initialize()
+    {
+        Count = 0;
+        hashSet = new();
+    }
+    public void Enqueue(T element)
+    {
+        hashSet.Add(element);
+        Count = hashSet.Count;
+    }
+    public T Dequeue()
+    {
+        T value = hashSet.First();
+        hashSet.Remove(value);
+        Count = hashSet.Count;
+        return value;
     }
 }

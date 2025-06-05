@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.AI.Navigation;
-using UnityEditor;
 using UnityEngine;
 
 public class LameDungeonAssetGenerator : MonoBehaviour
@@ -13,6 +11,7 @@ public class LameDungeonAssetGenerator : MonoBehaviour
     public GameObject player;
     [Header("Coroutine speed")]
     public int assetsPerDelayWalls = 40;
+    public int assetsPerDelayFloors = 5;
     private int assetsDone;
 
     private void Awake() => d = this.GetComponent<DungeonGenerator>();
@@ -89,35 +88,34 @@ public class LameDungeonAssetGenerator : MonoBehaviour
 
     public IEnumerator GenerateFloor(GameObject floor)
     { 
-        // Generate floor
+        assetsDone = 0;
+        // room floors
         GameObject floorContainer = new GameObject("FloorContainer");
         foreach (RectInt room in d.rooms)
         {
             GameObject _floor = Instantiate(floor, new Vector3(room.center.x, 0, room.center.y),
                 Quaternion.identity, floorContainer.transform);
             _floor.transform.localScale = new Vector3(room.width - 2, 1, room.height - 2);
+            DungeonGenerator.DrawRectangle(room, .2f, Color.white, .5f);
             yield return new WaitForSeconds(d.generationInterval);
         }
-
+        // door flooors
         foreach (RectInt door in d.doors)
         {
             GameObject doorFloor = Instantiate(floor, new Vector3(door.center.x, 0, door.center.y),
             Quaternion.identity, floorContainer.transform);
             doorFloor.transform.localScale = new Vector3(door.width, 1, door.height);
-            yield return new WaitForSeconds(d.generationInterval);
+            DungeonGenerator.DrawRectangle(door, .2f, Color.white, .5f);
+            
+            assetsDone++;
+            if (assetsDone >= assetsPerDelayWalls)
+            {
+                yield return new WaitForSeconds(d.generationInterval);
+                assetsDone = 0;
+            }
         }
 
         yield return new();
         d.coroutineIsDone = true;
     }
-    public IEnumerator SpawnPlayer()
-    {
-        d.navMeshSurface.BuildNavMesh();
-        Destroy(Camera.main.gameObject);
-        Instantiate(player, new(d.GetOriginRoom().center.x, 0, d.GetOriginRoom().center.y), Quaternion.identity);
-
-        yield return new();
-        d.coroutineIsDone = true;
-    }
-
 }

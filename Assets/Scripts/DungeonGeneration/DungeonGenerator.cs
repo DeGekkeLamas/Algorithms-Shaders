@@ -1,12 +1,11 @@
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.AI.Navigation;
-using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(BetterDungeonAssetGenerator), typeof(LameDungeonAssetGenerator), typeof(DungeonAssetGenerator))]
 public class DungeonGenerator : MonoBehaviour
 {
     DungeonAssetGenerator da;
@@ -17,6 +16,7 @@ public class DungeonGenerator : MonoBehaviour
     [Tooltip("Leave as 0 to use a random seed")]
     public int seed;
     public bool shouldRemoveSmallestRooms;
+    [Range(0, 100)] public int percentSmallestRoomsToRemove = 10;
     public RectInt initialRoom = new(0, 0, 100, 100);
     RectInt originRoom;
     public enum GenerationType { Old, Cool, Lame} // Cool is for good requirements, lame is for sufficient requirements
@@ -78,64 +78,64 @@ public class DungeonGenerator : MonoBehaviour
         assetContainer = new GameObject("AssetContainer");
 
         coroutineIsDone = false;
-        StartCoroutine(GenerateRooms());
+        StartCoroutine(GenerateRooms()); // Rooms
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;
-        StartCoroutine(GenerateDoors());
+        StartCoroutine(GenerateDoors()); // Doors
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;
-        StartCoroutine(RemoveRooms());
-        yield return new WaitUntil(() => coroutineIsDone);
-        coroutineIsDone = false;
-        StartCoroutine(da.AssignRoomTypes());
+        StartCoroutine(RemoveRooms()); // Remove rooms
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;
         switch(generationType)
         {
             case GenerationType.Old:
-                StartCoroutine(da.GenerateInitialWalls());
+                StartCoroutine(da.AssignRoomTypes()); // Room types that serve no purpose outside of barely functional old generation
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
-                StartCoroutine(da.ModifyWalls());
+                StartCoroutine(da.GenerateInitialWalls()); // Walls
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
-                StartCoroutine(da.GenerateFloor());
+                StartCoroutine(da.ModifyWalls()); // Remove walls
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
-                StartCoroutine(da.Brickify());
+                StartCoroutine(da.GenerateFloor()); // Floor
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
-                StartCoroutine(da.SpawnObjects());
+                StartCoroutine(da.Brickify()); // Carve bricks
+                yield return new WaitUntil(() => coroutineIsDone);
+                coroutineIsDone = false;
+                StartCoroutine(da.SpawnObjects()); // Objects
                 yield return new WaitUntil(() => coroutineIsDone);
                 break;
             case GenerationType.Cool:
-                StartCoroutine(bda.GenerateTileMap());
+                StartCoroutine(bda.GenerateTileMap()); // Tilemap
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
-                StartCoroutine(bda.GenerateWalls());
+                StartCoroutine(bda.GenerateWalls()); // Walls
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
-                StartCoroutine(bda.GenerateFloor(Vector2Int.RoundToInt(originRoom.center)));
+                StartCoroutine(bda.GenerateFloor(Vector2Int.RoundToInt(originRoom.center))); // Floor
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
                 StartCoroutine(lda.GenerateFloor(bda.floorCollider)); // Add colliders
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
-                StartCoroutine(da.Brickify());
+                StartCoroutine(da.Brickify()); // Carve walls into bricks
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
-                StartCoroutine(bda.SpawnPlayer());
+                StartCoroutine(bda.SpawnPlayer()); // Player
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
                 break;
             case GenerationType.Lame:
-                StartCoroutine(lda.GenerateWalls());
+                StartCoroutine(lda.GenerateWalls()); // Walls
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
-                StartCoroutine(lda.GenerateFloor(lda.floor));
+                StartCoroutine(lda.GenerateFloor(lda.floor)); // Floor
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
-                StartCoroutine(lda.SpawnPlayer());
+                StartCoroutine(bda.SpawnPlayer()); // Player
                 yield return new WaitUntil(() => coroutineIsDone);
                 coroutineIsDone = false;
                 break;
@@ -176,7 +176,7 @@ public class DungeonGenerator : MonoBehaviour
     IEnumerator GenerateDoors()
     {
         // Door generation
-        int _tolerance = 3; // variable for determining if a door is too close to the edge of its room
+        const int _tolerance = 3; // variable for determining if a door is too close to the edge of its room
 
         for (int i = 0; i < rooms.Count; i++)
         {
@@ -203,7 +203,7 @@ public class DungeonGenerator : MonoBehaviour
                         _newDoor.height = doorWidth;
                     }
 
-
+                    // Remove corner doors
                     if (Mathf.Abs(rooms[i].center.x - _newDoor.center.x) > rooms[i].width / _tolerance &&
                         Mathf.Abs(rooms[i].center.y - _newDoor.center.y) > rooms[i].height / _tolerance ||
                         Mathf.Abs(rooms[j].center.x - _newDoor.center.x) > rooms[j].width / _tolerance &&
@@ -260,9 +260,6 @@ public class DungeonGenerator : MonoBehaviour
         }
         Debug.Log($"Removed {_roomsRemoved} inaccessible rooms, from {this}");
 
-        // Reset seed to random after generation
-        _random = new System.Random((int)DateTime.Now.Ticks);
-
         // Removes smallest rooms
         if (shouldRemoveSmallestRooms)
         {
@@ -271,14 +268,14 @@ public class DungeonGenerator : MonoBehaviour
             rooms = InvertList(rooms);
 
             int roomsRemoved = 0;
-            int roomsToRemove = rooms.Count / 10;
+            int roomsToRemove = rooms.Count * percentSmallestRoomsToRemove / 100;
 
             // Checks if all rooms remain accessible with this room removed
             for(int i = 0; i < rooms.Count && roomsRemoved < roomsToRemove; i++)
             {
                 RectInt room = rooms[i];
                 DrawRectangle(room, 5, Color.white, .5f);
-                yield return new WaitForSeconds(.1f);
+                yield return new WaitForSeconds(generationInterval);
 
                 // Skip if originroom, remove without graphcheck if 1 door
                 if (room == originRoom) continue;
@@ -304,7 +301,6 @@ public class DungeonGenerator : MonoBehaviour
                     roomsRemoved++;
                     continue;
                 }
-                Debug.Log($"{accessibleRoomsWoThis.Count}, {roomsWoThis.Count}");
             }
             Debug.Log($"Removed smallest {roomsRemoved} rooms");
         }
@@ -312,25 +308,6 @@ public class DungeonGenerator : MonoBehaviour
         Debug.Log("Dungeon drawing done!");
         if (disableVisualDebuggingAfterRoomGeneration) displayVisualDebugging = false;
         coroutineIsDone = true;
-    }
-
-    /// <summary>
-    /// Also works if lists contain same values in a different order
-    /// </summary>
-    static bool ListsAreEqual<T>(List<T> list1, List<T> list2)
-    {
-        if (list1.Count == list2.Count)
-        {
-            for (int i = 0; i < list1.Count; i++)
-            {
-                if (!list1.Contains(list2[i]))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
     }
     void RemoveRoom(RectInt roomToRemove)
     {
@@ -367,21 +344,6 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
         return biggestIndex;
-    }
-    int GetSmallestRoom(out int smallesttIndex)
-    {
-        smallesttIndex = 0;
-        RectInt smallestRoom = originRoom;
-
-        for (int i = 0; i < rooms.Count; i++)
-        {
-            if (rooms[i].size.magnitude < smallestRoom.size.magnitude)
-            {
-                smallesttIndex = i;
-                smallestRoom = rooms[i];
-            }
-        }
-        return smallesttIndex;
     }
     int GetNearestToOrigin()
     {
