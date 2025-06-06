@@ -6,9 +6,9 @@ Shader "Custom/VelocityStretch"
 	{
 		_Color("Color", Color) = (1,1,1,1)
 		_Velocity ("Velocity", Vector) = (0, 0, 0)
-		_Ambient("Ambient", Float) = 0
 		_Intensity("Intensity", Float) = 1
-		_Radius("Radius", FLoat) = 1
+		_Radius("Radius", Float) = 1
+		_Sharpness("Sharpness", Float) = 1
 	}
 	SubShader
 	{
@@ -39,27 +39,37 @@ Shader "Custom/VelocityStretch"
 
 			float4 _Color;
 			float4 _Velocity;
-			float _Ambient;
 			float _Intensity;
 			float _Radius;
+			float _Sharpness;
 
 			output vert(input v)
 			{
 				const float pi = 3.14159;
 				output o;
 
+				// rotated, scaled, but no translation
 				float translate = v.vertex.w;
 				v.vertex.w = 0;
-				float4 world = mul(UNITY_MATRIX_M, v.vertex);
+				float4 world = mul(UNITY_MATRIX_M, v.vertex); 
 
 				_Velocity *= _Intensity;
-				float4 velocityDir = normalize(_Velocity);
-				float4 reflection = reflect(velocityDir, world);
+				float4 velocityDir = float4(0,0,0,0);
+				float velocityLength = length(_Velocity);
+				if (velocityLength != 0) 
+				{
+					velocityDir = _Velocity / velocityLength;
+				}
 
-				float x = length(reflection/_Radius)/_Radius;
-				world *= pow( ( sin( (x+.5)*pi)+1)/2, 1 ) * length(_Velocity) + 1;
+				// Using Section 5.2.2 of gamemath book:
+				// vector projection formula:
+				float4 parallel = dot(world,velocityDir) * _Velocity; // w=0
+				float4 perpendicular = world-parallel; // w=0
 
-				world += mul(UNITY_MATRIX_M, float4(0,0,0,translate));
+				world = parallel * (1+_Intensity) + perpendicular / sqrt(1+_Intensity);
+
+				// add world position of GO
+				world += mul(UNITY_MATRIX_M, float4(0,0,0,translate)); 
 				o.vertex = mul(UNITY_MATRIX_VP, world);
 
 				return o;
@@ -68,7 +78,6 @@ Shader "Custom/VelocityStretch"
 			fixed4 frag(output i) : SV_Target
 			{
 				fixed4 col = _Color;
-				col = col *	(_Ambient + (1 - _Ambient) * saturate(i.normal.y)); // VERY basic lighting. TODO LATER: improve
 				return col;
 			}
 			ENDCG
