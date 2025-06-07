@@ -206,23 +206,23 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
 public struct HashQueue<T>
 {
     HashSet<T> hashSet;
-    public int Count;
+    Queue<T> queue;
+    public int Count { get { return hashSet.Count; } }
 
     public void Initialize()
     {
-        Count = 0;
         hashSet = new();
+        queue = new();
     }
     public void Enqueue(T element)
     {
-        hashSet.Add(element);
-        Count = hashSet.Count;
+        if (hashSet.Add(element)) queue.Enqueue(element);
+        
     }
     public T Dequeue()
     {
-        T value = hashSet.First();
+        T value = queue.Dequeue();
         hashSet.Remove(value);
-        Count = hashSet.Count;
         return value;
     }
 }

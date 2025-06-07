@@ -43,6 +43,7 @@ public class DungeonGenerator : MonoBehaviour
     public List<RectInt> removedObjects = new(1);
     Graph<Vector2> _dungeonGraph = new();
     System.Random _random = new();
+    List<Vector2> _accessibleRooms = new();
 
     private void OnValidate()
     {
@@ -84,7 +85,10 @@ public class DungeonGenerator : MonoBehaviour
         StartCoroutine(GenerateDoors()); // Doors
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;
-        StartCoroutine(RemoveRooms()); // Remove rooms
+        StartCoroutine(RemoveUnreachableRooms()); // Check for room accessibility and delete unreachable rooms
+        yield return new WaitUntil(() => coroutineIsDone);
+        coroutineIsDone = false;
+        StartCoroutine(RemoveSmallestRooms()); // Remove smallest rooms if enabled
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;
         switch(generationType)
@@ -235,9 +239,9 @@ public class DungeonGenerator : MonoBehaviour
         coroutineIsDone = true;
     }
     /// <summary>
-    /// Remove unreachable rooms and smallest rooms if enabled
+    /// Check for room accessibility and delete unreachable rooms
     /// </summary>
-    IEnumerator RemoveRooms()
+    IEnumerator RemoveUnreachableRooms()
     {
         // Removes rooms with 0 doors
         int roomsRemovedAccessibility = 0;
@@ -253,12 +257,12 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         // removes rooms with doors but no way to reach origin
-        List<Vector2> accessibleRooms = _dungeonGraph.BFS(_originRoom.center);
+        _accessibleRooms = _dungeonGraph.BFS(_originRoom.center);
 
         List<Vector2> roomsToRemove = new();
         foreach (KeyValuePair<Vector2, List<Vector2>> point in _dungeonGraph._adjacencyList)
         {
-            if (!accessibleRooms.Contains(point.Key)) roomsToRemove.Add(point.Key);
+            if (!_accessibleRooms.Contains(point.Key)) roomsToRemove.Add(point.Key);
         }
 
         foreach (Vector2 room in roomsToRemove)
@@ -268,7 +272,13 @@ public class DungeonGenerator : MonoBehaviour
             yield return new WaitForSeconds(generationInterval);
         }
         Debug.Log($"Removed {roomsRemovedAccessibility} inaccessible rooms, from {this}");
-
+        coroutineIsDone = true;
+    }
+    /// <summary>
+    /// Removes smallest rooms if enabled
+    /// </summary>
+    IEnumerator RemoveSmallestRooms()
+    {
         // Removes smallest rooms
         if (shouldRemoveSmallestRooms)
         {
@@ -280,7 +290,7 @@ public class DungeonGenerator : MonoBehaviour
             int roomsToRemoveQTY = rooms.Count * percentSmallestRoomsToRemove / 100;
 
             // Checks if all rooms remain accessible with this room removed
-            for(int i = 0; i < rooms.Count && roomsRemovedSmallest < roomsToRemoveQTY; i++)
+            for (int i = 0; i < rooms.Count && roomsRemovedSmallest < roomsToRemoveQTY; i++)
             {
                 RectInt room = rooms[i];
                 DrawRectangle(room, 5, Color.white, .5f);
@@ -295,7 +305,7 @@ public class DungeonGenerator : MonoBehaviour
                     continue;
                 }
 
-                List<Vector2> roomsWoThis = new(accessibleRooms);
+                List<Vector2> roomsWoThis = new(_accessibleRooms);
                 roomsWoThis.Remove(room.center);
                 List<Vector2> accessibleRoomsWoThis = _dungeonGraph.BFSWithout(_originRoom.center, room.center);
 
@@ -303,9 +313,9 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     foreach (var door in _dungeonGraph.GetNeighbours(room.center))
                     {
-                        accessibleRooms.Remove(door);
+                        _accessibleRooms.Remove(door);
                     }
-                    accessibleRooms.Remove(room.center);
+                    _accessibleRooms.Remove(room.center);
                     RemoveRoom(room);
                     roomsRemovedSmallest++;
                     continue;
@@ -315,9 +325,10 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         Debug.Log("Dungeon drawing done!");
-        if (disableVisualDebuggingAfterRoomGeneration) displayVisualDebugging = false;
         coroutineIsDone = true;
+        yield return null;
     }
+
     /// <summary>
     /// Remove a room, also removes it and its attached doors from the dungeongraph
     /// </summary>

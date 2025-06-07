@@ -6,8 +6,10 @@ Shader "Custom/VelocityStretch"
 	{
 		_Color("Color", Color) = (1,1,1,1)
 		_Velocity ("Velocity", Vector) = (0, 0, 0)
+		_Reflectiveness("Reflectiveness", Float) = 16
+		_CellShadeLoops("Cell shade loops", Integer) = 3
+		_Emissiveness("Emissiveness", Float) = 0
 		_Intensity("Intensity", Float) = 1
-		_Radius("Radius", Float) = 1
 		_Sharpness("Sharpness", Float) = 1
 	}
 	SubShader
@@ -22,6 +24,7 @@ Shader "Custom/VelocityStretch"
 			#pragma fragment frag
 
 			#include "UnityCG.cginc"
+			#include "UnityLightingCommon.cginc"
 
 			struct input
 			{
@@ -35,12 +38,15 @@ Shader "Custom/VelocityStretch"
 				float2 uv : TEXCOORD0;
 				float4 vertex : SV_POSITION;
 				float4 normal : NORMAL;
+				float4 worldPos : TEXCOORD2;
 			};
 
 			float4 _Color;
 			float4 _Velocity;
+			float _Reflectiveness;
+			int _CellShadeLoops;
+			float _Emissiveness;
 			float _Intensity;
-			float _Radius;
 			float _Sharpness;
 
 			output vert(input v)
@@ -72,12 +78,40 @@ Shader "Custom/VelocityStretch"
 				world += mul(UNITY_MATRIX_M, float4(0,0,0,translate)); 
 				o.vertex = mul(UNITY_MATRIX_VP, world);
 
+				// Stuff for lighting
+				float4 noTranslate = v.normal;
+				noTranslate.w = 0;
+				float4 mat = mul(UNITY_MATRIX_M, noTranslate);
+				o.normal = normalize(mat);
+				o.worldPos = mul(UNITY_MATRIX_M, v.vertex);
+
 				return o;
 			}
 
 			fixed4 frag(output i) : SV_Target
 			{
 				fixed4 col = _Color;
+
+				// Lighting
+				float4 lightDir = _WorldSpaceLightPos0;
+				float4 lightColor = _LightColor0;
+				float4 ambientColor = (float4(1,1,1,1) - lightColor);
+				float3 cameraDir = _WorldSpaceCameraPos;
+				// Diffuse
+				float diffuse = saturate(dot(lightDir, i.normal));
+				// Specular
+				float3 reflectionDir = normalize(cameraDir - i.worldPos);
+				float4 reflection = reflect(float4(-reflectionDir, 0), normalize(i.normal));
+				float specular = dot(reflection, lightDir);
+				specular = pow( specular, _Reflectiveness);
+				float4 specular4 = saturate( float4(specular.xxx, 0) * lightColor );
+				diffuse += specular4;
+				// Cell shade conversion
+				diffuse = ceil(diffuse * _CellShadeLoops + pow(_CellShadeLoops, -1)) / _CellShadeLoops;
+				 
+				col *= (diffuse + ambientColor) * lightColor;
+				col *= 1 + _Emissiveness;
+
 				return col;
 			}
 			ENDCG

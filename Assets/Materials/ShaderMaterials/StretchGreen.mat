@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StretchWhite
+  m_Name: StretchGreen
   m_Shader: {fileID: 4800000, guid: 1808c0ef279a02442a47ddbe5bdf24dd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -94,12 +94,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints:
-    - _CellShadeLoops: 2
+    - _CellShadeLoops: 3
     m_Floats:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Ambient: 1
+    - _Ambient: 0.3
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -116,14 +116,14 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Intensity: 0.25
+    - _Intensity: 0.375
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _Radius: 1
     - _ReceiveShadows: 1
-    - _Reflectiveness: 4
+    - _Reflectiveness: 16
     - _Sharpness: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -135,12 +135,12 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.84313726, g: 0.8352941, b: 0.8352941, a: 1}
+    - _Color: {r: 0.36862746, g: 0.68235296, b: 0.4392157, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Position: {r: 0, g: 0, b: 0, a: 1}
-    - _Rotation: {r: 0, g: 0, b: 0, a: 0}
+    - _Rotation: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Velocity: {r: 0, g: 0, b: 0, a: 0}
-    - _VelocityRotation: {r: 0, g: 0, b: 0, a: 0}
+    - _VelocityRotation: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -8806985211751940049}
   - component: {fileID: -4791254542994142077}
   - component: {fileID: 7891199860114195892}
+  - component: {fileID: 794499156652449697}
   m_Layer: 7
   m_Name: WaterGlassProjectile
   m_TagString: Untagged
@@ -68,8 +69,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 08215070415f0354093445310b501e71, type: 2}
-  - {fileID: 2100000, guid: c0b5345ccefbdeb4dac6d87bd5e9424a, type: 2}
+  - {fileID: 2100000, guid: 31f957464f33b244fa5aa2a9be5350b0, type: 2}
+  - {fileID: 2100000, guid: 84950fde795ede140a8e3fab4303bed5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,3 +186,15 @@ CapsuleCollider:
   m_Height: 60
   m_Direction: 1
   m_Center: {x: -0.00000047683716, y: 0, z: 0.00000047683716}
+--- !u!114 &794499156652449697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97514727698275135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7aec3dcef8f3b0c428809690303852ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

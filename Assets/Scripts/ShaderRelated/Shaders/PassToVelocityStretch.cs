@@ -4,14 +4,17 @@ using UnityEngine;
 public class PassToVelocityStretch : MonoBehaviour
 {
     Rigidbody r;
-    Material velocityStretch;
+    Material[] velocityStretch;
     private void Awake()
     {
         r = GetComponent<Rigidbody>();
-        velocityStretch = GetComponent<MeshRenderer>().material;
+        velocityStretch = GetComponent<MeshRenderer>().materials;
     }
     void Update()
     {
-        velocityStretch.SetVector("_Velocity", r.linearVelocity);
+        foreach(Material mat in velocityStretch)
+        {
+            mat.SetVector("_Velocity", r.linearVelocity);
+        }
     }
 }
