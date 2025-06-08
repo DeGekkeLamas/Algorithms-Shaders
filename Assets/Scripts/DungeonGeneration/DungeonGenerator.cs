@@ -271,7 +271,9 @@ public class DungeonGenerator : MonoBehaviour
             roomsRemovedAccessibility++;
             yield return new WaitForSeconds(generationInterval);
         }
-        Debug.Log($"Removed {roomsRemovedAccessibility} inaccessible rooms, from {this}");
+        if (roomsRemovedAccessibility != 0) Debug.Log($"Removed {roomsRemovedAccessibility} inaccessible rooms");
+        else Debug.Log("All rooms were accessible, no rooms had to be removed");
+
         coroutineIsDone = true;
     }
     /// <summary>
