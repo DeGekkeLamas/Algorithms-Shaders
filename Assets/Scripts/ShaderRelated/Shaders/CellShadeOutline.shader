@@ -70,9 +70,7 @@ Shader "Custom/CellShadeOutline"
 
 			fixed4 frag(output i) : SV_Target
 			{
-				float4 col;
-
-				col = tex2D(_MainTex, i.uv) * _Color;
+				float4 col = tex2D(_MainTex, i.uv) * _Color;
 
 				// Lighting
 				float4 lightDir = _WorldSpaceLightPos0;

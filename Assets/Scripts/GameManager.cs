@@ -7,10 +7,7 @@ public class GameManager : MonoBehaviour
     Inventory inventory;
 
     [Header("UI")]
-    public GameObject hotBar;
     public GameObject itemDescription;
-    public Vector3 battleUIPosition;
-    public Vector3 overworldUIPosition;
 
     bool shouldUpdateInventory;
 
@@ -29,7 +26,6 @@ public class GameManager : MonoBehaviour
     {
         isInBattle = true;
         itemDescription.SetActive(true);
-        hotBar.transform.position = battleUIPosition;
 
         shouldUpdateInventory = true;
 
@@ -50,7 +46,6 @@ public class GameManager : MonoBehaviour
     {
         isInBattle = false;
         itemDescription.SetActive(false);
-        hotBar.transform.position = overworldUIPosition;
         for (int i = 0; i < inventory.currentInventory.Length; i++) inventory.UpdateInventory(i);
         Debug.Log("Ended battle");
     }

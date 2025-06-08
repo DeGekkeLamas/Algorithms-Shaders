@@ -4,13 +4,13 @@ Shader "Custom/VelocityStretch"
 {
 	Properties
 	{
+		_MainTex("Texture", 2D) = "white" {}
 		_Color("Color", Color) = (1,1,1,1)
 		_Velocity ("Velocity", Vector) = (0, 0, 0)
 		_Reflectiveness("Reflectiveness", Float) = 16
 		_CellShadeLoops("Cell shade loops", Integer) = 3
 		_Emissiveness("Emissiveness", Float) = 0
 		_Intensity("Intensity", Float) = 1
-		_Sharpness("Sharpness", Float) = 1
 	}
 	SubShader
 	{
@@ -40,19 +40,19 @@ Shader "Custom/VelocityStretch"
 				float4 normal : NORMAL;
 				float4 worldPos : TEXCOORD2;
 			};
-
+			
+			sampler2D _MainTex;
 			float4 _Color;
 			float4 _Velocity;
 			float _Reflectiveness;
 			int _CellShadeLoops;
 			float _Emissiveness;
 			float _Intensity;
-			float _Sharpness;
 
 			output vert(input v)
 			{
-				const float pi = 3.14159;
 				output o;
+				o.uv = v.uv;
 
 				// rotated, scaled, but no translation
 				float translate = v.vertex.w;
@@ -90,7 +90,7 @@ Shader "Custom/VelocityStretch"
 
 			fixed4 frag(output i) : SV_Target
 			{
-				fixed4 col = _Color;
+				fixed4 col = tex2D(_MainTex, i.uv) * _Color;
 
 				// Lighting
 				float4 lightDir = _WorldSpaceLightPos0;
