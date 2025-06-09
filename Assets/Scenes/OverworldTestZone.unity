@@ -3173,7 +3173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f44c65f842535740b33da7fd7689af9, type: 2}
+  - {fileID: 2100000, guid: eba662a3e26cc85418749e1e9b8110cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7551,7 +7551,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f44c65f842535740b33da7fd7689af9, type: 2}
+  - {fileID: 2100000, guid: eba662a3e26cc85418749e1e9b8110cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21246,7 +21246,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.1
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 3fb686a8a2bdd88409acedfbb3743442, type: 2}
   m_BuildHeightMesh: 0

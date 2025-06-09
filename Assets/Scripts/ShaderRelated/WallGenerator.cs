@@ -64,6 +64,7 @@ public class WallGenerator : MonoBehaviour
             else offset.x -= Mathf.Abs(this.transform.position.z % width);
         }
         Vector3 initialOffset = offset;
+        Vector3 brickRatio = new Vector3(width, height, depth) / Mathf.Max(width, height);
 
         // continue generation vertically
         for (int i = 0; i < Mathf.Ceil(originalScale.y / height); i++)
@@ -72,30 +73,50 @@ public class WallGenerator : MonoBehaviour
             for (int j = 0; j < Mathf.Ceil((generateOverXAxis ? originalScale.x : originalScale.z) / width) + (i % 2 != 0 ? 1 : 0); j++)
             {
                 //side left
-                int v0 = sideBuilder.AddVertex(origin + offset + new Vector3(0, 0, 0));
-                int v1 = sideBuilder.AddVertex(origin + offset + new Vector3(0, height, 0));
-                int v2 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth));
-                int v3 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth));
+                int v0 = sideBuilder.AddVertex(origin + offset + new Vector3(0, 0, 0),
+                    new());
+                int v1 = sideBuilder.AddVertex(origin + offset + new Vector3(0, height, 0),
+                    new(0, brickRatio.y));
+                int v2 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth),
+                    new(brickRatio.z, brickRatio.z));
+                int v3 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth), 
+                    new(brickRatio.z, brickRatio.y - brickRatio.z));
                 // side right
-                int v4 = sideBuilder.AddVertex(origin + offset + new Vector3(width, 0, 0));
-                int v5 = sideBuilder.AddVertex(origin + offset + new Vector3(width, height, 0));
-                int v6 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth));
-                int v7 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth));
+                int v4 = sideBuilder.AddVertex(origin + offset + new Vector3(width, 0, 0),
+                    new(brickRatio.x, 0));
+                int v5 = sideBuilder.AddVertex(origin + offset + new Vector3(width, height, 0),
+                    new(brickRatio.x, brickRatio.y));
+                int v6 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth), 
+                    new(brickRatio.x - brickRatio.z, brickRatio.z));
+                int v7 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth),
+                    new(brickRatio.x - brickRatio.z, brickRatio.y - brickRatio.z));
                 // bottom
-                int v8 = sideBuilder.AddVertex(origin + offset + new Vector3(0, 0, 0));
-                int v9 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth));
-                int v10 = sideBuilder.AddVertex(origin + offset + new Vector3(width, 0, 0));
-                int v11 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth));
+                int v8 = sideBuilder.AddVertex(origin + offset + new Vector3(0, 0, 0),
+                    new());
+                int v9 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth),
+                    new(brickRatio.z, brickRatio.z));
+                int v10 = sideBuilder.AddVertex(origin + offset + new Vector3(width, 0, 0),
+                    new(brickRatio.x, 0));
+                int v11 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth), 
+                    new(brickRatio.x - brickRatio.z, brickRatio.z));
                 // top
-                int v12 = sideBuilder.AddVertex(origin + offset + new Vector3(0, height, 0));
-                int v13 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth));
-                int v14 = sideBuilder.AddVertex(origin + offset + new Vector3(width, height, 0));
-                int v15 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth));
+                int v12 = sideBuilder.AddVertex(origin + offset + new Vector3(0, height, 0),
+                    new(0, brickRatio.y));
+                int v13 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth),
+                    new(brickRatio.z, brickRatio.y - brickRatio.z));
+                int v14 = sideBuilder.AddVertex(origin + offset + new Vector3(width, height, 0),
+                    new(brickRatio.x, brickRatio.y));
+                int v15 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth),
+                    new(brickRatio.x - brickRatio.z, brickRatio.y - brickRatio.z));
                 // front
-                int v16 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth));
-                int v17 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth));
-                int v18 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth));
-                int v19 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth));
+                int v16 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth), 
+                    new(brickRatio.z, brickRatio.z));
+                int v17 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth), 
+                    new(brickRatio.z, brickRatio.y - brickRatio.z));
+                int v18 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth), 
+                    new(brickRatio.x - brickRatio.z, brickRatio.y - brickRatio.z));
+                int v19 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth), 
+                    new(brickRatio.x - brickRatio.z, brickRatio.z));
 
                 //side left
                 sideBuilder.AddTriangle(v1, v2, v0);
