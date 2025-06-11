@@ -4,7 +4,9 @@ Shader "Custom/Triplanar"
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		_Ambient("Ambient", Float) = 0.05
+		_Reflectiveness("Reflectiveness", Float) = 16
+		_CellShadeLoops("Cell shade loops", Integer) = 3
+		_BlendStrength("Blend strength", Float) = 1
 	}
 	SubShader
 	{
@@ -36,7 +38,9 @@ Shader "Custom/Triplanar"
 
 			float4 _MainTex_ST;
 			sampler2D _MainTex;
-			float _Ambient;
+			float _Reflectiveness;
+			int _CellShadeLoops;
+			float _BlendStrength;
 
 			output vert(input v)
 			{
@@ -62,29 +66,32 @@ Shader "Custom/Triplanar"
 				float4 colX = tex2D(_MainTex, i.coords.yz / _MainTex_ST.xy); // tiling hm,...
 				float4 colY = tex2D(_MainTex, i.coords.xz / _MainTex_ST.xy);
 				float4 colZ = tex2D(_MainTex, i.coords.xy / _MainTex_ST.xy);
-				float3 blendWeight = abs(i.normal);
-				//blendWeight = pow(blendWeight,50); // ?
-
-				// suppose normal = (0.7,0.7,0)
-				blendWeight /= dot(blendWeight, 1); // WHAT IS HAPPENING HERE???
-				// dot = 0.7+0.7+0 = 1.4
-				// now normal = (0.5,0.5,0)
+				// blendWeight blends the color if multple sampled colors have values
+				float3 blendWeight = pow( abs(i.normal), _BlendStrength);
+				// ensures total sum of the components in blendWeight is 1
+				blendWeight /= dot(blendWeight, 1);
 				
 				col = colX * blendWeight.x + colY * blendWeight.y + colZ * blendWeight.z;
 
-				//Lighting
+				
+				// Lighting
 				float4 lightDir = _WorldSpaceLightPos0;
 				float4 lightColor = _LightColor0;
-				float4 ambientColor = (float4(1,1,1,1) - lightColor) * _Ambient;
-				float3 cameraDir = normalize(_WorldSpaceCameraPos);
-
+				float4 ambientColor = (float4(1,1,1,1) - lightColor);
+				float3 cameraDir = _WorldSpaceCameraPos;
+				// Diffuse
 				float diffuse = saturate(dot(lightDir, i.normal));
-
-				//float cartoonLoops = 3;
-				//diffuse = ceil(diffuse * cartoonLoops) / cartoonLoops;
-				float reflection = saturate( lightDir - dot(2*dot(lightDir, cameraDir), cameraDir) ); // ????
-
-				col *= diffuse * lightColor + ambientColor;
+				// Specular
+				float3 reflectionDir = normalize(cameraDir - i.coords);
+				float4 reflection = reflect(float4(-reflectionDir, 0), normalize(i.normal));
+				float specular = dot(reflection, lightDir);
+				specular = pow( specular, _Reflectiveness);
+				float4 specular4 = saturate( float4(specular.xxx, 0) * lightColor );
+				diffuse += specular4;
+				// Cell shade conversion
+				diffuse = ceil(diffuse * _CellShadeLoops + pow(_CellShadeLoops, -1)) / _CellShadeLoops;
+				 
+				col *= (diffuse + ambientColor) * lightColor;
 
 				return col;
 			}
