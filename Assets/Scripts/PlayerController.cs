@@ -42,16 +42,21 @@ public class PlayerController : MonoBehaviour
         // Checks for mouse position on right mouse click for interaction
         if (Input.GetMouseButtonDown(1))
         {
-            (bool, RaycastHit) otherRayHit = GetCamCast(~LayerMask.GetMask("Terrain"));
-            if (otherRayHit.Item1)
+            (bool, RaycastHit) rayHit = GetCamCast(~LayerMask.GetMask("Terrain"));
+            if (rayHit.Item1)
             {
-                Debug.DrawLine(Camera.main.transform.position, otherRayHit.Item2.point, Color.blue, 1);
+                Debug.DrawLine(Camera.main.transform.position, rayHit.Item2.point, Color.blue, 1);
 
-                if (otherRayHit.Item2.collider.gameObject.TryGetComponent<PickupItem>(out PickupItem item))
+                if (rayHit.Item2.collider.gameObject.TryGetComponent<PickupItem>(out PickupItem item))
                 {
                     bool couldAdd = inventory.AddItem(item.itemToGive);
-                    if (couldAdd) Destroy(otherRayHit.Item2.collider.gameObject);
+                    if (couldAdd) Destroy(rayHit.Item2.collider.gameObject);
                     canUseItem = false;
+                }
+                else if (rayHit.Item2.transform.CompareTag("Sink"))
+                {
+                    inventory.AddItem(ItemPresets.presets["WaterGlass"]);
+                    return;
                 }
             }
         }

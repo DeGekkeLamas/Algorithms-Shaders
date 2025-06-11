@@ -148,7 +148,7 @@ public class EnemyFollower : MonoBehaviour
             Debug.Log($"Hit by projecile {other.gameObject.name}");
             GameManager manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
             if (hitProjectile != null) Death();
-            else manager.StartBattle();
+            //else manager.StartBattle();
         }
     }
     void Death()

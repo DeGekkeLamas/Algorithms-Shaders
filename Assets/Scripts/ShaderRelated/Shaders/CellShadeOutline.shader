@@ -11,18 +11,11 @@ Shader "Custom/CellShadeOutline"
 	}
 	SubShader
 	{
-		// Tags {
-		// 	"RenderType" = "Transparent"
-		// 	"Queue" = "Transparent"
-		// 	}
-		// Blend SrcAlpha OneMinusSrcAlpha
-		// Cull Back
 		LOD 100
-		//ZWrite Off
 
 		Pass
 		{
-
+			Name "CellShadeOutline"
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
@@ -90,6 +83,7 @@ Shader "Custom/CellShadeOutline"
 				diffuse = ceil(diffuse * _CellShadeLoops + pow(_CellShadeLoops, -1)) / _CellShadeLoops;
 				 
 				col *= (diffuse + ambientColor) * lightColor;
+				col.a = 1 * _Transparency;
 				col *= 1 + _Emissiveness;
 
 				return col;
