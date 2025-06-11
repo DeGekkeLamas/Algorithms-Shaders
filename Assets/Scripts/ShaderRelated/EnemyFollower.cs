@@ -59,7 +59,7 @@ public class EnemyFollower : MonoBehaviour
             if (playerEnemyDistance < battleStartDistance)
             {
                 GameManager manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-                manager.StartBattle();
+                //manager.StartBattle();
             }
         }
         else
