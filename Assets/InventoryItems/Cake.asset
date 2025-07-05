@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fa68591495e844caca24b89cb97a2e, type: 3}
+  m_Name: Cake
+  m_EditorClassIdentifier: 
+  item:
+    itemName: Cake
+    itemSprite: {fileID: 0}
+    itemModel: {fileID: 919132149155446097, guid: ea0587121e2211f4ebe4031e6597257e, type: 3}
+    toolTip: Just as caked out as your mom.
+    isStackable: 0
+    maxStack: 1
+    amountLeft: 1
+    durability: 0
+    currentDurability: 0
+    damage: 25
+    hpHealed: 0
+    amountOfTargets: 1
+    targetAll: 0
+    amountOfHits: 1
+    slotIsEmty: 0
+    isConsumedOnUse: 1
+    isFood: 1
+    isMetal: 0
+    isKnife: 0
+    isEmptyMicrowave: 0
+    inflictOnFire: 0
+    inflictPoisoned: 0
+    inflictBlindness: 1
+    onAttackHealHP: 0
+    inflictStuck: 0
+    damageScalesWithHP: 0
+    knifeBoost: 0
+    foodBoost: 0
+    foodResistanceBoost: 0
+    fireImmunity: 0
+    seeEnemyInventories: 0
+    durabilityBoost: 0
+    healingBoost: 0
+    consumesBread: 0
+    curesOnFireWhenConsumed: 0
+    damageAfterBlock: 0
+    grantsImmortality: 0
+    isStoveIngredient: 0
+    canAttack: 1
+    canBlock: 0
+    canConsume: 0
+    canThrow: 1
+    hasOverworldUses: 0
+    projectile: {fileID: 0}
+    autoFire: 0
+    cooldown: 0
+    cooldownLeft: 0

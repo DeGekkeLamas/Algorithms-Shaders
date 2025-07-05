@@ -3,20 +3,21 @@ using UnityEngine;
 
 public class ItemPresets : MonoBehaviour
 {
-    public static Dictionary<string, InventoryItem> presets = new Dictionary<string, InventoryItem>();
+    public static Dictionary<string, InventoryItemData> presets = new Dictionary<string, InventoryItemData>();
+    public InventoryItem[] items;
     public GameObject[] itemModels;
     public GameObject placeholderModel;
     public Rigidbody[] projectiles;
     public Rigidbody placeholderProjectile;
     private void Awake()
     {
-        presets["Apron"] = new InventoryItem
+        presets["Apron"] = new InventoryItemData
         {
             itemName = "Apron",
             foodResistanceBoost = true,
             toolTip = "What does your grandma's death have to do with the blo- tomato stains on this?"
         };
-        presets["Baguette"] = new InventoryItem
+        presets["Baguette"] = new InventoryItemData
         {
             itemName = "Baguette",
             isFood = true,
@@ -25,7 +26,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "A French katana, or a French Japanese sword.",
             canAttack = true,
         };
-        presets["Banana"] = new InventoryItem
+        presets["Banana"] = new InventoryItemData
         {
             itemName = "Banana",
             isConsumedOnUse = true,
@@ -37,7 +38,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Will you use this as gun or as a phone? Will you pick the dark side or the light side?",
             hasOverworldUses = true,
         };
-        presets["Bread"] = new InventoryItem
+        presets["Bread"] = new InventoryItemData
         {
             itemName = "Bread",
             isStackable = true,
@@ -45,7 +46,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Hansel and Gretel GPS.",
             isStoveIngredient = true,
         };
-        presets["Butter"] = new InventoryItem
+        presets["Butter"] = new InventoryItemData
         {
             itemName = "Butter",
             damage = 10,
@@ -55,7 +56,7 @@ public class ItemPresets : MonoBehaviour
             canThrow = true,
             hasOverworldUses = true,
         };
-        presets["Cake"] = new InventoryItem
+        presets["Cake"] = new InventoryItemData
         {
             itemName = "Cake",
             isConsumedOnUse = true,
@@ -66,7 +67,7 @@ public class ItemPresets : MonoBehaviour
             canThrow = true,
             hasOverworldUses = true,
         };
-        presets["CakeKnife"] = new InventoryItem
+        presets["CakeKnife"] = new InventoryItemData
         {
             itemName = "Cake knife",
             damage = 60,
@@ -77,7 +78,7 @@ public class ItemPresets : MonoBehaviour
             canAttack = true,
             isStoveIngredient = true,
         };
-        presets["Cheese"] = new InventoryItem
+        presets["Cheese"] = new InventoryItemData
         {
             itemName = "Cheese",
             isConsumedOnUse = true,
@@ -87,7 +88,7 @@ public class ItemPresets : MonoBehaviour
             isStoveIngredient = true,
             hasOverworldUses = true,
         };
-        presets["CheesePizza"] = new InventoryItem
+        presets["CheesePizza"] = new InventoryItemData
         {
             itemName = "Cheese pizza",
             damage = 25,
@@ -100,13 +101,13 @@ public class ItemPresets : MonoBehaviour
             hasOverworldUses = true,
             cooldown = 0.5f,
         };
-        presets["ChefHat"] = new InventoryItem
+        presets["ChefHat"] = new InventoryItemData
         {
             itemName = "Chef hat",
             foodBoost = true,
             toolTip = "A crown, only effective in the kitchen."
         };
-        presets["CryingPan"] = new InventoryItem
+        presets["CryingPan"] = new InventoryItemData
         {
             itemName = "Crying pan",
             damage = 60,
@@ -118,7 +119,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Why the long handle?",
             isStoveIngredient = true,
         };
-        presets["CuttingBoard"] = new InventoryItem
+        presets["CuttingBoard"] = new InventoryItemData
         {
             itemName = "Cutting board",
             durability = 50,
@@ -126,7 +127,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Great for cutting, or as a shield, depends on how good you are at cooking.",
             canBlock = true
         };
-        presets["DryingPan"] = new InventoryItem
+        presets["DryingPan"] = new InventoryItemData
         {
             itemName = "Drying pan",
             damage = 60,
@@ -138,7 +139,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "I'm gonna use my frying pan as a drying pan!",
             isStoveIngredient = true,
         };
-        presets["DyingPan"] = new InventoryItem
+        presets["DyingPan"] = new InventoryItemData
         {
             itemName = "Dying pan",
             damage = 80,
@@ -150,7 +151,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Not to be confused with a dyeing pan.",
             isStoveIngredient = true,
         };
-        presets["Egg"] = new InventoryItem
+        presets["Egg"] = new InventoryItemData
         {
             itemName = "Egg",
             isConsumedOnUse = true,
@@ -162,13 +163,13 @@ public class ItemPresets : MonoBehaviour
             canThrow = true,
             hasOverworldUses = true,
         };
-        presets["EmptyMicrowave"] = new InventoryItem
+        presets["EmptyMicrowave"] = new InventoryItemData
         {
             itemName = "Empty microwave",
             isEmptyMicrowave = true,
             toolTip = "Great for storing your favorite metal objects!",
         };
-        presets["Fork"] = new InventoryItem
+        presets["Fork"] = new InventoryItemData
         {
             itemName = "Fork",
             damage = 25,
@@ -179,7 +180,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "What the fork",
             isStoveIngredient = true,
         };
-        presets["FryingPan"] = new InventoryItem
+        presets["FryingPan"] = new InventoryItemData
         {
             itemName = "Frying pan",
             damage = 50,
@@ -190,7 +191,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "You're gonna cook!",
             isStoveIngredient = true,
         };
-        presets["GrilledCheeseSandwich"] = new InventoryItem
+        presets["GrilledCheeseSandwich"] = new InventoryItemData
         {
             itemName = "Grilled cheese sandwich",
             isConsumedOnUse = true,
@@ -199,7 +200,7 @@ public class ItemPresets : MonoBehaviour
             canConsume = true,
             hasOverworldUses = true,
         };
-        presets["GrilledChicken"] = new InventoryItem
+        presets["GrilledChicken"] = new InventoryItemData
         {
             itemName = "Grilled chicken",
             hpHealed = 60,
@@ -207,7 +208,7 @@ public class ItemPresets : MonoBehaviour
             canConsume = true,
             hasOverworldUses = true,
         };
-        presets["IdentifyingPan"] = new InventoryItem
+        presets["IdentifyingPan"] = new InventoryItemData
         {
             itemName = "Identifying pan",
             damage = 60,
@@ -219,7 +220,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Legend has it the identifying pan is also identifying as pan.",
             isStoveIngredient = true,
         };
-        presets["Jalapeno"] = new InventoryItem
+        presets["Jalapeno"] = new InventoryItemData
         {
             itemName = "Jalapeño",
             isConsumedOnUse = true,
@@ -233,7 +234,7 @@ public class ItemPresets : MonoBehaviour
             isStoveIngredient = true,
             hasOverworldUses = true,
         };
-        presets["KetchupBottle"] = new InventoryItem
+        presets["KetchupBottle"] = new InventoryItemData
         {
             itemName = "Ketchup bottle",
             isConsumedOnUse = true,
@@ -244,7 +245,7 @@ public class ItemPresets : MonoBehaviour
             canConsume = true,
             hasOverworldUses = true,
         };
-        presets["Knife"] = new InventoryItem
+        presets["Knife"] = new InventoryItemData
         {
             itemName = "Knife",
             damage = 30,
@@ -256,7 +257,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Great for if you like eating sliced bread or sliced people!",
             isStoveIngredient = true,
         };
-        presets["Knork"] = new InventoryItem
+        presets["Knork"] = new InventoryItemData
         {
             itemName = "Knork",
             damage = 45,
@@ -268,7 +269,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "YOU KNOR'D YOUR LAST KNORK!",
             isStoveIngredient = true,
         };
-        presets["LoadedMicrowave"] = new InventoryItem
+        presets["LoadedMicrowave"] = new InventoryItemData
         {
             itemName = "Loaded microwave",
             isConsumedOnUse = true,
@@ -279,7 +280,7 @@ public class ItemPresets : MonoBehaviour
             canThrow = true,
             hasOverworldUses = true,
         };
-        presets["MystifyingPan"] = new InventoryItem
+        presets["MystifyingPan"] = new InventoryItemData
         {
             itemName = "Mystifying pan",
             damage = 70,
@@ -296,7 +297,7 @@ public class ItemPresets : MonoBehaviour
             hasOverworldUses = true,
             cooldown = 0.2f,
         };
-        presets["PepperShaker"] = new InventoryItem
+        presets["PepperShaker"] = new InventoryItemData
         {
             itemName = "Pepper shaker",
             isConsumedOnUse = true,
@@ -306,7 +307,7 @@ public class ItemPresets : MonoBehaviour
             canThrow = true,
             hasOverworldUses = true,
         };
-        presets["PipingBag"] = new InventoryItem
+        presets["PipingBag"] = new InventoryItemData
         {
             itemName = "Piping bag",
             damage = 25,
@@ -317,7 +318,7 @@ public class ItemPresets : MonoBehaviour
             cooldown = 0.3f,
             autoFire = true,
         };
-        presets["Pizza"] = new InventoryItem
+        presets["Pizza"] = new InventoryItemData
         {
             itemName = "Pizza",
             damage = 25,
@@ -330,7 +331,7 @@ public class ItemPresets : MonoBehaviour
             hasOverworldUses = true,
             cooldown = 0.5f,
         };
-        presets["Plate"] = new InventoryItem
+        presets["Plate"] = new InventoryItemData
         {
             itemName = "Plate",
             isConsumedOnUse = true,
@@ -344,7 +345,7 @@ public class ItemPresets : MonoBehaviour
             hasOverworldUses = true,
             cooldown = 0.5f,
         };
-        presets["RawChicken"] = new InventoryItem
+        presets["RawChicken"] = new InventoryItemData
         {
             itemName = "Raw chicken",
             damage = 20,
@@ -356,7 +357,7 @@ public class ItemPresets : MonoBehaviour
             isStoveIngredient = true,
             hasOverworldUses = true,
         };
-        presets["RollingPin"] = new InventoryItem
+        presets["RollingPin"] = new InventoryItemData
         {
             itemName = "Rolling pin",
             damage = 50,
@@ -364,7 +365,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "On a roll!",
             canAttack = true,
         };
-        presets["SaltShaker"] = new InventoryItem
+        presets["SaltShaker"] = new InventoryItemData
         {
             itemName = "Salt shaker",
             toolTip = "To rub salt in the wound.",
@@ -374,7 +375,7 @@ public class ItemPresets : MonoBehaviour
             canThrow = true,
             hasOverworldUses = true,
         };
-        presets["SpicyPizza"] = new InventoryItem
+        presets["SpicyPizza"] = new InventoryItemData
         {
             itemName = "Spicy pizza",
             damage = 25,
@@ -387,7 +388,7 @@ public class ItemPresets : MonoBehaviour
             hasOverworldUses = true,
             cooldown = 0.5f,
         };
-        presets["Spife"] = new InventoryItem
+        presets["Spife"] = new InventoryItemData
         {
             itemName = "Spife",
             damage = 35,
@@ -399,7 +400,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Spife will take your life.",
             isStoveIngredient = true,
         };
-        presets["Spoon"] = new InventoryItem
+        presets["Spoon"] = new InventoryItemData
         {
             itemName = "Spoon",
             damage = 20,
@@ -410,7 +411,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Great for if you're lonely in bed",
             isStoveIngredient = true,
         };
-        presets["Sporf"] = new InventoryItem
+        presets["Sporf"] = new InventoryItemData
         {
             itemName = "Sporf",
             damage = 60,
@@ -421,7 +422,7 @@ public class ItemPresets : MonoBehaviour
             isKnife = true,
             toolTip = "Who needs multiple pieces of cutlery when you can use this!"
         };
-        presets["Spork"] = new InventoryItem
+        presets["Spork"] = new InventoryItemData
         {
             itemName = "Spork",
             damage = 40,
@@ -432,14 +433,14 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Also a place in germany!",
             isStoveIngredient = true,
         };
-        presets["StainlessSteelPot"] = new InventoryItem
+        presets["StainlessSteelPot"] = new InventoryItemData
         {
             itemName = "Stainless steel pot",
             isMetal = true,
             toolTip = "Cheaper drumset",
             isStoveIngredient = true,
         };
-        presets["Sausage"] = new InventoryItem
+        presets["Sausage"] = new InventoryItemData
         {
             itemName = "Sausage",
             damage = 50,
@@ -448,7 +449,7 @@ public class ItemPresets : MonoBehaviour
             toolTip = "Remind me of the events from last night...",
             canAttack = true,
         };
-        presets["Toaster"] = new InventoryItem
+        presets["Toaster"] = new InventoryItemData
         {
             itemName = "Toaster",
             damage = 70,
@@ -458,7 +459,7 @@ public class ItemPresets : MonoBehaviour
             canAttack = true,
             hasOverworldUses = true,
         };
-        presets["Tomato"] = new InventoryItem
+        presets["Tomato"] = new InventoryItemData
         {
             itemName = "Tomato",
             isConsumedOnUse = true,
@@ -472,14 +473,14 @@ public class ItemPresets : MonoBehaviour
             hasOverworldUses = true,
             cooldown = 0.3f,
         };
-        presets["Towel"] = new InventoryItem
+        presets["Towel"] = new InventoryItemData
         {
             itemName = "Towel",
             durabilityBoost = true,
             toolTip = "A towel is just about the most massively useful thing an interstellar hitchhiker can carry.",
             isStoveIngredient = true,
         };
-        presets["WaterGlass"] = new InventoryItem
+        presets["WaterGlass"] = new InventoryItemData
         {
             itemName = "Water bottle",
             damage = 10,
@@ -495,7 +496,7 @@ public class ItemPresets : MonoBehaviour
         };
 
 
-        presets["BlessedCheese"] = new InventoryItem
+        presets["BlessedCheese"] = new InventoryItemData
         {
             itemName = "Blessed cheese",
             damage = 1500,
@@ -515,7 +516,7 @@ public class ItemPresets : MonoBehaviour
             cooldown = 0.2f,
             autoFire = true,
         };
-        presets["UndyingPan"] = new InventoryItem
+        presets["UndyingPan"] = new InventoryItemData
         {
             itemName = "Undying pan",
             grantsImmortality = true,
@@ -523,11 +524,11 @@ public class ItemPresets : MonoBehaviour
             toolTip = "You cheated to get this item =)"
         };
 
-        Dictionary<string, InventoryItem> _newPresets = new Dictionary<string, InventoryItem>();
-        foreach (KeyValuePair<string, InventoryItem> preset in presets)
+        Dictionary<string, InventoryItemData> _newPresets = new Dictionary<string, InventoryItemData>();
+        foreach (KeyValuePair<string, InventoryItemData> preset in presets)
         {
             string _name = preset.Key;
-            InventoryItem _newItem = preset.Value;
+            InventoryItemData _newItem = preset.Value;
 
 
             if (preset.Value.maxStack == 0) _newItem.maxStack = 1;

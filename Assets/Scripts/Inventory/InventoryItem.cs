@@ -1,25 +1,37 @@
 using UnityEngine;
 
+[CreateAssetMenu]
+public class InventoryItem : ScriptableObject
+{
+    public InventoryItemData item = new InventoryItemData
+        {
+            maxStack = 1,
+            amountLeft = 1,
+            amountOfHits = 1,
+            amountOfTargets = 1,
+        };
+}
+
 [System.Serializable]
-public struct InventoryItem
+public struct InventoryItemData
 {
     public string itemName;
-    public Texture2D itemSprite;
+    [HideInInspector] public Texture2D itemSprite;
     public GameObject itemModel;
-    public string toolTip;
+    [TextArea] public string toolTip;
     public bool isStackable;
     public int maxStack;
-    public int amountLeft;
+    [HideInInspector] public int amountLeft;
     [Header("Stats")]
     public float durability;
-    public float currentDurability;
+    [HideInInspector] public float currentDurability;
     public float damage;
     public float hpHealed;
     public int amountOfTargets;
     public bool targetAll;
     public int amountOfHits;
     [Header("Properties")]
-    public bool slotIsEmty;
+    [HideInInspector] public bool slotIsEmty;
     public bool isConsumedOnUse;
     public bool isFood;
     public bool isMetal;

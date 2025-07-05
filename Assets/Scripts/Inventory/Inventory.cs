@@ -4,7 +4,7 @@ using TMPro;
 
 public class Inventory : MonoBehaviour
 {
-    public InventoryItem[] currentInventory = new InventoryItem[5];
+    public InventoryItemData[] currentInventory = new InventoryItemData[5];
 
     [Header("UI")]
     public Image[] Hotbar = new Image[5];
@@ -47,7 +47,7 @@ public class Inventory : MonoBehaviour
                 currentInventory[i].cooldownLeft -= Time.deltaTime;
     }
 
-    public bool AddItem(InventoryItem itemToAdd)
+    public bool AddItem(InventoryItemData itemToAdd)
     {
         if (itemToAdd.isStackable)
         {
@@ -83,7 +83,7 @@ public class Inventory : MonoBehaviour
     }
      public void RemoveItem(int index)
     {
-        currentInventory[index] = new InventoryItem { slotIsEmty = true };
+        currentInventory[index] = new InventoryItemData { slotIsEmty = true };
         UpdateInventory(index);
     }
     public void RemoveFromStack(int index)

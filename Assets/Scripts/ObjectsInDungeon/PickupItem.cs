@@ -4,7 +4,7 @@ public class PickupItem : MonoBehaviour
 {
     [Tooltip("Leave empty to not become any preset")]
     public string itemPresetName;
-    public InventoryItem itemToGive;
+    public InventoryItemData itemToGive;
     public GameObject placeholderModel;
 
     private void Start()
