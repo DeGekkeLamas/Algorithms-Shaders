@@ -79,6 +79,7 @@ public class DungeonGenerator : MonoBehaviour
         assetContainer = new GameObject("AssetContainer");
 
         coroutineIsDone = false;
+        //yield return GenerateRooms();
         StartCoroutine(GenerateRooms()); // Rooms
         yield return new WaitUntil(() => coroutineIsDone);
         coroutineIsDone = false;

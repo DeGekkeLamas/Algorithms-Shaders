@@ -63,7 +63,7 @@ Shader "Custom/Triplanar"
 			{
 				float4 col;
 
-				float4 colX = tex2D(_MainTex, i.coords.yz / _MainTex_ST.xy); // tiling hm,...
+				float4 colX = tex2D(_MainTex, i.coords.yz / _MainTex_ST.xy);
 				float4 colY = tex2D(_MainTex, i.coords.xz / _MainTex_ST.xy);
 				float4 colZ = tex2D(_MainTex, i.coords.xy / _MainTex_ST.xy);
 				// blendWeight blends the color if multple sampled colors have values
