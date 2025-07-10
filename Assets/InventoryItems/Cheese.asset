@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Cheese
   m_EditorClassIdentifier: 
   item:
-    itemName: Cheese
     itemSprite: {fileID: 0}
+    itemName: Cheese
     itemModel: {fileID: 0}
     toolTip: Say cheese when taking a picture!
     isStackable: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     canBlock: 0
     canConsume: 1
     canThrow: 0
-    hasOverworldUses: 1
+    hasOverworldUses: 0
     projectile: {fileID: 0}
     autoFire: 0
     cooldown: 0

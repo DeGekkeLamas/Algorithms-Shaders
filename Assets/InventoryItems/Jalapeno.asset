@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5fa68591495e844caca24b89cb97a2e, type: 3}
-  m_Name: Cake
+  m_Name: Jalapeno
   m_EditorClassIdentifier: 
   item:
     itemSprite: {fileID: 0}
-    itemName: Cake
-    itemModel: {fileID: 919132149155446097, guid: ea0587121e2211f4ebe4031e6597257e, type: 3}
-    toolTip: Just as caked out as your mom.
+    itemName: Jalapeno
+    itemModel: {fileID: 0}
+    toolTip: An arsonists favorite fruit!
     isStackable: 0
     maxStack: 1
     amountLeft: 1
     durability: 0
     currentDurability: 0
-    damage: 25
-    hpHealed: 0
+    damage: 20
+    hpHealed: 50
     amountOfTargets: 1
     targetAll: 0
     amountOfHits: 1
@@ -33,9 +33,9 @@ MonoBehaviour:
     isMetal: 0
     isKnife: 0
     isEmptyMicrowave: 0
-    inflictOnFire: 0
+    inflictOnFire: 1
     inflictPoisoned: 0
-    inflictBlindness: 1
+    inflictBlindness: 0
     onAttackHealHP: 0
     inflictStuck: 0
     damageScalesWithHP: 0
@@ -50,10 +50,10 @@ MonoBehaviour:
     curesOnFireWhenConsumed: 0
     damageAfterBlock: 0
     grantsImmortality: 0
-    isStoveIngredient: 0
+    isStoveIngredient: 1
     canAttack: 1
     canBlock: 0
-    canConsume: 0
+    canConsume: 1
     canThrow: 1
     hasOverworldUses: 1
     projectile: {fileID: 0}

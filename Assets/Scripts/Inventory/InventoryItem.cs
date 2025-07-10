@@ -15,8 +15,8 @@ public class InventoryItem : ScriptableObject
 [System.Serializable]
 public struct InventoryItemData
 {
-    public string itemName;
     [HideInInspector] public Texture2D itemSprite;
+    public string itemName;
     public GameObject itemModel;
     [TextArea] public string toolTip;
     public bool isStackable;

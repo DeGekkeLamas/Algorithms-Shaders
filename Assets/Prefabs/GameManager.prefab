@@ -2102,8 +2102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentInventory:
-  - itemName: 
-    itemSprite: {fileID: 0}
+  - itemSprite: {fileID: 0}
+    itemName: 
     itemModel: {fileID: 0}
     toolTip: 
     isStackable: 0
@@ -2125,7 +2125,6 @@ MonoBehaviour:
     inflictOnFire: 0
     inflictPoisoned: 0
     inflictBlindness: 0
-    inflictFakeBlood: 0
     onAttackHealHP: 0
     inflictStuck: 0
     damageScalesWithHP: 0
@@ -2150,8 +2149,8 @@ MonoBehaviour:
     autoFire: 0
     cooldown: 0
     cooldownLeft: 0
-  - itemName: 
-    itemSprite: {fileID: 0}
+  - itemSprite: {fileID: 0}
+    itemName: 
     itemModel: {fileID: 0}
     toolTip: 
     isStackable: 0
@@ -2173,7 +2172,6 @@ MonoBehaviour:
     inflictOnFire: 0
     inflictPoisoned: 0
     inflictBlindness: 0
-    inflictFakeBlood: 0
     onAttackHealHP: 0
     inflictStuck: 0
     damageScalesWithHP: 0
@@ -2198,8 +2196,8 @@ MonoBehaviour:
     autoFire: 0
     cooldown: 0
     cooldownLeft: 0
-  - itemName: 
-    itemSprite: {fileID: 0}
+  - itemSprite: {fileID: 0}
+    itemName: 
     itemModel: {fileID: 0}
     toolTip: 
     isStackable: 0
@@ -2221,7 +2219,6 @@ MonoBehaviour:
     inflictOnFire: 0
     inflictPoisoned: 0
     inflictBlindness: 0
-    inflictFakeBlood: 0
     onAttackHealHP: 0
     inflictStuck: 0
     damageScalesWithHP: 0
@@ -2246,8 +2243,8 @@ MonoBehaviour:
     autoFire: 0
     cooldown: 0
     cooldownLeft: 0
-  - itemName: 
-    itemSprite: {fileID: 0}
+  - itemSprite: {fileID: 0}
+    itemName: 
     itemModel: {fileID: 0}
     toolTip: 
     isStackable: 0
@@ -2269,7 +2266,6 @@ MonoBehaviour:
     inflictOnFire: 0
     inflictPoisoned: 0
     inflictBlindness: 0
-    inflictFakeBlood: 0
     onAttackHealHP: 0
     inflictStuck: 0
     damageScalesWithHP: 0
@@ -2294,8 +2290,8 @@ MonoBehaviour:
     autoFire: 0
     cooldown: 0
     cooldownLeft: 0
-  - itemName: 
-    itemSprite: {fileID: 0}
+  - itemSprite: {fileID: 0}
+    itemName: 
     itemModel: {fileID: 0}
     toolTip: 
     isStackable: 0
@@ -2317,7 +2313,6 @@ MonoBehaviour:
     inflictOnFire: 0
     inflictPoisoned: 0
     inflictBlindness: 0
-    inflictFakeBlood: 0
     onAttackHealHP: 0
     inflictStuck: 0
     damageScalesWithHP: 0
@@ -2367,10 +2362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49dd665afb07194283e35bcc1d27119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hotBar: {fileID: 4886532645219844462}
   itemDescription: {fileID: 5001704730604281708}
-  battleUIPosition: {x: 342.5, y: 195, z: 0}
-  overworldUIPosition: {x: 180, y: 520, z: 0}
 --- !u!114 &5293728399048542619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2383,6 +2375,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362cd5dca8a8a694bbdc8ad824bfd2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  items:
+  - {fileID: 11400000, guid: 05f4e82dae39ebd488ab86b90ffbec81, type: 2}
+  - {fileID: 11400000, guid: 28fbde6df351ba14b93d6391b414051a, type: 2}
+  - {fileID: 11400000, guid: 9091ed9c5574dc54da46fc502d76834d, type: 2}
+  - {fileID: 11400000, guid: cda71e602cf1a3c4f920bfd6314726d9, type: 2}
+  - {fileID: 11400000, guid: 91c7a1afb95980b48ae3c90f641a75ec, type: 2}
+  - {fileID: 11400000, guid: ea27409c7e7ea54498bbae40c7de14fc, type: 2}
+  - {fileID: 11400000, guid: afd2e58b3798a2549aea67ef17c798f0, type: 2}
+  - {fileID: 11400000, guid: 4fc7385e2f84b984387a9425c1ef9679, type: 2}
+  - {fileID: 11400000, guid: 97ca6228e3c3bb2459d561f57a783f36, type: 2}
+  - {fileID: 11400000, guid: d6d674b7117c5b4468238ab7263f5372, type: 2}
+  - {fileID: 11400000, guid: d55442a208dcf704d822cb40e7b8a90a, type: 2}
+  - {fileID: 11400000, guid: b29987c1adeb87149ab5b0a933e7bd2c, type: 2}
+  - {fileID: 11400000, guid: a34246590f0857a4abe102cb8b34fbdd, type: 2}
+  - {fileID: 11400000, guid: e4d8a3b589c58e84a80e512e7372fa32, type: 2}
+  - {fileID: 11400000, guid: ca137c0b040dbb74bacbbb2df0c35610, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   itemModels:
   - {fileID: 919132149155446097, guid: ea0587121e2211f4ebe4031e6597257e, type: 3}
   - {fileID: 919132149155446097, guid: 37cce4daeda266648aed2cc03b8a0cc1, type: 3}

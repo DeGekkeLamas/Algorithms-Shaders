@@ -10,32 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5fa68591495e844caca24b89cb97a2e, type: 3}
-  m_Name: Cake
+  m_Name: IdentifyingPan
   m_EditorClassIdentifier: 
   item:
     itemSprite: {fileID: 0}
-    itemName: Cake
-    itemModel: {fileID: 919132149155446097, guid: ea0587121e2211f4ebe4031e6597257e, type: 3}
-    toolTip: Just as caked out as your mom.
+    itemName: Identifying pan
+    itemModel: {fileID: 919132149155446097, guid: b8d0c08ba159f64439cd8f8af14d351b, type: 3}
+    toolTip: Legend has it the identifying pan is also identifying as pan.
     isStackable: 0
     maxStack: 1
     amountLeft: 1
-    durability: 0
+    durability: 20
     currentDurability: 0
-    damage: 25
+    damage: 60
     hpHealed: 0
     amountOfTargets: 1
     targetAll: 0
     amountOfHits: 1
     slotIsEmty: 0
-    isConsumedOnUse: 1
-    isFood: 1
-    isMetal: 0
+    isConsumedOnUse: 0
+    isFood: 0
+    isMetal: 1
     isKnife: 0
     isEmptyMicrowave: 0
     inflictOnFire: 0
     inflictPoisoned: 0
-    inflictBlindness: 1
+    inflictBlindness: 0
     onAttackHealHP: 0
     inflictStuck: 0
     damageScalesWithHP: 0
@@ -43,19 +43,19 @@ MonoBehaviour:
     foodBoost: 0
     foodResistanceBoost: 0
     fireImmunity: 0
-    seeEnemyInventories: 0
+    seeEnemyInventories: 1
     durabilityBoost: 0
     healingBoost: 0
     consumesBread: 0
     curesOnFireWhenConsumed: 0
     damageAfterBlock: 0
     grantsImmortality: 0
-    isStoveIngredient: 0
+    isStoveIngredient: 1
     canAttack: 1
-    canBlock: 0
+    canBlock: 1
     canConsume: 0
-    canThrow: 1
-    hasOverworldUses: 1
+    canThrow: 0
+    hasOverworldUses: 0
     projectile: {fileID: 0}
     autoFire: 0
     cooldown: 0
