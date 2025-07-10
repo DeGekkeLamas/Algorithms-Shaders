@@ -2066,6 +2066,7 @@ GameObject:
   - component: {fileID: 1807757889685326516}
   - component: {fileID: 5293728399048542619}
   - component: {fileID: 2990881938606332820}
+  - component: {fileID: 3777997893634887980}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -2422,28 +2423,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 02f12b7b27c2ed742bac5e6dfce5a8f1, type: 2}
   - {fileID: 11400000, guid: e61dba28bf43c0f48b548f656ef505bb, type: 2}
   - {fileID: 11400000, guid: cfb8d551f1720644c80ccb0b9b716f54, type: 2}
-  itemModels:
-  - {fileID: 919132149155446097, guid: ea0587121e2211f4ebe4031e6597257e, type: 3}
-  - {fileID: 919132149155446097, guid: 37cce4daeda266648aed2cc03b8a0cc1, type: 3}
-  - {fileID: 919132149155446097, guid: a7419f7294dffea4c85240cda6fff55a, type: 3}
-  - {fileID: 919132149155446097, guid: 0c974d5e7ef84a34fb1cd41bafe2b43c, type: 3}
-  - {fileID: 919132149155446097, guid: 5bc7f786d812e584b991b6d50815f35f, type: 3}
-  - {fileID: 919132149155446097, guid: bae3b18278764f744b622a60310b4521, type: 3}
-  - {fileID: 919132149155446097, guid: b8d0c08ba159f64439cd8f8af14d351b, type: 3}
-  - {fileID: 919132149155446097, guid: d1152141a88aaa446930d4b59920bc01, type: 3}
-  - {fileID: 919132149155446097, guid: 4cda69c66e4642642805242b9890c7d2, type: 3}
-  - {fileID: 919132149155446097, guid: 1a473f3d0e3abdb4a96c49dc049144b4, type: 3}
-  - {fileID: 919132149155446097, guid: 9539657be840a6247aafa8d71e1d051f, type: 3}
-  - {fileID: 919132149155446097, guid: a8fd15390e7ff9245804f9cd77a49fa9, type: 3}
-  - {fileID: 919132149155446097, guid: 25f3956d6acf477478bb1e1ed105a35b, type: 3}
-  - {fileID: 919132149155446097, guid: b6e7d8da7dd773c4ea0f6fc7cb943f49, type: 3}
-  - {fileID: 919132149155446097, guid: c9fff288cca057e488c486bccf19c463, type: 3}
   placeholderModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
-  projectiles:
-  - {fileID: -8806985211751940049, guid: 5f701301407c6644f996319132fd3a8e, type: 3}
-  - {fileID: -8806985211751940049, guid: bf0428376ca0fcd48bec4b47f9a1cbe6, type: 3}
-  - {fileID: -8806985211751940049, guid: 81865e04c6089024aa1cb85ca1330bdc, type: 3}
-  - {fileID: -8806985211751940049, guid: d7af4061e5ae1bc41a95cc7542c2c9a1, type: 3}
   placeholderProjectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
 --- !u!114 &2990881938606332820
 MonoBehaviour:
@@ -2457,6 +2437,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d55cb09c47a28b4ead390f5e8060749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3777997893634887980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7148870164262935656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0ac37e13d2710428ea24f6259ad812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoveRecipes:
+  - name: CheesePizza
+    result: {fileID: 11400000, guid: 97ca6228e3c3bb2459d561f57a783f36, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: e0e14abac84f6af47a62a67d087f23af, type: 2}
+    - {fileID: 11400000, guid: 4fc7385e2f84b984387a9425c1ef9679, type: 2}
+  - name: CryingPan
+    result: {fileID: 11400000, guid: d55442a208dcf704d822cb40e7b8a90a, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
+    - {fileID: 11400000, guid: cfb8d551f1720644c80ccb0b9b716f54, type: 2}
+  - name: DryingPan
+    result: {fileID: 11400000, guid: a34246590f0857a4abe102cb8b34fbdd, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
+    - {fileID: 11400000, guid: 02f12b7b27c2ed742bac5e6dfce5a8f1, type: 2}
+  - name: DyingPan
+    result: {fileID: 11400000, guid: e4d8a3b589c58e84a80e512e7372fa32, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
+    - {fileID: 11400000, guid: afd2e58b3798a2549aea67ef17c798f0, type: 2}
+  - name: GrilledCheeseSandwich
+    result: {fileID: 11400000, guid: 893f279f9ff5ce443a9ba582d338dd21, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: cda71e602cf1a3c4f920bfd6314726d9, type: 2}
+    - {fileID: 11400000, guid: 4fc7385e2f84b984387a9425c1ef9679, type: 2}
+  - name: GrilledChicken
+    result: {fileID: 11400000, guid: 5189754c597f9c34181c847d722cd9af, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: 0bacf20af3865a145b2c68870033ab67, type: 2}
+  - name: Knork
+    result: {fileID: 11400000, guid: a8021a96aad8207419a3db35381231ec, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
+    - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
+  - name: IdentifyingPan
+    result: {fileID: 11400000, guid: d1a3b41d2a79af449a59b4eb01613768, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
+    - {fileID: 11400000, guid: 74617052ab2b04748ac01eab9574d602, type: 2}
+  - name: MystifyingPan
+    result: {fileID: 11400000, guid: 1795c669611ec484fa9dbbb57ebe44d3, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
+    - {fileID: 11400000, guid: e4d8a3b589c58e84a80e512e7372fa32, type: 2}
+    - {fileID: 11400000, guid: a34246590f0857a4abe102cb8b34fbdd, type: 2}
+    - {fileID: 11400000, guid: d55442a208dcf704d822cb40e7b8a90a, type: 2}
+    - {fileID: 11400000, guid: d1a3b41d2a79af449a59b4eb01613768, type: 2}
+  - name: SpicyPizza
+    result: {fileID: 11400000, guid: 5b1eff5725772d64fb337e60c2e31c7c, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: e0e14abac84f6af47a62a67d087f23af, type: 2}
+    - {fileID: 11400000, guid: 17bec8cc810a8c64aa4b5815cb0fd3ac, type: 2}
+  - name: Spife
+    result: {fileID: 11400000, guid: 1c067684e17a70e4bbfee385c02fa15c, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
+    - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
+  - name: Sporf
+    result: {fileID: 11400000, guid: 167eb45cc9794674988f74ebb3a1b444, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
+    - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
+    - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
+  - name: Spork
+    result: {fileID: 11400000, guid: c35b4927a8f872040ae14e4c250c8757, type: 2}
+    ingredients:
+    - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
+    - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
 --- !u!1 &7644046490921562159
 GameObject:
   m_ObjectHideFlags: 0
