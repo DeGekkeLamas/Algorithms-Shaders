@@ -3,17 +3,15 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour
 {
     [Tooltip("Leave empty to not become any preset")]
-    public string itemPresetName;
+    public InventoryItem itemPreset;
     public InventoryItemData itemToGive;
     public GameObject placeholderModel;
 
     private void Start()
     {
-        if (itemPresetName != string.Empty )
+        if (itemPreset != null )
         {
-            if (ItemPresets.presets.ContainsKey(itemPresetName))
-                itemToGive = ItemPresets.presets[itemPresetName];
-            else Debug.LogWarning("This item doesnt exist dumbass");
+                itemToGive = itemPreset.item;
         }
         GameObject spawned; 
         if (itemToGive.itemModel != null) spawned = Instantiate(itemToGive.itemModel, this.transform);

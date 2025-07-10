@@ -7,10 +7,12 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 1;
     public float projectileForce = 5;
 
+    [Header("References")]
     public Rigidbody pickupSpawned;
     public MeshRenderer projectileChart;
     Material projectileChartMat;
-    public static PlayerController playerReference; 
+    public static PlayerController playerReference;
+    public InventoryItem waterGlass;
     NavMeshAgent navMeshAgent;
 
     Inventory inventory;
@@ -55,7 +57,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (rayHit.Item2.transform.CompareTag("Sink"))
                 {
-                    inventory.AddItem(ItemPresets.presets["WaterGlass"]);
+                    inventory.AddItem(waterGlass.item);
                     return;
                 }
             }

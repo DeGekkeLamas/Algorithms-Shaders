@@ -56,7 +56,7 @@ MonoBehaviour:
     canConsume: 1
     canThrow: 1
     hasOverworldUses: 1
-    projectile: {fileID: 0}
+    projectile: {fileID: -8806985211751940049, guid: 81865e04c6089024aa1cb85ca1330bdc, type: 3}
     autoFire: 0
     cooldown: 0.5
     cooldownLeft: 0

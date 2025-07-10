@@ -15,7 +15,7 @@ MonoBehaviour:
   item:
     itemSprite: {fileID: 0}
     itemName: Spicy pizza
-    itemModel: {fileID: 0}
+    itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: Not suitable for those under the age of 18, might contain spicy content.
     isStackable: 0
     maxStack: 1
@@ -56,7 +56,7 @@ MonoBehaviour:
     canConsume: 0
     canThrow: 0
     hasOverworldUses: 1
-    projectile: {fileID: 0}
+    projectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
     autoFire: 0
     cooldown: 0.5
     cooldownLeft: 0

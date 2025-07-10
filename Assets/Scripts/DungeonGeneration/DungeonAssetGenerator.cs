@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DungeonAssetGenerator : MonoBehaviour
@@ -384,7 +385,7 @@ public class DungeonAssetGenerator : MonoBehaviour
                                 PickupItem itemSpawned = Instantiate(rsa.itemPickup, new(
                                     counter.position.x, wallHeight, counter.position.z
                                     ), Quaternion.identity, itemSpawnsContainer.transform);
-                                itemSpawned.itemToGive = ItemPresets.presets[itemToSpawn];
+                                //itemSpawned.itemToGive = itemToSpawn;
                             }
                         }
                         if (roomvertical) offset = new(offset.x + counterSize, -.5f * rsa.counterLength);

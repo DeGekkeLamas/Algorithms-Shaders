@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Crate : MonoBehaviour
 {
-    public string[] itemsToGive;
+    public InventoryItem[] itemsToGive;
     public GameObject pickupSpawned;
 
     public int boxHP;
@@ -18,13 +18,8 @@ public class Crate : MonoBehaviour
     {
         foreach (var item in itemsToGive)
         {
-            if (!ItemPresets.presets.ContainsKey(item))
-            {
-                Debug.LogWarning($"This item doesnt exist dumbass, from {this}");
-                continue;
-            }
             Instantiate(pickupSpawned, transform.position, Quaternion.identity).
-                GetComponent<PickupItem>().itemToGive = ItemPresets.presets[item];
+                GetComponent<PickupItem>().itemToGive = item.item;
             Debug.Log($"Spawned {item}, from {this}");
         }
         Destroy(this.gameObject);

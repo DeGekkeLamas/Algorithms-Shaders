@@ -194,10 +194,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19463c3738e6648a8e9e4fddbe2ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPresetName: Plate
+  itemPreset: {fileID: 11400000, guid: 247cc278387b2fe4c8b40dd67d1cd2d0, type: 2}
   itemToGive:
-    itemName: "Jalape\xF1o"
     itemSprite: {fileID: 0}
+    itemName: "Jalape\xF1o"
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: An arsonists favorite fruit!
     isStackable: 0
@@ -1436,10 +1436,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19463c3738e6648a8e9e4fddbe2ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPresetName: Plate
+  itemPreset: {fileID: 11400000, guid: 247cc278387b2fe4c8b40dd67d1cd2d0, type: 2}
   itemToGive:
-    itemName: Pizza
     itemSprite: {fileID: 0}
+    itemName: Pizza
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: An italian frisbee
     isStackable: 0
@@ -4591,10 +4591,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19463c3738e6648a8e9e4fddbe2ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPresetName: Tomato
+  itemPreset: {fileID: 11400000, guid: d1009260424791f48bcb20e493b745ea, type: 2}
   itemToGive:
-    itemName: Cheese
     itemSprite: {fileID: 0}
+    itemName: Cheese
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: Say cheese when taking a picture!
     isStackable: 0
@@ -5743,10 +5743,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19463c3738e6648a8e9e4fddbe2ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPresetName: CryingPan
+  itemPreset: {fileID: 11400000, guid: d55442a208dcf704d822cb40e7b8a90a, type: 2}
   itemToGive:
-    itemName: Spoon
     itemSprite: {fileID: 0}
+    itemName: Spoon
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: Great for if you're lonely in bed
     isStackable: 0
@@ -6433,10 +6433,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19463c3738e6648a8e9e4fddbe2ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPresetName: FryingPan
+  itemPreset: {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
   itemToGive:
-    itemName: Frying pan
     itemSprite: {fileID: 0}
+    itemName: Frying pan
     itemModel: {fileID: 919132149155446097, guid: bae3b18278764f744b622a60310b4521, type: 3}
     toolTip: You're gonna cook!
     isStackable: 0
@@ -6694,10 +6694,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19463c3738e6648a8e9e4fddbe2ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPresetName: Tomato
+  itemPreset: {fileID: 11400000, guid: d1009260424791f48bcb20e493b745ea, type: 2}
   itemToGive:
-    itemName: Spoon
     itemSprite: {fileID: 0}
+    itemName: Spoon
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: Great for if you're lonely in bed
     isStackable: 0
@@ -7637,10 +7637,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19463c3738e6648a8e9e4fddbe2ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPresetName: StainlessSteelPot
+  itemPreset: {fileID: 11400000, guid: c82e7f2cea5db4f4c81c8a8728237e37, type: 2}
   itemToGive:
-    itemName: Fork
     itemSprite: {fileID: 0}
+    itemName: Fork
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: What the fork
     isStackable: 0
@@ -9733,10 +9733,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a19463c3738e6648a8e9e4fddbe2ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemPresetName: MystifyingPan
+  itemPreset: {fileID: 11400000, guid: 1795c669611ec484fa9dbbb57ebe44d3, type: 2}
   itemToGive:
-    itemName: Raw chicken
     itemSprite: {fileID: 0}
+    itemName: Raw chicken
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: Alternate ending to Chicken Little.
     isStackable: 0
