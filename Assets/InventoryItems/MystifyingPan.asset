@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5fa68591495e844caca24b89cb97a2e, type: 3}
-  m_Name: Knork
+  m_Name: MystifyingPan
   m_EditorClassIdentifier: 
   item:
     itemSprite: {fileID: 0}
-    itemName: Knork
-    itemModel: {fileID: 0}
-    toolTip: YOU KNOR'D YOUR LAST KNORK!
+    itemName: Mystifying pan
+    itemModel: {fileID: 919132149155446097, guid: 4cda69c66e4642642805242b9890c7d2, type: 3}
+    toolTip: One pan to rule them all...
     isStackable: 0
     maxStack: 1
     amountLeft: 1
-    durability: 15
+    durability: 40
     currentDurability: 0
-    damage: 45
+    damage: 70
     hpHealed: 0
-    amountOfTargets: 1
+    amountOfTargets: 2
     targetAll: 0
     amountOfHits: 1
     slotIsEmty: 0
@@ -42,21 +42,21 @@ MonoBehaviour:
     knifeBoost: 0
     foodBoost: 0
     foodResistanceBoost: 0
-    fireImmunity: 0
-    seeEnemyInventories: 0
-    durabilityBoost: 0
-    healingBoost: 20
+    fireImmunity: 1
+    seeEnemyInventories: 1
+    durabilityBoost: 1
+    healingBoost: 0
     consumesBread: 0
     curesOnFireWhenConsumed: 0
     damageAfterBlock: 0
     grantsImmortality: 0
-    isStoveIngredient: 1
+    isStoveIngredient: 0
     canAttack: 1
-    canBlock: 0
+    canBlock: 1
     canConsume: 0
     canThrow: 0
-    hasOverworldUses: 0
+    hasOverworldUses: 1
     projectile: {fileID: 0}
     autoFire: 0
-    cooldown: 0
+    cooldown: 0.2
     cooldownLeft: 0

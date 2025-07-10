@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5fa68591495e844caca24b89cb97a2e, type: 3}
-  m_Name: Knork
+  m_Name: Tomato
   m_EditorClassIdentifier: 
   item:
     itemSprite: {fileID: 0}
-    itemName: Knork
-    itemModel: {fileID: 0}
-    toolTip: YOU KNOR'D YOUR LAST KNORK!
-    isStackable: 0
-    maxStack: 1
+    itemName: Tomato
+    itemModel: {fileID: 919132149155446097, guid: a8fd15390e7ff9245804f9cd77a49fa9, type: 3}
+    toolTip: An italian apple
+    isStackable: 1
+    maxStack: 10
     amountLeft: 1
-    durability: 15
+    durability: 0
     currentDurability: 0
-    damage: 45
+    damage: 30
     hpHealed: 0
     amountOfTargets: 1
     targetAll: 0
     amountOfHits: 1
     slotIsEmty: 0
-    isConsumedOnUse: 0
-    isFood: 0
-    isMetal: 1
-    isKnife: 1
+    isConsumedOnUse: 1
+    isFood: 1
+    isMetal: 0
+    isKnife: 0
     isEmptyMicrowave: 0
     inflictOnFire: 0
     inflictPoisoned: 0
@@ -45,18 +45,18 @@ MonoBehaviour:
     fireImmunity: 0
     seeEnemyInventories: 0
     durabilityBoost: 0
-    healingBoost: 20
+    healingBoost: 0
     consumesBread: 0
     curesOnFireWhenConsumed: 0
     damageAfterBlock: 0
     grantsImmortality: 0
     isStoveIngredient: 1
-    canAttack: 1
+    canAttack: 0
     canBlock: 0
     canConsume: 0
-    canThrow: 0
-    hasOverworldUses: 0
+    canThrow: 1
+    hasOverworldUses: 1
     projectile: {fileID: 0}
     autoFire: 0
-    cooldown: 0
+    cooldown: 0.3
     cooldownLeft: 0

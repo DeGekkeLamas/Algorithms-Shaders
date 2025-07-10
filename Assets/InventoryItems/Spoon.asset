@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5fa68591495e844caca24b89cb97a2e, type: 3}
-  m_Name: Knork
+  m_Name: Spoon
   m_EditorClassIdentifier: 
   item:
     itemSprite: {fileID: 0}
-    itemName: Knork
+    itemName: Spoon
     itemModel: {fileID: 0}
-    toolTip: YOU KNOR'D YOUR LAST KNORK!
+    toolTip: Great for if you're lonely in bed
     isStackable: 0
     maxStack: 1
     amountLeft: 1
-    durability: 15
+    durability: 10
     currentDurability: 0
-    damage: 45
+    damage: 20
     hpHealed: 0
     amountOfTargets: 1
     targetAll: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     isConsumedOnUse: 0
     isFood: 0
     isMetal: 1
-    isKnife: 1
+    isKnife: 0
     isEmptyMicrowave: 0
     inflictOnFire: 0
     inflictPoisoned: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
     fireImmunity: 0
     seeEnemyInventories: 0
     durabilityBoost: 0
-    healingBoost: 20
+    healingBoost: 10
     consumesBread: 0
     curesOnFireWhenConsumed: 0
     damageAfterBlock: 0
