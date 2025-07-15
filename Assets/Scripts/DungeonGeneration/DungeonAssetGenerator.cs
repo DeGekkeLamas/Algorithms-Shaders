@@ -21,6 +21,19 @@ public class DungeonAssetGenerator : MonoBehaviour
         rsa.kitchenTotalItemChance = GetTotalItemProbability(rsa.kitchenItemSpawns);
         rsa.storageTotalItemChance = GetTotalItemProbability(rsa.storageItemSpawns);
         rsa.seatingTotalItemChance = GetTotalItemProbability(rsa.seatingItemSpawns);
+
+        // Set names of item tables
+        for (int i = 0; i < rsa.bakeryItemSpawns.Length; i++) 
+            rsa.bakeryItemSpawns[i].itemName = rsa.bakeryItemSpawns[i].item.name;
+        for (int i = 0; i < rsa.breakItemSpawns.Length; i++) 
+            rsa.breakItemSpawns[i].itemName = rsa.breakItemSpawns[i].item.name;
+        for (int i = 0; i < rsa.kitchenItemSpawns.Length; i++) 
+            rsa.kitchenItemSpawns[i].itemName = rsa.kitchenItemSpawns[i].item.name;
+        for (int i = 0; i < rsa.seatingItemSpawns.Length; i++)
+            rsa.seatingItemSpawns[i].itemName = rsa.seatingItemSpawns[i].item.name;
+        for (int i = 0; i < rsa.storageItemSpawns.Length; i++) 
+            rsa.storageItemSpawns[i].itemName = rsa.storageItemSpawns[i].item.name;
+        
     }
 
     private void Awake() => d = this.GetComponent<DungeonGenerator>();
@@ -124,12 +137,13 @@ public class DungeonAssetGenerator : MonoBehaviour
                             if (roomvertical) offset.y += counterSize;
                             else offset.x += counterSize;
 
-                            string itemToSpawn = GetItemFromLoottable(rsa.kitchenItemSpawns);
-                            if (itemToSpawn != string.Empty)
+                            InventoryItemData itemToSpawn = GetItemFromLoottable(rsa.kitchenItemSpawns);
+                            if (!itemToSpawn.slotIsEmty)
                             {
                                 PickupItem itemSpawned = Instantiate(rsa.itemPickup, new(
                                     counter.position.x, 10, counter.position.z
                                     ), Quaternion.identity, itemSpawnsContainer.transform);
+                                itemSpawned.itemPreset.item = itemToSpawn;
                             }
                         }
                         if (roomvertical) offset = new(offset.x + counterSize, -.5f * rsa.counterLength);
@@ -173,16 +187,20 @@ public class DungeonAssetGenerator : MonoBehaviour
 
         yield return new WaitForSeconds(d.generationInterval);
     }
-    string GetItemFromLoottable(ItemLootLable[] lootTable)
+    /// <summary>
+    /// Returns item based on item probabilities
+    /// </summary>
+    InventoryItemData GetItemFromLoottable(ItemLootLable[] lootTable)
     {
         int probabilityPassed = lootTable[0].probability;
         int lootRoll = d.GetSeed().Next(0, 100);
         for (int i = 0; i < lootTable.Length; i++)
         {
-            if (lootRoll < probabilityPassed) return lootTable[i].itemName;
+            if (lootRoll < probabilityPassed) return lootTable[i].item.item;
             else probabilityPassed += lootTable[i].probability;
         }
-        return string.Empty;
+        // If no item, return empty slot
+        return new InventoryItemData { slotIsEmty = true };
     }
     public static int GetTotalItemProbability(ItemLootLable[] lootTable)
     {
@@ -196,6 +214,7 @@ public class DungeonAssetGenerator : MonoBehaviour
 public struct ItemLootLable
 {
     public string itemName;
+    public InventoryItem item;
     public int probability;
 }
 

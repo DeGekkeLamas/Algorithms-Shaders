@@ -81,6 +81,7 @@ public class DungeonGenerator : MonoBehaviour
         yield return StartCoroutine(GenerateDoors()); // Doors
         yield return StartCoroutine(RemoveUnreachableRooms()); // Check for room accessibility and delete unreachable rooms
         yield return StartCoroutine(RemoveSmallestRooms()); // Remove smallest rooms if enabled
+        yield return StartCoroutine(da.AssignRoomTypes()); // Assign different types of rooms
         switch(generationType)
         {
             case GenerationType.Cool:

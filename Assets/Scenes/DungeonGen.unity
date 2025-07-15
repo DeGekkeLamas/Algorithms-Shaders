@@ -218,12 +218,16 @@ MonoBehaviour:
     breakTotalItemChance: 100
     breakItemSpawns:
     - itemName: FryingPan
+      item: {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
       probability: 25
     - itemName: Cheese
+      item: {fileID: 11400000, guid: 4fc7385e2f84b984387a9425c1ef9679, type: 2}
       probability: 25
     - itemName: Egg
+      item: {fileID: 11400000, guid: ca137c0b040dbb74bacbbb2df0c35610, type: 2}
       probability: 25
     - itemName: Fork
+      item: {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
       probability: 25
     kitchenWall: {fileID: 2100000, guid: 3f44c65f842535740b33da7fd7689af9, type: 2}
     kitchenFloor: {fileID: 2100000, guid: 02d201850671c8846b80ee6821141424, type: 2}
@@ -234,40 +238,58 @@ MonoBehaviour:
     kitchenTotalItemChance: 49
     kitchenItemSpawns:
     - itemName: FryingPan
+      item: {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
       probability: 8
     - itemName: Towel
+      item: {fileID: 11400000, guid: 02f12b7b27c2ed742bac5e6dfce5a8f1, type: 2}
       probability: 3
     - itemName: Apron
+      item: {fileID: 11400000, guid: 05f4e82dae39ebd488ab86b90ffbec81, type: 2}
       probability: 2
     - itemName: ChefHat
+      item: {fileID: 11400000, guid: d6d674b7117c5b4468238ab7263f5372, type: 2}
       probability: 2
     - itemName: CuttingBoard
+      item: {fileID: 11400000, guid: b29987c1adeb87149ab5b0a933e7bd2c, type: 2}
       probability: 2
     - itemName: Tomato
+      item: {fileID: 11400000, guid: d1009260424791f48bcb20e493b745ea, type: 2}
       probability: 5
     - itemName: EmptyMicrowave
+      item: {fileID: 11400000, guid: 60e0083c0b51ad94eb90194d6f4e5855, type: 2}
       probability: 2
     - itemName: Fork
+      item: {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
       probability: 3
     - itemName: Spoon
+      item: {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
       probability: 3
-    - itemName: Fork
+    - itemName: Knife
+      item: {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
       probability: 3
     - itemName: Jalapeno
+      item: {fileID: 11400000, guid: 17bec8cc810a8c64aa4b5815cb0fd3ac, type: 2}
       probability: 2
     - itemName: Pizza
+      item: {fileID: 11400000, guid: e0e14abac84f6af47a62a67d087f23af, type: 2}
       probability: 2
     - itemName: RawChicken
+      item: {fileID: 11400000, guid: 0bacf20af3865a145b2c68870033ab67, type: 2}
       probability: 2
     - itemName: Cheese
+      item: {fileID: 11400000, guid: 4fc7385e2f84b984387a9425c1ef9679, type: 2}
       probability: 2
     - itemName: Butter
+      item: {fileID: 11400000, guid: 91c7a1afb95980b48ae3c90f641a75ec, type: 2}
       probability: 2
     - itemName: StainlessSteelPot
+      item: {fileID: 11400000, guid: c82e7f2cea5db4f4c81c8a8728237e37, type: 2}
       probability: 2
     - itemName: Sausage
+      item: {fileID: 11400000, guid: 16f673256b958c943a3c82b2cd8ed380, type: 2}
       probability: 2
     - itemName: Toaster
+      item: {fileID: 11400000, guid: f0033415184c7ae4d97f6858066d5df2, type: 2}
       probability: 2
     storageWall: {fileID: 2100000, guid: c9d55ecc4a07e034d8af8df890f4ff5c, type: 2}
     storageFloor: {fileID: 2100000, guid: c9d55ecc4a07e034d8af8df890f4ff5c, type: 2}
