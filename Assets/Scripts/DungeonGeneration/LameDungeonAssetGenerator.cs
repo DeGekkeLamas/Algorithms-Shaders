@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Script used for lame dungeon generation
+/// </summary>
 public class LameDungeonAssetGenerator : MonoBehaviour
 {
     DungeonGenerator d;
@@ -87,7 +90,6 @@ public class LameDungeonAssetGenerator : MonoBehaviour
 
         Debug.Log("Placed all walls");
         yield return new();
-        d.coroutineIsDone = true;
     }
     /// <summary>
     /// Generates a quad the size of the room for every room at floorheight
@@ -128,6 +130,5 @@ public class LameDungeonAssetGenerator : MonoBehaviour
 
         Debug.Log("Generated floor");
         yield return new();
-        d.coroutineIsDone = true;
     }
 }

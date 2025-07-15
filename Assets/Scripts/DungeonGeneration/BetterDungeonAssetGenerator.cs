@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+/// <summary>
+/// Script used for cool dungeon generation
+/// </summary>
 public class BetterDungeonAssetGenerator : MonoBehaviour
 {
     DungeonGenerator d;
@@ -66,7 +69,6 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
 
         Debug.Log("Generated tilemap");
         yield return new();
-        d.coroutineIsDone = true;
     }
     /// <summary>
     /// Generate walls with marching squares
@@ -103,7 +105,6 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         }
         Debug.Log("Placed all walls");
         yield return new();
-        d.coroutineIsDone = true;
     }
     /// <summary>
     /// Generates floor with floodfill
@@ -151,7 +152,6 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
         }
         Debug.Log("Generated floor");
         yield return new();
-        d.coroutineIsDone = true;
     }
     /// <summary>
     /// Spawns player and bakes navmesh
@@ -164,7 +164,6 @@ public class BetterDungeonAssetGenerator : MonoBehaviour
 
         Debug.Log("Spawned player and generated navmesh");
         yield return new();
-        d.coroutineIsDone = true;
     }
     static RectInt RectIntAddition(RectInt A, RectInt B)
     {
