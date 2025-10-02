@@ -45,7 +45,6 @@ public class HotbarHover : MonoBehaviour
             _description += $" \nDeals {inventory.currentInventory[index].damage} damage";
         if (inventory.currentInventory[index].amountOfTargets > 1)
             _description += $" to {inventory.currentInventory[index].amountOfTargets} enemies";
-        if (inventory.currentInventory[index].targetAll) _description += " to all enemies";
         if (inventory.currentInventory[index].damageScalesWithHP) _description += ", deals more damage to damaged enemies";
 
         if (inventory.currentInventory[index].hpHealed != 0) 
@@ -57,10 +56,10 @@ public class HotbarHover : MonoBehaviour
         if (inventory.currentInventory[index].damageAfterBlock > 0) 
             _description += $"\nDeals {inventory.currentInventory[index].damageAfterBlock} to the player after blocking";
 
-        if (inventory.currentInventory[index].inflictOnFire) _description += $"\nInflicts fire";
-        if (inventory.currentInventory[index].inflictBlindness) _description += $"\nInflicts blindness";
-        if (inventory.currentInventory[index].inflictPoisoned) _description += $"\nInflicts poison";
-        if (inventory.currentInventory[index].inflictStuck) _description += $"\ncauses an enemy to be stuck";
+        foreach(StatusEffect effect in inventory.currentInventory[index].effectApplied)
+        {
+            _description += $"\nInflicts {effect.name}";
+        }
 
         if (inventory.currentInventory[index].durabilityBoost) _description += $"\nWhile in inventory, increases durability of items";
         if (inventory.currentInventory[index].foodBoost) _description += $"\nWhile in inventory, increases damage of food-based items";

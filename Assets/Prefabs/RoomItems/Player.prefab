@@ -381,7 +381,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f45f5157a6f11a645a1514ed503ae6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHP: 100
   moveSpeed: 15
+  strength: 1
+  activeStatusEffects: []
   projectileForce: 20
   pickupSpawned: {fileID: 2400643790871167767, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
   projectileChart: {fileID: 6158452050362798746}

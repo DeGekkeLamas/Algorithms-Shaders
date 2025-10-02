@@ -2,10 +2,9 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class EnemyFollower : MonoBehaviour
+public class EnemyFollower : Entity
 {
     public float maxDistance = 15;
-    public float moveSpeed = 5;
     public float battleStartDistance = 1;
     public float visionAngle = 45;
 
@@ -29,13 +28,13 @@ public class EnemyFollower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PlayerController.playerReference == null) return;
+        if (PlayerController.instance == null) return;
         // shows vision range
         DebugExtension.DebugCircle(this.transform.position, Color.green, maxDistance);
         Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * maxDistance, visionAngle), Color.green);
         Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * maxDistance, -visionAngle), Color.green);
 
-        Vector3 playerPos = PlayerController.playerReference.transform.position;
+        Vector3 playerPos = PlayerController.instance.transform.position;
         float playerEnemyDistance = (playerPos - this.transform.position).magnitude;
 
         // start following player if player has been seen before
@@ -45,7 +44,7 @@ public class EnemyFollower : MonoBehaviour
             VectorMath.GetAngleBetweenVectors(playerPos - this.transform.position, this.transform.forward) 
                 < visionAngle &&
                 Physics.Raycast(this.transform.position + Vector3.up, playerPos + Vector3.up - (this.transform.position),
-            out RaycastHit visionHit) && visionHit.collider.transform == PlayerController.playerReference.transform.GetChild(0))
+            out RaycastHit visionHit) && visionHit.collider.transform == PlayerController.instance.transform.GetChild(0))
         {
             hasSeenPlayer = true;
             Vector3 lastSeenPlayerPos = playerPos;
@@ -148,7 +147,6 @@ public class EnemyFollower : MonoBehaviour
             Debug.Log($"Hit by projecile {other.gameObject.name}");
             GameManager manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
             if (hitProjectile != null) Death();
-            //else manager.StartBattle();
         }
     }
     void Death()

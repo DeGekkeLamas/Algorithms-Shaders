@@ -7,7 +7,6 @@ public class InventoryItem : ScriptableObject
         {
             maxStack = 1,
             amountLeft = 1,
-            amountOfHits = 1,
             amountOfTargets = 1,
         };
 }
@@ -28,8 +27,6 @@ public struct InventoryItemData
     public float damage;
     public float hpHealed;
     public int amountOfTargets;
-    public bool targetAll;
-    public int amountOfHits;
     [Header("Properties")]
     [HideInInspector] public bool slotIsEmty;
     public bool isConsumedOnUse;
@@ -37,11 +34,8 @@ public struct InventoryItemData
     public bool isMetal;
     public bool isKnife;
     public bool isEmptyMicrowave;
-    public bool inflictOnFire;
-    public bool inflictPoisoned;
-    public bool inflictBlindness;
+    public StatusEffect[] effectApplied;
     public bool onAttackHealHP;
-    public bool inflictStuck;
     public bool damageScalesWithHP;
     public bool knifeBoost;
     public bool foodBoost;
@@ -61,7 +55,6 @@ public struct InventoryItemData
     public bool canConsume;
     public bool canThrow;
     [Header("Overworld properties")]
-    public bool hasOverworldUses;
     public Rigidbody projectile;
     public bool autoFire;
     public float cooldown;

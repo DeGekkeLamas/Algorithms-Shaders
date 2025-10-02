@@ -12,16 +12,15 @@ public class Inventory : MonoBehaviour
     public Texture2D HotbarItemBG;
     public static int itemSelected;
 
-    static Inventory reference;
+    public static Inventory instance;
 
     HotbarHover HH;
 
     private void Awake()
     {
-        if (reference == null)
+        if (instance == null)
         {
-            reference = this;
-            DontDestroyOnLoad(this);
+            instance = this;
         }
         else Destroy(this);
 
@@ -43,8 +42,7 @@ public class Inventory : MonoBehaviour
         }
 
         for (int i = 0; i < currentInventory.Length; i++)
-            if (currentInventory[i].hasOverworldUses)
-                currentInventory[i].cooldownLeft -= Time.deltaTime;
+            currentInventory[i].cooldownLeft -= Time.deltaTime;
     }
 
     public bool AddItem(InventoryItemData itemToAdd)
@@ -102,8 +100,7 @@ public class Inventory : MonoBehaviour
 
             currentInventory[index].itemSprite = SpriteEditor.AddOutline(currentInventory[index].itemSprite);
 
-            if (!currentInventory[index].hasOverworldUses && !GameManager.isInBattle)
-                currentInventory[index].itemSprite = SpriteEditor.MakeGrayScale(currentInventory[index].itemSprite);
+            //currentInventory[index].itemSprite = SpriteEditor.MakeGrayScale(currentInventory[index].itemSprite);
         }
         else currentInventory[index].itemSprite = HotbarItemBG;
 

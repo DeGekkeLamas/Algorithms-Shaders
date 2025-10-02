@@ -1,26 +1,26 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Entity
 {
     Vector3 playerDestination;
-    public float moveSpeed = 1;
     public float projectileForce = 5;
 
     [Header("References")]
     public Rigidbody pickupSpawned;
     public MeshRenderer projectileChart;
     Material projectileChartMat;
-    public static PlayerController playerReference;
+    public static PlayerController instance;
     public InventoryItem waterGlass;
     NavMeshAgent navMeshAgent;
 
     Inventory inventory;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         playerDestination = transform.position;
-        inventory = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Inventory>();
-        playerReference = this;
+        inventory = Inventory.instance;
+        instance = this;
         navMeshAgent = GetComponent<NavMeshAgent>();
         projectileChartMat = projectileChart.material;
     }
@@ -67,8 +67,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && canUseItem || Input.GetMouseButton(1) && inventory.currentInventory[Inventory.itemSelected].autoFire &&
             inventory.currentInventory[Inventory.itemSelected].cooldownLeft <= 0 && canUseItem)
         {
-            if (inventory.currentInventory[Inventory.itemSelected].hasOverworldUses &&
-                inventory.currentInventory[Inventory.itemSelected].projectile != null &&
+            if (inventory.currentInventory[Inventory.itemSelected].projectile != null &&
                 inventory.currentInventory[Inventory.itemSelected].cooldownLeft <= 0)
             {
                 // shot projectiles
