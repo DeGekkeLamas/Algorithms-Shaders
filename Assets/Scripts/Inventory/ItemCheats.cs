@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class ItemCheats : MonoBehaviour
+namespace InventoryStuff
 {
-    Inventory inventory;
-    private void Awake() => inventory = GetComponent<Inventory>();
-    private void Update()
+    public class ItemCheats : MonoBehaviour
     {
-        if (Input.GetKey(KeyCode.Equals))
+        Inventory inventory;
+        private void Awake() => inventory = GetComponent<Inventory>();
+        private void Update()
         {
-            switch(Input.inputString)
+            if (Input.GetKey(KeyCode.Equals))
             {
+                switch (Input.inputString)
+                {
 
-                case "-":
-                    for(int i = 0; i < inventory.currentInventory.Length; i++)
-                        inventory.RemoveItem(i);
-                    Debug.Log($"Cleared inventory, from {this}");
-                    break;
+                    case "-":
+                        for (int i = 0; i < inventory.currentInventory.Length; i++)
+                            inventory.RemoveItem(i);
+                        Debug.Log($"Cleared inventory, from {this}");
+                        break;
+                }
             }
         }
     }

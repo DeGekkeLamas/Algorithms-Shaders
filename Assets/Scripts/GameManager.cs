@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using InventoryStuff;
 
 public class GameManager : MonoBehaviour
 {

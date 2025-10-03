@@ -1,20 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPresets : MonoBehaviour
+namespace InventoryStuff
 {
-    public InventoryItem[] items;
-    public static InventoryItem[] presets;
-    public GameObject placeholderModel;
-    public Rigidbody placeholderProjectile;
-
-    private void Awake()
+    public class ItemPresets : MonoBehaviour
     {
-        presets = items;
-        foreach(var preset in presets)
+        public InventoryItem[] items;
+        public static InventoryItem[] presets;
+        public GameObject placeholderModel;
+        public Rigidbody placeholderProjectile;
+
+        private void Awake()
         {
-            if (preset.item.itemModel == null)
-                preset.item.itemModel = placeholderModel;
+            presets = items;
+            foreach (var preset in presets)
+            {
+                if (preset.item.itemModel == null)
+                    preset.item.itemModel = placeholderModel;
+            }
         }
     }
 }

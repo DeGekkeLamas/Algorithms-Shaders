@@ -1,62 +1,98 @@
+using NaughtyAttributes;
+using System;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class InventoryItem : ScriptableObject
+namespace InventoryStuff
 {
-    public InventoryItemData item = new InventoryItemData
-        {
-            maxStack = 1,
-            amountLeft = 1,
-            amountOfTargets = 1,
-        };
-}
+    [CreateAssetMenu]
+    public class InventoryItem : ScriptableObject
+    {
+        public InventoryItemData item = new();
+    }
 
-[System.Serializable]
-public struct InventoryItemData
-{
-    [HideInInspector] public Texture2D itemSprite;
-    public string itemName;
-    public GameObject itemModel;
-    [TextArea] public string toolTip;
-    public bool isStackable;
-    public int maxStack;
-    [HideInInspector] public int amountLeft;
-    [Header("Stats")]
-    public float durability;
-    [HideInInspector] public float currentDurability;
-    public float damage;
-    public float hpHealed;
-    public int amountOfTargets;
-    [Header("Properties")]
-    [HideInInspector] public bool slotIsEmty;
-    public bool isConsumedOnUse;
-    public bool isFood;
-    public bool isMetal;
-    public bool isKnife;
-    public bool isEmptyMicrowave;
-    public StatusEffect[] effectApplied;
-    public bool onAttackHealHP;
-    public bool damageScalesWithHP;
-    public bool knifeBoost;
-    public bool foodBoost;
-    public bool foodResistanceBoost;
-    public bool fireImmunity;
-    public bool seeEnemyInventories;
-    public bool durabilityBoost;
-    public int healingBoost;
-    public bool consumesBread;
-    public bool curesOnFireWhenConsumed;
-    public float damageAfterBlock;
-    public bool grantsImmortality;
-    public bool isStoveIngredient;
-    [Header("Buttons")]
-    public bool canAttack;
-    public bool canBlock;
-    public bool canConsume;
-    public bool canThrow;
-    [Header("Overworld properties")]
-    public Rigidbody projectile;
-    public bool autoFire;
-    public float cooldown;
-    public float cooldownLeft;
+    [System.Serializable]
+    public class InventoryItemData
+    {
+        [HideInInspector] public Texture2D itemSprite;
+        public string itemName;
+        public GameObject itemModel;
+        [TextArea] public string toolTip;
+        public bool isStackable;
+        public int maxStack = 1;
+        [HideInInspector] public int amountLeft = 1;
+        [Header("Stats")]
+        public float durability;
+        [HideInInspector] public float currentDurability;
+        public float damage; //
+        public float hpHealed; //
+        [Header("Properties")]
+        [HideInInspector] public bool slotIsEmty;
+        public bool isConsumedOnUse; //
+        public bool isFood;
+        public bool isMetal;
+        public bool isKnife;
+        public StatusEffect[] effectApplied;
+        public bool onAttackHealHP;
+        public bool damageScalesWithHP;
+        public float damageAfterBlock;
+        [Header("Overworld properties")]
+        public Rigidbody projectile; //
+        public bool autoFire; //
+        public float cooldown; //
+        public float cooldownLeft; //
+        [Header("Passive effects")]
+        public StatusEffect[] grantsImmunityTo;
+        public bool grantsImmortality;
+        public bool knifeBoost;
+        public bool foodBoost;
+        public bool foodResistanceBoost;
+        public bool durabilityBoost;
+        public int healingBoost;
+        public bool seeEnemyInventories;
+
+        public Texture2D SetSprite()
+        {
+            itemSprite = RuntimePreviewGenerator.GenerateModelPreview(itemModel.transform, 256, 256, false, true);
+            itemSprite = SpriteEditor.AddOutline(itemSprite);
+
+            return itemSprite;
+        }
+
+        public virtual void UseItem() { }
+
+        [Button]
+        void ConvertToConsumableItem(ConsumableItem target)
+        {
+
+        }
+    }
+
+    public class ConsumableItem : InventoryItemData
+    {
+        public float hpHealed;
+        public StatusEffect[] effectApplied;
+
+        public override void UseItem()
+        {
+            Inventory.instance.RemoveItem(this);
+        }
+    }
+    public class RangedWeapon : InventoryItemData
+    {
+        public float damage;
+        public StatusEffect[] effectApplied;
+        public Rigidbody projectile;
+        public bool autoFire;
+        public float cooldown;
+        public float cooldownLeft;
+        public bool isConsumedOnUse;
+        [Tooltip("Leave empty to use no fuel")]
+        public InventoryItemData fuel;
+    }
+    public class MeleeWeapon : InventoryItemData
+    {
+        public float damage;
+        public StatusEffect[] effectApplied;
+    }
+
 }

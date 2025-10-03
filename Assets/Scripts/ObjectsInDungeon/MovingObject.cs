@@ -7,30 +7,20 @@ public class MovingObject : MonoBehaviour
     /// </summary>
 
     [Header("Movement related")]
-    public float moveSpeedX;
-    public float moveRangeX;
-    public float moveSpeedY;
-    public float moveRangeY;
-    public float moveSpeedZ;
-    public float moveRangeZ;
-    public float offsetX;
-    public float offsetY;
-    public float offsetZ;
+    public Vector3 moveSpeed;
+    public Vector3 moveRange;
+    public Vector3 offset;
 
     Vector3 _oriPos;
-    float _oriRot;
 
     public enum MovementType { Circular, PingPong, Forward};
     public MovementType currentMovement = MovementType.PingPong;
 
-    GameManager GM;
 
     // Start is called before the first frame update
     void Awake()
     {
         _oriPos = this.transform.localPosition;
-        _oriRot = transform.eulerAngles.y;
-        GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -53,22 +43,22 @@ public class MovingObject : MonoBehaviour
     void MovementPingPong()
     {
         this.transform.localPosition = _oriPos + new Vector3(
-                        Mathf.Sin(moveSpeedX * Time.time + offsetX) * moveRangeX,
-                        Mathf.Sin(moveSpeedY * Time.time + offsetY) * moveRangeY,
-                        Mathf.Sin(moveSpeedZ * Time.time + offsetZ) * moveRangeZ);
-    }
-    void MovementCircular()
-    {
-        this.transform.localPosition = _oriPos + new Vector3(
-                        Mathf.Sin(moveSpeedX * Time.time + offsetX) * moveRangeX,
-                        Mathf.Sin(moveSpeedY * Time.time + offsetY) * moveRangeY,
-                        Mathf.Cos(moveSpeedZ * Time.time + offsetZ) * moveRangeZ);
+                        Mathf.Sin(moveSpeed.x * Time.time + offset.x) * moveRange.x,
+                        Mathf.Sin(moveSpeed.y * Time.time + offset.y) * moveRange.y,
+                        Mathf.Sin(moveSpeed.z * Time.time + offset.z) * moveRange.z);
+    }                                                             
+    void MovementCircular()                                       
+    {                                                             
+        this.transform.localPosition = _oriPos + new Vector3(     
+                        Mathf.Sin(moveSpeed.x * Time.time + offset.x) * moveRange.x,
+                        Mathf.Sin(moveSpeed.y * Time.time + offset.y) * moveRange.y,
+                        Mathf.Cos(moveSpeed.z * Time.time + offset.z) * moveRange.z);
     }
     void MovementForward()
     {
         this.transform.localPosition = _oriPos + new Vector3(
-                        moveSpeedX * Time.time,
-                        Mathf.Sin(moveSpeedY * Time.time) * moveRangeY,
-                        moveSpeedZ * Time.time);
+                        moveSpeed.x * Time.time,
+                        moveSpeed.y * Time.time,
+                        moveSpeed.z * Time.time);
     }
 }

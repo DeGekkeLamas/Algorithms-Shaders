@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5254387307098633409}
   - component: {fileID: 6232500598109979020}
   - component: {fileID: 2123825402581610809}
+  - component: {fileID: 6087264469851866165}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -47,14 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7fdf845122eba44ca5aa3d255718543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 15
+  maxHP: 100
   moveSpeed: 5
-  battleStartDistance: 1
-  visionAngle: 75
-  rotationSpeed: 100
-  RotationRange: {x: 30, y: 45}
-  delayBetweenMovements: 0.75
-  moveDistance: 2
+  strength: 1
   corpse: {fileID: 8120454217808119696, guid: 275cfdf6fcabefb4380cafd02cfad82a, type: 3}
   tomatoSplat: {fileID: 966423011128645671, guid: 12141ac9eae3ad8428d53249e5653f16, type: 3}
 --- !u!136 &6232500598109979020
@@ -107,6 +103,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &6087264469851866165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18489271436508005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f44df3d9c1284a4795dac60da128b80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  rotationSpeed: 100
+  RotationRange: {x: 30, y: 45}
+  delayBetweenMovements: 0.75
+  moveDistance: 2
+  maxVisionDistance: 15
+  visionAngle: 75
+  target: {fileID: 0}
 --- !u!1001 &7938821554620023863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,15 +234,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedX: 0
-  moveRangeX: 0
-  moveSpeedY: 2
-  moveRangeY: 1.5
-  moveSpeedZ: 0
-  moveRangeZ: 0
-  offsetX: 0
-  offsetY: 0
-  offsetZ: 0
+  moveSpeed: {x: 0, y: 1.5, z: 0}
+  moveRange: {x: 0, y: 1.5, z: 0}
+  offset: {x: 0, y: 0, z: 0}
   currentMovement: 1
 --- !u!1 &2486528980705178714 stripped
 GameObject:
@@ -245,15 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedX: 0
-  moveRangeX: 0
-  moveSpeedY: 3
-  moveRangeY: 2
-  moveSpeedZ: 0
-  moveRangeZ: 0
-  offsetX: 0
-  offsetY: 1
-  offsetZ: 0
+  moveSpeed: {x: 0, y: 2, z: 0}
+  moveRange: {x: 0, y: 2, z: 0}
+  offset: {x: 0, y: 1, z: 0}
   currentMovement: 1
 --- !u!1 &4318771721170168079 stripped
 GameObject:
@@ -272,15 +276,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedX: 0
-  moveRangeX: 0
-  moveSpeedY: 3
-  moveRangeY: 10
-  moveSpeedZ: 0
-  moveRangeZ: 0
-  offsetX: 0
-  offsetY: -1
-  offsetZ: 0
+  moveSpeed: {x: 0, y: 10, z: 0}
+  moveRange: {x: 0, y: 10, z: 0}
+  offset: {x: 0, y: -1, z: 0}
   currentMovement: 1
 --- !u!1 &4715384418117532363 stripped
 GameObject:
@@ -299,15 +297,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedX: 0
-  moveRangeX: 0
-  moveSpeedY: 3
-  moveRangeY: 2
-  moveSpeedZ: 0
-  moveRangeZ: 0
-  offsetX: 0
-  offsetY: -1
-  offsetZ: 0
+  moveSpeed: {x: 0, y: 2, z: 0}
+  moveRange: {x: 0, y: 2, z: 0}
+  offset: {x: 0, y: -1, z: 0}
   currentMovement: 1
 --- !u!1 &5735735249779840079 stripped
 GameObject:
@@ -326,15 +318,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedX: 0
-  moveRangeX: 0
-  moveSpeedY: 3
-  moveRangeY: 2
-  moveSpeedZ: 0
-  moveRangeZ: 0
-  offsetX: 0
-  offsetY: 1
-  offsetZ: 0
+  moveSpeed: {x: 0, y: 2, z: 0}
+  moveRange: {x: 0, y: 2, z: 0}
+  offset: {x: 0, y: 1, z: 0}
   currentMovement: 1
 --- !u!1 &7128413113968916838 stripped
 GameObject:
@@ -353,15 +339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedX: 0
-  moveRangeX: 0
-  moveSpeedY: 3
-  moveRangeY: 0.1
-  moveSpeedZ: 0
-  moveRangeZ: 0
-  offsetX: 0
-  offsetY: 0
-  offsetZ: 0
+  moveSpeed: {x: 0, y: 0.1, z: 0}
+  moveRange: {x: 0, y: 0.1, z: 0}
+  offset: {x: 0, y: 0, z: 0}
   currentMovement: 1
 --- !u!1 &7223663388040409838 stripped
 GameObject:
@@ -380,15 +360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedX: 0
-  moveRangeX: 0
-  moveSpeedY: 3
-  moveRangeY: 10
-  moveSpeedZ: 0
-  moveRangeZ: 0
-  offsetX: 0
-  offsetY: -1
-  offsetZ: 0
+  moveSpeed: {x: 0, y: 10, z: 0}
+  moveRange: {x: 0, y: 10, z: 0}
+  offset: {x: 0, y: -1, z: 0}
   currentMovement: 1
 --- !u!4 &7613024390882141148 stripped
 Transform:

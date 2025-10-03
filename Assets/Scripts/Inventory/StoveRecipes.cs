@@ -1,4 +1,5 @@
 using UnityEngine;
+using InventoryStuff;
 
 public class StoveRecipes : MonoBehaviour
 {
@@ -19,12 +20,15 @@ public class StoveRecipes : MonoBehaviour
     }
 }
 
-[System.Serializable]
-public struct Recipe
+namespace InventoryStuff
 {
-    [Tooltip("This variable is for clarity and not meant to be modified")]
-    public string name;
+    [System.Serializable]
+    public struct Recipe
+    {
+        [Tooltip("This variable is for clarity and not meant to be modified")]
+        public string name;
 
-    public InventoryItem result;
-    public InventoryItem[] ingredients;
+        public InventoryItem result;
+        public InventoryItem[] ingredients;
+    }
 }
