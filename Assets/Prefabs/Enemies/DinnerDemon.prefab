@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2123825402581610809}
   - component: {fileID: 6087264469851866165}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: DinnerDemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
