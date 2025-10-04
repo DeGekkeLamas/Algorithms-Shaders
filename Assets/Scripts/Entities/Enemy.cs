@@ -21,11 +21,12 @@ public class Enemy : Entity
     void Death()
     {
         GameObject oldModel = this.transform.GetChild(0).gameObject;
+        Instantiate(corpse, oldModel.transform.position, oldModel.transform.rotation, this.transform);
         Destroy(oldModel);
         Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hitInfo);
         Instantiate(tomatoSplat, hitInfo.point + new Vector3(0,0.01f,0), Quaternion.identity, Projectile.projectileContainer.transform);
-        Instantiate(corpse, this.transform.position, Quaternion.identity, this.transform);
         StopAllCoroutines();
+        if (this.TryGetComponent(out MovingObjectBase move)) Destroy(move);
         Destroy(this);
     }
 }

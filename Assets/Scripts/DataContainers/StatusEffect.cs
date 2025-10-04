@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class StatusEffect
+public abstract class StatusEffect : ScriptableObject
 {
     public string name;
     public float duration;

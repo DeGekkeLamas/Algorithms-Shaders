@@ -31,7 +31,7 @@ namespace InventoryStuff
         public bool isFood;
         public bool isMetal;
         public bool isKnife;
-        public StatusEffect[] effectApplied;
+        [SerializeField] public StatusEffect[] effectApplied;
         public bool onAttackHealHP;
         public bool damageScalesWithHP;
         public float damageAfterBlock;
@@ -41,7 +41,6 @@ namespace InventoryStuff
         public float cooldown; //
         public float cooldownLeft; //
         [Header("Passive effects")]
-        public StatusEffect[] grantsImmunityTo;
         public bool grantsImmortality;
         public bool knifeBoost;
         public bool foodBoost;
@@ -49,6 +48,7 @@ namespace InventoryStuff
         public bool durabilityBoost;
         public int healingBoost;
         public bool seeEnemyInventories;
+        [SerializeField] public StatusEffect[] grantsImmunityTo;
 
         public Texture2D SetSprite()
         {

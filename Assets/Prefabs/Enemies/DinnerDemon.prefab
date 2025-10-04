@@ -115,7 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f44df3d9c1284a4795dac60da128b80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  baseSpeed: 1
+  moveSpeed: 1
   rotationSpeed: 100
   RotationRange: {x: 30, y: 45}
   delayBetweenMovements: 0.75
@@ -234,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 1
   moveSpeed: {x: 0, y: 1.5, z: 0}
   moveRange: {x: 0, y: 1.5, z: 0}
   offset: {x: 0, y: 0, z: 0}
@@ -255,6 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 1
   moveSpeed: {x: 0, y: 2, z: 0}
   moveRange: {x: 0, y: 2, z: 0}
   offset: {x: 0, y: 1, z: 0}
@@ -276,6 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 1
   moveSpeed: {x: 0, y: 10, z: 0}
   moveRange: {x: 0, y: 10, z: 0}
   offset: {x: 0, y: -1, z: 0}
@@ -297,6 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 1
   moveSpeed: {x: 0, y: 2, z: 0}
   moveRange: {x: 0, y: 2, z: 0}
   offset: {x: 0, y: -1, z: 0}
@@ -318,6 +323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 1
   moveSpeed: {x: 0, y: 2, z: 0}
   moveRange: {x: 0, y: 2, z: 0}
   offset: {x: 0, y: 1, z: 0}
@@ -339,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 1
   moveSpeed: {x: 0, y: 0.1, z: 0}
   moveRange: {x: 0, y: 0.1, z: 0}
   offset: {x: 0, y: 0, z: 0}
@@ -360,6 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1214045513b124196761300806a1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 1
   moveSpeed: {x: 0, y: 10, z: 0}
   moveRange: {x: 0, y: 10, z: 0}
   offset: {x: 0, y: -1, z: 0}

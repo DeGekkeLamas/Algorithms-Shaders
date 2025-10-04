@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MovingObject : MonoBehaviour
+public class MovingObject : MovingObjectBase
 {
     /// <summary>
     /// Script intended to be placed on enemies, though it can be placed on other moving obstacles as well
@@ -43,22 +43,22 @@ public class MovingObject : MonoBehaviour
     void MovementPingPong()
     {
         this.transform.localPosition = _oriPos + new Vector3(
-                        Mathf.Sin(moveSpeed.x * Time.time + offset.x) * moveRange.x,
-                        Mathf.Sin(moveSpeed.y * Time.time + offset.y) * moveRange.y,
-                        Mathf.Sin(moveSpeed.z * Time.time + offset.z) * moveRange.z);
+                        Mathf.Sin(baseSpeed * moveSpeed.x * Time.time + offset.x) * moveRange.x,
+                        Mathf.Sin(baseSpeed * moveSpeed.y * Time.time + offset.y) * moveRange.y,
+                        Mathf.Sin(baseSpeed * moveSpeed.z * Time.time + offset.z) * moveRange.z);
     }                                                             
     void MovementCircular()                                       
     {                                                             
         this.transform.localPosition = _oriPos + new Vector3(     
-                        Mathf.Sin(moveSpeed.x * Time.time + offset.x) * moveRange.x,
-                        Mathf.Sin(moveSpeed.y * Time.time + offset.y) * moveRange.y,
-                        Mathf.Cos(moveSpeed.z * Time.time + offset.z) * moveRange.z);
+                        Mathf.Sin(baseSpeed * moveSpeed.x * Time.time + offset.x) * moveRange.x,
+                        Mathf.Sin(baseSpeed * moveSpeed.y * Time.time + offset.y) * moveRange.y,
+                        Mathf.Cos(baseSpeed * moveSpeed.z * Time.time + offset.z) * moveRange.z);
     }
     void MovementForward()
     {
         this.transform.localPosition = _oriPos + new Vector3(
-                        moveSpeed.x * Time.time,
-                        moveSpeed.y * Time.time,
-                        moveSpeed.z * Time.time);
+                        baseSpeed * moveSpeed.x * Time.time,
+                        baseSpeed * moveSpeed.y * Time.time,
+                        baseSpeed * moveSpeed.z * Time.time);
     }
 }

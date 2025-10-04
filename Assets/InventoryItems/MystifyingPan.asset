@@ -24,39 +24,24 @@ MonoBehaviour:
     currentDurability: 0
     damage: 70
     hpHealed: 0
-    amountOfTargets: 2
-    targetAll: 0
-    amountOfHits: 1
     slotIsEmty: 0
     isConsumedOnUse: 0
     isFood: 0
     isMetal: 1
     isKnife: 1
-    isEmptyMicrowave: 0
-    inflictOnFire: 0
-    inflictPoisoned: 0
-    inflictBlindness: 0
+    effectApplied: []
     onAttackHealHP: 0
-    inflictStuck: 0
     damageScalesWithHP: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    fireImmunity: 1
-    seeEnemyInventories: 1
-    durabilityBoost: 1
-    healingBoost: 0
-    consumesBread: 0
-    curesOnFireWhenConsumed: 0
     damageAfterBlock: 0
-    grantsImmortality: 0
-    isStoveIngredient: 0
-    canAttack: 1
-    canBlock: 1
-    canConsume: 0
-    canThrow: 0
-    hasOverworldUses: 1
     projectile: {fileID: -8806985211751940049, guid: 5f701301407c6644f996319132fd3a8e, type: 3}
     autoFire: 0
     cooldown: 0.2
     cooldownLeft: 0
+    grantsImmortality: 0
+    knifeBoost: 0
+    foodBoost: 0
+    foodResistanceBoost: 0
+    durabilityBoost: 1
+    healingBoost: 0
+    seeEnemyInventories: 1
+    grantsImmunityTo: []

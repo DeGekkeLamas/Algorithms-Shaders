@@ -13,6 +13,14 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
+        if (this.TryGetComponent(out MovingObjectBase movingObject)) movingObject.baseSpeed = moveSpeed;
         currentHP = maxHP;
+    }
+
+    public void ChangeMoveSpeed(float newSpeed)
+    {
+        moveSpeed= newSpeed;
+
+        if (this.TryGetComponent(out MovingObjectBase movingObject)) movingObject.baseSpeed = moveSpeed;
     }
 }
