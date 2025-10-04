@@ -50,16 +50,10 @@ public class PlayerController : Entity
             {
                 Debug.DrawLine(Camera.main.transform.position, rayHit.Item2.point, Color.blue, 1);
 
-                if (rayHit.Item2.collider.gameObject.TryGetComponent<PickupItem>(out PickupItem item))
+                if (rayHit.Item2.collider.gameObject.TryGetComponent(out IInteractible interactible))
                 {
-                    bool couldAdd = inventory.AddItem(item.itemToGive);
-                    if (couldAdd) Destroy(rayHit.Item2.collider.gameObject);
+                    interactible.OnInteract();
                     canUseItem = false;
-                }
-                else if (rayHit.Item2.transform.CompareTag("Sink"))
-                {
-                    inventory.AddItem(waterGlass.item);
-                    return;
                 }
             }
         }

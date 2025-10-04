@@ -17,46 +17,31 @@ MonoBehaviour:
     itemName: Water bottle
     itemModel: {fileID: 919132149155446097, guid: b6e7d8da7dd773c4ea0f6fc7cb943f49, type: 3}
     toolTip: Bo'ol o' wa'ah
-    isStackable: 0
-    maxStack: 1
     amountLeft: 1
+    isStackable: 1
+    maxStack: 5
     durability: 0
     currentDurability: 0
     damage: 10
     hpHealed: 0
-    amountOfTargets: 1
-    targetAll: 0
-    amountOfHits: 1
     slotIsEmty: 0
     isConsumedOnUse: 1
     isFood: 1
     isMetal: 0
     isKnife: 0
-    isEmptyMicrowave: 0
-    inflictOnFire: 0
-    inflictPoisoned: 0
-    inflictBlindness: 0
+    effectApplied: []
     onAttackHealHP: 0
-    inflictStuck: 0
     damageScalesWithHP: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    fireImmunity: 0
-    seeEnemyInventories: 0
-    durabilityBoost: 0
-    healingBoost: 0
-    consumesBread: 0
-    curesOnFireWhenConsumed: 1
     damageAfterBlock: 0
-    grantsImmortality: 0
-    isStoveIngredient: 1
-    canAttack: 0
-    canBlock: 0
-    canConsume: 1
-    canThrow: 1
-    hasOverworldUses: 1
     projectile: {fileID: -8806985211751940049, guid: 81865e04c6089024aa1cb85ca1330bdc, type: 3}
     autoFire: 0
     cooldown: 0.5
-    cooldownLeft: 0
+    cooldownLeft: -28.670286
+    grantsImmortality: 0
+    knifeBoost: 0
+    foodBoost: 0
+    foodResistanceBoost: 0
+    durabilityBoost: 0
+    healingBoost: 0
+    seeEnemyInventories: 0
+    grantsImmunityTo: []

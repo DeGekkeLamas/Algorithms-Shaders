@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using InventoryStuff;
+using NaughtyAttributes;
 
 namespace DungeonGeneration
 {
@@ -22,11 +23,11 @@ namespace DungeonGeneration
         private void OnValidate()
         {
             // Get total item probabilities
-            rsa.bakeryTotalItemChance = GetTotalItemProbability(rsa.bakeryItemSpawns);
-            rsa.breakTotalItemChance = GetTotalItemProbability(rsa.breakItemSpawns);
-            rsa.kitchenTotalItemChance = GetTotalItemProbability(rsa.kitchenItemSpawns);
-            rsa.storageTotalItemChance = GetTotalItemProbability(rsa.storageItemSpawns);
-            rsa.seatingTotalItemChance = GetTotalItemProbability(rsa.seatingItemSpawns);
+            rsa.bakeryTotalItemChance = ItemLootTable.GetTotalItemProbability(rsa.bakeryItemSpawns);
+            rsa.breakTotalItemChance = ItemLootTable.GetTotalItemProbability(rsa.breakItemSpawns);
+            rsa.kitchenTotalItemChance = ItemLootTable.GetTotalItemProbability(rsa.kitchenItemSpawns);
+            rsa.storageTotalItemChance = ItemLootTable.GetTotalItemProbability(rsa.storageItemSpawns);
+            rsa.seatingTotalItemChance = ItemLootTable.GetTotalItemProbability(rsa.seatingItemSpawns);
 
             // Set names of item tables
             for (int i = 0; i < rsa.bakeryItemSpawns.Length; i++)
@@ -143,7 +144,7 @@ namespace DungeonGeneration
                                 if (roomvertical) offset.y += counterSize;
                                 else offset.x += counterSize;
 
-                                InventoryItemData itemToSpawn = GetItemFromLoottable(rsa.kitchenItemSpawns);
+                                InventoryItemData itemToSpawn = ItemLootTable.GetItemFromLoottable(rsa.kitchenItemSpawns, d.GetSeed());
                                 if (!itemToSpawn.slotIsEmty)
                                 {
                                     PickupItem itemSpawned = Instantiate(rsa.itemPickup, new(
@@ -193,35 +194,6 @@ namespace DungeonGeneration
 
             yield return new WaitForSeconds(d.generationInterval);
         }
-        /// <summary>
-        /// Returns item based on item probabilities
-        /// </summary>
-        InventoryItemData GetItemFromLoottable(ItemLootLable[] lootTable)
-        {
-            int probabilityPassed = lootTable[0].probability;
-            int lootRoll = d.GetSeed().Next(0, 100);
-            for (int i = 0; i < lootTable.Length; i++)
-            {
-                if (lootRoll < probabilityPassed) return lootTable[i].item.item;
-                else probabilityPassed += lootTable[i].probability;
-            }
-            // If no item, return empty slot
-            return new InventoryItemData { slotIsEmty = true };
-        }
-        public static int GetTotalItemProbability(ItemLootLable[] lootTable)
-        {
-            int probability = 0;
-            foreach (var loot in lootTable) probability += loot.probability;
-            return probability;
-        }
-    }
-
-    [System.Serializable]
-    public struct ItemLootLable
-    {
-        public string itemName;
-        public InventoryItem item;
-        public int probability;
     }
 
     [Serializable]
@@ -232,14 +204,14 @@ namespace DungeonGeneration
         public Material bakeryWall;
         public Material bakeryFloor;
         [Space]
-        public int bakeryTotalItemChance;
-        public ItemLootLable[] bakeryItemSpawns;
+        [ReadOnly] public int bakeryTotalItemChance;
+        public ItemLootTable[] bakeryItemSpawns;
         [Header("Break room")]
         public Material breakRoomWall;
         public Material breakRoomFloor;
         [Space]
-        public int breakTotalItemChance;
-        public ItemLootLable[] breakItemSpawns;
+        [ReadOnly] public int breakTotalItemChance;
+        public ItemLootTable[] breakItemSpawns;
         [Header("Kitchen")]
         public Material kitchenWall;
         public Material kitchenFloor;
@@ -248,20 +220,20 @@ namespace DungeonGeneration
         public GameObject counterCornerL;
         public GameObject counterCornerR;
         [Space]
-        public int kitchenTotalItemChance;
-        public ItemLootLable[] kitchenItemSpawns;
+        [ReadOnly] public int kitchenTotalItemChance;
+        public ItemLootTable[] kitchenItemSpawns;
         [Header("Storage")]
         public Material storageWall;
         public Material storageFloor;
         [Space]
-        public int storageTotalItemChance;
-        public ItemLootLable[] storageItemSpawns;
+        [ReadOnly] public int storageTotalItemChance;
+        public ItemLootTable[] storageItemSpawns;
         [Header("Seating")]
         public Material seatingWall;
         public Material seatingFloor;
         [Space]
-        public int seatingTotalItemChance;
-        public ItemLootLable[] seatingItemSpawns;
+        [ReadOnly] public int seatingTotalItemChance;
+        public ItemLootTable[] seatingItemSpawns;
     }
 
     [System.Serializable]
