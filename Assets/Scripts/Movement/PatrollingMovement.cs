@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class PatrollingMovement : MovingObjectBase
 {
@@ -9,58 +10,23 @@ public class PatrollingMovement : MovingObjectBase
     public Vector2 RotationRange = new(30, 45);
     public float delayBetweenMovements = .5f;
     public float moveDistance = 2;
-    [Header("Vision")]
-    public float maxVisionDistance = 15;
-    public float visionAngle = 45;
 
-    public Transform target;
-    bool hasSeenTarget;
     bool coroutineIsRunning;
-    void Start()
+    void OnEnable()
     {
         StartCoroutine(RandomMovements());
     }
 
-    void Update()
+    void OnDisable()
     {
-        if (PlayerController.instance == null) return;
-        // shows vision range
-        DebugExtension.DebugCircle(this.transform.position, Color.green, maxVisionDistance);
-        Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * maxVisionDistance, visionAngle), Color.green);
-        Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * maxVisionDistance, -visionAngle), Color.green);
-
-        Vector3 playerPos = PlayerController.instance.transform.position;
-        float playerEnemyDistance = (playerPos - this.transform.position).magnitude;
-
-        // start following player if player has been seen before
-        Debug.DrawRay(this.transform.position + Vector3.up, playerPos + Vector3.up - (this.transform.position + transform.forward));
-
-        if (playerEnemyDistance > .5f && playerEnemyDistance < maxVisionDistance &&
-            VectorMath.GetAngleBetweenVectors(playerPos - this.transform.position, this.transform.forward)
-                < visionAngle &&
-                Physics.Raycast(this.transform.position + Vector3.up, playerPos + Vector3.up - (this.transform.position),
-            out RaycastHit visionHit) && visionHit.collider.transform == PlayerController.instance.transform.GetChild(0))
-        {
-            hasSeenTarget = true;
-            Vector3 lastSeenPlayerPos = playerPos;
-
-            // Move to player
-            this.transform.position += baseSpeed * moveSpeed * Time.deltaTime *
-                (lastSeenPlayerPos - this.transform.position).normalized;
-            transform.LookAt(lastSeenPlayerPos);
-        }
-        else
-        {
-            hasSeenTarget = false;
-            if (!coroutineIsRunning) StartCoroutine(RandomMovements());
-        }
+        StopAllCoroutines();
     }
 
 
     IEnumerator RandomMovements()
     {
         coroutineIsRunning = true;
-        while (!hasSeenTarget)
+        while (true)
         {
             float _rotation;
             // ALways turn around if wall nearby
@@ -105,14 +71,20 @@ public class PatrollingMovement : MovingObjectBase
         }
         coroutineIsRunning = false;
     }
-    // Determines which direction is shorter for rotation
+
+    /// <summary>
+    /// Determines which direction is shorter for rotation
+    /// </summary>
     static bool CloserToPlusSide(float currentRotation, float destination)
     {
         float differenceUp = (360 + destination - currentRotation) % 360;
         float differenceDown = (360 + currentRotation - destination) % 360;
         return differenceDown > differenceUp;
     }
-    // Gets rotation for spin
+
+    /// <summary>
+    /// Gets rotation for spin
+    /// </summary>
     static float AddRotation(float original, float rotation)
     {
         original = (original + rotation) % 360;

@@ -21,6 +21,7 @@ public abstract class Entity : MonoBehaviour
     {
         moveSpeed= newSpeed;
 
-        if (this.TryGetComponent(out MovingObjectBase movingObject)) movingObject.baseSpeed = moveSpeed;
+        MovingObjectBase[] objs = GetComponents<MovingObjectBase>();
+        foreach (MovingObjectBase obj in objs) obj.baseSpeed = moveSpeed;
     }
 }
