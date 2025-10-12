@@ -9,7 +9,7 @@ public class TargetSightKeep : TargetSight
     protected override void Update()
     {
         base.Update();
-        bool canSeePlayer = CanSeePlayer();
+        bool canSeePlayer = CanSeePlayer(this.transform, target.transform, maxVisionDistance, visionAngle);
         MovementBeforeSeenTarget.enabled = !canSeePlayer;
         MovementAfterSeenTarget.enabled = canSeePlayer;
     }

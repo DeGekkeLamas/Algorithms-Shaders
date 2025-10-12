@@ -1,5 +1,7 @@
 using UnityEngine;
 using NaughtyAttributes;
+using System.Collections;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Base for switching between movement types depending on if target can be seen by object
@@ -14,35 +16,47 @@ public abstract class TargetSight : MonoBehaviour
     public float maxVisionDistance = 15;
     public float visionAngle = 75;
 
-    private void Awake()
+    public bool showDebug;
+
+    private void OnValidate()
+    {
+        if (showDebug) StartCoroutine(ShowDebug());
+    }
+
+    private void Start()
     {
         MovementBeforeSeenTarget.enabled = true;
         MovementAfterSeenTarget.enabled = false;
-    }
-    private void Start()
-    {
         if (target == null) target = PlayerController.instance.transform;
     }
 
     protected virtual void Update()
     {
         if (target == null) return;
-        VisualDebug();
     }
 
     /// <summary>
     /// Returns if the object has sight of the player, based off distance, angle and objects in the way
     /// </summary>
     /// <returns></returns>
-    protected bool CanSeePlayer()
+    public static bool CanSeePlayer(Transform self, Transform target, float maxVisionDistance, float visionAngle)
     {
         Vector3 targetPos = target.position;
-        float targetEnemyDistance = (targetPos - this.transform.position).magnitude;
+        float targetEnemyDistance = (targetPos - self.transform.position).magnitude;
 
         return targetEnemyDistance > .5f && targetEnemyDistance < maxVisionDistance && // Distance
-            VectorMath.GetAngleBetweenVectors(targetPos - this.transform.position, this.transform.forward) < visionAngle && // Vision angle
-                Physics.Raycast(this.transform.position + Vector3.up, targetPos + Vector3.up - (this.transform.position), // Direct line of sight
+            VectorMath.GetAngleBetweenVectors(targetPos - self.transform.position, self.transform.forward) < visionAngle && // Vision angle
+                Physics.Raycast(self.transform.position + Vector3.up, targetPos + Vector3.up - (self.transform.position), // Direct line of sight
             out RaycastHit visionHit) && visionHit.collider.transform == target;                                         // to target
+    }
+
+    IEnumerator ShowDebug()
+    {
+        while (showDebug)
+        {
+            VisualDebug();
+            yield return null;
+        }
     }
 
     /// <summary>

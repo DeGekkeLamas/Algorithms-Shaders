@@ -9,11 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9089323051470772063}
-  - component: {fileID: 7858897311122115716}
+  - component: {fileID: 649392384874580996}
   - component: {fileID: 4282499219386979268}
   - component: {fileID: 6649370425793603788}
+  - component: {fileID: 2850295908962625381}
   - component: {fileID: 7583575851937448990}
+  - component: {fileID: 4595315138715716598}
   - component: {fileID: 4200914740082318497}
+  - component: {fileID: 3124029538007209555}
   m_Layer: 0
   m_Name: CerealKiller
   m_TagString: Untagged
@@ -37,7 +40,7 @@ Transform:
   - {fileID: 8603744236704771251}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7858897311122115716
+--- !u!114 &649392384874580996
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,12 +49,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5020230783508771579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7fdf845122eba44ca5aa3d255718543, type: 3}
+  m_Script: {fileID: 11500000, guid: 23483b5eae9357f4b98a3b1e2394f4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 200
   moveSpeed: 2
-  strength: 1
+  strength: 15
   activeStatusEffects: []
   totalDropChance: 50
   dropsOnDeath:
@@ -72,6 +75,10 @@ MonoBehaviour:
     probability: 5
   corpse: {fileID: 3778903803615357484, guid: 823350eade72eb448b59e00f6f3e4838, type: 3}
   tomatoSplat: {fileID: 966423011128645671, guid: a9667468bcb0be7478c770a7c83249b9, type: 3}
+  maxAttackDistance: 2.5
+  attackStartDistance: 2
+  attackAngle: 75
+  showVisualDebug: 0
 --- !u!136 &4282499219386979268
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -122,6 +129,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &2850295908962625381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020230783508771579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ae497c482ba924ba137895c482c27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementBeforeSeenTarget: {fileID: 7583575851937448990}
+  MovementAfterSeenTarget: {fileID: 4595315138715716598}
+  target: {fileID: 0}
+  maxVisionDistance: 15
+  visionAngle: 75
+  showDebug: 0
 --- !u!114 &7583575851937448990
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,9 +165,23 @@ MonoBehaviour:
   RotationRange: {x: 30, y: 45}
   delayBetweenMovements: 0.1
   moveDistance: 2
-  maxVisionDistance: 15
-  visionAngle: 75
+--- !u!114 &4595315138715716598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020230783508771579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5f1fce231b5f84ba277d377d879e25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 1
   target: {fileID: 0}
+  moveSpeed: 2
+  rotationSpeed: 1
+  minDistance: 0
 --- !u!95 &4200914740082318497
 Animator:
   serializedVersion: 7
@@ -165,6 +204,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3124029538007209555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020230783508771579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc5ebdcf4626064a80b32f587292e09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8136907974425135960
 PrefabInstance:
   m_ObjectHideFlags: 0

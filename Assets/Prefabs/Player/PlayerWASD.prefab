@@ -318,11 +318,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1823438395285073010}
-  - component: {fileID: 9134182752649397864}
+  - component: {fileID: 3214448125551340852}
   - component: {fileID: 4554953839631238754}
   - component: {fileID: 1709325684178408358}
   m_Layer: 6
-  m_Name: Player
+  m_Name: PlayerWASD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,7 +346,7 @@ Transform:
   - {fileID: 4649350564725063489}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9134182752649397864
+--- !u!114 &3214448125551340852
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -355,17 +355,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8608250485412360592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f45f5157a6f11a645a1514ed503ae6be, type: 3}
+  m_Script: {fileID: 11500000, guid: 26ad9f6bc7fca714c88a9751bb4d461e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
-  moveSpeed: 15
+  moveSpeed: 10
   strength: 1
   activeStatusEffects: []
   projectileForce: 20
   pickupSpawned: {fileID: 2400643790871167767, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
   projectileChart: {fileID: 6158452050362798746}
-  waterGlass: {fileID: 11400000, guid: cfb8d551f1720644c80ccb0b9b716f54, type: 2}
 --- !u!195 &4554953839631238754
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class TargetSightOnce : TargetSight
     protected override void Update()
     {
         base.Update();
-        if (CanSeePlayer())
+        if (CanSeePlayer(this.transform, target.transform, maxVisionDistance, visionAngle))
         {
             MovementBeforeSeenTarget.enabled = false;
             MovementAfterSeenTarget.enabled = true;

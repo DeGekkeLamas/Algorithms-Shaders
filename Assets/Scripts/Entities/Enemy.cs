@@ -12,7 +12,7 @@ public class Enemy : Entity
     public GameObject corpse;
     public GameObject tomatoSplat;
 
-    private void OnValidate()
+    protected virtual void OnValidate()
     {
         totalDropChance = ItemLootTable.GetTotalItemProbability(dropsOnDeath);
         for(int i = 0; i < dropsOnDeath.Length; i++)
@@ -21,18 +21,17 @@ public class Enemy : Entity
         }
     }
 
-    // start battle on collision with player or projectile
+    // Take damage on collision with weapon or projectile
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Projectile>(out Projectile hitProjectile) || other.gameObject.CompareTag("Player"))
+        if (other.TryGetComponent(out Projectile hitProjectile))
         {
             Debug.Log($"Hit by projecile {other.gameObject.name}");
-            GameManager manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
             if (hitProjectile != null) Death();
         }
     }
 
-    void Death()
+    protected override void Death()
     {
         SpawnCorpse();
         SpawnDrops();

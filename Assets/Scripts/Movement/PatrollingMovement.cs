@@ -11,7 +11,6 @@ public class PatrollingMovement : MovingObjectBase
     public float delayBetweenMovements = .5f;
     public float moveDistance = 2;
 
-    bool coroutineIsRunning;
     void OnEnable()
     {
         StartCoroutine(RandomMovements());
@@ -25,7 +24,6 @@ public class PatrollingMovement : MovingObjectBase
 
     IEnumerator RandomMovements()
     {
-        coroutineIsRunning = true;
         while (true)
         {
             float _rotation;
@@ -64,12 +62,10 @@ public class PatrollingMovement : MovingObjectBase
             {
                 this.transform.position += baseSpeed * moveSpeed * Time.deltaTime * transform.forward;
                 yield return null;
-
             }
 
             yield return new WaitForSeconds(delayBetweenMovements);
         }
-        coroutineIsRunning = false;
     }
 
     /// <summary>
