@@ -52,37 +52,7 @@ public class PlayerController : Entity
         if (interactInput && canUseItem || interactInputStay && itemSelected.autoFire &&
             itemSelected.cooldownLeft <= 0 && canUseItem)
         {
-            itemSelected.UseItem();
-            #region deleteLater
-            if (itemSelected.projectile != null &&
-                itemSelected.cooldownLeft <= 0)
-            {
-                // shot projectiles
-                Rigidbody spawnedProjectile = Instantiate(itemSelected.projectile,
-                    transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(relMousePos));
-                Projectile projectile = spawnedProjectile.GetComponent<Projectile>();
-                projectile.damage = itemSelected.damage;
-                if (!projectile.useGravity)
-                { // Straight projectile
-                    spawnedProjectile.linearVelocity = relMousePos.normalized *
-                        projectile.projectileSpeed;
-                    spawnedProjectile.linearVelocity = new(spawnedProjectile.linearVelocity.x, 0, spawnedProjectile.linearVelocity.z);
-                }
-                else // Lobbed projectile
-                {
-                    spawnedProjectile.linearVelocity = relMousePos *
-                        projectile.projectileSpeed;
-                    spawnedProjectile.angularVelocity = Vector3.Cross(spawnedProjectile.linearVelocity, Vector3.up) * -projectile.rotationIntensity;
-                }
-
-                itemSelected.cooldownLeft =
-                    itemSelected.cooldown;
-                if (itemSelected.isConsumedOnUse)
-                    Inventory.instance.RemoveFromStack(Inventory.itemSelected);
-
-                Debug.Log($"Spawned projectile, from {this}");
-            }
-            #endregion
+            itemSelected.UseItem(this, relMousePos);
         }
 
         // Drop currently held item

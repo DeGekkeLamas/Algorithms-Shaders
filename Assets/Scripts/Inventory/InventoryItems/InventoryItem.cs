@@ -4,7 +4,10 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(
+        fileName = "InventoryItem",
+        menuName = "ScriptableObjects/Items/InventoryItem", 
+        order = 0)]
     public class InventoryItem : ScriptableObject
     {
         public InventoryItemData item = new();
@@ -58,41 +61,6 @@ namespace InventoryStuff
             return itemSprite;
         }
 
-        public virtual void UseItem() { }
-
-        [Button]
-        void ConvertToConsumableItem(ConsumableItem target)
-        {
-
-        }
+        public virtual void UseItem(Entity source, Vector3 inputDir) { }
     }
-
-    public class ConsumableItem : InventoryItemData
-    {
-        public float hpHealed;
-        public StatusEffect[] effectApplied;
-
-        public override void UseItem()
-        {
-            Inventory.instance.RemoveItem(this);
-        }
-    }
-    public class RangedWeapon : InventoryItemData
-    {
-        public float damage;
-        public StatusEffect[] effectApplied;
-        public Rigidbody projectile;
-        public bool autoFire;
-        public float cooldown;
-        public float cooldownLeft;
-        public bool isConsumedOnUse;
-        [Tooltip("Leave empty to use no fuel")]
-        public InventoryItemData fuel;
-    }
-    public class MeleeWeapon : InventoryItemData
-    {
-        public float damage;
-        public StatusEffect[] effectApplied;
-    }
-
 }
