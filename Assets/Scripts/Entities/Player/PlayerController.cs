@@ -60,18 +60,19 @@ public class PlayerController : Entity
                 // shot projectiles
                 Rigidbody spawnedProjectile = Instantiate(itemSelected.projectile,
                     transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(relMousePos));
-                if (!spawnedProjectile.GetComponent<Projectile>().useGravity)
+                Projectile projectile = spawnedProjectile.GetComponent<Projectile>();
+                projectile.damage = itemSelected.damage;
+                if (!projectile.useGravity)
                 { // Straight projectile
                     spawnedProjectile.linearVelocity = relMousePos.normalized *
-                        spawnedProjectile.GetComponent<Projectile>().projectileSpeed;
+                        projectile.projectileSpeed;
                     spawnedProjectile.linearVelocity = new(spawnedProjectile.linearVelocity.x, 0, spawnedProjectile.linearVelocity.z);
                 }
                 else // Lobbed projectile
                 {
-                    Projectile spawned = spawnedProjectile.GetComponent<Projectile>();
                     spawnedProjectile.linearVelocity = relMousePos *
-                        spawned.projectileSpeed;
-                    spawnedProjectile.angularVelocity = Vector3.Cross(spawnedProjectile.linearVelocity, Vector3.up) * -spawned.rotationIntensity;
+                        projectile.projectileSpeed;
+                    spawnedProjectile.angularVelocity = Vector3.Cross(spawnedProjectile.linearVelocity, Vector3.up) * -projectile.rotationIntensity;
                 }
 
                 itemSelected.cooldownLeft =

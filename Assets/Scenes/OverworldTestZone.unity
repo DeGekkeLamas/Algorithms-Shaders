@@ -3887,6 +3887,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CerealKiller (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.041151
@@ -7840,6 +7848,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 129598289559540586, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 129598289559540586, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1823438395285073010, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -7878,6 +7894,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1823438395285073010, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533478313816462005, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6533478313816462005, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8608250485412360592, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
@@ -8151,6 +8175,14 @@ PrefabInstance:
     - target: {fileID: 5020230783508771579, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_Name
       value: CerealKiller (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11308,6 +11340,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CerealKiller (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.806798
@@ -13145,6 +13185,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CerealKiller (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.863038
@@ -14405,6 +14453,14 @@ PrefabInstance:
     - target: {fileID: 5020230783508771579, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_Name
       value: CerealKiller (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20695,6 +20751,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: CerealKiller (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.377245
@@ -22855,6 +22919,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3130531851452049467, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3130531851452049467, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4
@@ -23120,6 +23192,14 @@ PrefabInstance:
     - target: {fileID: 5020230783508771579, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_Name
       value: CerealKiller
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_LocalPosition.x

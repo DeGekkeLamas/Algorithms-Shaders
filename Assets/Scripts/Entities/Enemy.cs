@@ -22,14 +22,14 @@ public class Enemy : Entity
     }
 
     // Take damage on collision with weapon or projectile
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out Projectile hitProjectile))
-        {
-            Debug.Log($"Hit by projecile {other.gameObject.name}");
-            if (hitProjectile != null) Death();
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.TryGetComponent(out Projectile hitProjectile))
+    //    {
+    //        Debug.Log($"Hit by projecile {other.gameObject.name}");
+    //        if (hitProjectile != null) Death();
+    //    }
+    //}
 
     protected override void Death()
     {

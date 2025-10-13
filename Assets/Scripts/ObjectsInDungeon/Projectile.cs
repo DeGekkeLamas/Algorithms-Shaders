@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 public class Projectile : MonoBehaviour
 {
+    [HideInInspector] public float damage;
+    [Header("Movement")]
     public float projectileSpeed = 20;
     public float upForce;
     public bool useGravity;
@@ -39,9 +41,14 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.TryGetComponent<Crate>(out Crate crate)) 
-            crate.SubtractHP(1);
+        if (other.TryGetComponent(out Entity entity))
+        {
+            entity.DealDamage(damage);
+        }
+        //if (other.gameObject.TryGetComponent<Crate>(out Crate crate)) 
+        //    crate.SubtractHP(1);
 
+        // Add force to hit
         if (other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
             rb.AddExplosionForce(projectileSpeed + 0.1f*upForce, this.transform.position, 5);
@@ -55,14 +62,12 @@ public class Projectile : MonoBehaviour
             Destroy(this.gameObject);
         }
 
+        // Leace splat
         if (leaveSplat)
         {
             Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hitInfo);
-            Instantiate(splat, hitInfo.point + new Vector3(0, 0.01f, 0), Quaternion.identity, Projectile.projectileContainer.transform);
-
-            //Vector3 point = other.ClosestPoint(transform.position);
-            //Physics.Raycast(point, point-other.transform.position, out RaycastHit hitInfo);
-            //Instantiate(splat, point, Quaternion.LookRotation(hitInfo.normal), projectileContainer.transform);
+            Instantiate(splat, hitInfo.point + new Vector3(0, 0.01f, 0), Quaternion.identity, 
+                Projectile.projectileContainer.transform);
         }
     }
     private void OnDestroy() => existingProjectiles.Remove(this);
