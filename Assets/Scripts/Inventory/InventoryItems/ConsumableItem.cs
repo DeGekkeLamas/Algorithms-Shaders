@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    [CreateAssetMenu(
+        fileName = "ConsumableItem",
+        menuName = "ScriptableObjects/Items/ConsumableItem",
+        order = 0)]
     public class ConsumableItemData : InventoryItem
     {
         public ConsumableItem item = new();

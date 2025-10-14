@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    [CreateAssetMenu(
+        fileName = "MeleeItem",
+        menuName = "ScriptableObjects/Items/MeleeItem",
+        order = 0)]
     public class MeleeWeaponData : InventoryItem
     {
         public MeleeWeapon item = new();

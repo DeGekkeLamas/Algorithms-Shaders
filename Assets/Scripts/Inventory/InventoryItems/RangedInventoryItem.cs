@@ -2,6 +2,10 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    [CreateAssetMenu(
+        fileName = "RangedItem",
+        menuName = "ScriptableObjects/Items/RangedItem",
+        order = 0)]
     public class RangedWeaponData : InventoryItem
     {
         public RangedWeapon item = new();
