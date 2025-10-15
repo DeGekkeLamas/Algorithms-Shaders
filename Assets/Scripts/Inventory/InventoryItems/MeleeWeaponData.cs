@@ -10,8 +10,11 @@ namespace InventoryStuff
     {
         public MeleeWeapon item = new();
     }
+
+    [System.Serializable]
     public class MeleeWeapon : InventoryItemData
     {
+        [Header("Type specific")]
         public float damage;
         public StatusEffect[] effectApplied;
         public override void UseItem(Entity source, Vector3 inputDir)

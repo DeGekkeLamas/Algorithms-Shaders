@@ -10,7 +10,7 @@ namespace InventoryStuff
         order = 0)]
     public class InventoryItem : ScriptableObject
     {
-        public InventoryItemData item = new();
+        [HideInInspector] public InventoryItemData item = new();
     }
 
     [System.Serializable]
@@ -26,11 +26,11 @@ namespace InventoryStuff
         [Header("Stats")]
         public float durability;
         [HideInInspector] public float currentDurability;
-        public float damage; //
-        public float hpHealed; //
+        [HideInInspector] public float damage; //
+        [HideInInspector] public float hpHealed; //
         [Header("Properties")]
         [HideInInspector] public bool slotIsEmty;
-        public bool isConsumedOnUse; //
+        [HideInInspector] public bool isConsumedOnUse; //
         public bool isFood;
         public bool isMetal;
         public bool isKnife;
@@ -39,10 +39,10 @@ namespace InventoryStuff
         public bool damageScalesWithHP;
         public float damageAfterBlock;
         [Header("Overworld properties")]
-        public Rigidbody projectile; //
-        public bool autoFire; //
-        public float cooldown; //
-        public float cooldownLeft; //
+        [HideInInspector] public Rigidbody projectile; //
+        [HideInInspector] public bool autoFire; //
+        [HideInInspector] public float cooldown; //
+        [HideInInspector] public float cooldownLeft; //
         [Header("Passive effects")]
         public bool grantsImmortality;
         public bool knifeBoost;

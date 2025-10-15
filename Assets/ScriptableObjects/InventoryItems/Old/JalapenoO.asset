@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5fa68591495e844caca24b89cb97a2e, type: 3}
+  m_Name: JalapenoO
+  m_EditorClassIdentifier: 
+  item:
+    itemSprite: {fileID: 0}
+    itemName: Jalapeno
+    itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
+    toolTip: An arsonists favorite fruit!
+    isStackable: 0
+    maxStack: 1
+    amountLeft: 1
+    durability: 0
+    currentDurability: 0
+    damage: 20
+    hpHealed: 50
+    amountOfTargets: 1
+    targetAll: 0
+    amountOfHits: 1
+    slotIsEmty: 0
+    isConsumedOnUse: 1
+    isFood: 1
+    isMetal: 0
+    isKnife: 0
+    isEmptyMicrowave: 0
+    inflictOnFire: 1
+    inflictPoisoned: 0
+    inflictBlindness: 0
+    onAttackHealHP: 0
+    inflictStuck: 0
+    damageScalesWithHP: 0
+    knifeBoost: 0
+    foodBoost: 0
+    foodResistanceBoost: 0
+    fireImmunity: 0
+    seeEnemyInventories: 0
+    durabilityBoost: 0
+    healingBoost: 0
+    consumesBread: 0
+    curesOnFireWhenConsumed: 0
+    damageAfterBlock: 0
+    grantsImmortality: 0
+    isStoveIngredient: 1
+    canAttack: 1
+    canBlock: 0
+    canConsume: 1
+    canThrow: 1
+    hasOverworldUses: 1
+    projectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
+    autoFire: 0
+    cooldown: 0
+    cooldownLeft: 0

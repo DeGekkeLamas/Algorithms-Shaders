@@ -11,6 +11,7 @@ namespace InventoryStuff
         public PassiveItem item = new();
     }
 
+    [System.Serializable]
     public class PassiveItem : InventoryItemData
     {
         public override void UseItem(Entity source, Vector3 inputDir)

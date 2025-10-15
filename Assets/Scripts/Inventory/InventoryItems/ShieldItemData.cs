@@ -10,9 +10,10 @@ namespace InventoryStuff
     {
         public ShieldItem item = new();
     }
-    //[System.Serializable]
+    [System.Serializable]
     public class ShieldItem : InventoryItemData
     {
+        [Header("Type specific")]
         public float dmgReduction;
         public override void UseItem(Entity source, Vector3 inputDir)
         {

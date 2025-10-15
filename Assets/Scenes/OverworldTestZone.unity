@@ -1985,9 +1985,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0a656c430f03f4b9618ad07d9088b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  original: {fileID: 11400000, guid: 05f4e82dae39ebd488ab86b90ffbec81, type: 2}
+  original: {fileID: 11400000, guid: 28fbde6df351ba14b93d6391b414051a, type: 2}
   rangedNew: {fileID: 0}
-  meleeNew: {fileID: 0}
+  meleeNew: {fileID: 11400000, guid: 0ee27b4cc1196d4498cf59df47ee056f, type: 2}
   consumableNew: {fileID: 11400000, guid: 3cb5ed9ed44bdac48a6fbb32ceec4aea, type: 2}
   passiveNew: {fileID: 11400000, guid: a8343eaa7b2d9454daf9e25da1e54f4e, type: 2}
 --- !u!4 &245268659

@@ -10,8 +10,11 @@ namespace InventoryStuff
     {
         public ConsumableItem item = new();
     }
+
+    [System.Serializable]
     public class ConsumableItem : InventoryItemData
     {
+        [Header("Type specific")]
         public float hpHealed;
         public StatusEffect[] effectApplied;
 

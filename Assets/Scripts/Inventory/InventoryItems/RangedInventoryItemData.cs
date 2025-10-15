@@ -10,8 +10,11 @@ namespace InventoryStuff
     {
         public RangedWeapon item = new();
     }
+
+    [System.Serializable]
     public class RangedWeapon : InventoryItemData
     {
+        [Header("Type specific")]
         public float damage;
         public StatusEffect[] effectApplied;
         public Rigidbody projectile;
