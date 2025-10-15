@@ -66,19 +66,19 @@ MonoBehaviour:
   totalDropChance: 50
   dropsOnDeath:
   - itemName: Spoon
-    item: {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
+    item: {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
     probability: 20
   - itemName: Cake knife
-    item: {fileID: 11400000, guid: afd2e58b3798a2549aea67ef17c798f0, type: 2}
+    item: {fileID: 11400000, guid: 6138d3284b688f747a26edfbdf15c506, type: 2}
     probability: 10
   - itemName: Cake
-    item: {fileID: 11400000, guid: ea27409c7e7ea54498bbae40c7de14fc, type: 2}
+    item: {fileID: 11400000, guid: 3976b3a34f7d5a442b178c0b0c7e9517, type: 2}
     probability: 10
   - itemName: Fork
-    item: {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
+    item: {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
     probability: 5
   - itemName: Knife
-    item: {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
+    item: {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
     probability: 5
   corpse: {fileID: 3778903803615357484, guid: 823350eade72eb448b59e00f6f3e4838, type: 3}
   tomatoSplat: {fileID: 966423011128645671, guid: a9667468bcb0be7478c770a7c83249b9, type: 3}

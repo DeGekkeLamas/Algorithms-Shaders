@@ -6,6 +6,6 @@ public class Sink : MonoBehaviour, IInteractible
     public InventoryItem waterGlass;
     public void OnInteract()
     {
-        Inventory.instance.AddItem(waterGlass.item);
+        Inventory.instance.AddItem(waterGlass.GetItem());
     }
 }

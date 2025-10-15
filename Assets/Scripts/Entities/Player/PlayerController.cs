@@ -49,14 +49,14 @@ public class PlayerController : Entity
 
         // Use item if it has interactions
         InventoryItemData itemSelected = Inventory.instance.currentInventory[Inventory.itemSelected];
-        if (interactInput && canUseItem || interactInputStay && itemSelected.autoFire &&
-            itemSelected.cooldownLeft <= 0 && canUseItem)
+        if (itemSelected != null && (interactInput) /*|| (interactInputStay && itemSelected.autoFire)*/ &&
+            itemSelected.canUseItem && canUseItem)
         {
             itemSelected.UseItem(this, relMousePos);
         }
 
         // Drop currently held item
-        if (dropItemKey && !itemSelected.slotIsEmty)
+        if (dropItemKey && itemSelected != null)
         {
             DropHeldItem();
         }

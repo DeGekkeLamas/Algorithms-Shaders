@@ -10,13 +10,13 @@ namespace InventoryStuff
         order = 0)]
     public class InventoryItem : ScriptableObject
     {
-        [HideInInspector] public InventoryItemData item = new();
+        //[HideInInspector] public InventoryItemData item = new();
+        public virtual InventoryItemData GetItem() { return default; }
     }
 
     [System.Serializable]
     public class InventoryItemData
     {
-        [HideInInspector] public Texture2D itemSprite;
         public string itemName;
         public GameObject itemModel;
         [TextArea] public string toolTip;
@@ -25,24 +25,14 @@ namespace InventoryStuff
         [HideInInspector] public int amountLeft = 1;
         [Header("Stats")]
         public float durability;
-        [HideInInspector] public float currentDurability;
-        [HideInInspector] public float damage; //
-        [HideInInspector] public float hpHealed; //
         [Header("Properties")]
-        [HideInInspector] public bool slotIsEmty;
-        [HideInInspector] public bool isConsumedOnUse; //
         public bool isFood;
         public bool isMetal;
         public bool isKnife;
-        [SerializeField] public StatusEffect[] effectApplied;
         public bool onAttackHealHP;
         public bool damageScalesWithHP;
         public float damageAfterBlock;
         [Header("Overworld properties")]
-        [HideInInspector] public Rigidbody projectile; //
-        [HideInInspector] public bool autoFire; //
-        [HideInInspector] public float cooldown; //
-        [HideInInspector] public float cooldownLeft; //
         [Header("Passive effects")]
         public bool grantsImmortality;
         public bool knifeBoost;
@@ -53,6 +43,10 @@ namespace InventoryStuff
         public bool seeEnemyInventories;
         [SerializeField] public StatusEffect[] grantsImmunityTo;
 
+        [HideInInspector] public Texture2D itemSprite;
+        [HideInInspector] public bool canUseItem;
+        [HideInInspector] public float currentDurability;
+
         public Texture2D SetSprite()
         {
             itemSprite = RuntimePreviewGenerator.GenerateModelPreview(itemModel.transform, 256, 256, false, true);
@@ -62,5 +56,7 @@ namespace InventoryStuff
         }
 
         public virtual void UseItem(Entity source, Vector3 inputDir) { }
+
+        public virtual void UpdateAction() { }
     }
 }

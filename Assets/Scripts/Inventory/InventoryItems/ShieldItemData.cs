@@ -9,6 +9,7 @@ namespace InventoryStuff
     public class ShieldItemData : InventoryItem
     {
         public ShieldItem item = new();
+        public override InventoryItemData GetItem() { return item; }
     }
     [System.Serializable]
     public class ShieldItem : InventoryItemData

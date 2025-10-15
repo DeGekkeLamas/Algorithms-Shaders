@@ -2064,7 +2064,6 @@ GameObject:
   - component: {fileID: 1413741798407944745}
   - component: {fileID: 3377598894811355491}
   - component: {fileID: 1807757889685326516}
-  - component: {fileID: 5293728399048542619}
   - component: {fileID: 2990881938606332820}
   - component: {fileID: 3777997893634887980}
   m_Layer: 0
@@ -2102,242 +2101,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f05cc9f0784d2f4ebb80b874b6b056b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentInventory:
-  - itemSprite: {fileID: 0}
-    itemName: 
-    itemModel: {fileID: 0}
-    toolTip: 
-    isStackable: 0
-    maxStack: 1
-    amountLeft: 1
-    durability: 0
-    currentDurability: 0
-    damage: 0
-    hpHealed: 0
-    amountOfTargets: 0
-    targetAll: 0
-    amountOfHits: 0
-    slotIsEmty: 1
-    isConsumedOnUse: 0
-    isFood: 0
-    isMetal: 0
-    isKnife: 0
-    isEmptyMicrowave: 0
-    inflictOnFire: 0
-    inflictPoisoned: 0
-    inflictBlindness: 0
-    onAttackHealHP: 0
-    inflictStuck: 0
-    damageScalesWithHP: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    fireImmunity: 0
-    seeEnemyInventories: 0
-    durabilityBoost: 0
-    healingBoost: 0
-    consumesBread: 0
-    curesOnFireWhenConsumed: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    isStoveIngredient: 0
-    canAttack: 0
-    canBlock: 0
-    canConsume: 0
-    canThrow: 0
-    hasOverworldUses: 0
-    projectile: {fileID: 0}
-    autoFire: 0
-    cooldown: 0
-    cooldownLeft: 0
-  - itemSprite: {fileID: 0}
-    itemName: 
-    itemModel: {fileID: 0}
-    toolTip: 
-    isStackable: 0
-    maxStack: 1
-    amountLeft: 1
-    durability: 0
-    currentDurability: 0
-    damage: 0
-    hpHealed: 0
-    amountOfTargets: 0
-    targetAll: 0
-    amountOfHits: 0
-    slotIsEmty: 1
-    isConsumedOnUse: 0
-    isFood: 0
-    isMetal: 0
-    isKnife: 0
-    isEmptyMicrowave: 0
-    inflictOnFire: 0
-    inflictPoisoned: 0
-    inflictBlindness: 0
-    onAttackHealHP: 0
-    inflictStuck: 0
-    damageScalesWithHP: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    fireImmunity: 0
-    seeEnemyInventories: 0
-    durabilityBoost: 0
-    healingBoost: 0
-    consumesBread: 0
-    curesOnFireWhenConsumed: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    isStoveIngredient: 0
-    canAttack: 0
-    canBlock: 0
-    canConsume: 0
-    canThrow: 0
-    hasOverworldUses: 0
-    projectile: {fileID: 0}
-    autoFire: 0
-    cooldown: 0
-    cooldownLeft: 0
-  - itemSprite: {fileID: 0}
-    itemName: 
-    itemModel: {fileID: 0}
-    toolTip: 
-    isStackable: 0
-    maxStack: 1
-    amountLeft: 1
-    durability: 0
-    currentDurability: 0
-    damage: 0
-    hpHealed: 0
-    amountOfTargets: 0
-    targetAll: 0
-    amountOfHits: 0
-    slotIsEmty: 1
-    isConsumedOnUse: 0
-    isFood: 0
-    isMetal: 0
-    isKnife: 0
-    isEmptyMicrowave: 0
-    inflictOnFire: 0
-    inflictPoisoned: 0
-    inflictBlindness: 0
-    onAttackHealHP: 0
-    inflictStuck: 0
-    damageScalesWithHP: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    fireImmunity: 0
-    seeEnemyInventories: 0
-    durabilityBoost: 0
-    healingBoost: 0
-    consumesBread: 0
-    curesOnFireWhenConsumed: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    isStoveIngredient: 0
-    canAttack: 0
-    canBlock: 0
-    canConsume: 0
-    canThrow: 0
-    hasOverworldUses: 0
-    projectile: {fileID: 0}
-    autoFire: 0
-    cooldown: 0
-    cooldownLeft: 0
-  - itemSprite: {fileID: 0}
-    itemName: 
-    itemModel: {fileID: 0}
-    toolTip: 
-    isStackable: 0
-    maxStack: 1
-    amountLeft: 1
-    durability: 0
-    currentDurability: 0
-    damage: 0
-    hpHealed: 0
-    amountOfTargets: 0
-    targetAll: 0
-    amountOfHits: 0
-    slotIsEmty: 1
-    isConsumedOnUse: 0
-    isFood: 0
-    isMetal: 0
-    isKnife: 0
-    isEmptyMicrowave: 0
-    inflictOnFire: 0
-    inflictPoisoned: 0
-    inflictBlindness: 0
-    onAttackHealHP: 0
-    inflictStuck: 0
-    damageScalesWithHP: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    fireImmunity: 0
-    seeEnemyInventories: 0
-    durabilityBoost: 0
-    healingBoost: 0
-    consumesBread: 0
-    curesOnFireWhenConsumed: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    isStoveIngredient: 0
-    canAttack: 0
-    canBlock: 0
-    canConsume: 0
-    canThrow: 0
-    hasOverworldUses: 0
-    projectile: {fileID: 0}
-    autoFire: 0
-    cooldown: 0
-    cooldownLeft: 0
-  - itemSprite: {fileID: 0}
-    itemName: 
-    itemModel: {fileID: 0}
-    toolTip: 
-    isStackable: 0
-    maxStack: 1
-    amountLeft: 1
-    durability: 0
-    currentDurability: 0
-    damage: 0
-    hpHealed: 0
-    amountOfTargets: 0
-    targetAll: 0
-    amountOfHits: 0
-    slotIsEmty: 1
-    isConsumedOnUse: 0
-    isFood: 0
-    isMetal: 0
-    isKnife: 0
-    isEmptyMicrowave: 0
-    inflictOnFire: 0
-    inflictPoisoned: 0
-    inflictBlindness: 0
-    onAttackHealHP: 0
-    inflictStuck: 0
-    damageScalesWithHP: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    fireImmunity: 0
-    seeEnemyInventories: 0
-    durabilityBoost: 0
-    healingBoost: 0
-    consumesBread: 0
-    curesOnFireWhenConsumed: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    isStoveIngredient: 0
-    canAttack: 0
-    canBlock: 0
-    canConsume: 0
-    canThrow: 0
-    hasOverworldUses: 0
-    projectile: {fileID: 0}
-    autoFire: 0
-    cooldown: 0
-    cooldownLeft: 0
   Hotbar:
   - {fileID: 3565875426722051589}
   - {fileID: 7082999946771178380}
@@ -2364,67 +2127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDescription: {fileID: 5001704730604281708}
---- !u!114 &5293728399048542619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7148870164262935656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 362cd5dca8a8a694bbdc8ad824bfd2c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: 05f4e82dae39ebd488ab86b90ffbec81, type: 2}
-  - {fileID: 11400000, guid: 28fbde6df351ba14b93d6391b414051a, type: 2}
-  - {fileID: 11400000, guid: 9091ed9c5574dc54da46fc502d76834d, type: 2}
-  - {fileID: 11400000, guid: cda71e602cf1a3c4f920bfd6314726d9, type: 2}
-  - {fileID: 11400000, guid: 91c7a1afb95980b48ae3c90f641a75ec, type: 2}
-  - {fileID: 11400000, guid: ea27409c7e7ea54498bbae40c7de14fc, type: 2}
-  - {fileID: 11400000, guid: afd2e58b3798a2549aea67ef17c798f0, type: 2}
-  - {fileID: 11400000, guid: 4fc7385e2f84b984387a9425c1ef9679, type: 2}
-  - {fileID: 11400000, guid: 97ca6228e3c3bb2459d561f57a783f36, type: 2}
-  - {fileID: 11400000, guid: d6d674b7117c5b4468238ab7263f5372, type: 2}
-  - {fileID: 11400000, guid: d55442a208dcf704d822cb40e7b8a90a, type: 2}
-  - {fileID: 11400000, guid: b29987c1adeb87149ab5b0a933e7bd2c, type: 2}
-  - {fileID: 11400000, guid: a34246590f0857a4abe102cb8b34fbdd, type: 2}
-  - {fileID: 11400000, guid: e4d8a3b589c58e84a80e512e7372fa32, type: 2}
-  - {fileID: 11400000, guid: ca137c0b040dbb74bacbbb2df0c35610, type: 2}
-  - {fileID: 11400000, guid: 60e0083c0b51ad94eb90194d6f4e5855, type: 2}
-  - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
-  - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
-  - {fileID: 11400000, guid: 893f279f9ff5ce443a9ba582d338dd21, type: 2}
-  - {fileID: 11400000, guid: 5189754c597f9c34181c847d722cd9af, type: 2}
-  - {fileID: 11400000, guid: d1a3b41d2a79af449a59b4eb01613768, type: 2}
-  - {fileID: 11400000, guid: 17bec8cc810a8c64aa4b5815cb0fd3ac, type: 2}
-  - {fileID: 11400000, guid: b4f3848eb091b2d4088afa97a421ef5a, type: 2}
-  - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
-  - {fileID: 11400000, guid: a8021a96aad8207419a3db35381231ec, type: 2}
-  - {fileID: 11400000, guid: e31b2337b0b351c46a63b822620942ef, type: 2}
-  - {fileID: 11400000, guid: 1795c669611ec484fa9dbbb57ebe44d3, type: 2}
-  - {fileID: 11400000, guid: 554022c5f526fb645a98fd1758551460, type: 2}
-  - {fileID: 11400000, guid: f2fa39db12e06424784a37d7e39e14d9, type: 2}
-  - {fileID: 11400000, guid: e0e14abac84f6af47a62a67d087f23af, type: 2}
-  - {fileID: 11400000, guid: 247cc278387b2fe4c8b40dd67d1cd2d0, type: 2}
-  - {fileID: 11400000, guid: 0bacf20af3865a145b2c68870033ab67, type: 2}
-  - {fileID: 11400000, guid: 7cf75c5d9d9d14e4880e21b031cd37ef, type: 2}
-  - {fileID: 11400000, guid: 894145dc28e71984c8564350693caf3c, type: 2}
-  - {fileID: 11400000, guid: 16f673256b958c943a3c82b2cd8ed380, type: 2}
-  - {fileID: 11400000, guid: 5b1eff5725772d64fb337e60c2e31c7c, type: 2}
-  - {fileID: 11400000, guid: 1c067684e17a70e4bbfee385c02fa15c, type: 2}
-  - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
-  - {fileID: 11400000, guid: 167eb45cc9794674988f74ebb3a1b444, type: 2}
-  - {fileID: 11400000, guid: c35b4927a8f872040ae14e4c250c8757, type: 2}
-  - {fileID: 11400000, guid: c82e7f2cea5db4f4c81c8a8728237e37, type: 2}
-  - {fileID: 11400000, guid: f0033415184c7ae4d97f6858066d5df2, type: 2}
-  - {fileID: 11400000, guid: d1009260424791f48bcb20e493b745ea, type: 2}
-  - {fileID: 11400000, guid: 02f12b7b27c2ed742bac5e6dfce5a8f1, type: 2}
-  - {fileID: 11400000, guid: e61dba28bf43c0f48b548f656ef505bb, type: 2}
-  - {fileID: 11400000, guid: cfb8d551f1720644c80ccb0b9b716f54, type: 2}
-  placeholderModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
-  placeholderProjectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
 --- !u!114 &2990881938606332820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2450,46 +2152,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stoveRecipes:
-  - name: CheesePizza
+  - name: CheesePizzaO
     result: {fileID: 11400000, guid: 97ca6228e3c3bb2459d561f57a783f36, type: 2}
     ingredients:
     - {fileID: 11400000, guid: e0e14abac84f6af47a62a67d087f23af, type: 2}
     - {fileID: 11400000, guid: 4fc7385e2f84b984387a9425c1ef9679, type: 2}
-  - name: CryingPan
+  - name: CryingPanO
     result: {fileID: 11400000, guid: d55442a208dcf704d822cb40e7b8a90a, type: 2}
     ingredients:
     - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
     - {fileID: 11400000, guid: cfb8d551f1720644c80ccb0b9b716f54, type: 2}
-  - name: DryingPan
+  - name: DryingPanO
     result: {fileID: 11400000, guid: a34246590f0857a4abe102cb8b34fbdd, type: 2}
     ingredients:
     - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
     - {fileID: 11400000, guid: 02f12b7b27c2ed742bac5e6dfce5a8f1, type: 2}
-  - name: DyingPan
+  - name: DyingPanO
     result: {fileID: 11400000, guid: e4d8a3b589c58e84a80e512e7372fa32, type: 2}
     ingredients:
     - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
     - {fileID: 11400000, guid: afd2e58b3798a2549aea67ef17c798f0, type: 2}
-  - name: GrilledCheeseSandwich
+  - name: GrilledCheeseSandwichO
     result: {fileID: 11400000, guid: 893f279f9ff5ce443a9ba582d338dd21, type: 2}
     ingredients:
     - {fileID: 11400000, guid: cda71e602cf1a3c4f920bfd6314726d9, type: 2}
     - {fileID: 11400000, guid: 4fc7385e2f84b984387a9425c1ef9679, type: 2}
-  - name: GrilledChicken
+  - name: GrilledChickenO
     result: {fileID: 11400000, guid: 5189754c597f9c34181c847d722cd9af, type: 2}
     ingredients:
     - {fileID: 11400000, guid: 0bacf20af3865a145b2c68870033ab67, type: 2}
-  - name: Knork
+  - name: KnorkO
     result: {fileID: 11400000, guid: a8021a96aad8207419a3db35381231ec, type: 2}
     ingredients:
     - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
     - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
-  - name: IdentifyingPan
+  - name: IdentifyingPanO
     result: {fileID: 11400000, guid: d1a3b41d2a79af449a59b4eb01613768, type: 2}
     ingredients:
     - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
     - {fileID: 11400000, guid: 74617052ab2b04748ac01eab9574d602, type: 2}
-  - name: MystifyingPan
+  - name: MystifyingPanO
     result: {fileID: 11400000, guid: 1795c669611ec484fa9dbbb57ebe44d3, type: 2}
     ingredients:
     - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
@@ -2497,38 +2199,38 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a34246590f0857a4abe102cb8b34fbdd, type: 2}
     - {fileID: 11400000, guid: d55442a208dcf704d822cb40e7b8a90a, type: 2}
     - {fileID: 11400000, guid: d1a3b41d2a79af449a59b4eb01613768, type: 2}
-  - name: SpicyPizza
+  - name: SpicyPizzaO
     result: {fileID: 11400000, guid: 5b1eff5725772d64fb337e60c2e31c7c, type: 2}
     ingredients:
     - {fileID: 11400000, guid: e0e14abac84f6af47a62a67d087f23af, type: 2}
     - {fileID: 11400000, guid: 17bec8cc810a8c64aa4b5815cb0fd3ac, type: 2}
-  - name: Spife
+  - name: SpifeO
     result: {fileID: 11400000, guid: 1c067684e17a70e4bbfee385c02fa15c, type: 2}
     ingredients:
     - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
     - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
-  - name: Sporf
+  - name: SporfO
     result: {fileID: 11400000, guid: 167eb45cc9794674988f74ebb3a1b444, type: 2}
     ingredients:
     - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
     - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
     - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
-  - name: Sporf
+  - name: SporfO
     result: {fileID: 11400000, guid: 167eb45cc9794674988f74ebb3a1b444, type: 2}
     ingredients:
     - {fileID: 11400000, guid: 1c067684e17a70e4bbfee385c02fa15c, type: 2}
     - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
-  - name: Sporf
+  - name: SporfO
     result: {fileID: 11400000, guid: 167eb45cc9794674988f74ebb3a1b444, type: 2}
     ingredients:
     - {fileID: 11400000, guid: c35b4927a8f872040ae14e4c250c8757, type: 2}
     - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
-  - name: Sporf
+  - name: SporfO
     result: {fileID: 11400000, guid: 167eb45cc9794674988f74ebb3a1b444, type: 2}
     ingredients:
     - {fileID: 11400000, guid: a8021a96aad8207419a3db35381231ec, type: 2}
     - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
-  - name: Spork
+  - name: SporkO
     result: {fileID: 11400000, guid: c35b4927a8f872040ae14e4c250c8757, type: 2}
     ingredients:
     - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}

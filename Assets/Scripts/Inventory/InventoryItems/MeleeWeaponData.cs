@@ -9,6 +9,7 @@ namespace InventoryStuff
     public class MeleeWeaponData : InventoryItem
     {
         public MeleeWeapon item = new();
+        public override InventoryItemData GetItem() { return item; }
     }
 
     [System.Serializable]

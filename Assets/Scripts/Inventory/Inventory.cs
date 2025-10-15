@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 namespace InventoryStuff
 {
     public class Inventory : MonoBehaviour
     {
-        public InventoryItemData[] currentInventory = new InventoryItemData[5];
+        [HideInInspector, NonSerialized] public InventoryItemData[] currentInventory = new InventoryItemData[5];
 
         [Header("UI")]
         public Image[] Hotbar = new Image[5];
@@ -44,17 +45,25 @@ namespace InventoryStuff
             }
 
             for (int i = 0; i < currentInventory.Length; i++)
-                currentInventory[i].cooldownLeft -= Time.deltaTime;
+            {
+                if (currentInventory[i] !=  null) currentInventory[i].UpdateAction();
+            }
+                
         }
-
+        /// <summary>
+        /// Add an item to the inventory, returns if adding was succesful or not
+        /// </summary>
         public bool AddItem(InventoryItemData itemToAdd)
         {
+            // Stackable
             if (itemToAdd.isStackable)
             {
                 for (int i = 0; i < currentInventory.Length; i++)
                 {
-                    if (currentInventory[i].isStackable && currentInventory[i].amountLeft < currentInventory[i].maxStack
-                        && currentInventory[i].itemName == itemToAdd.itemName)
+                    InventoryItemData item = currentInventory[i];
+
+                    if (item != null && item.isStackable && item.amountLeft < item.maxStack
+                        && item.itemName == itemToAdd.itemName)
                     {
                         currentInventory[i].amountLeft++;
                         UpdateInventoryTexts();
@@ -62,9 +71,10 @@ namespace InventoryStuff
                     }
                 }
             }
+            // Non stackable
             for (int i = 0; i < currentInventory.Length; i++)
             {
-                if (currentInventory[i].slotIsEmty)
+                if (currentInventory[i] == null)
                 {
                     currentInventory[i] = itemToAdd;
                     UpdateInventory(i);
@@ -72,13 +82,14 @@ namespace InventoryStuff
                     return true;
                 }
             }
+            // Failed to add
             Debug.Log("Inventory full, from " + this);
             return false;
         }
         public bool InventoryHasSpace()
         {
             for (int i = 0; i < currentInventory.Length; i++)
-                if (currentInventory[i].slotIsEmty) return true;
+                if (currentInventory[i] == null) return true;
             return false;
         }
         /// <summary>
@@ -86,7 +97,7 @@ namespace InventoryStuff
         /// </summary>
         public void RemoveItem(int index)
         {
-            currentInventory[index] = new InventoryItemData { slotIsEmty = true };
+            currentInventory[index] = null;
             UpdateInventory(index);
         }
 
@@ -103,8 +114,6 @@ namespace InventoryStuff
                 {
                     index = i;
                     RemoveItem(index);
-                    currentInventory[index] = new InventoryItemData { slotIsEmty = true };
-                    UpdateInventory(index);
                 }
             }
             return;
@@ -123,14 +132,20 @@ namespace InventoryStuff
         [ContextMenu("Update inventory")]
         public void UpdateInventory(int index)
         {
-            if (currentInventory[index].itemModel != null)
-            {
-                currentInventory[index].SetSprite();
-            }
-            else currentInventory[index].itemSprite = HotbarItemBG;
+            InventoryItemData item = currentInventory[index];
 
-            Hotbar[index].sprite = Sprite.Create(currentInventory[index].itemSprite, new Rect(0.0f, 0.0f,
-                currentInventory[index].itemSprite.width, currentInventory[index].itemSprite.height), new Vector2(0, 0));
+            if (item == null)
+            {
+                Hotbar[index].sprite = Sprite.Create(HotbarItemBG, new Rect(0.0f, 0.0f,
+                HotbarItemBG.width, HotbarItemBG.height), new Vector2(0, 0));
+                UpdateInventoryTexts();
+                return;
+            }
+
+            item.SetSprite();
+
+            Hotbar[index].sprite = Sprite.Create(item.itemSprite, new Rect(0.0f, 0.0f,
+                item.itemSprite.width, item.itemSprite.height), new Vector2(0, 0));
 
             HH.SetSelectedBorder(itemSelected);
             UpdateInventoryTexts();
@@ -140,13 +155,17 @@ namespace InventoryStuff
 
             for (int i = 0; i < currentInventory.Length; i++)
             {
-                // Set quantity counters
-                if (currentInventory[i].isStackable)
+                InventoryItemData item = currentInventory[i];
+                quantityCounters[i].gameObject.SetActive(false);
+                if (item != null)
                 {
-                    quantityCounters[i].gameObject.SetActive(true);
-                    quantityCounters[i].text = currentInventory[i].amountLeft.ToString();
+                    // Set quantity counters
+                    if (item.isStackable)
+                    {
+                        quantityCounters[i].gameObject.SetActive(true);
+                        quantityCounters[i].text = currentInventory[i].amountLeft.ToString();
+                    }
                 }
-                else quantityCounters[i].gameObject.SetActive(false);
             }
         }
     }

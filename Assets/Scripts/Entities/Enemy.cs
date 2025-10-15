@@ -52,9 +52,9 @@ public class Enemy : Entity
     void SpawnDrops()
     {
         InventoryItemData itemDropped = ItemLootTable.GetItemFromLoottable(dropsOnDeath);
-        if (itemDropped != null && !itemDropped.slotIsEmty)
+        if (itemDropped != null && itemDropped != null)
         {
-            Debug.Log($"{this} dropped {itemDropped.itemName}");
+            Debug.Log($"{entityName} dropped {itemDropped.itemName}");
             PickupItem pickup = PickupItem.SpawnPickup(itemDropped, this.transform, Vector3.up);
             pickup.transform.parent = this.transform.parent;
         }

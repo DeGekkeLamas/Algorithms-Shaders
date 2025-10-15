@@ -9,6 +9,7 @@ namespace InventoryStuff
     public class ConsumableItemData : InventoryItem
     {
         public ConsumableItem item = new();
+        public override InventoryItemData GetItem() { return item; }
     }
 
     [System.Serializable]

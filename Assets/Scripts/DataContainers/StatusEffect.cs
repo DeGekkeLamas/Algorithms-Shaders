@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class StatusEffect : ScriptableObject
 {
-    public string name;
+    public string effectName;
     public float duration;
     protected float durationLeft;
     public ParticleSystem particleEffect;

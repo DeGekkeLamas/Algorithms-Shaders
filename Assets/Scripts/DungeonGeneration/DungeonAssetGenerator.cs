@@ -145,12 +145,12 @@ namespace DungeonGeneration
                                 else offset.x += counterSize;
 
                                 InventoryItemData itemToSpawn = ItemLootTable.GetItemFromLoottable(rsa.kitchenItemSpawns, d.GetSeed());
-                                if (!itemToSpawn.slotIsEmty)
+                                if (itemToSpawn != null)
                                 {
                                     PickupItem itemSpawned = Instantiate(rsa.itemPickup, new(
                                         counter.position.x, 10, counter.position.z
                                         ), Quaternion.identity, itemSpawnsContainer.transform);
-                                    itemSpawned.itemPreset.item = itemToSpawn;
+                                    //itemSpawned.itemPreset.GetItem() = itemToSpawn;
                                 }
                             }
                             if (roomvertical) offset = new(offset.x + counterSize, -.5f * rsa.counterLength);

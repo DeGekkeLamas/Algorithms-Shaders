@@ -47,7 +47,7 @@ public abstract class Entity : MonoBehaviour
     public void DealDamage(float dmg)
     {
         UpdateHP(currentHP - dmg);
-        Debug.Log($"Dealt {dmg} damage to {this.gameObject.name}");
+        Debug.Log($"Dealt {dmg} damage to {this.entityName}");
     }
 
     void UpdateHP(float newHP)

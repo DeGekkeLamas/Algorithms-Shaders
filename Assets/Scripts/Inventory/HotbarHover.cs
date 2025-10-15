@@ -25,7 +25,7 @@ public class HotbarHover : MonoBehaviour
         foreach (var border in selectedBorders) border.SetActive(false);
         selectedBorders[index].SetActive(true);
 
-        if (!Inventory.instance.currentInventory[index].slotIsEmty)
+        if (Inventory.instance.currentInventory[index] != null)
         {
             itemname.text = Inventory.instance.currentInventory[index].itemName;
             description.text = ItemDescription.GenerateDescription(Inventory.instance.currentInventory[index]);

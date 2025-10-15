@@ -9,6 +9,7 @@ namespace InventoryStuff
     public class PassiveItemData : InventoryItem
     {
         public PassiveItem item = new();
+        public override InventoryItemData GetItem() { return item; }
     }
 
     [System.Serializable]

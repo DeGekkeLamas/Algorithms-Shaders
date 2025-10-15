@@ -19,7 +19,7 @@ public class PickupItem : MonoBehaviour, IInteractible
     {
         if (itemPreset != null )
         {
-                itemToGive = itemPreset.item;
+                itemToGive = itemPreset.GetItem();
         }
         GameObject spawned; 
         if (itemToGive.itemModel != null) spawned = Instantiate(itemToGive.itemModel, this.transform);

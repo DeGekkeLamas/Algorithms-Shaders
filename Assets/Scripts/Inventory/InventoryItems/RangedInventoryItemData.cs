@@ -9,6 +9,7 @@ namespace InventoryStuff
     public class RangedWeaponData : InventoryItem
     {
         public RangedWeapon item = new();
+        public override InventoryItemData GetItem() { return item; }
     }
 
     [System.Serializable]
@@ -20,10 +21,11 @@ namespace InventoryStuff
         public Rigidbody projectile;
         public bool autoFire;
         public float cooldown;
-        public float cooldownLeft;
         public bool isConsumedOnUse;
         [Tooltip("Leave empty to use no fuel")]
         public InventoryItemData fuel;
+
+        [HideInInspector] public float cooldownLeft;
 
         public override void UseItem(Entity source, Vector3 inputDir)
         {
@@ -53,6 +55,11 @@ namespace InventoryStuff
 
                 Debug.Log($"Spawned projectile, from {this}");
             }
+        }
+        public override void UpdateAction()
+        {
+            cooldownLeft -= Time.deltaTime;
+            canUseItem = cooldownLeft <= 0;
         }
     }
 }

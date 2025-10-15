@@ -20,7 +20,7 @@ public class Crate : MonoBehaviour
         foreach (var item in itemsToGive)
         {
             Instantiate(pickupSpawned, transform.position, Quaternion.identity).
-                GetComponent<PickupItem>().itemToGive = item.item;
+                GetComponent<PickupItem>().itemToGive = item.GetItem();
             Debug.Log($"Spawned {item}, from {this}");
         }
         Destroy(this.gameObject);

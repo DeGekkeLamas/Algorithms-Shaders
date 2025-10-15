@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventoryItemConverter : MonoBehaviour
 {
+    /**
     public InventoryItem original;
 
     // Ranged
@@ -27,7 +28,7 @@ public class InventoryItemConverter : MonoBehaviour
     [Button]
     public void ConvertToMelee()
     {
-        meleeNew.item = original.item as MeleeWeapon;
+        meleeNew.item = original.GetItem() as MeleeWeapon;
         meleeNew.item.damage = original.item.damage;
         meleeNew.item.effectApplied = original.item.effectApplied;
         Debug.Log("Converted succesfully");
@@ -52,4 +53,5 @@ public class InventoryItemConverter : MonoBehaviour
         passiveNew.item = original.item as PassiveItem;
         Debug.Log("Converted succesfully");
     }
+    **/
 }

@@ -8,20 +8,20 @@ namespace InventoryStuff
         public static string GenerateDescription(InventoryItemData item)
         {
             string _description = string.Empty;
-            if (item.damage != 0)
-                _description += $" \nDeals {item.damage} damage";
+            //if (item.damage != 0)
+                //_description += $" \nDeals {item.damage} damage";
             if (item.damageScalesWithHP) _description += ", deals more damage to damaged enemies";
 
-            if (item.hpHealed != 0)
-                _description += $"\nHeals {item.hpHealed} HP when consumed";
+            //if (item.hpHealed != 0)
+                //_description += $"\nHeals {item.hpHealed} HP when consumed";
 
             if (item.damageAfterBlock > 0)
                 _description += $"\nDeals {item.damageAfterBlock} to the player after blocking";
 
-            foreach (StatusEffect effect in item.effectApplied)
-            {
-                _description += $"\nInflicts {effect.name}";
-            }
+            //foreach (StatusEffect effect in item.effectApplied)
+            //{
+            //    _description += $"\nInflicts {effect.name}";
+            //}
 
             if (item.durabilityBoost) _description += $"\nWhile in inventory, increases durability of items";
             if (item.foodBoost) _description += $"\nWhile in inventory, increases damage of food-based items";

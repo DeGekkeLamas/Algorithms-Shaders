@@ -14,7 +14,7 @@ namespace InventoryStuff
 
         public void OnValidate()
         {
-            if (item != null) itemName = item.item.itemName;
+            if (item != null) itemName = item.GetItem().itemName;
         }
 
         /// <summary>
@@ -32,11 +32,11 @@ namespace InventoryStuff
             int lootRoll = seed.Next(0, 100);
             for (int i = 0; i < lootTable.Length; i++)
             {
-                if (lootRoll < probabilityPassed) return lootTable[i].item.item;
+                if (lootRoll < probabilityPassed) return lootTable[i].item.GetItem();
                 else probabilityPassed += lootTable[i].probability;
             }
             // If no item, return empty slot
-            return new InventoryItemData { slotIsEmty = true };
+            return null;
         }
         /// <summary>
         /// Returns item based on item probabilities
