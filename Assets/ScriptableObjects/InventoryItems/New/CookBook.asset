@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Aprom
-  m_EditorClassIdentifier: Assembly-CSharp:InventoryStuff:PassiveItemData
+  m_Script: {fileID: 11500000, guid: 802ccf284692cf54288ea0f696b6d814, type: 3}
+  m_Name: CookBook
+  m_EditorClassIdentifier: 
   item:
     itemSprite: {fileID: 0}
-    itemName: 
+    itemName: Cookbook
     itemModel: {fileID: 0}
-    toolTip: 
+    toolTip: Cookbook means you need to cook the book.
     isStackable: 0
     maxStack: 1
     amountLeft: 1
@@ -24,15 +24,38 @@ MonoBehaviour:
     currentDurability: 0
     damage: 0
     hpHealed: 0
+    amountOfTargets: 1
+    targetAll: 0
+    amountOfHits: 1
     slotIsEmty: 0
     isConsumedOnUse: 0
     isFood: 0
     isMetal: 0
     isKnife: 0
-    effectApplied: []
+    isEmptyMicrowave: 0
+    inflictOnFire: 0
+    inflictPoisoned: 0
+    inflictBlindness: 0
     onAttackHealHP: 0
+    inflictStuck: 0
     damageScalesWithHP: 0
+    knifeBoost: 0
+    foodBoost: 0
+    foodResistanceBoost: 0
+    fireImmunity: 0
+    seeEnemyInventories: 1
+    durabilityBoost: 0
+    healingBoost: 0
+    consumesBread: 0
+    curesOnFireWhenConsumed: 0
     damageAfterBlock: 0
+    grantsImmortality: 0
+    isStoveIngredient: 0
+    canAttack: 0
+    canBlock: 0
+    canConsume: 0
+    canThrow: 0
+    hasOverworldUses: 0
     projectile: {fileID: 0}
     autoFire: 0
     cooldown: 0

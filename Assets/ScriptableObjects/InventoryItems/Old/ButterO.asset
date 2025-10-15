@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5fa68591495e844caca24b89cb97a2e, type: 3}
-  m_Name: Cake
+  m_Name: ButterO
   m_EditorClassIdentifier: 
   item:
     itemSprite: {fileID: 0}
-    itemName: Cake
-    itemModel: {fileID: 919132149155446097, guid: ea0587121e2211f4ebe4031e6597257e, type: 3}
-    toolTip: Just as caked out as your mom.
+    itemName: Butter
+    itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
+    toolTip: It's like sunscreen but better!
     isStackable: 0
     maxStack: 1
     amountLeft: 1
     durability: 0
     currentDurability: 0
-    damage: 25
+    damage: 10
     hpHealed: 0
     amountOfTargets: 1
     targetAll: 0
@@ -35,9 +35,9 @@ MonoBehaviour:
     isEmptyMicrowave: 0
     inflictOnFire: 0
     inflictPoisoned: 0
-    inflictBlindness: 1
+    inflictBlindness: 0
     onAttackHealHP: 0
-    inflictStuck: 0
+    inflictStuck: 1
     damageScalesWithHP: 0
     knifeBoost: 0
     foodBoost: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
     damageAfterBlock: 0
     grantsImmortality: 0
     isStoveIngredient: 0
-    canAttack: 1
+    canAttack: 0
     canBlock: 0
     canConsume: 0
     canThrow: 1

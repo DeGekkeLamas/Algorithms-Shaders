@@ -10,36 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5fa68591495e844caca24b89cb97a2e, type: 3}
-  m_Name: CuttingBoard
+  m_Name: CakeO
   m_EditorClassIdentifier: 
   item:
     itemSprite: {fileID: 0}
-    itemName: CuttingBoard
-    itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
-    toolTip: Great for cutting, or as a shield, depends on how good you are at cooking.
+    itemName: Cake
+    itemModel: {fileID: 919132149155446097, guid: ea0587121e2211f4ebe4031e6597257e, type: 3}
+    toolTip: Just as caked out as your mom.
     isStackable: 0
     maxStack: 1
     amountLeft: 1
-    durability: 50
+    durability: 0
     currentDurability: 0
-    damage: 0
+    damage: 25
     hpHealed: 0
     amountOfTargets: 1
     targetAll: 0
     amountOfHits: 1
     slotIsEmty: 0
-    isConsumedOnUse: 0
-    isFood: 0
+    isConsumedOnUse: 1
+    isFood: 1
     isMetal: 0
     isKnife: 0
     isEmptyMicrowave: 0
     inflictOnFire: 0
     inflictPoisoned: 0
-    inflictBlindness: 0
+    inflictBlindness: 1
     onAttackHealHP: 0
     inflictStuck: 0
     damageScalesWithHP: 0
-    knifeBoost: 1
+    knifeBoost: 0
     foodBoost: 0
     foodResistanceBoost: 0
     fireImmunity: 0
@@ -51,11 +51,11 @@ MonoBehaviour:
     damageAfterBlock: 0
     grantsImmortality: 0
     isStoveIngredient: 0
-    canAttack: 0
-    canBlock: 1
+    canAttack: 1
+    canBlock: 0
     canConsume: 0
-    canThrow: 0
-    hasOverworldUses: 0
+    canThrow: 1
+    hasOverworldUses: 1
     projectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
     autoFire: 0
     cooldown: 0

@@ -10,26 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5fa68591495e844caca24b89cb97a2e, type: 3}
-  m_Name: Banana
+  m_Name: CheesePizzaO
   m_EditorClassIdentifier: 
   item:
     itemSprite: {fileID: 0}
-    itemName: Banana
+    itemName: Cheese pizza
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
-    toolTip: Will you use this as gun or as a phone? Will you pick the dark side
-      or the light side?
+    toolTip: You can never have enough cheese.
     isStackable: 0
     maxStack: 1
     amountLeft: 1
-    durability: 0
+    durability: 10
     currentDurability: 0
-    damage: 80
-    hpHealed: 40
+    damage: 25
+    hpHealed: 0
     amountOfTargets: 1
     targetAll: 0
-    amountOfHits: 1
+    amountOfHits: 2
     slotIsEmty: 0
-    isConsumedOnUse: 1
+    isConsumedOnUse: 0
     isFood: 1
     isMetal: 0
     isKnife: 0
@@ -37,7 +36,7 @@ MonoBehaviour:
     inflictOnFire: 0
     inflictPoisoned: 0
     inflictBlindness: 0
-    onAttackHealHP: 0
+    onAttackHealHP: 1
     inflictStuck: 0
     damageScalesWithHP: 0
     knifeBoost: 0
@@ -54,7 +53,7 @@ MonoBehaviour:
     isStoveIngredient: 0
     canAttack: 1
     canBlock: 0
-    canConsume: 1
+    canConsume: 0
     canThrow: 0
     hasOverworldUses: 1
     projectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
