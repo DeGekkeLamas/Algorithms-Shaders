@@ -6,14 +6,14 @@ namespace InventoryStuff
         fileName = "PassiveItem",
         menuName = "ScriptableObjects/Items/PassiveItem",
         order = 0)]
-    public class PassiveItemData : InventoryItem
+    public class PassiveItemData : InventoryItemData
     {
         public PassiveItem item = new();
-        public override InventoryItemData GetItem() { return item; }
+        public override InventoryItem GetItem() { return item; }
     }
 
     [System.Serializable]
-    public class PassiveItem : InventoryItemData
+    public class PassiveItem : InventoryItem
     {
         public override void UseItem(Entity source, Vector3 inputDir)
         {

@@ -11,7 +11,7 @@ namespace InventoryStuff
     public struct ItemUniqueStats
     {
         [ReadOnly] public string itemName;
-        public InventoryItemData item;
+        public InventoryItem item;
         public float durabilityLeft;
         public float quantityLeft;
     }

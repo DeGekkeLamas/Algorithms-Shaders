@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Sink : MonoBehaviour, IInteractible
 {
-    public InventoryItem waterGlass;
+    public InventoryItemData waterGlass;
     public void OnInteract()
     {
         Inventory.instance.AddItem(waterGlass.GetItem());

@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
-    public abstract class InventoryItem : ScriptableObject
+    public abstract class InventoryItemData : ScriptableObject
     {
         //[HideInInspector] public InventoryItemData item = new();
-        public abstract InventoryItemData GetItem();
+        public abstract InventoryItem GetItem();
     }
 
     [System.Serializable]
-    public abstract class InventoryItemData
+    public abstract class InventoryItem
     {
         public string itemName;
         public GameObject itemModel;

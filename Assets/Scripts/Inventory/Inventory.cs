@@ -53,14 +53,14 @@ namespace InventoryStuff
         /// <summary>
         /// Add an item to the inventory, returns if adding was succesful or not
         /// </summary>
-        public bool AddItem(InventoryItemData itemToAdd)
+        public bool AddItem(InventoryItem itemToAdd)
         {
             // Stackable
             if (itemToAdd.isStackable)
             {
                 for (int i = 0; i < currentInventory.Length; i++)
                 {
-                    InventoryItemData item = currentInventory[i].item;
+                    InventoryItem item = currentInventory[i].item;
 
                     if (item != null && item.isStackable && currentInventory[i].quantityLeft < item.maxStack
                         && item.itemName == itemToAdd.itemName)
@@ -107,7 +107,7 @@ namespace InventoryStuff
         /// <summary>
         /// Remove an item by itemdata object
         /// </summary>
-        public void RemoveItem(InventoryItemData item)
+        public void RemoveItem(InventoryItem item)
         {
             int index = 0;
             for (int i = 0; i < currentInventory.Length; i++)
@@ -135,7 +135,7 @@ namespace InventoryStuff
         [ContextMenu("Update inventory")]
         public void UpdateInventory(int index)
         {
-            InventoryItemData item = currentInventory[index].item;
+            InventoryItem item = currentInventory[index].item;
 
             if (item == null)
             {
@@ -158,7 +158,7 @@ namespace InventoryStuff
 
             for (int i = 0; i < currentInventory.Length; i++)
             {
-                InventoryItemData item = currentInventory[i].item;
+                InventoryItem item = currentInventory[i].item;
                 quantityCounters[i].gameObject.SetActive(false);
                 if (item != null)
                 {

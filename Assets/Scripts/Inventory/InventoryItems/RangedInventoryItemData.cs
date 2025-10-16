@@ -6,14 +6,14 @@ namespace InventoryStuff
         fileName = "RangedItem",
         menuName = "ScriptableObjects/Items/RangedItem",
         order = 0)]
-    public class RangedWeaponData : InventoryItem
+    public class RangedWeaponData : InventoryItemData
     {
         public RangedWeapon item = new();
-        public override InventoryItemData GetItem() { return item; }
+        public override InventoryItem GetItem() { return item; }
     }
 
     [System.Serializable]
-    public class RangedWeapon : InventoryItemData
+    public class RangedWeapon : InventoryItem
     {
         [Header("Type specific")]
         public float damage;
@@ -23,7 +23,7 @@ namespace InventoryStuff
         public float cooldown;
         public bool isConsumedOnUse;
         [Tooltip("Leave empty to use no fuel")]
-        public InventoryItemData fuel;
+        public InventoryItem fuel;
 
         [HideInInspector] public float cooldownLeft;
 

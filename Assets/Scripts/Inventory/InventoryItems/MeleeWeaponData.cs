@@ -6,14 +6,14 @@ namespace InventoryStuff
         fileName = "MeleeItem",
         menuName = "ScriptableObjects/Items/MeleeItem",
         order = 0)]
-    public class MeleeWeaponData : InventoryItem
+    public class MeleeWeaponData : InventoryItemData
     {
         public MeleeWeapon item = new();
-        public override InventoryItemData GetItem() { return item; }
+        public override InventoryItem GetItem() { return item; }
     }
 
     [System.Serializable]
-    public class MeleeWeapon : InventoryItemData
+    public class MeleeWeapon : InventoryItem
     {
         [Header("Type specific")]
         public float damage;

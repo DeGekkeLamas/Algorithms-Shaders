@@ -48,7 +48,7 @@ public class PlayerController : Entity
         }
 
         // Use item if it has interactions
-        InventoryItemData itemSelected = Inventory.instance.currentInventory[Inventory.itemSelected].item;
+        InventoryItem itemSelected = Inventory.instance.currentInventory[Inventory.itemSelected].item;
         if (itemSelected != null && (interactInput) /*|| (interactInputStay && itemSelected.autoFire)*/ &&
             itemSelected.canUseItem && canUseItem)
         {
@@ -67,7 +67,7 @@ public class PlayerController : Entity
 
     void DropHeldItem()
     {
-        InventoryItemData itemSelected = Inventory.instance.currentInventory[Inventory.itemSelected].item;
+        InventoryItem itemSelected = Inventory.instance.currentInventory[Inventory.itemSelected].item;
         Debug.Log($"Dropped {itemSelected.itemName}, from {this}");
         Rigidbody droppedItem = Instantiate(pickupSpawned, this.transform.position + transform.forward, Quaternion.identity);
         droppedItem.gameObject.GetComponent<PickupItem>().itemToGive = Inventory.instance.currentInventory[Inventory.itemSelected].item;

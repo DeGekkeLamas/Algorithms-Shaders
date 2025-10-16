@@ -9,7 +9,7 @@ namespace InventoryStuff
     public struct ItemLootTable
     {
         [ReadOnly] public string itemName;
-        public InventoryItem item;
+        public InventoryItemData item;
         public int probability;
 
         public void OnValidate()
@@ -20,7 +20,7 @@ namespace InventoryStuff
         /// <summary>
         /// Returns item based on item probabilities, using a set seed
         /// </summary>
-        public static InventoryItemData GetItemFromLoottable(ItemLootTable[] lootTable, System.Random seed)
+        public static InventoryItem GetItemFromLoottable(ItemLootTable[] lootTable, System.Random seed)
         {
             if (lootTable.Length < 1)
             {
@@ -41,7 +41,7 @@ namespace InventoryStuff
         /// <summary>
         /// Returns item based on item probabilities
         /// </summary>
-        public static InventoryItemData GetItemFromLoottable(ItemLootTable[] lootTable)
+        public static InventoryItem GetItemFromLoottable(ItemLootTable[] lootTable)
         {
             return GetItemFromLoottable(lootTable, new());
         }

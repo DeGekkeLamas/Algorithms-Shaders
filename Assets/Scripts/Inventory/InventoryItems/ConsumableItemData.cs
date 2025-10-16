@@ -6,14 +6,14 @@ namespace InventoryStuff
         fileName = "ConsumableItem",
         menuName = "ScriptableObjects/Items/ConsumableItem",
         order = 0)]
-    public class ConsumableItemData : InventoryItem
+    public class ConsumableItemData : InventoryItemData
     {
         public ConsumableItem item = new();
-        public override InventoryItemData GetItem() { return item; }
+        public override InventoryItem GetItem() { return item; }
     }
 
     [System.Serializable]
-    public class ConsumableItem : InventoryItemData
+    public class ConsumableItem : InventoryItem
     {
         [Header("Type specific")]
         public float hpHealed;

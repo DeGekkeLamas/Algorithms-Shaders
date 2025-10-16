@@ -5,8 +5,8 @@ using Unity.VisualScripting;
 public class PickupItem : MonoBehaviour, IInteractible
 {
     [Tooltip("Leave empty to not become any preset")]
-    public InventoryItem itemPreset;
-    public InventoryItemData itemToGive;
+    public InventoryItemData itemPreset;
+    public InventoryItem itemToGive;
     public GameObject placeholderModel;
     static GameObject staticPlaceholderModel;
     private void Awake()
@@ -38,7 +38,7 @@ public class PickupItem : MonoBehaviour, IInteractible
         if (couldAdd) Destroy(this.gameObject);
     }
 
-    public static PickupItem SpawnPickup(InventoryItemData item, Transform source, Vector3 offset = new())
+    public static PickupItem SpawnPickup(InventoryItem item, Transform source, Vector3 offset = new())
     {
         GameObject obj = new("ItemPickup");
         PickupItem pickup = obj.AddComponent<PickupItem>();

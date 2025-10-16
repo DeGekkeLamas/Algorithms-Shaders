@@ -144,7 +144,7 @@ namespace DungeonGeneration
                                 if (roomvertical) offset.y += counterSize;
                                 else offset.x += counterSize;
 
-                                InventoryItemData itemToSpawn = ItemLootTable.GetItemFromLoottable(rsa.kitchenItemSpawns, d.GetSeed());
+                                InventoryItem itemToSpawn = ItemLootTable.GetItemFromLoottable(rsa.kitchenItemSpawns, d.GetSeed());
                                 if (itemToSpawn != null)
                                 {
                                     PickupItem itemSpawned = Instantiate(rsa.itemPickup, new(

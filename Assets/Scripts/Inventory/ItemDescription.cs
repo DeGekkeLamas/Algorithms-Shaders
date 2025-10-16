@@ -5,7 +5,7 @@ namespace InventoryStuff
 {
     public static class ItemDescription
     {
-        public static string GenerateDescription(InventoryItemData item)
+        public static string GenerateDescription(InventoryItem item)
         {
             string _description = string.Empty;
             //if (item.damage != 0)

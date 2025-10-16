@@ -3,7 +3,7 @@ using InventoryStuff;
 
 public class Crate : MonoBehaviour
 {
-    public InventoryItem[] itemsToGive;
+    public InventoryItemData[] itemsToGive;
     public GameObject pickupSpawned;
 
     public int boxHP;

@@ -6,13 +6,13 @@ namespace InventoryStuff
         fileName = "ShieldItem",
         menuName = "ScriptableObjects/Items/ShieldItem",
         order = 0)]
-    public class ShieldItemData : InventoryItem
+    public class ShieldItemData : InventoryItemData
     {
         public ShieldItem item = new();
-        public override InventoryItemData GetItem() { return item; }
+        public override InventoryItem GetItem() { return item; }
     }
     [System.Serializable]
-    public class ShieldItem : InventoryItemData
+    public class ShieldItem : InventoryItem
     {
         [Header("Type specific")]
         public float dmgReduction;

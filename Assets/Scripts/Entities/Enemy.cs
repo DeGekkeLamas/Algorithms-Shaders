@@ -43,7 +43,7 @@ public class Enemy : Entity
 
     void SpawnDrops()
     {
-        InventoryItemData itemDropped = ItemLootTable.GetItemFromLoottable(dropsOnDeath);
+        InventoryItem itemDropped = ItemLootTable.GetItemFromLoottable(dropsOnDeath);
         if (itemDropped != null && itemDropped != null)
         {
             Debug.Log($"{entityName} dropped {itemDropped.itemName}");

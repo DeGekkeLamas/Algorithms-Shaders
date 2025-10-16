@@ -9,7 +9,7 @@ namespace InventoryStuff
     {
         [ReadOnly] public string name;
 
-        public InventoryItem result;
-        public InventoryItem[] ingredients;
+        public InventoryItemData result;
+        public InventoryItemData[] ingredients;
     }
 }
