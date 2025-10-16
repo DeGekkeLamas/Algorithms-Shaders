@@ -105,4 +105,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f6d01d6d1e496648acf1f5af942fc0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterGlass: {fileID: 11400000, guid: cfb8d551f1720644c80ccb0b9b716f54, type: 2}
+  waterGlass: {fileID: 11400000, guid: 623d8eb10a9ed9845bc5972345fec14e, type: 2}

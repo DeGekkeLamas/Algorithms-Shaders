@@ -4,25 +4,20 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
-    [CreateAssetMenu(
-        fileName = "InventoryItem",
-        menuName = "ScriptableObjects/Items/InventoryItem", 
-        order = 0)]
-    public class InventoryItem : ScriptableObject
+    public abstract class InventoryItem : ScriptableObject
     {
         //[HideInInspector] public InventoryItemData item = new();
-        public virtual InventoryItemData GetItem() { return default; }
+        public abstract InventoryItemData GetItem();
     }
 
     [System.Serializable]
-    public class InventoryItemData
+    public abstract class InventoryItemData
     {
         public string itemName;
         public GameObject itemModel;
         [TextArea] public string toolTip;
         public bool isStackable;
         public int maxStack = 1;
-        [HideInInspector] public int amountLeft = 1;
         [Header("Stats")]
         public float durability;
         [Header("Properties")]
@@ -45,7 +40,6 @@ namespace InventoryStuff
 
         [HideInInspector] public Texture2D itemSprite;
         [HideInInspector] public bool canUseItem;
-        [HideInInspector] public float currentDurability;
 
         public Texture2D SetSprite()
         {
@@ -55,8 +49,8 @@ namespace InventoryStuff
             return itemSprite;
         }
 
-        public virtual void UseItem(Entity source, Vector3 inputDir) { }
+        public abstract void UseItem(Entity source, Vector3 inputDir);
 
-        public virtual void UpdateAction() { }
+        public abstract void UpdateAction();
     }
 }

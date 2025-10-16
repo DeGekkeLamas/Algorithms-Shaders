@@ -20,6 +20,10 @@ namespace InventoryStuff
         {
 
         }
+        public override void UpdateAction()
+        {
+
+        }
     }
 
 }

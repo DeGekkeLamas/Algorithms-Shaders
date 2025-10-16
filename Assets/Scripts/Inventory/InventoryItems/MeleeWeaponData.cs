@@ -17,8 +17,13 @@ namespace InventoryStuff
     {
         [Header("Type specific")]
         public float damage;
+        public float swingTime;
         public StatusEffect[] effectApplied;
         public override void UseItem(Entity source, Vector3 inputDir)
+        {
+
+        }
+        public override void UpdateAction()
         {
 
         }

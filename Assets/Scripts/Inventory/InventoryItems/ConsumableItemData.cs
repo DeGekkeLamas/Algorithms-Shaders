@@ -23,6 +23,11 @@ namespace InventoryStuff
         {
             Inventory.instance.RemoveItem(this);
         }
+
+        public override void UpdateAction()
+        {
+            
+        }
     }
 
 }

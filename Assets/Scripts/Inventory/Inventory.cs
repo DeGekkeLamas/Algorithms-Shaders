@@ -7,7 +7,7 @@ namespace InventoryStuff
 {
     public class Inventory : MonoBehaviour
     {
-        [HideInInspector, NonSerialized] public InventoryItemData[] currentInventory = new InventoryItemData[5];
+        public ItemUniqueStats[] currentInventory = new ItemUniqueStats[5];
 
         [Header("UI")]
         public Image[] Hotbar = new Image[5];
@@ -46,7 +46,7 @@ namespace InventoryStuff
 
             for (int i = 0; i < currentInventory.Length; i++)
             {
-                if (currentInventory[i] !=  null) currentInventory[i].UpdateAction();
+                if (currentInventory[i].item !=  null) currentInventory[i].item.UpdateAction();
             }
                 
         }
@@ -60,12 +60,13 @@ namespace InventoryStuff
             {
                 for (int i = 0; i < currentInventory.Length; i++)
                 {
-                    InventoryItemData item = currentInventory[i];
+                    InventoryItemData item = currentInventory[i].item;
 
-                    if (item != null && item.isStackable && item.amountLeft < item.maxStack
+                    if (item != null && item.isStackable && currentInventory[i].quantityLeft < item.maxStack
                         && item.itemName == itemToAdd.itemName)
                     {
-                        currentInventory[i].amountLeft++;
+                        currentInventory[i].quantityLeft++;
+                        currentInventory[i].itemName = itemToAdd.itemName;
                         UpdateInventoryTexts();
                         return true;
                     }
@@ -74,9 +75,11 @@ namespace InventoryStuff
             // Non stackable
             for (int i = 0; i < currentInventory.Length; i++)
             {
-                if (currentInventory[i] == null)
+                if (currentInventory[i].item == null)
                 {
-                    currentInventory[i] = itemToAdd;
+                    currentInventory[i].item = itemToAdd;
+                    currentInventory[i].quantityLeft++;
+                    currentInventory[i].itemName = itemToAdd.itemName;
                     UpdateInventory(i);
                     Debug.Log("Added " + itemToAdd.itemName + ", from " + this);
                     return true;
@@ -89,7 +92,7 @@ namespace InventoryStuff
         public bool InventoryHasSpace()
         {
             for (int i = 0; i < currentInventory.Length; i++)
-                if (currentInventory[i] == null) return true;
+                if (currentInventory[i].item == null) return true;
             return false;
         }
         /// <summary>
@@ -97,7 +100,7 @@ namespace InventoryStuff
         /// </summary>
         public void RemoveItem(int index)
         {
-            currentInventory[index] = null;
+            currentInventory[index].item = null;
             UpdateInventory(index);
         }
 
@@ -110,7 +113,7 @@ namespace InventoryStuff
             for (int i = 0; i < currentInventory.Length; i++)
             {
                 // Compare to find item in inventory, remove by index if match
-                if (currentInventory[i].itemName == item.itemName)
+                if (currentInventory[i].item.itemName == item.itemName)
                 {
                     index = i;
                     RemoveItem(index);
@@ -124,15 +127,15 @@ namespace InventoryStuff
         /// </summary>
         public void RemoveFromStack(int index)
         {
-            currentInventory[index].amountLeft--;
-            if (currentInventory[index].amountLeft == 0) RemoveItem(index);
+            currentInventory[index].quantityLeft--;
+            if (currentInventory[index].quantityLeft == 0) RemoveItem(index);
             UpdateInventoryTexts();
         }
 
         [ContextMenu("Update inventory")]
         public void UpdateInventory(int index)
         {
-            InventoryItemData item = currentInventory[index];
+            InventoryItemData item = currentInventory[index].item;
 
             if (item == null)
             {
@@ -155,7 +158,7 @@ namespace InventoryStuff
 
             for (int i = 0; i < currentInventory.Length; i++)
             {
-                InventoryItemData item = currentInventory[i];
+                InventoryItemData item = currentInventory[i].item;
                 quantityCounters[i].gameObject.SetActive(false);
                 if (item != null)
                 {
@@ -163,7 +166,7 @@ namespace InventoryStuff
                     if (item.isStackable)
                     {
                         quantityCounters[i].gameObject.SetActive(true);
-                        quantityCounters[i].text = currentInventory[i].amountLeft.ToString();
+                        quantityCounters[i].text = currentInventory[i].quantityLeft.ToString();
                     }
                 }
             }

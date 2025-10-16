@@ -15,20 +15,8 @@ public class StoveRecipes : MonoBehaviour
     {
         for (int i = 0; i < stoveRecipes.Length; i++)
         {
-            stoveRecipes[i].name = stoveRecipes[i].result.name;
+            //stoveRecipes[i].name = stoveRecipes[i].result.name;
         }
     }
 }
 
-namespace InventoryStuff
-{
-    [System.Serializable]
-    public struct Recipe
-    {
-        [Tooltip("This variable is for clarity and not meant to be modified")]
-        public string name;
-
-        public InventoryItem result;
-        public InventoryItem[] ingredients;
-    }
-}

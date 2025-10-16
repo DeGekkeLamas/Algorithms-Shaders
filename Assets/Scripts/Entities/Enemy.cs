@@ -21,22 +21,14 @@ public class Enemy : Entity
         }
     }
 
-    // Take damage on collision with weapon or projectile
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.TryGetComponent(out Projectile hitProjectile))
-    //    {
-    //        Debug.Log($"Hit by projecile {other.gameObject.name}");
-    //        if (hitProjectile != null) Death();
-    //    }
-    //}
-
+    /// <summary>
+    /// Spawns corpse and lootdrops, also destroys object
+    /// </summary>
     protected override void Death()
     {
         SpawnCorpse();
         SpawnDrops();
         StopAllCoroutines();
-        if (this.TryGetComponent(out MovingObjectBase move)) Destroy(move);
         Destroy(this.gameObject);
     }
 
