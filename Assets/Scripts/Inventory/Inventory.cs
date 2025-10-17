@@ -113,10 +113,12 @@ namespace InventoryStuff
             for (int i = 0; i < currentInventory.Length; i++)
             {
                 // Compare to find item in inventory, remove by index if match
-                if (currentInventory[i].item.itemName == item.itemName)
+                InventoryItem currentItem = currentInventory[i].item;
+                if (currentItem != null && currentItem.itemName == item.itemName)
                 {
                     index = i;
                     RemoveItem(index);
+                    return;
                 }
             }
             return;

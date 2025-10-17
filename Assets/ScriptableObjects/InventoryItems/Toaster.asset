@@ -41,4 +41,5 @@ MonoBehaviour:
     autoFire: 0
     cooldown: 0
     isConsumedOnUse: 0
+    fuel: {fileID: 11400000, guid: 5a402ceecb804564fb804d4f971fa8c9, type: 2}
     cooldownLeft: 0

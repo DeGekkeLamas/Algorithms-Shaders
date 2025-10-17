@@ -5,7 +5,7 @@ using UnityEngine;
 namespace InventoryStuff
 {
     [System.Serializable]
-    public struct Recipe
+    public class Recipe
     {
         [ReadOnly] public string name;
 

@@ -23,7 +23,7 @@ namespace InventoryStuff
         public float cooldown;
         public bool isConsumedOnUse;
         [Tooltip("Leave empty to use no fuel")]
-        public InventoryItem fuel;
+        public InventoryItemData fuel;
 
         [HideInInspector] public float cooldownLeft;
 

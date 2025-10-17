@@ -15,7 +15,7 @@ public class StoveRecipes : MonoBehaviour
     {
         for (int i = 0; i < stoveRecipes.Length; i++)
         {
-            //stoveRecipes[i].name = stoveRecipes[i].result.name;
+            stoveRecipes[i].name = stoveRecipes[i].result.GetItem().itemName;
         }
     }
 }

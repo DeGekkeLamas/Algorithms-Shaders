@@ -2101,6 +2101,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f05cc9f0784d2f4ebb80b874b6b056b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentInventory:
+  - itemName: 
+    durabilityLeft: 0
+    quantityLeft: 0
+  - itemName: 
+    durabilityLeft: 0
+    quantityLeft: 0
+  - itemName: 
+    durabilityLeft: 0
+    quantityLeft: 0
+  - itemName: 
+    durabilityLeft: 0
+    quantityLeft: 0
+  - itemName: 
+    durabilityLeft: 0
+    quantityLeft: 0
   Hotbar:
   - {fileID: 3565875426722051589}
   - {fileID: 7082999946771178380}
@@ -2139,6 +2155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d55cb09c47a28b4ead390f5e8060749, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemToAdd: {fileID: 0}
 --- !u!114 &3777997893634887980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2152,89 +2169,89 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stoveRecipes:
-  - name: CheesePizzaO
-    result: {fileID: 11400000, guid: 97ca6228e3c3bb2459d561f57a783f36, type: 2}
+  - name: Cheese pizza
+    result: {fileID: 11400000, guid: 344767c78c39be8438a6c88254270f54, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: e0e14abac84f6af47a62a67d087f23af, type: 2}
-    - {fileID: 11400000, guid: 4fc7385e2f84b984387a9425c1ef9679, type: 2}
-  - name: CryingPanO
-    result: {fileID: 11400000, guid: d55442a208dcf704d822cb40e7b8a90a, type: 2}
+    - {fileID: 11400000, guid: 0c9854909dd97e2478a86b625761d40b, type: 2}
+    - {fileID: 11400000, guid: 56d542c75f99489439b474ab28192e77, type: 2}
+  - name: Crying pan
+    result: {fileID: 11400000, guid: 7ac080eb2418b864fb453dcd451705b6, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
-    - {fileID: 11400000, guid: cfb8d551f1720644c80ccb0b9b716f54, type: 2}
-  - name: DryingPanO
-    result: {fileID: 11400000, guid: a34246590f0857a4abe102cb8b34fbdd, type: 2}
+    - {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
+    - {fileID: 11400000, guid: 623d8eb10a9ed9845bc5972345fec14e, type: 2}
+  - name: Drying pan
+    result: {fileID: 11400000, guid: 2b58d1d459c22d24eab8d5dfc60ee403, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
-    - {fileID: 11400000, guid: 02f12b7b27c2ed742bac5e6dfce5a8f1, type: 2}
-  - name: DyingPanO
-    result: {fileID: 11400000, guid: e4d8a3b589c58e84a80e512e7372fa32, type: 2}
+    - {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
+    - {fileID: 11400000, guid: 0b352e7b1fdba9142a3c23bc8f80323f, type: 2}
+  - name: Dying pan
+    result: {fileID: 11400000, guid: da01f6079f5bc5a4c9da09e8f8655cc6, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
-    - {fileID: 11400000, guid: afd2e58b3798a2549aea67ef17c798f0, type: 2}
-  - name: GrilledCheeseSandwichO
-    result: {fileID: 11400000, guid: 893f279f9ff5ce443a9ba582d338dd21, type: 2}
+    - {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
+    - {fileID: 11400000, guid: 6138d3284b688f747a26edfbdf15c506, type: 2}
+  - name: Grilled cheese sandwich
+    result: {fileID: 11400000, guid: a03e253024b72bd449c7aa591ab2a7d0, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: cda71e602cf1a3c4f920bfd6314726d9, type: 2}
-    - {fileID: 11400000, guid: 4fc7385e2f84b984387a9425c1ef9679, type: 2}
-  - name: GrilledChickenO
-    result: {fileID: 11400000, guid: 5189754c597f9c34181c847d722cd9af, type: 2}
+    - {fileID: 11400000, guid: 5a402ceecb804564fb804d4f971fa8c9, type: 2}
+    - {fileID: 11400000, guid: 0c9854909dd97e2478a86b625761d40b, type: 2}
+  - name: Grilled chicken
+    result: {fileID: 11400000, guid: 306c161096859b145a9df927fa03da7e, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: 0bacf20af3865a145b2c68870033ab67, type: 2}
-  - name: KnorkO
-    result: {fileID: 11400000, guid: a8021a96aad8207419a3db35381231ec, type: 2}
+    - {fileID: 11400000, guid: 7ed9a3564ba33c34aac7fca8d293579d, type: 2}
+  - name: Knork
+    result: {fileID: 11400000, guid: fa01f09ccc6549746acc0317369c8e66, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
-    - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
-  - name: IdentifyingPanO
-    result: {fileID: 11400000, guid: d1a3b41d2a79af449a59b4eb01613768, type: 2}
+    - {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
+    - {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
+  - name: Identifying pan
+    result: {fileID: 11400000, guid: f7d412925109647469e9a9fae61092ad, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
-    - {fileID: 11400000, guid: 74617052ab2b04748ac01eab9574d602, type: 2}
-  - name: MystifyingPanO
-    result: {fileID: 11400000, guid: 1795c669611ec484fa9dbbb57ebe44d3, type: 2}
+    - {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
+    - {fileID: 11400000, guid: b91cf5ac102677e438c130294aaedf62, type: 2}
+  - name: Mystifying pan
+    result: {fileID: 11400000, guid: 725a289c589acf24390f0ca6e5d74448, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: d968ca1f0f862194c9162506695772eb, type: 2}
-    - {fileID: 11400000, guid: e4d8a3b589c58e84a80e512e7372fa32, type: 2}
-    - {fileID: 11400000, guid: a34246590f0857a4abe102cb8b34fbdd, type: 2}
-    - {fileID: 11400000, guid: d55442a208dcf704d822cb40e7b8a90a, type: 2}
-    - {fileID: 11400000, guid: d1a3b41d2a79af449a59b4eb01613768, type: 2}
-  - name: SpicyPizzaO
-    result: {fileID: 11400000, guid: 5b1eff5725772d64fb337e60c2e31c7c, type: 2}
+    - {fileID: 11400000, guid: da01f6079f5bc5a4c9da09e8f8655cc6, type: 2}
+    - {fileID: 11400000, guid: 2b58d1d459c22d24eab8d5dfc60ee403, type: 2}
+    - {fileID: 11400000, guid: f7d412925109647469e9a9fae61092ad, type: 2}
+    - {fileID: 11400000, guid: 7ac080eb2418b864fb453dcd451705b6, type: 2}
+    - {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
+  - name: Spicy pizza
+    result: {fileID: 11400000, guid: af8e16ce578c1b1439c1482f5700d7ec, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: e0e14abac84f6af47a62a67d087f23af, type: 2}
-    - {fileID: 11400000, guid: 17bec8cc810a8c64aa4b5815cb0fd3ac, type: 2}
-  - name: SpifeO
-    result: {fileID: 11400000, guid: 1c067684e17a70e4bbfee385c02fa15c, type: 2}
+    - {fileID: 11400000, guid: 56d542c75f99489439b474ab28192e77, type: 2}
+    - {fileID: 11400000, guid: 511a173d4c59bbc4cba2a50d0a934351, type: 2}
+  - name: Spife
+    result: {fileID: 11400000, guid: 080ea9fea7bb230479f6d86598ae13ab, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
-    - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
-  - name: SporfO
-    result: {fileID: 11400000, guid: 167eb45cc9794674988f74ebb3a1b444, type: 2}
+    - {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
+    - {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
+  - name: Sporf
+    result: {fileID: 11400000, guid: f68a265b79360694ca49a819c932524e, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
-    - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
-    - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
-  - name: SporfO
-    result: {fileID: 11400000, guid: 167eb45cc9794674988f74ebb3a1b444, type: 2}
+    - {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
+    - {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
+    - {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
+  - name: Sporf
+    result: {fileID: 11400000, guid: f68a265b79360694ca49a819c932524e, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: 1c067684e17a70e4bbfee385c02fa15c, type: 2}
-    - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
-  - name: SporfO
-    result: {fileID: 11400000, guid: 167eb45cc9794674988f74ebb3a1b444, type: 2}
+    - {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
+    - {fileID: 11400000, guid: fa01f09ccc6549746acc0317369c8e66, type: 2}
+  - name: Sporf
+    result: {fileID: 11400000, guid: f68a265b79360694ca49a819c932524e, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: c35b4927a8f872040ae14e4c250c8757, type: 2}
-    - {fileID: 11400000, guid: a590670a7c27215478b065a33fe4b7ff, type: 2}
-  - name: SporfO
-    result: {fileID: 11400000, guid: 167eb45cc9794674988f74ebb3a1b444, type: 2}
+    - {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
+    - {fileID: 11400000, guid: 930b0a3119abbd4488e83bd19ab363c7, type: 2}
+  - name: Sporf
+    result: {fileID: 11400000, guid: f68a265b79360694ca49a819c932524e, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: a8021a96aad8207419a3db35381231ec, type: 2}
-    - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
-  - name: SporkO
-    result: {fileID: 11400000, guid: c35b4927a8f872040ae14e4c250c8757, type: 2}
+    - {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
+    - {fileID: 11400000, guid: 080ea9fea7bb230479f6d86598ae13ab, type: 2}
+  - name: Spork
+    result: {fileID: 11400000, guid: 930b0a3119abbd4488e83bd19ab363c7, type: 2}
     ingredients:
-    - {fileID: 11400000, guid: f662170310db0ab47b23d0ebe1ada091, type: 2}
-    - {fileID: 11400000, guid: f5ab728f38627204c9ad34b293eff2f4, type: 2}
+    - {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
+    - {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
 --- !u!1 &7644046490921562159
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,11 @@ public class AnimationController : MonoBehaviour
     {
         animator.Play(animation);
         yield return null;
+        yield return WaitForCurrentAnimation();
+    }
+
+    public IEnumerator WaitForCurrentAnimation()
+    {
         float animationDuration = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
         yield return new WaitForSeconds(animationDuration);
     }

@@ -51,6 +51,8 @@ public class MeleeEnemy : Enemy
         {
             PlayerController.instance.DealDamage(strength);
         }
+        yield return null;
+        yield return anim.WaitForCurrentAnimation();
         isAttacking = false;
         ChangeMoveSpeed(originalSpeed);
     }

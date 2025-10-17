@@ -54,6 +54,8 @@ public abstract class Entity : MonoBehaviour
     {
         currentHP = newHP;
         if (currentHP <= 0) Death();
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+
         onStatsChanged?.Invoke();
     }
 

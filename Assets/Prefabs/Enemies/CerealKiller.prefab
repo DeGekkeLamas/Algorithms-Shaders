@@ -82,8 +82,8 @@ MonoBehaviour:
     probability: 5
   corpse: {fileID: 3778903803615357484, guid: 823350eade72eb448b59e00f6f3e4838, type: 3}
   tomatoSplat: {fileID: 966423011128645671, guid: a9667468bcb0be7478c770a7c83249b9, type: 3}
-  maxAttackDistance: 2.5
-  attackStartDistance: 2
+  maxAttackDistance: 3
+  attackStartDistance: 2.5
   attackAngle: 75
   showVisualDebug: 0
 --- !u!136 &4282499219386979268
