@@ -1,6 +1,7 @@
+using InventoryStuff;
 using UnityEngine;
 using UnityEngine.AI;
-using InventoryStuff;
+using static UnityEditor.Progress;
 
 /// <summary>
 /// Base for playercontroller, override to add a way to move player
@@ -77,6 +78,18 @@ public class PlayerController : Entity
 
     void SetProjectileChart(Vector3 mousePos)
     {
+        InventoryItem item = Inventory.instance.currentInventory[Inventory.itemSelected].item;
+        RangedWeapon itemR = (RangedWeapon)item;
+        if (item != null && itemR.projectile.useGravity)
+        {
+            projectileChart.gameObject.SetActive(true);
+        }
+        else
+        {
+            projectileChart.gameObject.SetActive(false);
+            return;
+        }
+
         Vector3 nMousePos = mousePos;
         nMousePos.y = 0;
         nMousePos = nMousePos.normalized;

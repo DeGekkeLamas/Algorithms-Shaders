@@ -18,7 +18,7 @@ namespace InventoryStuff
         [Header("Type specific")]
         public float damage;
         public StatusEffect[] effectApplied;
-        public Rigidbody projectile;
+        public Projectile projectile;
         public bool autoFire;
         public float cooldown;
         public bool isConsumedOnUse;
@@ -31,21 +31,21 @@ namespace InventoryStuff
         {
             if (cooldownLeft <= 0)
             {
-                Rigidbody spawnedProjectile = MonoBehaviour.Instantiate(this.projectile,
+                Projectile spawnedProjectile = MonoBehaviour.Instantiate(this.projectile,
                     source.transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(inputDir));
-                Projectile projectile = spawnedProjectile.GetComponent<Projectile>();
+                Rigidbody rigidbody = spawnedProjectile.GetComponent<Rigidbody>();
                 projectile.damage = damage;
                 if (!projectile.useGravity)
                 { // Straight projectile
-                    spawnedProjectile.linearVelocity = inputDir.normalized *
+                    rigidbody.linearVelocity = inputDir.normalized *
                         projectile.projectileSpeed;
-                    spawnedProjectile.linearVelocity = new(spawnedProjectile.linearVelocity.x, 0, spawnedProjectile.linearVelocity.z);
+                    rigidbody.linearVelocity = new(rigidbody.linearVelocity.x, 0, rigidbody.linearVelocity.z);
                 }
                 else // Lobbed projectile
                 {
-                    spawnedProjectile.linearVelocity = inputDir *
+                    rigidbody.linearVelocity = inputDir *
                         projectile.projectileSpeed;
-                    spawnedProjectile.angularVelocity = Vector3.Cross(spawnedProjectile.linearVelocity, Vector3.up) * -projectile.rotationIntensity;
+                    rigidbody.angularVelocity = Vector3.Cross(rigidbody.linearVelocity, Vector3.up) * -projectile.rotationIntensity;
                 }
 
                 cooldownLeft += cooldown;

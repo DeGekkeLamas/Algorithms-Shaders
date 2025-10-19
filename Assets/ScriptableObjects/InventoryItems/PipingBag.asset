@@ -13,50 +13,19 @@ MonoBehaviour:
   m_Name: PipingBag
   m_EditorClassIdentifier: 
   item:
-    itemSprite: {fileID: 0}
     itemName: Piping bag
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: It's pipin' hot, or should I say, pipin' fresh.
-    isStackable: 0
     maxStack: 1
-    amountLeft: 1
     durability: 0
-    currentDurability: 0
+    grantsImmunityTo: []
+    itemSprite: {fileID: 0}
+    canUseItem: 0
     damage: 25
-    hpHealed: 0
-    amountOfTargets: 3
-    targetAll: 0
-    amountOfHits: 1
-    slotIsEmty: 0
-    isConsumedOnUse: 0
-    isFood: 0
-    isMetal: 0
-    isKnife: 0
-    isEmptyMicrowave: 0
-    inflictOnFire: 0
-    inflictPoisoned: 0
-    inflictBlindness: 0
-    onAttackHealHP: 0
-    inflictStuck: 0
-    damageScalesWithHP: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    fireImmunity: 0
-    seeEnemyInventories: 0
-    durabilityBoost: 0
-    healingBoost: 0
-    consumesBread: 0
-    curesOnFireWhenConsumed: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    isStoveIngredient: 0
-    canAttack: 1
-    canBlock: 0
-    canConsume: 0
-    canThrow: 0
-    hasOverworldUses: 1
-    projectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
+    effectApplied: []
+    projectile: {fileID: -4791254542994142077, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
     autoFire: 1
     cooldown: 0.3
+    isConsumedOnUse: 0
+    fuel: {fileID: 0}
     cooldownLeft: 0

@@ -83,7 +83,7 @@ namespace InventoryStuff
             string description = string.Empty;
 
             // Damage
-            description += $"Deals {item.damage} {(!item.projectile.useGravity ? "ranged" : "Lobbed")} damage.\n";
+            description += $"Deals {item.damage} {(!item.projectile.useGravity ? "ranged" : "lobbed")} damage.\n";
             // fuel
             if (item.fuel != null) description += $"Uses {item.itemName} as fuel.\n";
             // Onetime use

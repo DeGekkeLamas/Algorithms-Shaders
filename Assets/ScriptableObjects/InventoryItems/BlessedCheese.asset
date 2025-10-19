@@ -13,50 +13,19 @@ MonoBehaviour:
   m_Name: BlessedCheese
   m_EditorClassIdentifier: 
   item:
-    itemSprite: {fileID: 0}
     itemName: Blessed cheese
     itemModel: {fileID: 0}
     toolTip: You cheated to get this item =)
-    isStackable: 0
     maxStack: 1
-    amountLeft: 1
     durability: 42069
-    currentDurability: 0
+    grantsImmunityTo: []
+    itemSprite: {fileID: 0}
+    canUseItem: 0
     damage: 1500
-    hpHealed: 0
-    amountOfTargets: 1
-    targetAll: 1
-    amountOfHits: 1
-    slotIsEmty: 0
-    isConsumedOnUse: 0
-    isFood: 1
-    isMetal: 1
-    isKnife: 1
-    isEmptyMicrowave: 0
-    inflictOnFire: 1
-    inflictPoisoned: 1
-    inflictBlindness: 1
-    onAttackHealHP: 0
-    inflictStuck: 1
-    damageScalesWithHP: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    fireImmunity: 0
-    seeEnemyInventories: 1
-    durabilityBoost: 0
-    healingBoost: 0
-    consumesBread: 0
-    curesOnFireWhenConsumed: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    isStoveIngredient: 0
-    canAttack: 1
-    canBlock: 0
-    canConsume: 0
-    canThrow: 0
-    hasOverworldUses: 1
-    projectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
+    effectApplied: []
+    projectile: {fileID: -4791254542994142077, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
     autoFire: 1
     cooldown: 0.2
+    isConsumedOnUse: 0
+    fuel: {fileID: 0}
     cooldownLeft: 0

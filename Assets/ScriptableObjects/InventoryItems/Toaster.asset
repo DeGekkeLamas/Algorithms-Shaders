@@ -16,28 +16,14 @@ MonoBehaviour:
     itemName: Toaster
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: Very friendly bathing companion.
-    isStackable: 0
     maxStack: 1
     durability: 0
-    isFood: 1
-    isMetal: 0
-    isKnife: 0
-    onAttackHealHP: 0
-    damageScalesWithHP: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    durabilityBoost: 0
-    healingBoost: 0
-    seeEnemyInventories: 0
     grantsImmunityTo: []
     itemSprite: {fileID: 0}
     canUseItem: 0
     damage: 80
     effectApplied: []
-    projectile: {fileID: -8806985211751940049, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
+    projectile: {fileID: -4791254542994142077, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
     autoFire: 0
     cooldown: 0
     isConsumedOnUse: 0
