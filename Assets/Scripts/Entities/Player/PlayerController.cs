@@ -13,6 +13,7 @@ public class PlayerController : Entity
     [Header("References")]
     public Rigidbody pickupSpawned;
     public MeshRenderer projectileChart;
+    public GameObject meleeWeaponHandle;
     Material projectileChartMat;
     public static PlayerController instance;
     protected override void Awake()

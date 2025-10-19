@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+
+[RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
     [HideInInspector] public float damage;
@@ -17,10 +19,8 @@ public class Projectile : MonoBehaviour
     public float maxExpansion = 2;
 
     [Header("Splat")]
-    public bool leaveSplat;
     public GameObject splat;
 
-    public static List<Projectile> existingProjectiles = new();
     public static GameObject projectileContainer;
 
     Rigidbody rb;
@@ -29,7 +29,6 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (useGravity) rb.useGravity = true;
         rb.AddForce(new(0, upForce, 0));
-        existingProjectiles.Add(this);
         if (projectileContainer == null) projectileContainer = new("ProjectileContainer");
         this.transform.parent = projectileContainer.transform;
     }
@@ -63,12 +62,11 @@ public class Projectile : MonoBehaviour
         }
 
         // Leace splat
-        if (leaveSplat)
+        if (splat != null)
         {
             Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hitInfo);
             Instantiate(splat, hitInfo.point + new Vector3(0, 0.01f, 0), Quaternion.identity, 
                 Projectile.projectileContainer.transform);
         }
     }
-    private void OnDestroy() => existingProjectiles.Remove(this);
 }

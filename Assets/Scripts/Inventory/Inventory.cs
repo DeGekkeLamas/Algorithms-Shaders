@@ -10,38 +10,26 @@ namespace InventoryStuff
         public ItemUniqueStats[] currentInventory = new ItemUniqueStats[5];
 
         [Header("UI")]
-        public Image[] Hotbar = new Image[5];
-        public TMP_Text[] quantityCounters = new TMP_Text[5];
         public Texture2D HotbarItemBG;
         public static int itemSelected;
 
         public static Inventory instance;
-
-        HotbarHover HH;
+        public event Action onItemChanged;
+        public event Action onSeletecItemSwitched;
 
         private void Awake()
         {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else Destroy(this);
+            instance = this;
+        }
 
-            HH = GameObject.FindFirstObjectByType<HotbarHover>().GetComponent<HotbarHover>();
-        }
-        private void Start()
-        {
-            for (int i = 0; i < currentInventory.Length; i++) UpdateInventory(i);
-        }
         void Update()
         {
             if (Input.mouseScrollDelta.y != 0)
             {
                 float _direction = (Input.mouseScrollDelta.y > 0) ? -1 : 1;
                 itemSelected += Mathf.RoundToInt(_direction);
-                if (itemSelected < 0) itemSelected = 4;
-                if (itemSelected > 4) itemSelected = 0;
-                HH.SetSelectedBorder(itemSelected);
+                itemSelected = itemSelected % currentInventory.Length;
+                onSeletecItemSwitched?.Invoke();
             }
 
             for (int i = 0; i < currentInventory.Length; i++)
@@ -67,7 +55,7 @@ namespace InventoryStuff
                     {
                         currentInventory[i].quantityLeft++;
                         currentInventory[i].itemName = itemToAdd.itemName;
-                        UpdateInventoryTexts();
+                        onItemChanged?.Invoke();
                         return true;
                     }
                 }
@@ -80,7 +68,7 @@ namespace InventoryStuff
                     currentInventory[i].item = itemToAdd;
                     currentInventory[i].quantityLeft++;
                     currentInventory[i].itemName = itemToAdd.itemName;
-                    UpdateInventory(i);
+                    onItemChanged?.Invoke();
                     Debug.Log("Added " + itemToAdd.itemName + ", from " + this);
                     return true;
                 }
@@ -101,7 +89,7 @@ namespace InventoryStuff
         public void RemoveItem(int index)
         {
             currentInventory[index].item = null;
-            UpdateInventory(index);
+            onItemChanged?.Invoke();
         }
 
         /// <summary>
@@ -131,47 +119,7 @@ namespace InventoryStuff
         {
             currentInventory[index].quantityLeft--;
             if (currentInventory[index].quantityLeft == 0) RemoveItem(index);
-            UpdateInventoryTexts();
-        }
-
-        [ContextMenu("Update inventory")]
-        public void UpdateInventory(int index)
-        {
-            InventoryItem item = currentInventory[index].item;
-
-            if (item == null)
-            {
-                Hotbar[index].sprite = Sprite.Create(HotbarItemBG, new Rect(0.0f, 0.0f,
-                HotbarItemBG.width, HotbarItemBG.height), new Vector2(0, 0));
-                UpdateInventoryTexts();
-                return;
-            }
-
-            item.SetSprite();
-
-            Hotbar[index].sprite = Sprite.Create(item.itemSprite, new Rect(0.0f, 0.0f,
-                item.itemSprite.width, item.itemSprite.height), new Vector2(0, 0));
-
-            HH.SetSelectedBorder(itemSelected);
-            UpdateInventoryTexts();
-        }
-        void UpdateInventoryTexts()
-        {
-
-            for (int i = 0; i < currentInventory.Length; i++)
-            {
-                InventoryItem item = currentInventory[i].item;
-                quantityCounters[i].gameObject.SetActive(false);
-                if (item != null)
-                {
-                    // Set quantity counters
-                    if (item.isStackable)
-                    {
-                        quantityCounters[i].gameObject.SetActive(true);
-                        quantityCounters[i].text = currentInventory[i].quantityLeft.ToString();
-                    }
-                }
-            }
+            onItemChanged?.Invoke();
         }
     }
 }
