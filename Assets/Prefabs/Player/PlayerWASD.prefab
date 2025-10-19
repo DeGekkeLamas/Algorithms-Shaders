@@ -319,7 +319,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1823438395285073010}
   - component: {fileID: 3214448125551340852}
-  - component: {fileID: 4554953839631238754}
   - component: {fileID: 1709325684178408358}
   - component: {fileID: 1272428489091131549}
   m_Layer: 6
@@ -372,28 +371,7 @@ MonoBehaviour:
   projectileForce: 20
   pickupSpawned: {fileID: 2400643790871167767, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
   projectileChart: {fileID: 6158452050362798746}
---- !u!195 &4554953839631238754
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8608250485412360592}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 15
-  m_Acceleration: 20000
-  avoidancePriority: 50
-  m_AngularSpeed: 0
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  meleeWeaponHandle: {fileID: 0}
 --- !u!136 &1709325684178408358
 CapsuleCollider:
   m_ObjectHideFlags: 0

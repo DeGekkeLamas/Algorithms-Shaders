@@ -17,13 +17,15 @@ namespace InventoryStuff
     {
         [Header("Type specific")]
         public float hpHealed;
-        public StatusEffect effectApplied;
+        public StatusEffect[] effectsApplied;
 
         public override void UseItem(Entity source, Vector3 inputDir)
         {
             source.DealDamage(-hpHealed);
-            if (effectApplied != null)
-                source.activeStatusEffects.Add(effectApplied);
+            for (int i = 0; i < effectsApplied.Length; i++)
+            {
+                source.activeStatusEffects.Add(effectsApplied[i]);
+            }
             Inventory.instance.RemoveItem(this);
             canUseItem = false;
         }

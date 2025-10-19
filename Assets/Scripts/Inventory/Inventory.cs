@@ -28,7 +28,7 @@ namespace InventoryStuff
             {
                 float _direction = (Input.mouseScrollDelta.y > 0) ? -1 : 1;
                 itemSelected += Mathf.RoundToInt(_direction);
-                itemSelected = itemSelected % currentInventory.Length;
+                itemSelected = (int)Mathf.Repeat(itemSelected, currentInventory.Length);
                 onSeletecItemSwitched?.Invoke();
             }
 
@@ -44,13 +44,13 @@ namespace InventoryStuff
         public bool AddItem(InventoryItem itemToAdd)
         {
             // Stackable
-            if (itemToAdd.isStackable)
+            if (itemToAdd.IsStackable)
             {
                 for (int i = 0; i < currentInventory.Length; i++)
                 {
                     InventoryItem item = currentInventory[i].item;
 
-                    if (item != null && item.isStackable && currentInventory[i].quantityLeft < item.maxStack
+                    if (item != null && item.IsStackable && currentInventory[i].quantityLeft < item.maxStack
                         && item.itemName == itemToAdd.itemName)
                     {
                         currentInventory[i].quantityLeft++;

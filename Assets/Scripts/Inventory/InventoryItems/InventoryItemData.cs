@@ -16,30 +16,15 @@ namespace InventoryStuff
         public string itemName;
         public GameObject itemModel;
         [TextArea] public string toolTip;
-        public bool isStackable;
         public int maxStack = 1;
         [Header("Stats")]
         public float durability;
-        [Header("Properties")]
-        public bool isFood;
-        public bool isMetal;
-        public bool isKnife;
-        public bool onAttackHealHP;
-        public bool damageScalesWithHP;
-        public float damageAfterBlock;
         [Header("Overworld properties")]
-        [Header("Passive effects")]
-        public bool grantsImmortality;
-        public bool knifeBoost;
-        public bool foodBoost;
-        public bool foodResistanceBoost;
-        public bool durabilityBoost;
-        public int healingBoost;
-        public bool seeEnemyInventories;
         [SerializeField] public StatusEffect[] grantsImmunityTo;
 
         [HideInInspector] public Texture2D itemSprite;
         [HideInInspector] public bool canUseItem;
+        public bool IsStackable => maxStack > 1;
 
         public Texture2D SetSprite()
         {

@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace InventoryStuff
@@ -7,35 +8,96 @@ namespace InventoryStuff
     {
         public static string GenerateDescription(InventoryItem item)
         {
-            string _description = string.Empty;
-            //if (item.damage != 0)
-                //_description += $" \nDeals {item.damage} damage";
-            if (item.damageScalesWithHP) _description += ", deals more damage to damaged enemies";
+            // Empty
+            if (item == null)
+            {
+                return StringTools.Bold("Empty");
+            }
 
-            //if (item.hpHealed != 0)
-                //_description += $"\nHeals {item.hpHealed} HP when consumed";
+            string description = $"{StringTools.Bold(item.itemName)}\n\n";
+            description += GeneralItemInfo(item);
+            // Consumable type
+            if (item.GetType() == typeof(ConsumableItem))
+                description += ConsumableItemInfo(item as ConsumableItem);
+            // Melee type
+            if (item.GetType() == typeof(MeleeWeapon)) 
+                description += MeleeItemInfo(item as MeleeWeapon);
+            // Ranged type
+            if (item.GetType() == typeof(RangedWeapon))
+                description += RangedItemInfo(item as RangedWeapon);
+            // Passive type
+            if (item.GetType() == typeof(PassiveItem))
+                description += PassiveItemInfo(item as PassiveItem);
 
-            if (item.damageAfterBlock > 0)
-                _description += $"\nDeals {item.damageAfterBlock} to the player after blocking";
+            description += $" \n\"{item.toolTip}\"";
 
-            //foreach (StatusEffect effect in item.effectApplied)
-            //{
-            //    _description += $"\nInflicts {effect.name}";
-            //}
+            return description;
+        }
 
-            if (item.durabilityBoost) _description += $"\nWhile in inventory, increases durability of items";
-            if (item.foodBoost) _description += $"\nWhile in inventory, increases damage of food-based items";
-            if (item.foodResistanceBoost) _description += $"\nWhile in inventory, increases defence against food-based items";
-            if (item.knifeBoost) _description += $"\nWhile in inventory, increases damage of knifes and their upgrades";
-            if (item.healingBoost > 0)
-                _description += $"\n While in inventory, healing items heal {item.healingBoost} more HP";
-            if (item.seeEnemyInventories) _description += $"\nWhile in inventory, allows you to see the inventories of enemies";
-            if (item.grantsImmortality) _description += $"\nWhile in inventory, grants immunity to attacks";
-            //if (item.isStoveIngredient) _description += $"\nCan be used as ingredient for crafting at stoves";
+        public static string GeneralItemInfo(InventoryItem item)
+        {
+            string description = string.Empty;
+            // Max stacj
+            if (item.IsStackable)
+            {
+                description += $"Max stack = {item.maxStack}.\n";
+            }
+            // Immune effects
+            foreach (StatusEffect effect in item.grantsImmunityTo)
+            {
+                description += $"Grants immunity to {effect.name}.\n";
+            }
 
-            _description += $" \n\"{item.toolTip}\"";
+            return description;
+        }
+        public static string ConsumableItemInfo(ConsumableItem item)
+        {
+            string description = string.Empty;
 
-            return _description;
+            // Healing
+            description += $"Recovers {item.hpHealed} HP.\n";
+            // Given effects
+            foreach (StatusEffect effect in item.effectsApplied)
+            {
+                description += $"Gives {effect.name} effect.\n";
+            }
+
+            return description;
+        }
+        public static string MeleeItemInfo(MeleeWeapon item)
+        {
+            string description = string.Empty;
+
+            // Damage
+            description += $"Deals {item.damage} melee damage.\n";
+            // Effects applied
+            foreach (StatusEffect effect in item.effectApplied)
+            {
+                description += $"Inflicts {effect.name}.\n";
+            }
+
+            return description;
+        }
+        public static string RangedItemInfo(RangedWeapon item)
+        {
+            string description = string.Empty;
+
+            // Damage
+            description += $"Deals {item.damage} {(!item.projectile.useGravity ? "ranged" : "Lobbed")} damage.\n";
+            // fuel
+            if (item.fuel != null) description += $"Uses {item.itemName} as fuel.\n";
+            // Onetime use
+            if (item.isConsumedOnUse) description += "Single use.\n";
+
+            return description;
+        }
+        public static string PassiveItemInfo(PassiveItem item)
+        {
+            string description = string.Empty;
+
+            // stuff
+
+            return description;
         }
     }
 }
