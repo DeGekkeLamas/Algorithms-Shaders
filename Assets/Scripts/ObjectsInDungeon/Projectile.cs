@@ -44,24 +44,22 @@ public class Projectile : MonoBehaviour
         {
             entity.DealDamage(damage);
         }
-        //if (other.gameObject.TryGetComponent<Crate>(out Crate crate)) 
-        //    crate.SubtractHP(1);
 
         // Add force to hit
-        if (other.gameObject.TryGetComponent<Rigidbody>(out Rigidbody rb))
+        if (other.gameObject.TryGetComponent(out Rigidbody rb))
         {
             rb.AddExplosionForce(projectileSpeed + 0.1f*upForce, this.transform.position, 5);
         }
 
         // destroys on terrain collision or wall collision or any collision
-        if (other.gameObject.layer != 3 && !onlyDestroyOnTerrain || 
-            onlyDestroyOnTerrain && other.gameObject.layer == 8 || 
-            destroyOnGround && other.gameObject.layer == 3)
+        if (other.gameObject.layer != LayerMask.GetMask("Terrain") && !onlyDestroyOnTerrain || 
+            onlyDestroyOnTerrain && other.gameObject.layer == LayerMask.GetMask("Walls") || 
+            destroyOnGround && other.gameObject.layer == LayerMask.GetMask("Terrain"))
         {
             Destroy(this.gameObject);
         }
 
-        // Leace splat
+        // Leave splat
         if (splat != null)
         {
             Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hitInfo);

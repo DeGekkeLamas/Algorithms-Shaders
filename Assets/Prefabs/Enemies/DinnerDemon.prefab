@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5725711894490709162}
-  - component: {fileID: 5254387307098633409}
+  - component: {fileID: 3376632439275880072}
   - component: {fileID: 6232500598109979020}
   - component: {fileID: 2123825402581610809}
   - component: {fileID: 6087264469851866165}
@@ -42,7 +42,7 @@ Transform:
   - {fileID: 5875770768562176605}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5254387307098633409
+--- !u!114 &3376632439275880072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,13 +51,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 18489271436508005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7fdf845122eba44ca5aa3d255718543, type: 3}
+  m_Script: {fileID: 11500000, guid: 8224d8a84f119c140a9b8a3518ca23b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityName: Dinner demon
   maxHP: 100
-  moveSpeed: 5
-  strength: 1
+  moveSpeed: 1
+  strength: 20
   level: 1
   XPRequired: 100
   HPIncrement: 10
@@ -67,6 +67,11 @@ MonoBehaviour:
   dropsOnDeath: []
   corpse: {fileID: 8120454217808119696, guid: 275cfdf6fcabefb4380cafd02cfad82a, type: 3}
   tomatoSplat: {fileID: 966423011128645671, guid: 12141ac9eae3ad8428d53249e5653f16, type: 3}
+  attackStartDistance: 14
+  attackAngle: 75
+  showVisualDebug: 0
+  projectile: {fileID: 2142696792574118062, guid: b38b8dbf5d1efab429b85183bbd4b35b, type: 3}
+  projectileOrigin: {fileID: 821464050600228753}
 --- !u!136 &6232500598109979020
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -237,7 +242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1460262785641845971
 Transform:
   m_ObjectHideFlags: 0
@@ -322,6 +327,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fork
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: edc1d3738eac56045b52662da3845311, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3044331527310831217, guid: edc1d3738eac56045b52662da3845311, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -340,9 +353,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5725711894490709162}
     m_Modifications:
+    - target: {fileID: 308190941649573678, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106093928463115208, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2883713843112065043, guid: e20c57f859de96540bee665e202f6609, type: 3}
       propertyPath: m_Name
       value: HPDataPresenter
+      objectReference: {fileID: 0}
+    - target: {fileID: 2883713843112065043, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4269758938964827268, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4270857070061967526, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4271533878065088035, guid: e20c57f859de96540bee665e202f6609, type: 3}
       propertyPath: m_AnchorMax.x
@@ -350,6 +383,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4271533878065088035, guid: e20c57f859de96540bee665e202f6609, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4276696653592797298, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4736807339795967045, guid: e20c57f859de96540bee665e202f6609, type: 3}
@@ -430,6 +467,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4736807339795967045, guid: e20c57f859de96540bee665e202f6609, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504048139612562180, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6458498125241322104, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6701473691350458728, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7014627209600986942, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284801858580159912, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7416409096600110301, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632879223627623386, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8408662645817932756, guid: e20c57f859de96540bee665e202f6609, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -539,9 +608,45 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -6794470628045418376, guid: cd443625954869744b375d26c543b967, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5810711139476439300, guid: cd443625954869744b375d26c543b967, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -741832106251744268, guid: cd443625954869744b375d26c543b967, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -259972160606440404, guid: cd443625954869744b375d26c543b967, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 726143524863735513, guid: cd443625954869744b375d26c543b967, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cd443625954869744b375d26c543b967, type: 3}
       propertyPath: m_Name
       value: DinnerDemon
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cd443625954869744b375d26c543b967, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5525266705404801133, guid: cd443625954869744b375d26c543b967, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179791754218106168, guid: cd443625954869744b375d26c543b967, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397323866302562857, guid: cd443625954869744b375d26c543b967, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

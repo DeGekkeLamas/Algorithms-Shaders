@@ -24,5 +24,6 @@ public class AnimationController : MonoBehaviour
     {
         float animationDuration = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
         yield return new WaitForSeconds(animationDuration);
+        yield return new WaitForEndOfFrame();
     }
 }

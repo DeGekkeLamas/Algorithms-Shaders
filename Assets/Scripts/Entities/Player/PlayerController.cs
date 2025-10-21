@@ -79,8 +79,8 @@ public class PlayerController : Entity
     void SetProjectileChart(Vector3 mousePos)
     {
         InventoryItem item = Inventory.instance.currentInventory[Inventory.itemSelected].item;
-        RangedWeapon itemR = (RangedWeapon)item;
-        if (item != null && itemR.projectile.useGravity)
+        RangedWeapon itemR = item as RangedWeapon;
+        if (item != null && itemR != null && itemR.projectile.useGravity)
         {
             projectileChart.gameObject.SetActive(true);
         }
