@@ -1,27 +1,17 @@
 using UnityEngine;
 using InventoryStuff;
 
-public class Crate : MonoBehaviour
+public class Crate : Entity
 {
     public InventoryItemData[] itemsToGive;
-    public GameObject pickupSpawned;
+    public PickupItem pickupSpawned;
 
-    public int boxHP;
-
-    public void SubtractHP(int hpToRemove)
-    {
-        boxHP -= hpToRemove;
-        Debug.Log($"Dealt {hpToRemove} damage to crate");
-        if (boxHP <= 0) DestroyBox();
-    }
-
-    void DestroyBox()
+    protected override void Death()
     {
         foreach (var item in itemsToGive)
         {
-            Instantiate(pickupSpawned, transform.position, Quaternion.identity).
-                GetComponent<PickupItem>().itemToGive = item.GetItem();
-            Debug.Log($"Spawned {item}, from {this}");
+            Instantiate(pickupSpawned, transform.position, Quaternion.identity).itemToGive = item.GetItem();
+            Debug.Log($"Spawned {item.GetItem().itemName}, from {entityName}");
         }
         Destroy(this.gameObject);
     }

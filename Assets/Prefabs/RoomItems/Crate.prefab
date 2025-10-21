@@ -80,9 +80,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1836a24290ab7746940efebcb5bd6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entityName: Crate
+  maxHP: 50
+  moveSpeed: 0
+  strength: 0
+  level: 0
+  XPRequired: 100
+  HPIncrement: 10
+  strengthIncrement: 0
+  activeStatusEffects: []
   itemsToGive: []
-  pickupSpawned: {fileID: 924318280545970095, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
-  boxHP: 3
+  pickupSpawned: {fileID: 3020829154051356937, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
 --- !u!65 &2055485109330012233
 BoxCollider:
   m_ObjectHideFlags: 0
