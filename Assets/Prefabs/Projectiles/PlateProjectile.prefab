@@ -130,7 +130,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0995d91cc4baa49b647456bbb59d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
   projectileSpeed: 20
   upForce: 0
   useGravity: 0
@@ -159,7 +160,6 @@ MonoBehaviour:
   expands: 0
   expansionFactor: 1.1
   maxExpansion: 5
-  leaveSplat: 0
   splat: {fileID: 0}
 --- !u!114 &8504142228676782153
 MonoBehaviour:

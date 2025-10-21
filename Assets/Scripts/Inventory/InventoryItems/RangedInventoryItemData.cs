@@ -34,6 +34,7 @@ namespace InventoryStuff
                 Projectile spawnedProjectile = MonoBehaviour.Instantiate(this.projectile,
                     source.transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(inputDir));
                 Rigidbody rigidbody = spawnedProjectile.GetComponent<Rigidbody>();
+                rigidbody.excludeLayers = rigidbody.excludeLayers + (int)Mathf.Pow(2, source.gameObject.layer);
                 projectile.damage = damage;
                 if (!projectile.useGravity)
                 { // Straight projectile
@@ -53,7 +54,7 @@ namespace InventoryStuff
                 if (isConsumedOnUse)
                     Inventory.instance.RemoveFromStack(Inventory.itemSelected);
 
-                Debug.Log($"Spawned projectile, from {this}");
+                Debug.Log($"Spawned projectile, from {source.entityName}");
             }
         }
         public override void UpdateAction()

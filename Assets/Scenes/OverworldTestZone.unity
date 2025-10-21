@@ -12883,6 +12883,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990881938606332820, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: itemToAdd
+      value: 
+      objectReference: {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
     - target: {fileID: 7148870164262935656, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -18541,6 +18545,10 @@ PrefabInstance:
     - target: {fileID: 3376632439275880072, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
       propertyPath: showVisualDebug
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3376632439275880072, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
+      propertyPath: totalDropChance
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
       propertyPath: m_LocalPosition.x

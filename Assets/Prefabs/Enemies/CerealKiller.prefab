@@ -63,7 +63,7 @@ MonoBehaviour:
   HPIncrement: 10
   strengthIncrement: 0.1
   activeStatusEffects: []
-  totalDropChance: 50
+  totalDropChance: 55
   dropsOnDeath:
   - itemName: Spoon
     item: {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
@@ -80,12 +80,15 @@ MonoBehaviour:
   - itemName: Knife
     item: {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
     probability: 5
+  - itemName: Stainless steel pot
+    item: {fileID: 11400000, guid: b515f50e15c8bb441a22fdd9eaa65797, type: 2}
+    probability: 5
   corpse: {fileID: 3778903803615357484, guid: 823350eade72eb448b59e00f6f3e4838, type: 3}
   tomatoSplat: {fileID: 966423011128645671, guid: a9667468bcb0be7478c770a7c83249b9, type: 3}
-  maxAttackDistance: 3
   attackStartDistance: 2.5
   attackAngle: 75
   showVisualDebug: 0
+  maxAttackDistance: 3
 --- !u!136 &4282499219386979268
 CapsuleCollider:
   m_ObjectHideFlags: 0

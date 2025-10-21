@@ -9,32 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec02b3349edf9aa4d9ffbdd1a83181d7, type: 3}
+  m_Script: {fileID: 11500000, guid: d80475cb7c89ce04d972fcadace84431, type: 3}
   m_Name: Fork
   m_EditorClassIdentifier: 
   item:
     itemName: Fork
     itemModel: {fileID: 919132149155446097, guid: edc1d3738eac56045b52662da3845311, type: 3}
     toolTip: What the fork
-    isStackable: 0
     maxStack: 1
-    durability: 10
-    isFood: 0
-    isMetal: 1
-    isKnife: 0
-    onAttackHealHP: 0
-    damageScalesWithHP: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    durabilityBoost: 0
-    healingBoost: 10
-    seeEnemyInventories: 0
+    durability: 0
     grantsImmunityTo: []
     itemSprite: {fileID: 0}
-    canUseItem: 0
-    damage: 25
-    swingTime: 0
+    canUseItem: 1
+    damage: 70
     effectApplied: []
+    projectile: {fileID: 2142696792574118062, guid: 73cdd2859f5d0f749a7896d328cd432d, type: 3}
+    autoFire: 0
+    cooldown: 0
+    isConsumedOnUse: 1
+    fuel: {fileID: 0}
+    cooldownLeft: -271.56256

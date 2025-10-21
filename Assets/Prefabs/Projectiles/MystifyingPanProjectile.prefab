@@ -108,7 +108,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -128,15 +128,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0995d91cc4baa49b647456bbb59d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 40
   projectileSpeed: 40
   upForce: 0
   useGravity: 0
-  startRotationForce: {x: 0, y: 0, z: 0}
+  rotationIntensity: 1
   onlyDestroyOnTerrain: 1
   destroyOnGround: 0
   expands: 1
   expansionFactor: 1.1
   maxExpansion: 0.025
+  splat: {fileID: 0}
 --- !u!64 &7214948073872953894
 MeshCollider:
   m_ObjectHideFlags: 0
