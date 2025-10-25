@@ -16,25 +16,13 @@ MonoBehaviour:
     itemName: Sporf
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: Who needs multiple pieces of cutlery when you can use this!
-    isStackable: 0
     maxStack: 1
     durability: 30
-    isFood: 0
-    isMetal: 1
-    isKnife: 1
-    onAttackHealHP: 0
-    damageScalesWithHP: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    durabilityBoost: 0
-    healingBoost: 30
-    seeEnemyInventories: 0
     grantsImmunityTo: []
     itemSprite: {fileID: 0}
-    canUseItem: 0
     damage: 40
-    swingTime: 0
-    effectApplied: []
+    effectsApplied: []
+    swingTime: 0.25
+    swingAngle: 45
+    distane: 1
+    objectDistance: 1

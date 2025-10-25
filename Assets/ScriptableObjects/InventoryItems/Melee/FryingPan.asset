@@ -16,25 +16,13 @@ MonoBehaviour:
     itemName: Frying pan
     itemModel: {fileID: 919132149155446097, guid: bae3b18278764f744b622a60310b4521, type: 3}
     toolTip: You're gonna cook!
-    isStackable: 0
     maxStack: 1
     durability: 20
-    isFood: 0
-    isMetal: 1
-    isKnife: 0
-    onAttackHealHP: 0
-    damageScalesWithHP: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    durabilityBoost: 0
-    healingBoost: 0
-    seeEnemyInventories: 0
     grantsImmunityTo: []
     itemSprite: {fileID: 0}
-    canUseItem: 0
     damage: 40
-    swingTime: 0
-    effectApplied: []
+    effectsApplied: []
+    swingTime: 0.25
+    swingAngle: 45
+    distane: 1
+    objectDistance: 1

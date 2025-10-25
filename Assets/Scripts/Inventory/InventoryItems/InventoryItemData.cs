@@ -23,7 +23,7 @@ namespace InventoryStuff
         [SerializeField] public StatusEffect[] grantsImmunityTo;
 
         [HideInInspector] public Texture2D itemSprite;
-        [HideInInspector] public bool canUseItem;
+        [HideInInspector, NonSerialized] public bool canUseItem = true;
         public bool IsStackable => maxStack > 1;
 
         public Texture2D SetSprite()
@@ -34,8 +34,13 @@ namespace InventoryStuff
             return itemSprite;
         }
 
+        protected void RemoveThisItem()
+        {
+            Inventory.instance.RemoveItem(Inventory.itemSelected);
+        }
+
         public abstract void UseItem(Entity source, Vector3 inputDir);
 
-        public abstract void UpdateAction();
+        public virtual void UpdateAction() { }
     }
 }

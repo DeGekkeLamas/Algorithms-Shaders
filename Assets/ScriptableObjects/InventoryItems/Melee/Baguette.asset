@@ -10,31 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec02b3349edf9aa4d9ffbdd1a83181d7, type: 3}
-  m_Name: Spork
+  m_Name: Baguette
   m_EditorClassIdentifier: 
   item:
-    itemName: Spork
+    itemName: Baguette
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
-    toolTip: Also a place in germany!
-    isStackable: 0
+    toolTip: A French katana, or a French Japanese sword.
     maxStack: 1
-    durability: 15
-    isFood: 0
-    isMetal: 1
-    isKnife: 0
-    onAttackHealHP: 0
-    damageScalesWithHP: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
-    durabilityBoost: 0
-    healingBoost: 20
-    seeEnemyInventories: 0
+    durability: 10
     grantsImmunityTo: []
     itemSprite: {fileID: 0}
-    canUseItem: 0
-    damage: 30
-    swingTime: 0
-    effectApplied: []
+    damage: 45
+    effectsApplied: []
+    swingTime: 0.25
+    swingAngle: 45
+    distane: 1
+    objectDistance: 1

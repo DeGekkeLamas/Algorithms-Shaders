@@ -26,7 +26,7 @@ namespace InventoryStuff
             {
                 source.activeStatusEffects.Add(effectsApplied[i]);
             }
-            Inventory.instance.RemoveItem(this);
+            RemoveThisItem();
             canUseItem = false;
         }
 

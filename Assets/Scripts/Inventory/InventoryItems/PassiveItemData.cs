@@ -28,9 +28,5 @@ namespace InventoryStuff
         {
             // do nothing lmao
         }
-        public override void UpdateAction()
-        {
-
-        }
     }
 }

@@ -15,5 +15,11 @@ namespace InventoryStuff
         {
             inventory.AddItem(itemToAdd.GetItem());
         }
+        #if UNITY_EDITOR
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Equals)) AddItemCheat();
+        }
+        #endif
     }
 }

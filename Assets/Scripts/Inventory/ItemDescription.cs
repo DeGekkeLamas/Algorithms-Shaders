@@ -71,7 +71,7 @@ namespace InventoryStuff
             // Damage
             description += $"Deals {item.damage} melee damage.\n";
             // Effects applied
-            foreach (StatusEffect effect in item.effectApplied)
+            foreach (StatusEffect effect in item.effectsApplied)
             {
                 description += $"Inflicts {effect.name}.\n";
             }

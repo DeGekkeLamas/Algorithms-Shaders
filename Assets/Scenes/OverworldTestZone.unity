@@ -5551,6 +5551,30 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 576232496}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &594502744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8608250485412360592, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+  m_PrefabInstance: {fileID: 850059707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &594502748 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1823438395285073010, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+  m_PrefabInstance: {fileID: 850059707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &594502749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 594502744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e518c6d74daecae47aabae074870fa8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showDebug: 1
+  itemToTest: {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
 --- !u!1 &601549066
 GameObject:
   m_ObjectHideFlags: 0
@@ -6357,7 +6381,7 @@ Transform:
   m_GameObject: {fileID: 691560919}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 354.27344, y: 188.34372, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8145,6 +8169,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3214448125551340852, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+      propertyPath: meleeWeaponHandle
+      value: 
+      objectReference: {fileID: 1323077486}
     - target: {fileID: 6533478313816462005, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -8159,8 +8187,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1823438395285073010, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1323077487}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8608250485412360592, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 594502749}
   m_SourcePrefab: {fileID: 100100000, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
 --- !u!43 &880608169
 Mesh:
@@ -12886,7 +12920,7 @@ PrefabInstance:
     - target: {fileID: 2990881938606332820, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: itemToAdd
       value: 
-      objectReference: {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
+      objectReference: {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
     - target: {fileID: 7148870164262935656, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -14208,6 +14242,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320283746}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1323077486
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1323077487}
+  m_Layer: 0
+  m_Name: MeleeWeaponHandle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1323077487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323077486}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 594502748}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1330926814
 GameObject:
   m_ObjectHideFlags: 0
