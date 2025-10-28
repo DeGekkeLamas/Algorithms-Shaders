@@ -11,8 +11,9 @@ public class Projectile : MonoBehaviour
     public bool useGravity;
     public float rotationIntensity = 1;
 
-    public bool onlyDestroyOnTerrain;
-    public bool destroyOnGround;
+    [Header("Collisions")]
+    public bool destroyOnTerrain = true;
+    public bool destroyOnAnything = true;
     [Header("Expansion")]
     public bool expands;
     public float expansionFactor = 1.05f;
@@ -20,10 +21,10 @@ public class Projectile : MonoBehaviour
 
     [Header("Splat")]
     public GameObject splat;
+    Rigidbody rb;
 
     public static GameObject projectileContainer;
 
-    Rigidbody rb;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -52,9 +53,9 @@ public class Projectile : MonoBehaviour
         }
 
         // destroys on terrain collision or wall collision or any collision
-        if (other.gameObject.layer != LayerMask.GetMask("Terrain") && !onlyDestroyOnTerrain || 
-            onlyDestroyOnTerrain && other.gameObject.layer == LayerMask.GetMask("Walls") || 
-            destroyOnGround && other.gameObject.layer == LayerMask.GetMask("Terrain"))
+        if (destroyOnAnything || // Any
+            other.gameObject.layer == LayerMask.GetMask("Terrain") && destroyOnTerrain || // Floor
+            destroyOnTerrain && other.gameObject.layer == LayerMask.GetMask("Walls")) // Walls
         {
             Destroy(this.gameObject);
         }

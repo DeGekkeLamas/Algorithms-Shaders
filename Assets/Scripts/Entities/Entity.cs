@@ -22,7 +22,11 @@ public abstract class Entity : MonoBehaviour
     public float strengthIncrement = .1f;
 
     [HideInInspector] public List<StatusEffect> activeStatusEffects;
-    [HideInInspector] public event Action onStatsChanged;
+    // events
+    [HideInInspector] public event Action OnStatsChanged;
+    [HideInInspector] public event Action OnLevelUp;
+    [HideInInspector] public event Action OnXPAdded;
+    [HideInInspector] public event Action OnDeath;
 
     MovingObjectBase[] movements;
 
@@ -34,7 +38,7 @@ public abstract class Entity : MonoBehaviour
     }
     private void Start()
     {
-        onStatsChanged?.Invoke();
+        OnStatsChanged?.Invoke();
     }
 
     public void ChangeMoveSpeed(float newSpeed)
@@ -56,7 +60,7 @@ public abstract class Entity : MonoBehaviour
         if (currentHP <= 0) Death();
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
 
-        onStatsChanged?.Invoke();
+        OnStatsChanged?.Invoke();
     }
 
     public void AddXP(float toAdd)
@@ -67,7 +71,8 @@ public abstract class Entity : MonoBehaviour
             currentXP -= XPRequired;
             LevelUp();
         }
-        onStatsChanged?.Invoke();
+        OnXPAdded?.Invoke();
+        OnStatsChanged?.Invoke();
     }
 
     void LevelUp()
@@ -76,6 +81,7 @@ public abstract class Entity : MonoBehaviour
         currentHP += (currentHP/maxHP) * HPIncrement;
         maxHP += HPIncrement;
         strength += strengthIncrement;
+        OnLevelUp.Invoke();
     }
 
     protected abstract void Death();

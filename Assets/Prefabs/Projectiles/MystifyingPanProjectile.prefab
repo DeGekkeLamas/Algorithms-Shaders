@@ -134,7 +134,8 @@ MonoBehaviour:
   useGravity: 0
   rotationIntensity: 1
   onlyDestroyOnTerrain: 1
-  destroyOnGround: 0
+  destroyOnTerrain: 1
+  destroyOnAnything: 0
   expands: 1
   expansionFactor: 1.1
   maxExpansion: 0.025

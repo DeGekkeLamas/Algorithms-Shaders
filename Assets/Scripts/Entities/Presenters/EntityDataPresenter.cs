@@ -5,10 +5,9 @@ public abstract class EntityDataPresenter : MonoBehaviour
 {
     protected Entity boundEntity;
 
-    private void Start()
+    private void Awake()
     {
         boundEntity = GetComponent<Entity>();
-        boundEntity.onStatsChanged += UpdateDisplay;
     }
 
     protected void SetSlider(Slider slider, float value, float maxValue)
@@ -20,4 +19,13 @@ public abstract class EntityDataPresenter : MonoBehaviour
         slider.fillRect.GetComponent<Image>().color = Color.Lerp(empty, full, slider.value/slider.maxValue);
     }
     protected abstract void UpdateDisplay();
+
+    private void OnEnable()
+    {
+        boundEntity.OnStatsChanged += UpdateDisplay;
+    }
+    private void OnDisable()
+    {
+        boundEntity.OnStatsChanged -= UpdateDisplay;
+    }
 }

@@ -27,6 +27,7 @@ namespace InventoryStuff
         [Tooltip("Distance of the physical model from the player")]
         public float objectDistance = 1;
         public float objectScale = 1;
+        public Vector3 modelRotation;
         public override void UseItem(Entity source, Vector3 inputDir)
         {
             Debug.Log($"Swung {itemName}");
@@ -37,13 +38,16 @@ namespace InventoryStuff
         IEnumerator SwingWeapon(PlayerController source, Vector3 inputDir)
         {
             // Initialize
-            source.meleeWeaponHandle.SetActive(true);
+            source.meleeWeaponHandle.gameObject.SetActive(true);
             float originalSpeed = source.moveSpeed;
             source.ChangeMoveSpeed(0);
             canUseItem = false;
             GameObject model = MonoBehaviour.Instantiate(itemModel, source.meleeWeaponHandle.transform.position,
                 source.meleeWeaponHandle.transform.rotation, source.meleeWeaponHandle.transform);
-            model.transform.localScale = objectScale * Vector3.one;
+            model.transform.localScale *= objectScale;
+            source.meleeWeaponHandle.handleCollider.size = new(.2f, 1, distane);
+            source.meleeWeaponHandle.projectile.damage = damage;
+            inputDir.y = 0;
 
             // Swing
             for (float i = 0; i < swingTime; i += Time.deltaTime)
@@ -56,14 +60,15 @@ namespace InventoryStuff
                 float rotation = Quaternion.LookRotation(offset, Vector3.up).eulerAngles.y;
 
                 source.meleeWeaponHandle.transform.position = source.transform.position + offset + Vector3.up;
-                source.meleeWeaponHandle.transform.eulerAngles = new(0,rotation,0);
+                source.meleeWeaponHandle.transform.eulerAngles = new Vector3(0,rotation,0) + modelRotation;
                 yield return null;
             }
 
             // Exit
             source.ChangeMoveSpeed(originalSpeed);
             MonoBehaviour.Destroy(model);
-            source.meleeWeaponHandle.SetActive(false);
+            source.meleeWeaponHandle.projectile.damage = 0;
+            source.meleeWeaponHandle.gameObject.SetActive(false);
             canUseItem = true;
         }
         
