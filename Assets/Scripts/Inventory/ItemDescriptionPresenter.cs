@@ -7,8 +7,8 @@ public class ItemDescriptionPresenter : MonoBehaviour
     public TMP_Text descrText;
     void Start()
     {
-        Inventory.instance.onItemChanged += UpdateText;
-        Inventory.instance.onSeletecItemSwitched += UpdateText;
+        Inventory.instance.OnItemChanged += UpdateText;
+        Inventory.OnSeletecItemSwitched += UpdateText;
         UpdateText();
     }
 

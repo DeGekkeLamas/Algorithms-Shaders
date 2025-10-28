@@ -18,8 +18,8 @@ public class InventoryitemPresenter : MonoBehaviour
 
     private void Start()
     {
-        Inventory.instance.onItemChanged += UpdateDisplay;
-        Inventory.instance.onSeletecItemSwitched += SetBorder;
+        Inventory.instance.OnItemChanged += UpdateDisplay;
+        Inventory.OnSeletecItemSwitched += SetBorder;
 
         UpdateDisplay();
         SetBorder();

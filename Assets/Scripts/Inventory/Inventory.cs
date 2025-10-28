@@ -14,8 +14,8 @@ namespace InventoryStuff
         public static int itemSelected;
 
         public static Inventory instance;
-        public event Action onItemChanged;
-        public event Action onSeletecItemSwitched;
+        public event Action OnItemChanged;
+        public static event Action OnSeletecItemSwitched;
 
         private void Awake()
         {
@@ -29,7 +29,7 @@ namespace InventoryStuff
                 float _direction = (Input.mouseScrollDelta.y > 0) ? -1 : 1;
                 itemSelected += Mathf.RoundToInt(_direction);
                 itemSelected = (int)Mathf.Repeat(itemSelected, currentInventory.Length);
-                onSeletecItemSwitched?.Invoke();
+                OnSeletecItemSwitched?.Invoke();
             }
 
             for (int i = 0; i < currentInventory.Length; i++)
@@ -55,7 +55,7 @@ namespace InventoryStuff
                     {
                         currentInventory[i].quantityLeft++;
                         currentInventory[i].itemName = itemToAdd.itemName;
-                        onItemChanged?.Invoke();
+                        OnItemChanged?.Invoke();
                         return true;
                     }
                 }
@@ -68,7 +68,7 @@ namespace InventoryStuff
                     currentInventory[i].item = itemToAdd;
                     currentInventory[i].quantityLeft++;
                     currentInventory[i].itemName = itemToAdd.itemName;
-                    onItemChanged?.Invoke();
+                    OnItemChanged?.Invoke();
                     Debug.Log("Added " + itemToAdd.itemName + ", from " + this);
                     return true;
                 }
@@ -89,7 +89,7 @@ namespace InventoryStuff
         public void RemoveItem(int index)
         {
             currentInventory[index].item = null;
-            onItemChanged?.Invoke();
+            OnItemChanged?.Invoke();
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace InventoryStuff
         {
             currentInventory[index].quantityLeft--;
             if (currentInventory[index].quantityLeft == 0) RemoveItem(index);
-            onItemChanged?.Invoke();
+            OnItemChanged?.Invoke();
         }
     }
 }

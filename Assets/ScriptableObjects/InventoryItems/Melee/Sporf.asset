@@ -20,9 +20,11 @@ MonoBehaviour:
     durability: 30
     grantsImmunityTo: []
     itemSprite: {fileID: 0}
-    damage: 40
+    damage: 30
     effectsApplied: []
-    swingTime: 0.25
+    swingTime: 0.1
     swingAngle: 45
-    distane: 1
-    objectDistance: 1
+    distane: 3
+    objectDistance: 2.5
+    objectScale: 2
+    modelRotation: {x: 0, y: 180, z: 0}

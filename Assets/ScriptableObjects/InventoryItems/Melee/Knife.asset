@@ -24,5 +24,7 @@ MonoBehaviour:
     effectsApplied: []
     swingTime: 0.25
     swingAngle: 45
-    distane: 1
-    objectDistance: 1
+    distane: 3
+    objectDistance: 2.5
+    objectScale: 2
+    modelRotation: {x: 0, y: 180, z: 90}
