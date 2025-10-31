@@ -8,10 +8,11 @@ using UnityEngine;
 namespace DungeonGeneration
 {
 
-    [RequireComponent(typeof(BetterDungeonAssetGenerator), typeof(LameDungeonAssetGenerator), typeof(DungeonAssetGenerator))]
+    [RequireComponent(typeof(BetterDungeonAssetGenerator), typeof(LameDungeonAssetGenerator), typeof(RoomAssetGenerator))]
     public class DungeonGenerator : MonoBehaviour
     {
-        DungeonAssetGenerator da;
+        RoomAssetGenerator rda;
+        public RoomAssetGenerator Rda => rda;
         BetterDungeonAssetGenerator bda; // Cool generation
         LameDungeonAssetGenerator lda; // Lame generation
 
@@ -64,7 +65,7 @@ namespace DungeonGeneration
         }
         private void Awake()
         {
-            da = this.GetComponent<DungeonAssetGenerator>();
+            rda = this.GetComponent<RoomAssetGenerator>();
             bda = this.GetComponent<BetterDungeonAssetGenerator>();
             lda = this.GetComponent<LameDungeonAssetGenerator>();
             if (seed == 0)
@@ -84,7 +85,7 @@ namespace DungeonGeneration
             yield return StartCoroutine(GenerateDoors()); // Doors
             yield return StartCoroutine(RemoveUnreachableRooms()); // Check for room accessibility and delete unreachable rooms
             yield return StartCoroutine(RemoveSmallestRooms()); // Remove smallest rooms if enabled
-            yield return StartCoroutine(da.AssignRoomTypes()); // Assign different types of rooms
+            rda.AssignRoomTypes(); // Assign different types of rooms
             switch (generationType)
             {
                 case GenerationType.Cool:
@@ -92,7 +93,7 @@ namespace DungeonGeneration
                     yield return StartCoroutine(bda.GenerateWalls()); // Walls
                     yield return StartCoroutine(bda.GenerateFloor(Vector2Int.RoundToInt(_originRoom.center))); // Floor
                     yield return StartCoroutine(lda.GenerateFloor(bda.floorCollider)); // Add colliders
-                    yield return StartCoroutine(da.Brickify()); // Carve walls into bricks
+                    yield return StartCoroutine(rda.Brickify()); // Carve walls into bricks
                     yield return StartCoroutine(bda.SpawnPlayer()); // Player
                     break;
                 case GenerationType.Lame:
@@ -101,6 +102,7 @@ namespace DungeonGeneration
                     yield return StartCoroutine(bda.SpawnPlayer()); // Player
                     break;
             }
+            yield return StartCoroutine(rda.SpawnObjects());
             Debug.Log("Generated all room assets!");
         }
         /// <summary>

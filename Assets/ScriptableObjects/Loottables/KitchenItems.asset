@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1068a3cabdfdbd44f93dc81a81c28155, type: 3}
+  m_Name: KitchenItems
+  m_EditorClassIdentifier: 
+  totalChance: 25
+  lootTable:
+  - itemName: Frying pan, 1%
+    item: {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
+    probability: 1
+  - itemName: Towel, 1%
+    item: {fileID: 11400000, guid: 0b352e7b1fdba9142a3c23bc8f80323f, type: 2}
+    probability: 1
+  - itemName: Apron, 1%
+    item: {fileID: 11400000, guid: a8343eaa7b2d9454daf9e25da1e54f4e, type: 2}
+    probability: 1
+  - itemName: Chef hat, 1%
+    item: {fileID: 11400000, guid: c7751ea55ba0a8f468deb474792099fe, type: 2}
+    probability: 1
+  - itemName: CuttingBoard, 1%
+    item: {fileID: 11400000, guid: c86b9a5cfe08f7b4cb2062800d273d53, type: 2}
+    probability: 1
+  - itemName: Tomato, 2%
+    item: {fileID: 11400000, guid: bf0beed5e1d28a14084c592f9fbde238, type: 2}
+    probability: 2
+  - itemName: Empty microwave, 1%
+    item: {fileID: 11400000, guid: bb48bd5aad822c6418b99418285988bd, type: 2}
+    probability: 1
+  - itemName: Fork, 1%
+    item: {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
+    probability: 1
+  - itemName: Spoon, 1%
+    item: {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
+    probability: 1
+  - itemName: Knife, 1%
+    item: {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
+    probability: 1
+  - itemName: Egg, 2%
+    item: {fileID: 11400000, guid: 2a073e5850757134883355d415e2698a, type: 2}
+    probability: 2
+  - itemName: Butter, 2%
+    item: {fileID: 11400000, guid: 335b16853165c8a48a4ea1f4a9f1617f, type: 2}
+    probability: 2
+  - itemName: Raw chicken, 2%
+    item: {fileID: 11400000, guid: 7ed9a3564ba33c34aac7fca8d293579d, type: 2}
+    probability: 2
+  - itemName: Cheese, 1%
+    item: {fileID: 11400000, guid: 0c9854909dd97e2478a86b625761d40b, type: 2}
+    probability: 1
+  - itemName: Jalapeno, 2%
+    item: {fileID: 11400000, guid: 511a173d4c59bbc4cba2a50d0a934351, type: 2}
+    probability: 2
+  - itemName: Sausage, 1%
+    item: {fileID: 11400000, guid: c7a8dc1b3e830714ca75bb3e0b6bc870, type: 2}
+    probability: 1
+  - itemName: Stainless steel pot, 1%
+    item: {fileID: 11400000, guid: b515f50e15c8bb441a22fdd9eaa65797, type: 2}
+    probability: 1
+  - itemName: Plate, 3%
+    item: {fileID: 11400000, guid: 48adf9d060aa1a74a9daa8b325b083dc, type: 2}
+    probability: 3

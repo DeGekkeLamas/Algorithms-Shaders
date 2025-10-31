@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -15,7 +17,7 @@ namespace DungeonGeneration
         int[,] _tilemap;
         [Header("Assets")]
         public GameObject[] marchingSquareAssets = new GameObject[16];
-        public GameObject floor;
+        public MeshRenderer floor;
         public GameObject player;
         public GameObject floorCollider;
         [Header("Coroutine speed")]
@@ -23,6 +25,14 @@ namespace DungeonGeneration
         public int assetsPerDelayFloor = 50;
         private int _assetsDone;
 
+        private void OnValidate()
+        {
+            if (marchingSquareAssets.Length != 16)
+            {
+                Debug.LogWarning("Don't change the 'marchingSquareAssets' field's array size!");
+                Array.Resize(ref marchingSquareAssets, 16);
+            }
+        }
         private void Awake() => d = this.GetComponent<DungeonGenerator>();
 
         /// <summary>
@@ -144,7 +154,8 @@ namespace DungeonGeneration
                     }
                 }
 
-                Instantiate(floor, new(point.x - .5f, 0, point.y - .5f), Quaternion.identity, floorContainer.transform);
+                MeshRenderer floorpiece = Instantiate(floor, new(point.x - .5f, 0, point.y - .5f), Quaternion.identity, floorContainer.transform);
+                floorpiece.material = d.Rda.floorMat;
                 _assetsDone++;
                 if (_assetsDone >= assetsPerDelayFloor)
                 {

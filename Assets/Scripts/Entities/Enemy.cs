@@ -8,17 +8,14 @@ public class Enemy : Entity
 {
     [Header("Item drops")]
     [ReadOnly] public int totalDropChance;
-    public ItemLootTable[] dropsOnDeath = new ItemLootTable[0];
+    public ItemLootDrop[] dropsOnDeath = new ItemLootDrop[0];
     public GameObject corpse;
     public GameObject tomatoSplat;
 
     protected virtual void OnValidate()
     {
-        totalDropChance = ItemLootTable.GetTotalItemProbability(dropsOnDeath);
-        for(int i = 0; i < dropsOnDeath.Length; i++)
-        {
-            dropsOnDeath[i].OnValidate();
-        }
+        totalDropChance = ItemLootDrop.GetTotalItemProbability(dropsOnDeath);
+        ItemLootDrop.MassValidate(dropsOnDeath);
     }
 
     /// <summary>
@@ -43,7 +40,7 @@ public class Enemy : Entity
 
     void SpawnDrops()
     {
-        InventoryItem itemDropped = ItemLootTable.GetItemFromLoottable(dropsOnDeath);
+        InventoryItem itemDropped = ItemLootDrop.GetItemFromLoottable(dropsOnDeath);
         if (itemDropped != null && itemDropped != null)
         {
             Debug.Log($"{entityName} dropped {itemDropped.itemName}");

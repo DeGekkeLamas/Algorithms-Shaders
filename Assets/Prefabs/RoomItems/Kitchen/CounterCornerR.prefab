@@ -59,7 +59,7 @@ PrefabInstance:
     - target: {fileID: 8710818269353950802, guid: 0d413d8ccf516d74bb2fa084514f420d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1ab9e6f8862bc974382a464b2c82cd17, type: 2}
+      objectReference: {fileID: 2100000, guid: 3f44c65f842535740b33da7fd7689af9, type: 2}
     - target: {fileID: 9011421418820237759, guid: 0d413d8ccf516d74bb2fa084514f420d, type: 3}
       propertyPath: m_Name
       value: CounterCornerR

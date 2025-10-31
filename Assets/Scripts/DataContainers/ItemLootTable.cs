@@ -1,59 +1,41 @@
-using InventoryStuff;
-using UnityEngine;
 using NaughtyAttributes;
-using System;
+using UnityEngine;
 
 namespace InventoryStuff
 {
-    [System.Serializable]
-    public struct ItemLootTable
+    [CreateAssetMenu(
+        fileName = "ItemLootTable",
+        menuName = "ScriptableObjects/Item Loottable",
+        order = 0)]
+    public class ItemLootTable : ScriptableObject
     {
-        [ReadOnly] public string itemName;
-        public InventoryItemData item;
-        public int probability;
+        [ReadOnly] public int totalChance;
+        public ItemLootDrop[] lootTable;
 
-        public void OnValidate()
+        private void OnValidate()
         {
-            if (item != null) itemName = item.GetItem().itemName;
+            ItemLootDrop.MassValidate(lootTable);
+            totalChance = ItemLootDrop.GetTotalItemProbability(lootTable);
         }
 
-        /// <summary>
-        /// Returns item based on item probabilities, using a set seed
-        /// </summary>
-        public static InventoryItem GetItemFromLoottable(ItemLootTable[] lootTable, System.Random seed)
+        [Button]
+        void DoubleAll()
         {
-            if (lootTable.Length < 1)
-            {
-                Debug.LogWarning("Loottable is empty");
-                return null;
-            }
-
-            int probabilityPassed = lootTable[0].probability;
-            int lootRoll = seed.Next(0, 100);
             for (int i = 0; i < lootTable.Length; i++)
             {
-                if (lootRoll < probabilityPassed) return lootTable[i].item.GetItem();
-                else probabilityPassed += lootTable[i].probability;
+                lootTable[i].probability *= 2;
             }
-            // If no item, return empty slot
-            return null;
-        }
-        /// <summary>
-        /// Returns item based on item probabilities
-        /// </summary>
-        public static InventoryItem GetItemFromLoottable(ItemLootTable[] lootTable)
-        {
-            return GetItemFromLoottable(lootTable, new());
+            OnValidate();
         }
 
-        /// <summary>
-        /// Get total chance of getting any item
-        /// </summary>
-        public static int GetTotalItemProbability(ItemLootTable[] lootTable)
+        [Button]
+        void HalfAll()
         {
-            int probability = 0;
-            foreach (var loot in lootTable) probability += loot.probability;
-            return probability;
+            for (int i = 0; i < lootTable.Length; i++)
+            {
+                lootTable[i].probability /= 2;
+            }
+            OnValidate();
         }
     }
 }
