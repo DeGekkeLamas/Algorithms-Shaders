@@ -23,6 +23,7 @@ namespace DungeonGeneration
         [Range(0, 100)] public int percentSmallestRoomsToRemove = 10;
         public RectInt initialRoom = new(0, 0, 100, 100);
         RectInt _originRoom;
+        public RectInt originRoom => _originRoom;
         public enum GenerationType { Cool, Lame } // Cool is for good requirements, lame is for sufficient requirements
         public GenerationType generationType = GenerationType.Cool;
 
@@ -35,6 +36,7 @@ namespace DungeonGeneration
         [Header("Display properties")]
         public bool displayVisualDebugging = true;
         public float generationInterval = .1f;
+        public YieldInstruction interval;
         public int doorWidth = 1;
         public bool showDeletedObjects = true;
         public bool disableVisualDebuggingAfterRoomGeneration = true;
@@ -47,6 +49,7 @@ namespace DungeonGeneration
         public List<RectInt> removedObjects = new(1);
         Graph<Vector2> _dungeonGraph = new();
         System.Random _random = new();
+        public System.Random random => _random;
         List<Vector2> _accessibleRooms = new();
 
         private void OnValidate()
@@ -65,6 +68,7 @@ namespace DungeonGeneration
         }
         private void Awake()
         {
+            interval = new WaitForSeconds(generationInterval);
             rda = this.GetComponent<RoomAssetGenerator>();
             bda = this.GetComponent<BetterDungeonAssetGenerator>();
             lda = this.GetComponent<LameDungeonAssetGenerator>();
@@ -94,15 +98,14 @@ namespace DungeonGeneration
                     yield return StartCoroutine(bda.GenerateFloor(Vector2Int.RoundToInt(_originRoom.center))); // Floor
                     yield return StartCoroutine(lda.GenerateFloor(bda.floorCollider)); // Add colliders
                     yield return StartCoroutine(rda.Brickify()); // Carve walls into bricks
-                    yield return StartCoroutine(bda.SpawnPlayer()); // Player
                     break;
                 case GenerationType.Lame:
                     yield return StartCoroutine(lda.GenerateWalls()); // Walls
                     yield return StartCoroutine(lda.GenerateFloor(lda.floor)); // Floor
-                    yield return StartCoroutine(bda.SpawnPlayer()); // Player
                     break;
             }
             yield return StartCoroutine(rda.SpawnObjects());
+            yield return StartCoroutine(bda.SpawnPlayer()); // Player
             Debug.Log("Generated all room assets!");
         }
         /// <summary>
@@ -131,7 +134,7 @@ namespace DungeonGeneration
                     rooms.Add(newRoomA);
                     rooms[biggestIndex] = newRoomB;
                 }
-                yield return new WaitForSeconds(generationInterval);
+                yield return interval;
             }
             foreach (var room in rooms) { _dungeonGraph.AddNode(room.center); }
             _originRoom = rooms[GetNearestToOrigin()];
@@ -150,8 +153,8 @@ namespace DungeonGeneration
             {
                 for (int j = i + 1; j < rooms.Count; j++)
                 {
-                    int roomsConnectedI = _dungeonGraph._adjacencyList[rooms[i].center].Count;
-                    int roomsConnectedJ = _dungeonGraph._adjacencyList[rooms[j].center].Count;
+                    int roomsConnectedI = _dungeonGraph.adjacencyList[rooms[i].center].Count;
+                    int roomsConnectedJ = _dungeonGraph.adjacencyList[rooms[j].center].Count;
                     if (AlgorithmsUtils.Intersects(rooms[i], rooms[j]) &&
                         (rooms[i] != _originRoom && roomsConnectedI < maxDoorsPerRoom ||
                         rooms[i] == _originRoom && roomsConnectedI < maxDoorsForOriginRoom) &&
@@ -179,7 +182,7 @@ namespace DungeonGeneration
                         {
                             Debug.Log($"Removed corner door, from {this}");
                             removedObjects.Add(newDoor);
-                            yield return new WaitForSeconds(generationInterval);
+                            yield return interval;
                             continue;
                         }
 
@@ -189,7 +192,7 @@ namespace DungeonGeneration
                         _dungeonGraph.AddEdge(newDoor.center, rooms[i].center);
                         _dungeonGraph.AddEdge(newDoor.center, rooms[j].center);
 
-                        yield return new WaitForSeconds(generationInterval);
+                        yield return interval;
                     }
                 }
             }
@@ -204,12 +207,12 @@ namespace DungeonGeneration
             int roomsRemovedAccessibility = 0;
             for (int i = 0; i < rooms.Count; i++)
             {
-                if (_dungeonGraph._adjacencyList[rooms[i].center].Count == 0)
+                if (_dungeonGraph.adjacencyList[rooms[i].center].Count == 0)
                 {
                     RemoveRoom(rooms[i]);
                     roomsRemovedAccessibility++;
                     i--;
-                    yield return new WaitForSeconds(generationInterval);
+                    yield return interval;
                 }
             }
 
@@ -217,7 +220,7 @@ namespace DungeonGeneration
             _accessibleRooms = _dungeonGraph.BFS(_originRoom.center);
 
             List<Vector2> roomsToRemove = new();
-            foreach (KeyValuePair<Vector2, List<Vector2>> point in _dungeonGraph._adjacencyList)
+            foreach (KeyValuePair<Vector2, List<Vector2>> point in _dungeonGraph.adjacencyList)
             {
                 if (!_accessibleRooms.Contains(point.Key)) roomsToRemove.Add(point.Key);
             }
@@ -226,7 +229,7 @@ namespace DungeonGeneration
             {
                 RemoveRoom(GetRoomByCenter(room));
                 roomsRemovedAccessibility++;
-                yield return new WaitForSeconds(generationInterval);
+                yield return interval;
             }
             if (roomsRemovedAccessibility != 0) Debug.Log($"Removed {roomsRemovedAccessibility} inaccessible rooms");
             else Debug.Log("All rooms were accessible, no rooms had to be removed");
@@ -252,11 +255,11 @@ namespace DungeonGeneration
                 {
                     RectInt room = rooms[i];
                     DrawRectangle(room, 5, Color.white, .5f);
-                    yield return new WaitForSeconds(generationInterval);
+                    yield return interval;
 
                     // Skip if originroom, remove without graphcheck if 1 door
                     if (room == _originRoom) continue;
-                    if (_dungeonGraph._adjacencyList[room.center].Count <= 1)
+                    if (_dungeonGraph.adjacencyList[room.center].Count <= 1)
                     {
                         RemoveRoom(room);
                         roomsRemovedSmallest++;
@@ -291,7 +294,7 @@ namespace DungeonGeneration
         /// </summary>
         void RemoveRoom(RectInt roomToRemove)
         {
-            if (!_dungeonGraph._adjacencyList.ContainsKey(roomToRemove.center))
+            if (!_dungeonGraph.adjacencyList.ContainsKey(roomToRemove.center))
             {
                 Debug.Log($"Node {roomToRemove.center} is alreadu deleted dumbass");
                 return;
@@ -299,9 +302,9 @@ namespace DungeonGeneration
 
             removedObjects.Add(roomToRemove);
             rooms.Remove(roomToRemove);
-            for (int i = _dungeonGraph._adjacencyList[roomToRemove.center].Count; i > 0; i--)
+            for (int i = _dungeonGraph.adjacencyList[roomToRemove.center].Count; i > 0; i--)
             {
-                Vector2 door = _dungeonGraph._adjacencyList[roomToRemove.center][i - 1];
+                Vector2 door = _dungeonGraph.adjacencyList[roomToRemove.center][i - 1];
                 RectInt doorRect = GetDoorByCenter(door);
                 removedObjects.Add(doorRect);
                 doors.Remove(doorRect);
@@ -413,14 +416,20 @@ namespace DungeonGeneration
 
             return newList;
         }
+
         /// <summary>
-        /// Let other scripts access originroom
+        /// Get the sides at which this room is connected to a door
         /// </summary>
-        public RectInt GetOriginRoom() { return _originRoom; }
-        /// <summary>
-        /// Let other scripts access seed
-        /// </summary>
-        public System.Random GetSeed() { return _random; }
+        protected Vector2[] GetDoorDIrections(RectInt room)
+        {
+            List<Vector2> doors = _dungeonGraph.GetNeighbours(room.center);
+            for (int i = 0; i < rooms.Count;i++)
+            {
+                doors[i] -= room.center;
+                doors[i].Normalize();
+            }
+            return doors.ToArray();
+        }
 
         void Update()
         {
@@ -458,7 +467,7 @@ namespace DungeonGeneration
             }
 
             // Draws graph lines
-            foreach (KeyValuePair<Vector2, List<Vector2>> point in _dungeonGraph._adjacencyList)
+            foreach (KeyValuePair<Vector2, List<Vector2>> point in _dungeonGraph.adjacencyList)
             {
                 for (int i = 0; i < point.Value.Count; i++)
                     Debug.DrawLine(new(point.Key.x, 1, point.Key.y), new(point.Value[i].x, 1, point.Value[i].y), Color.green);

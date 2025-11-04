@@ -119,136 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &783818897
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5020230783508771579, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_Name
-      value: CerealKiller
-      objectReference: {fileID: 0}
-    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6094589621589754062, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9089323051470772063, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
---- !u!1001 &1204382386
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 18489271436508005, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_Name
-      value: DinnerDemon
-      objectReference: {fileID: 0}
-    - target: {fileID: 3130531851452049467, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3130531851452049467, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
 --- !u!1 &1256635332
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +161,7 @@ MonoBehaviour:
     height: 50
   generationType: 0
   splitFractionRange: {x: 35, y: 66}
-  roomMaxSize: 32
+  roomMaxSize: 34
   maxDoorsForOriginRoom: 1
   maxDoorsPerRoom: 3
   displayVisualDebugging: 1
@@ -390,7 +260,11 @@ MonoBehaviour:
   counterCornerL: {fileID: 2101207922729177578, guid: c27b16d52413df147afcbd103875382f, type: 3}
   counterCornerR: {fileID: 8202259783184369343, guid: 9b4e8dccf73aade43b3cf1fb0c161018, type: 3}
   counterLength: 4
-  counterReplacements: []
+  totalReplaceChance: 5
+  counterReplacements:
+  - itemName: Sink (UnityEngine.GameObject), 5%
+    item: {fileID: 7248988456274800710, guid: e2c2e8c057e3bb1499ed5f13f73c1e03, type: 3}
+    probability: 5
 --- !u!1 &1545061832
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,5 +808,3 @@ SceneRoots:
   - {fileID: 1256635334}
   - {fileID: 1867934152}
   - {fileID: 1696973457}
-  - {fileID: 783818897}
-  - {fileID: 1204382386}

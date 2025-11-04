@@ -10,12 +10,12 @@ namespace InventoryStuff
     public class ItemLootTable : ScriptableObject
     {
         [ReadOnly] public int totalChance;
-        public ItemLootDrop[] lootTable;
+        public ItemLootDrop<InventoryItemData>[] lootTable;
 
         private void OnValidate()
         {
-            ItemLootDrop.MassValidate(lootTable);
-            totalChance = ItemLootDrop.GetTotalItemProbability(lootTable);
+            ItemLootDrop<InventoryItemData>.MassValidate(lootTable);
+            totalChance = ItemLootDrop<InventoryItemData>.GetTotalItemProbability(lootTable);
         }
 
         [Button]

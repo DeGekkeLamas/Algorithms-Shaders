@@ -23,10 +23,15 @@ namespace DungeonGeneration
         protected GameObject roomAssetContainer;
         protected GameObject itemSpawnsContainer;
 
-
         private void Awake()
         {
             d = this.GetComponent<DungeonGenerator>();
+
+            // Containers
+            roomAssetContainer = new("RoomAssetContainer");
+            roomAssetContainer.transform.parent = d.assetContainer.transform;
+            itemSpawnsContainer = new("ItemSpawnsContainer");
+            itemSpawnsContainer.transform.parent = roomAssetContainer.transform;
         }
 
         /// <summary>
@@ -58,11 +63,11 @@ namespace DungeonGeneration
 
         protected PickupItem SpawnPickup(Vector3 position)
         {
-            InventoryItem itemToSpawn = ItemLootDrop.GetItemFromLoottable(lootSpawns.lootTable, d.GetSeed());
-            if (itemToSpawn != null)
+            InventoryItemData itemToSpawn = ItemLootDrop<InventoryItemData>.GetItemFromLoottable(lootSpawns.lootTable, d.random);
+            if (itemToSpawn != null) // only actually spawn if item isnt null
             {
                 PickupItem itemSpawned = Instantiate(itemPickup, position, Quaternion.identity, itemSpawnsContainer.transform);
-                itemSpawned.itemToGive = itemToSpawn;
+                itemSpawned.itemToGive = itemToSpawn.GetItem();
                 return itemSpawned;
             }
             return null;
