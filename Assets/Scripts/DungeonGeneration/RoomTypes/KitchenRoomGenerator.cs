@@ -1,4 +1,5 @@
 using InventoryStuff;
+using System;
 using System.Collections;
 using UnityEngine;
 namespace DungeonGeneration
@@ -11,8 +12,7 @@ namespace DungeonGeneration
         public GameObject counterCornerR;
         public int counterLength = 4;
 
-        [Range(0,100)] public int sinkProbabiliy = 8;
-        public ItemDispenser sink;
+        public ItemLootDrop[] counterReplacements;
 
         public override IEnumerator SpawnObjects()
         {
@@ -52,15 +52,15 @@ namespace DungeonGeneration
                         else offset.x += counterSize;
 
                         // Replace with sink
-                        if (d.GetSeed().Next(0,100) < sinkProbabiliy)
-                        {
-                            Instantiate(sink, counter.position + sink.transform.position, counter.rotation, counterContainer.transform);
-                            Destroy(counter.gameObject);
-                        }
-                        else // Item pickup
-                        {
-                            SpawnPickup(new(counter.position.x, 10, counter.position.z));
-                        }
+                        //if (d.GetSeed().Next(0,100) < sinkProbabiliy)
+                        //{
+                        //    Instantiate(sink, counter.position + sink.transform.position, counter.rotation, counterContainer.transform);
+                        //    Destroy(counter.gameObject);
+                        //}
+                        //else // Item pickup
+                        //{
+                        //    SpawnPickup(new(counter.position.x, 10, counter.position.z));
+                        //}
                     }
                     if (roomvertical) offset = new(offset.x + counterSize, -.5f * counterLength);
                     else offset = new(-.5f * counterLength, offset.y + counterSize);

@@ -66,33 +66,34 @@ MonoBehaviour:
   activeStatusEffects: []
   totalDropChance: 70
   dropsOnDeath:
-  - itemName: Stainless steel pot
+  - itemName: Stainless steel pot, 5%
     item: {fileID: 11400000, guid: b515f50e15c8bb441a22fdd9eaa65797, type: 2}
     probability: 5
-  - itemName: Fork
+  - itemName: Fork, 15%
     item: {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
     probability: 15
-  - itemName: Frying pan
+  - itemName: Frying pan, 5%
     item: {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
     probability: 5
-  - itemName: Egg
+  - itemName: Egg, 10%
     item: {fileID: 11400000, guid: 2a073e5850757134883355d415e2698a, type: 2}
     probability: 10
-  - itemName: CuttingBoard
+  - itemName: CuttingBoard, 5%
     item: {fileID: 11400000, guid: c86b9a5cfe08f7b4cb2062800d273d53, type: 2}
     probability: 5
-  - itemName: Knife
+  - itemName: Knife, 5%
     item: {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
     probability: 5
-  - itemName: Spoon
+  - itemName: Spoon, 5%
     item: {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
     probability: 5
-  - itemName: Bread
+  - itemName: Bread, 5%
     item: {fileID: 11400000, guid: 5a402ceecb804564fb804d4f971fa8c9, type: 2}
     probability: 5
-  - itemName: Tomato
+  - itemName: Tomato, 15%
     item: {fileID: 11400000, guid: bf0beed5e1d28a14084c592f9fbde238, type: 2}
     probability: 15
+  lootTable: {fileID: 11400000, guid: 6f12e2f4b859e7540933723cf3ff9bf8, type: 2}
   corpse: {fileID: 8120454217808119696, guid: 275cfdf6fcabefb4380cafd02cfad82a, type: 3}
   tomatoSplat: {fileID: 966423011128645671, guid: 12141ac9eae3ad8428d53249e5653f16, type: 3}
   attackStartDistance: 14
@@ -215,9 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b90aac68d5de3d04f9fdc2de5b524a28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpText: {fileID: 0}
-  levelText: {fileID: 3570165424742009561}
-  nameText: {fileID: 4930279257962950869}
   HPSlider: {fileID: 3810855843783604622}
   XPColorEmpty: {r: 0.62352943, g: 0, b: 0, a: 1}
   XPColorFull: {r: 0.43529412, g: 0.8627451, b: 0, a: 1}

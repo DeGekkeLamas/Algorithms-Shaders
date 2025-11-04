@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1068a3cabdfdbd44f93dc81a81c28155, type: 3}
+  m_Name: CerealKillerLoottable
+  m_EditorClassIdentifier: 
+  totalChance: 55
+  lootTable:
+  - itemName: Spoon, 20%
+    item: {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
+    probability: 20
+  - itemName: Cake knife, 10%
+    item: {fileID: 11400000, guid: 6138d3284b688f747a26edfbdf15c506, type: 2}
+    probability: 10
+  - itemName: Cake, 10%
+    item: {fileID: 11400000, guid: 3976b3a34f7d5a442b178c0b0c7e9517, type: 2}
+    probability: 10
+  - itemName: Knife, 5%
+    item: {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
+    probability: 5
+  - itemName: Fork, 5%
+    item: {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
+    probability: 5
+  - itemName: Stainless steel pot, 5%
+    item: {fileID: 11400000, guid: b515f50e15c8bb441a22fdd9eaa65797, type: 2}
+    probability: 5

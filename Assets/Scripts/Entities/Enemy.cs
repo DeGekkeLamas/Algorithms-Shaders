@@ -9,6 +9,7 @@ public class Enemy : Entity
     [Header("Item drops")]
     [ReadOnly] public int totalDropChance;
     public ItemLootDrop[] dropsOnDeath = new ItemLootDrop[0];
+    public ItemLootTable lootTable;
     public GameObject corpse;
     public GameObject tomatoSplat;
 
