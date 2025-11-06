@@ -29,8 +29,9 @@ namespace DungeonGeneration
             counterContainer.transform.parent = roomAssetContainer.transform;
 
             float counterSize = counterMiddle.transform.lossyScale.x;
+            Vector2 counterSizeVec = new Vector2(counterSize, counterSize);
 
-            for (int i = 1; i < 2/*d.rooms.Count*/; i++) // for each room
+            for (int i = 0; i < d.rooms.Count; i++) // for each room
             {
                 RectInt room = d.rooms[i];
 
@@ -64,17 +65,18 @@ namespace DungeonGeneration
                 // Edges
                 Vector2[] doorDirs = d.GetDoorDirections(room);
                 Vector2 side = Vector2.right;
-                Vector2 usedSize = room.size - 1.5f * new Vector2(counterSize, counterSize);
+                Vector2 usedSize = room.size - 2 * counterSizeVec;
+                Vector2 usedMin = room.min + counterSizeVec;
                 for (int j = 0; j < 4; j++)
                 {
                     side = VectorMath.RotateVectorXY(side, 90);
+                    Vector2 ZeroToOneSide = MathTools.Vector3Max(side, Vector2.zero);
                     // Skip some sides
                     //if (d.random.Next(0, 2) > 1) continue;
 
                     // Get positions
-                    Vector2 startPos = (Vector2)room.min + (Vector2)MathTools.Vector3Multiply(usedSize, MathTools.Vector3Max(side, Vector2.zero));
-                    float lengthOtherside = Mathf.Abs(MathTools.Vector3CompSum((Vector3)usedSize - 
-                        MathTools.Vector3Multiply(usedSize, side) ) );
+                    Vector2 startPos = usedMin + (Vector2)MathTools.Vector3Multiply(usedSize, ZeroToOneSide);
+                    float lengthOtherside = MathTools.Vector3CompSum(MathTools.Vector3Multiply(usedSize, Vector3.one - MathTools.Vector3Abs(side)) );
 
                     DebugExtension.DebugWireSphere(new(startPos.x,0,startPos.y), Color.red, 1, 25);
 
@@ -101,13 +103,13 @@ namespace DungeonGeneration
         /// <summary>
         /// Check if there is a door in that direction, using angle between positions
         /// </summary>
-        static bool IntersectWithPoints(Vector2 point, Vector2[] points, float tolerance)
+        static bool IntersectWithPoints(Vector2 point, Vector2[] points, float minAngle)
         {
             foreach (var dir in points)
             {
                 float angle = VectorMath.GetAngleBetweenVectors(dir, point);
                 Debug.Log($"Doorpos = {dir}, point = {point}, angle = {angle}");
-                if (angle < tolerance)
+                if (angle < minAngle)
                 {
                     Debug.LogWarning("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                     //Debug.Break();
