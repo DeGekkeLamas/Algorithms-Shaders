@@ -64,35 +64,8 @@ MonoBehaviour:
   HPIncrement: 10
   strengthIncrement: 0.1
   activeStatusEffects: []
-  totalDropChance: 70
-  dropsOnDeath:
-  - itemName: Stainless steel pot, 5%
-    item: {fileID: 11400000, guid: b515f50e15c8bb441a22fdd9eaa65797, type: 2}
-    probability: 5
-  - itemName: Fork, 15%
-    item: {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
-    probability: 15
-  - itemName: Frying pan, 5%
-    item: {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
-    probability: 5
-  - itemName: Egg, 10%
-    item: {fileID: 11400000, guid: 2a073e5850757134883355d415e2698a, type: 2}
-    probability: 10
-  - itemName: CuttingBoard, 5%
-    item: {fileID: 11400000, guid: c86b9a5cfe08f7b4cb2062800d273d53, type: 2}
-    probability: 5
-  - itemName: Knife, 5%
-    item: {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
-    probability: 5
-  - itemName: Spoon, 5%
-    item: {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
-    probability: 5
-  - itemName: Bread, 5%
-    item: {fileID: 11400000, guid: 5a402ceecb804564fb804d4f971fa8c9, type: 2}
-    probability: 5
-  - itemName: Tomato, 15%
-    item: {fileID: 11400000, guid: bf0beed5e1d28a14084c592f9fbde238, type: 2}
-    probability: 15
+  xpToGive: 20
+  totalDropChance: 75
   lootTable: {fileID: 11400000, guid: 6f12e2f4b859e7540933723cf3ff9bf8, type: 2}
   corpse: {fileID: 8120454217808119696, guid: 275cfdf6fcabefb4380cafd02cfad82a, type: 3}
   tomatoSplat: {fileID: 966423011128645671, guid: 12141ac9eae3ad8428d53249e5653f16, type: 3}

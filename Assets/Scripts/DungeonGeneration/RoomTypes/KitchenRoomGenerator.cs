@@ -17,8 +17,9 @@ namespace DungeonGeneration
         public ItemLootDrop<GameObject>[] counterReplacements;
         public float counterDoorDistance;
 
-        private void OnValidate()
+        protected override void OnValidate()
         {
+            base.OnValidate();
             ItemLootDrop<GameObject>.MassValidate(counterReplacements);
             totalReplaceChance = ItemLootDrop<GameObject>.GetTotalItemProbability(counterReplacements);
         }

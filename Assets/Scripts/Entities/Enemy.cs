@@ -6,6 +6,7 @@ using NaughtyAttributes;
 
 public class Enemy : Entity
 {
+    public float xpToGive = 10;
     [Header("Item drops")]
     [ReadOnly] public int totalDropChance;
     public ItemLootTable lootTable;
@@ -23,6 +24,7 @@ public class Enemy : Entity
     /// </summary>
     protected override void Death()
     {
+        PlayerController.instance.AddXP(xpToGive);
         SpawnCorpse();
         SpawnDrops();
         StopAllCoroutines();
@@ -40,11 +42,11 @@ public class Enemy : Entity
 
     void SpawnDrops()
     {
-        InventoryItem itemDropped = ItemLootDrop<InventoryItemData>.GetItemFromLoottable(lootTable.lootTable).GetItem();
+        InventoryItemData itemDropped = ItemLootDrop<InventoryItemData>.GetItemFromLoottable(lootTable.lootTable);
         if (itemDropped != null && itemDropped != null)
         {
-            Debug.Log($"{entityName} dropped {itemDropped.itemName}");
-            PickupItem pickup = PickupItem.SpawnPickup(itemDropped, this.transform, Vector3.up);
+            Debug.Log($"{entityName} dropped {itemDropped.GetItem().itemName}");
+            PickupItem pickup = PickupItem.SpawnPickup(itemDropped.GetItem(), this.transform, Vector3.up);
             pickup.transform.parent = this.transform.parent;
         }
     }

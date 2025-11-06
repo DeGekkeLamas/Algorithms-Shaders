@@ -107,6 +107,7 @@ namespace DungeonGeneration
             }
             yield return StartCoroutine(rda.SpawnObjects());
             yield return StartCoroutine(bda.SpawnPlayer()); // Player
+            yield return StartCoroutine(rda.SpawnEnemies());
             Debug.Log("Generated all room assets!");
         }
         /// <summary>

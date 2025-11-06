@@ -256,6 +256,15 @@ MonoBehaviour:
   wallMat: {fileID: 2100000, guid: 3f44c65f842535740b33da7fd7689af9, type: 2}
   floorMat: {fileID: 2100000, guid: 3067396e9e61d114ebb833b7cc27db47, type: 2}
   itemPickup: {fileID: 3020829154051356937, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
+  AmountOfEnemiesToSpawn: 8
+  totalEnemyChance: 100
+  enemiesToSpawn:
+  - itemName: DinnerDemon (RangedEnemy), 75%
+    item: {fileID: 3376632439275880072, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
+    probability: 75
+  - itemName: CerealKiller (MeleeEnemy), 25%
+    item: {fileID: 649392384874580996, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+    probability: 25
   counterMiddle: {fileID: 9011421418820237759, guid: 0d413d8ccf516d74bb2fa084514f420d, type: 3}
   counterCornerL: {fileID: 2101207922729177578, guid: c27b16d52413df147afcbd103875382f, type: 3}
   counterCornerR: {fileID: 8202259783184369343, guid: 9b4e8dccf73aade43b3cf1fb0c161018, type: 3}

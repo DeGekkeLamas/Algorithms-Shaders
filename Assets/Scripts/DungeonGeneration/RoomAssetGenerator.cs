@@ -23,6 +23,21 @@ namespace DungeonGeneration
         protected GameObject roomAssetContainer;
         protected GameObject itemSpawnsContainer;
 
+        [Header("Enemy stuff")]
+        public int AmountOfEnemiesToSpawn = 8;
+        [ReadOnly] public int totalEnemyChance;
+        public ItemLootDrop<Entity>[] enemiesToSpawn;
+
+        protected virtual void OnValidate()
+        {
+            ItemLootDrop<Entity>.MassValidate(enemiesToSpawn);
+            totalEnemyChance = ItemLootDrop<Entity>.GetTotalItemProbability(enemiesToSpawn);
+            if (totalEnemyChance != 100)
+            {
+                Debug.LogWarning("totalEnemyChance is not 100");
+            }
+        }
+
         private void Awake()
         {
             d = this.GetComponent<DungeonGenerator>();
@@ -60,6 +75,34 @@ namespace DungeonGeneration
         /// Places objects in rooms
         /// </summary>
         public abstract IEnumerator SpawnObjects();
+
+        public IEnumerator SpawnEnemies()
+        {
+            GameObject enemyContainer = new("EnemyContainer");
+            enemyContainer.transform.parent = roomAssetContainer.transform;
+
+            AlgorithmsUtils.FillRectangle(d.tilemap, d.originRoom, 1);
+            for (int i = 0; i < AmountOfEnemiesToSpawn; i++)
+            {
+                Vector2Int position = new(d.random.Next(d.initialRoom.xMin, d.initialRoom.xMax), d.random.Next(d.initialRoom.yMin, d.initialRoom.yMax));
+                while (d.tilemap[position.x, position.y] != 0)
+                {
+                    position = new(d.random.Next(d.initialRoom.xMin, d.initialRoom.xMax), d.random.Next(d.initialRoom.yMin, d.initialRoom.yMax));
+                }
+                SpawnEnemy(new(position.x, 0, position.y), enemyContainer.transform);
+                //yield return d.interval;
+            }
+            yield return new();
+        }
+
+        void SpawnEnemy(Vector3 position, Transform parent = null)
+        {
+            Entity toSpawn = ItemLootDrop<Entity>.GetItemFromLoottable(enemiesToSpawn, d.random);
+            if (toSpawn != null)
+            {
+                Instantiate(toSpawn, position, Quaternion.identity, parent);
+            }
+        }
 
         protected PickupItem SpawnPickup(Vector3 position)
         {

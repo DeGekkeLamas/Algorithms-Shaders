@@ -77,6 +77,7 @@ public abstract class Entity : MonoBehaviour
 
     void LevelUp()
     {
+        currentXP -= XPRequired;
         level++;
         currentHP += (currentHP/maxHP) * HPIncrement;
         maxHP += HPIncrement;
