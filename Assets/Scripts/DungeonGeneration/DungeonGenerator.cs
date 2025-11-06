@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -53,6 +54,9 @@ namespace DungeonGeneration
         List<Vector2> _accessibleRooms = new();
         public int[,] tilemap;
 
+        [Header("Debug")]
+        public DrawTilemap tilemapDebugger;
+
         private void OnValidate()
         {
             splitFractionRange = new(
@@ -107,6 +111,7 @@ namespace DungeonGeneration
             }
             yield return StartCoroutine(rda.SpawnObjects());
             yield return StartCoroutine(bda.SpawnPlayer()); // Player
+            FillInaccessibleSpaces();
             yield return StartCoroutine(rda.SpawnEnemies());
             Debug.Log("Generated all room assets!");
         }
@@ -291,6 +296,15 @@ namespace DungeonGeneration
             yield return null;
         }
 
+        [Button]
+        public void DrawTilemap()
+        {
+            if (tilemapDebugger != null)
+            {
+                tilemapDebugger.DrawMap(tilemap);
+            }
+        }
+
         /// <summary>
         /// Remove a room, also removes it and its attached doors from the dungeongraph
         /// </summary>
@@ -315,6 +329,16 @@ namespace DungeonGeneration
 
             _dungeonGraph.RemoveNode(roomToRemove.center);
         }
+
+        public void FillInaccessibleSpaces()
+        {
+            AlgorithmsUtils.FillRectangleOutline(tilemap, new(initialRoom.xMin, initialRoom.yMin, initialRoom.width+2, initialRoom.height+2), 1);
+            foreach(RectInt obj in removedObjects)
+            {
+                AlgorithmsUtils.FillRectangle(tilemap, obj, 1);
+            }
+        }
+
         /// <summary>
         /// Gets biggest room
         /// </summary>

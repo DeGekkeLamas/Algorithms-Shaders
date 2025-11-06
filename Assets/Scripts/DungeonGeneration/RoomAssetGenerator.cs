@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace DungeonGeneration
 {
@@ -76,6 +77,7 @@ namespace DungeonGeneration
         /// </summary>
         public abstract IEnumerator SpawnObjects();
 
+
         public IEnumerator SpawnEnemies()
         {
             GameObject enemyContainer = new("EnemyContainer");
@@ -84,11 +86,13 @@ namespace DungeonGeneration
             AlgorithmsUtils.FillRectangle(d.tilemap, d.originRoom, 1);
             for (int i = 0; i < AmountOfEnemiesToSpawn; i++)
             {
-                Vector2Int position = new(d.random.Next(d.initialRoom.xMin, d.initialRoom.xMax), d.random.Next(d.initialRoom.yMin, d.initialRoom.yMax));
-                while (d.tilemap[position.x, position.y] != 0)
+                Vector2Int position;
+                do
                 {
                     position = new(d.random.Next(d.initialRoom.xMin, d.initialRoom.xMax), d.random.Next(d.initialRoom.yMin, d.initialRoom.yMax));
                 }
+                while (d.tilemap[position.y, position.x] != 0);
+
                 SpawnEnemy(new(position.x, 0, position.y), enemyContainer.transform);
                 //yield return d.interval;
             }

@@ -71,16 +71,13 @@ namespace DungeonGeneration
             d.tilemap = newTilemap;
 
             // Draw tilemap onto plane for debugging
-            DrawTilemap tilemapDebugger = FindAnyObjectByType<DrawTilemap>();
             //PrintTileMap();
-            if (tilemapDebugger != null)
-            {
-                tilemapDebugger.DrawMap(d.tilemap);
-            }
+            d.DrawTilemap();
 
             Debug.Log("Generated tilemap");
             yield return new();
         }
+
         /// <summary>
         /// Generate walls with marching squares
         /// </summary>

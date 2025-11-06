@@ -129,7 +129,10 @@ namespace DungeonGeneration
         {
             Transform counter = Instantiate(counterMiddle, position,
                 rotation, container).transform;
-            d.tilemap[(int)position.x, (int)position.z] = 1;
+            d.tilemap[Mathf.CeilToInt(position.x), Mathf.CeilToInt(position.z)] = 1;
+            d.tilemap[Mathf.FloorToInt(position.x), Mathf.CeilToInt(position.z)] = 1;
+            d.tilemap[Mathf.CeilToInt(position.x), Mathf.FloorToInt(position.z)] = 1;
+            d.tilemap[Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.z)] = 1;
 
             //Replace counter
             GameObject replacement = ItemLootDrop<GameObject>.GetItemFromLoottable(counterReplacements, d.random);

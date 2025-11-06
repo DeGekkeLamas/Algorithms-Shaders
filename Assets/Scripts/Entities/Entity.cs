@@ -82,7 +82,7 @@ public abstract class Entity : MonoBehaviour
         currentHP += (currentHP/maxHP) * HPIncrement;
         maxHP += HPIncrement;
         strength += strengthIncrement;
-        OnLevelUp.Invoke();
+        OnLevelUp?.Invoke();
     }
 
     protected abstract void Death();
