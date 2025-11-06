@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 using InventoryStuff;
+using DungeonGeneration;
 
 public class GameManager : MonoBehaviour
 {
-    Inventory inventory;
+    public ExitDoor exit;
+
     public static GameManager instance;
-
-    [Header("UI")]
-    public GameObject itemDescription;
-
 
     private void Awake()
     {
-        inventory = GetComponent<Inventory>();
         instance = this;
+    }
+    private void Start()
+    {
+        exit.killsRequired = DungeonGenerator.instance.Rda.AmountOfEnemiesToSpawn / 2;
     }
 }

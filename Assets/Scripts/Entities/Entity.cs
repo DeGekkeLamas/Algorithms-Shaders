@@ -27,6 +27,7 @@ public abstract class Entity : MonoBehaviour
     [HideInInspector] public event Action OnLevelUp;
     [HideInInspector] public event Action OnXPAdded;
     [HideInInspector] public event Action OnDeath;
+    public static event Action OnAnyDeath;
 
     MovingObjectBase[] movements;
 
@@ -85,5 +86,8 @@ public abstract class Entity : MonoBehaviour
         OnLevelUp?.Invoke();
     }
 
-    protected abstract void Death();
+    protected virtual void Death()
+    {
+        OnAnyDeath?.Invoke();
+    }
 }

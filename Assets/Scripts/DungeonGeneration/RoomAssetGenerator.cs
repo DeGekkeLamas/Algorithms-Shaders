@@ -86,17 +86,43 @@ namespace DungeonGeneration
             AlgorithmsUtils.FillRectangle(d.tilemap, d.originRoom, 1);
             for (int i = 0; i < AmountOfEnemiesToSpawn; i++)
             {
-                Vector2Int position;
-                do
-                {
-                    position = new(d.random.Next(d.initialRoom.xMin, d.initialRoom.xMax), d.random.Next(d.initialRoom.yMin, d.initialRoom.yMax));
-                }
-                while (d.tilemap[position.y, position.x] != 0);
-
-                SpawnEnemy(new(position.x, 0, position.y), enemyContainer.transform);
+                Vector3 spot = GetAvailableSpot();
+                SpawnEnemy(spot, enemyContainer.transform);
                 //yield return d.interval;
             }
             yield return new();
+        }
+
+        public IEnumerator SpawnExitDoor()
+        {
+            RectInt endRoom = d.rooms[d.GetRoomNearestToPoint(d.initialRoom.max)];
+            ExitDoor door = GameManager.instance.exit;
+            door.gameObject.SetActive(true);
+
+            Vector3 doorPos = new(endRoom.center.x, door.transform.position.y, endRoom.yMax - 2);
+            door.transform.position = doorPos;
+            Vector2 doorVec2 = new(doorPos.x, doorPos.z);
+
+            // Add connection to graph, so it doesnt get structures placed on it
+            d.DungoonGraph.AddNode(doorVec2);
+            d.DungoonGraph.AddEdge(endRoom.center, doorVec2);
+
+            yield return d.interval;
+        }
+
+        /// <summary>
+        /// Get a random available spot on the map, using the tilemap
+        /// </summary>
+        protected Vector3 GetAvailableSpot()
+        {
+            Vector2Int position;
+            do
+            {
+                position = new(d.random.Next(d.initialRoom.xMin, d.initialRoom.xMax), d.random.Next(d.initialRoom.yMin, d.initialRoom.yMax));
+            }
+            while (d.tilemap[position.y, position.x] != 0);
+
+            return new(position.x, 0, position.y);
         }
 
         void SpawnEnemy(Vector3 position, Transform parent = null)

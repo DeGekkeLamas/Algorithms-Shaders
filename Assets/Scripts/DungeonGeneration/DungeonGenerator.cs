@@ -49,13 +49,17 @@ namespace DungeonGeneration
         public List<RectInt> doors = new(1);
         public List<RectInt> removedObjects = new(1);
         Graph<Vector2> _dungeonGraph = new();
+        public Graph<Vector2> DungoonGraph => _dungeonGraph;
         System.Random _random = new();
-        public System.Random random => _random;
-        List<Vector2> _accessibleRooms = new();
-        public int[,] tilemap;
 
         [Header("Debug")]
         public DrawTilemap tilemapDebugger;
+
+        public System.Random random => _random;
+        List<Vector2> _accessibleRooms = new();
+        public int[,] tilemap;
+        public static DungeonGenerator instance;
+
 
         private void OnValidate()
         {
@@ -73,6 +77,7 @@ namespace DungeonGeneration
         }
         private void Awake()
         {
+            instance = this;
             interval = new WaitForSeconds(generationInterval);
             rda = this.GetComponent<RoomAssetGenerator>();
             bda = this.GetComponent<BetterDungeonAssetGenerator>();
@@ -109,6 +114,7 @@ namespace DungeonGeneration
                     yield return StartCoroutine(lda.GenerateFloor(lda.floor)); // Floor
                     break;
             }
+            yield return StartCoroutine(rda.SpawnExitDoor());
             yield return StartCoroutine(rda.SpawnObjects());
             yield return StartCoroutine(bda.SpawnPlayer()); // Player
             FillInaccessibleSpaces();
@@ -357,25 +363,31 @@ namespace DungeonGeneration
             }
             return biggestIndex;
         }
-        /// <summary>
-        /// Gets room nearest (0,0,0)
-        /// </summary>
-        int GetNearestToOrigin()
+
+        public int GetRoomNearestToPoint(Vector2 point)
         {
-            int _origin = 0;
+            int nearest = 0;
             Vector2Int offset = new(initialRoom.xMin, initialRoom.yMin);
 
             float latestDistance = float.MaxValue;
             for (int i = 0; i < rooms.Count; i++)
             {
-                float distanceFromOrigin = (rooms[i].center - offset).magnitude;
+                float distanceFromOrigin = (rooms[i].center - offset - point).magnitude;
                 if (distanceFromOrigin < latestDistance)
                 {
-                    _origin = i;
+                    nearest = i;
                     latestDistance = distanceFromOrigin;
                 }
             }
-            return _origin;
+            return nearest;
+        }
+
+        /// <summary>
+        /// Gets room nearest (0,0,0)
+        /// </summary>
+        int GetNearestToOrigin()
+        {
+            return GetRoomNearestToPoint(new());
         }
         /// <summary>
         /// Find a room by its center

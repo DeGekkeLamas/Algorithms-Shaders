@@ -132,6 +132,7 @@ public class PlayerController : Entity
 
     protected override void Death()
     {
+        base.Death();
         Debug.Log("You suck at this game LMAO");
     }
 }

@@ -24,6 +24,7 @@ public class Enemy : Entity
     /// </summary>
     protected override void Death()
     {
+        base.Death();
         PlayerController.instance.AddXP(xpToGive);
         SpawnCorpse();
         SpawnDrops();
