@@ -15,6 +15,7 @@ namespace DungeonGeneration
 
         [ReadOnly] public int totalReplaceChance;
         public ItemLootDrop<GameObject>[] counterReplacements;
+        public float counterDoorDistance;
 
         private void OnValidate()
         {
@@ -29,11 +30,11 @@ namespace DungeonGeneration
 
             float counterSize = counterMiddle.transform.lossyScale.x;
 
-            for (int i = 0; i < d.rooms.Count; i++) // for each room
+            for (int i = 1; i < 2/*d.rooms.Count*/; i++) // for each room
             {
                 RectInt room = d.rooms[i];
 
-                // SKip origin room
+                // Skip origin room
                 if (room == d.originRoom) continue;
 
                 // Kitchen island
@@ -47,7 +48,7 @@ namespace DungeonGeneration
                     // Counter pieces
                     for (int k = 0; k < counterLength; k++)
                     {
-                        Vector3 position = new(room.center.x + offset.x, 0 + counterSize * .5f, room.center.y + offset.y);
+                        Vector3 position = new(room.center.x + offset.x, counterSize * .5f, room.center.y + offset.y);
                         Quaternion rotation = j == 1 ? Quaternion.Euler(0, !roomvertical ? 0 : 90, 0) : 
                             Quaternion.Euler(0, !roomvertical ? 180 : 270, 0);
 
@@ -61,15 +62,46 @@ namespace DungeonGeneration
                 }
 
                 // Edges
+                Vector2[] doorDirs = d.GetDoorDirections(room);
+                Vector2 side = Vector2.right;
                 for (int j = 0; j < 4; j++)
                 {
+                    side = VectorMath.RotateVectorXY(side, 90);
                     // Skip some sides
-                    if (d.random.Next(0, 2) > 1) continue;
-                    
+                    //if (d.random.Next(0, 2) > 1) continue;
+
+                    // Get positions
+                    Vector2 startPos = (Vector2)room.min + (Vector2)MathTools.Vector3Multiply((Vector2)room.size, side)/2;
+                    float lengthOtherside = Mathf.Abs(MathTools.Vector3CompSum((Vector3)(Vector2)room.size - 
+                        MathTools.Vector3Multiply((Vector2)room.size, side) ) );
+
+                    DebugExtension.DebugWireSphere(new(startPos.x,0,startPos.y), Color.red, 1, 25);
+
+                    // Spawn counters
+                    for (int k = 0; k < lengthOtherside / counterSize; k++)
+                    {
+                        float sideOffset = k * counterSize;
+                        Vector3 placePos = startPos + (new Vector2(side.y, side.x) * sideOffset);
+                        placePos = new(placePos.x, counterSize * .5f, placePos.y);
+                        // Do not spawn if theres a door there
+                        if (IntersectWithPoints(placePos - (Vector3)room.center, doorDirs, counterDoorDistance)) continue;
+                        // Spawn counter
+                        SpawnCounter(placePos, Quaternion.LookRotation(new(side.x,0,side.y), Vector3.up), counterContainer.transform);
+                        yield return d.interval;
+                    }
                 }
 
             }
             yield return new();
+        }
+
+        static bool IntersectWithPoints(Vector2 point, Vector2[] points, float tolerance)
+        {
+            foreach (var dir in points)
+            {
+                if (VectorMath.GetAngleBetweenVectors(dir, point) < tolerance) return true;
+            }
+            return false;
         }
 
         void SpawnCounter(Vector3 position, Quaternion rotation, Transform container = null)

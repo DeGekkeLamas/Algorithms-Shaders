@@ -420,10 +420,10 @@ namespace DungeonGeneration
         /// <summary>
         /// Get the sides at which this room is connected to a door
         /// </summary>
-        protected Vector2[] GetDoorDIrections(RectInt room)
+        public Vector2[] GetDoorDirections(RectInt room)
         {
-            List<Vector2> doors = _dungeonGraph.GetNeighbours(room.center);
-            for (int i = 0; i < rooms.Count;i++)
+            List<Vector2> doors = new(_dungeonGraph.GetNeighbours(room.center));
+            for (int i = 0; i < doors.Count;i++)
             {
                 doors[i] -= room.center;
                 doors[i].Normalize();

@@ -87,4 +87,9 @@ public static class MathTools
     {
         return new(Mathf.Abs(input.x), Mathf.Abs(input.y), Mathf.Abs(input.z));
     }
+
+    public static float Vector3CompSum(Vector3 input)
+    {
+        return input.x + input.y + input.z;
+    }
 }
