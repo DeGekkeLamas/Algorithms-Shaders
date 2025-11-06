@@ -51,6 +51,7 @@ namespace DungeonGeneration
         System.Random _random = new();
         public System.Random random => _random;
         List<Vector2> _accessibleRooms = new();
+        public int[,] tilemap;
 
         private void OnValidate()
         {

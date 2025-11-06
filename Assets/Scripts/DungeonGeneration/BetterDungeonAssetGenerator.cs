@@ -14,7 +14,6 @@ namespace DungeonGeneration
     public class BetterDungeonAssetGenerator : MonoBehaviour
     {
         DungeonGenerator d;
-        int[,] _tilemap;
         [Header("Assets")]
         public GameObject[] marchingSquareAssets = new GameObject[16];
         public MeshRenderer floor;
@@ -42,15 +41,15 @@ namespace DungeonGeneration
         {
             RectInt bounds = d.initialRoom;
             RectInt offset = new(-d.initialRoom.xMin, -d.initialRoom.yMin, 0, 0);
-            _tilemap = new int[bounds.height, bounds.width];
+            d.tilemap = new int[bounds.height, bounds.width];
             // fill tilemap
             foreach (RectInt room in d.rooms)
             {
-                AlgorithmsUtils.FillRectangleOutline(_tilemap, RectIntAddition(room, offset), 1);
+                AlgorithmsUtils.FillRectangleOutline(d.tilemap, RectIntAddition(room, offset), 1);
             }
             foreach (RectInt door in d.doors)
             {
-                AlgorithmsUtils.FillRectangle(_tilemap, RectIntAddition(door, offset), 0);
+                AlgorithmsUtils.FillRectangle(d.tilemap, RectIntAddition(door, offset), 0);
             }
 
             // Add empty edges at the outside so walls generate on the dungeon exterior
@@ -65,18 +64,18 @@ namespace DungeonGeneration
                     }
                     else
                     {
-                        newTilemap[y, x] = _tilemap[y - 1, x - 1];
+                        newTilemap[y, x] = d.tilemap[y - 1, x - 1];
                     }
                 }
             }
-            _tilemap = newTilemap;
+            d.tilemap = newTilemap;
 
             // Draw tilemap onto plane for debugging
             DrawTilemap tilemapDebugger = FindAnyObjectByType<DrawTilemap>();
             //PrintTileMap();
             if (tilemapDebugger != null)
             {
-                tilemapDebugger.DrawMap(_tilemap);
+                tilemapDebugger.DrawMap(d.tilemap);
             }
 
             Debug.Log("Generated tilemap");
@@ -89,17 +88,17 @@ namespace DungeonGeneration
         {
             GameObject wallContainer = new("WallContainer");
             wallContainer.transform.parent = d.assetContainer.transform;
-            int rows = _tilemap.GetLength(0);
-            int columns = _tilemap.GetLength(1);
+            int rows = d.tilemap.GetLength(0);
+            int columns = d.tilemap.GetLength(1);
             for (int y = 0; y < columns - 1; y++)
             {
                 for (int x = 0; x < rows - 1; x++)
                 {
                     int[] localGroup = new int[4];
-                    localGroup[0] = _tilemap[Mathf.Clamp(x, 0, rows - 1), Mathf.Clamp(y, 0, columns - 1)];
-                    localGroup[1] = _tilemap[Mathf.Clamp(x + 1, 0, rows - 1), Mathf.Clamp(y, 0, columns - 1)];
-                    localGroup[2] = _tilemap[Mathf.Clamp(x, 0, rows - 1), Mathf.Clamp(y + 1, 0, columns - 1)];
-                    localGroup[3] = _tilemap[Mathf.Clamp(x + 1, 0, rows - 1), Mathf.Clamp(y + 1, 0, columns - 1)];
+                    localGroup[0] = d.tilemap[Mathf.Clamp(x, 0, rows - 1), Mathf.Clamp(y, 0, columns - 1)];
+                    localGroup[1] = d.tilemap[Mathf.Clamp(x + 1, 0, rows - 1), Mathf.Clamp(y, 0, columns - 1)];
+                    localGroup[2] = d.tilemap[Mathf.Clamp(x, 0, rows - 1), Mathf.Clamp(y + 1, 0, columns - 1)];
+                    localGroup[3] = d.tilemap[Mathf.Clamp(x + 1, 0, rows - 1), Mathf.Clamp(y + 1, 0, columns - 1)];
 
                     int tileBinary = localGroup[0] * 1 + localGroup[1] * 2 + localGroup[2] * 4 + localGroup[3] * 8;
                     if (marchingSquareAssets[tileBinary] != null)
@@ -146,9 +145,9 @@ namespace DungeonGeneration
                 {
                     Vector2Int realPoint = pointToFill / floorSize * floorSize;
                     if (!visitedList.Contains(realPoint) &&
-                        (_tilemap[
-                            Mathf.Clamp(realPoint.y, 1, _tilemap.GetLength(0) - 2),
-                            Mathf.Clamp(realPoint.x, 1, _tilemap.GetLength(1) - 2)] == 0))
+                        (d.tilemap[
+                            Mathf.Clamp(realPoint.y, 1, d.tilemap.GetLength(0) - 2),
+                            Mathf.Clamp(realPoint.x, 1, d.tilemap.GetLength(1) - 2)] == 0))
                     {
                         queue.Enqueue(realPoint);
                     }
@@ -185,10 +184,10 @@ namespace DungeonGeneration
 
         public string ToString(bool flip)
         {
-            if (_tilemap == null) return "Tile map not generated yet.";
+            if (d.tilemap == null) return "Tile map not generated yet.";
 
-            int rows = _tilemap.GetLength(0);
-            int cols = _tilemap.GetLength(1);
+            int rows = d.tilemap.GetLength(0);
+            int cols = d.tilemap.GetLength(1);
 
             var sb = new StringBuilder();
 
@@ -200,7 +199,7 @@ namespace DungeonGeneration
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    sb.Append((_tilemap[i, j] == 0 ? '0' : '#')); //Replaces 1 with '#' making it easier to visualize
+                    sb.Append((d.tilemap[i, j] == 0 ? '0' : '#')); //Replaces 1 with '#' making it easier to visualize
                 }
                 sb.AppendLine();
             }
