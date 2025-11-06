@@ -66,7 +66,6 @@ public class Graph<T>
         while(queue.Count > 0)
         {
             start = queue.Dequeue();
-            //Debug.Log(_start);
 
             foreach (T w in adjacencyList[start]) 
             {

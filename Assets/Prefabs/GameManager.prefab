@@ -881,6 +881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49dd665afb07194283e35bcc1d27119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scene: 0
+  roomExceptions: []
   exit: {fileID: 2740208576726757881}
 --- !u!114 &2990881938606332820
 MonoBehaviour:

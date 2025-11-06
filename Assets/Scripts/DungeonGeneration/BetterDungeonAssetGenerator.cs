@@ -167,7 +167,7 @@ namespace DungeonGeneration
         /// </summary>
         public IEnumerator SpawnPlayer()
         {
-            d.navMeshSurface.BuildNavMesh();
+            d.navMeshSurface?.BuildNavMesh();
             Destroy(Camera.main.gameObject);
             Instantiate(player, new(d.originRoom.center.x, 0, d.originRoom.center.y), Quaternion.identity);
 

@@ -27,11 +27,12 @@ public class ExitDoor : MonoBehaviour, IInteractible
 
     IEnumerator OpenDoor()
     {
+        Debug.Log("Opened door");
         yield return new();
     }
 
     public void OnInteract()
     {
-
+        if (isOpen) GameManager.instance.MoveToNextRoom();
     }
 }
