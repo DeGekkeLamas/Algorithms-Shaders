@@ -426,7 +426,7 @@ namespace DungeonGeneration
             for (int i = 0; i < doors.Count;i++)
             {
                 doors[i] -= room.center;
-                doors[i].Normalize();
+                doors[i] = doors[i].normalized;
             }
             return doors.ToArray();
         }

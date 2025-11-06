@@ -64,6 +64,7 @@ namespace DungeonGeneration
                 // Edges
                 Vector2[] doorDirs = d.GetDoorDirections(room);
                 Vector2 side = Vector2.right;
+                Vector2 usedSize = room.size - 1.5f * new Vector2(counterSize, counterSize);
                 for (int j = 0; j < 4; j++)
                 {
                     side = VectorMath.RotateVectorXY(side, 90);
@@ -71,9 +72,9 @@ namespace DungeonGeneration
                     //if (d.random.Next(0, 2) > 1) continue;
 
                     // Get positions
-                    Vector2 startPos = (Vector2)room.min + (Vector2)MathTools.Vector3Multiply((Vector2)room.size, side)/2;
-                    float lengthOtherside = Mathf.Abs(MathTools.Vector3CompSum((Vector3)(Vector2)room.size - 
-                        MathTools.Vector3Multiply((Vector2)room.size, side) ) );
+                    Vector2 startPos = (Vector2)room.min + (Vector2)MathTools.Vector3Multiply(usedSize, MathTools.Vector3Max(side, Vector2.zero));
+                    float lengthOtherside = Mathf.Abs(MathTools.Vector3CompSum((Vector3)usedSize - 
+                        MathTools.Vector3Multiply(usedSize, side) ) );
 
                     DebugExtension.DebugWireSphere(new(startPos.x,0,startPos.y), Color.red, 1, 25);
 
@@ -81,12 +82,14 @@ namespace DungeonGeneration
                     for (int k = 0; k < lengthOtherside / counterSize; k++)
                     {
                         float sideOffset = k * counterSize;
-                        Vector3 placePos = startPos + (new Vector2(side.y, side.x) * sideOffset);
-                        placePos = new(placePos.x, counterSize * .5f, placePos.y);
+                        Vector3 placePos = startPos + (new Vector2(Mathf.Abs(side.y), Mathf.Abs(side.x)) * sideOffset);
+
                         // Do not spawn if theres a door there
                         if (IntersectWithPoints(placePos - (Vector3)room.center, doorDirs, counterDoorDistance)) continue;
+
+                        placePos = new(placePos.x, counterSize * .5f, placePos.y);
                         // Spawn counter
-                        SpawnCounter(placePos, Quaternion.LookRotation(new(side.x,0,side.y), Vector3.up), counterContainer.transform);
+                        SpawnCounter(placePos, Quaternion.LookRotation(-new Vector3(side.x,0,side.y), Vector3.up), counterContainer.transform);
                         yield return d.interval;
                     }
                 }
@@ -95,11 +98,21 @@ namespace DungeonGeneration
             yield return new();
         }
 
+        /// <summary>
+        /// Check if there is a door in that direction, using angle between positions
+        /// </summary>
         static bool IntersectWithPoints(Vector2 point, Vector2[] points, float tolerance)
         {
             foreach (var dir in points)
             {
-                if (VectorMath.GetAngleBetweenVectors(dir, point) < tolerance) return true;
+                float angle = VectorMath.GetAngleBetweenVectors(dir, point);
+                Debug.Log($"Doorpos = {dir}, point = {point}, angle = {angle}");
+                if (angle < tolerance)
+                {
+                    Debug.LogWarning("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                    //Debug.Break();
+                    return true;
+                }
             }
             return false;
         }

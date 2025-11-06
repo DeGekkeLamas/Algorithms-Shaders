@@ -260,11 +260,12 @@ MonoBehaviour:
   counterCornerL: {fileID: 2101207922729177578, guid: c27b16d52413df147afcbd103875382f, type: 3}
   counterCornerR: {fileID: 8202259783184369343, guid: 9b4e8dccf73aade43b3cf1fb0c161018, type: 3}
   counterLength: 4
-  totalReplaceChance: 5
+  totalReplaceChance: 50
   counterReplacements:
-  - itemName: Sink (UnityEngine.GameObject), 5%
+  - itemName: Sink (UnityEngine.GameObject), 50%
     item: {fileID: 7248988456274800710, guid: e2c2e8c057e3bb1499ed5f13f73c1e03, type: 3}
-    probability: 5
+    probability: 50
+  counterDoorDistance: 15
 --- !u!1 &1545061832
 GameObject:
   m_ObjectHideFlags: 0

@@ -83,6 +83,16 @@ public static class MathTools
         return new( Mathf.Clamp(input.x, min.x, max.x), Mathf.Clamp(input.y, min.y, max.y), Mathf.Clamp(input.z, min.z, max.z) );
     }
 
+    public static Vector3 Vector3Min(Vector3 input, Vector3 min)
+    {
+        return new( Mathf.Min(input.x, min.x), Mathf.Min(input.y, min.y), Mathf.Min(input.z, min.z) );
+    }
+
+    public static Vector3 Vector3Max(Vector3 input, Vector3 max)
+    {
+        return new( Mathf.Max(input.x, max.x), Mathf.Max(input.y, max.y), Mathf.Max(input.z, max.z) );
+    }
+
     public static Vector3 Vector3Abs(Vector3 input)
     {
         return new(Mathf.Abs(input.x), Mathf.Abs(input.y), Mathf.Abs(input.z));
