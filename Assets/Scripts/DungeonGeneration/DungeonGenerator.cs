@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DungeonGeneration
@@ -77,6 +78,7 @@ namespace DungeonGeneration
         }
         private void Awake()
         {
+            assetContainer = new GameObject("AssetContainer");
             instance = this;
             interval = new WaitForSeconds(generationInterval);
             rda = this.GetComponent<RoomAssetGenerator>();
@@ -87,13 +89,15 @@ namespace DungeonGeneration
                 seed = _random.Next(int.MinValue, int.MaxValue);
                 Debug.Log($"Random chosen seed is {seed}");
             }
-            _random = new System.Random(seed);
 
+        }
+        private void Start()
+        {
             StartCoroutine(GenerateDungeon());
+            _random = new System.Random(seed);
         }
         IEnumerator GenerateDungeon()
         {
-            assetContainer = new GameObject("AssetContainer");
 
             yield return StartCoroutine(GenerateRooms()); // Rooms
             yield return StartCoroutine(GenerateDoors()); // Doors

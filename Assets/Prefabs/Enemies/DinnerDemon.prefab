@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 7298265231219849473}
   - component: {fileID: 4750478937100368925}
   - component: {fileID: -4471890809103436242}
+  - component: {fileID: 2924243632334802397}
+  - component: {fileID: 4581253673112429867}
   m_Layer: 0
   m_Name: DinnerDemon
   m_TagString: Untagged
@@ -241,6 +243,33 @@ MonoBehaviour:
   hpText: {fileID: 0}
   levelText: {fileID: 3570165424742009561}
   nameText: {fileID: 4930279257962950869}
+--- !u!114 &2924243632334802397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18489271436508005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3f76407972c26d49bf03588bf20c6e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 7613024390882141148}
+  corpse: {fileID: 8120454217808119696, guid: 275cfdf6fcabefb4380cafd02cfad82a, type: 3}
+--- !u!114 &4581253673112429867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18489271436508005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18def91b9d695b94096fddd5f84279b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splat: {fileID: 966423011128645671, guid: 12141ac9eae3ad8428d53249e5653f16, type: 3}
 --- !u!1 &699200300095502631
 GameObject:
   m_ObjectHideFlags: 0

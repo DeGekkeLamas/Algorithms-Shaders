@@ -2,10 +2,13 @@ using UnityEngine;
 using DungeonGeneration;
 using UnityEngine.SceneManagement;
 using System;
+using InventoryStuff;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
     int currentRoom = 1;
+    int seed;
     public int scene;
     public IntScene[] roomExceptions;
     public ExitDoor exit;
@@ -14,11 +17,16 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
-        instance = this;
+        if (instance == null) instance = this;
+        else Destroy(this.gameObject);
+
+        DontDestroyOnLoad(this.gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
     private void Start()
     {
         exit.killsRequired = DungeonGenerator.instance.Rda.AmountOfEnemiesToSpawn / 2;
+        seed = DungeonGenerator.instance.seed;
     }
 
     public void MoveToNextRoom()
@@ -34,6 +42,20 @@ public class GameManager : MonoBehaviour
             }
         }
         SceneManager.LoadScene(scene);
+        exit.gameObject.SetActive(false);
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        if (seed != 0)
+            DungeonGenerator.instance.seed = seed + currentRoom - 1;
+    }
+
+    public void ResetGame()
+    {
+        currentRoom = 0;
+        Inventory.instance.ClearInventory();
+        MoveToNextRoom();
     }
 }
 

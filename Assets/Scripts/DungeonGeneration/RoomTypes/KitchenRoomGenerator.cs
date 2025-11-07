@@ -74,8 +74,8 @@ namespace DungeonGeneration
                     placePos = new(placePos.x, counterSize * .5f, placePos.y);
                     // Spawn counter
                     SpawnCounter(placePos, Quaternion.LookRotation(-new Vector3(side.x, 0, side.y), Vector3.up), counterContainer);
-                    yield return d.interval;
                 }
+                yield return d.interval;
             }
         }
 
@@ -101,10 +101,10 @@ namespace DungeonGeneration
                     SpawnCounter(position, rotation, counterContainer.transform);
                     if (roomvertical) offset.y += counterSize;
                     else offset.x += counterSize;
-                    yield return d.interval;
                 }
                 if (roomvertical) offset = new(offset.x + counterSize, -.5f * counterLength);
                 else offset = new(-.5f * counterLength, offset.y + counterSize);
+                yield return d.interval;
             }
         }
 

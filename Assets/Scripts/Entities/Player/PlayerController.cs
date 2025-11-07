@@ -19,10 +19,16 @@ public class PlayerController : Entity
     public static PlayerController instance;
     protected override void Awake()
     {
+        if (instance == null) instance = this;
+        else Destroy(this.gameObject);
+
         base.Awake();
         playerDestination = transform.position;
-        instance = this;
         projectileChartMat = projectileChart.material;
+    }
+    private void Start()
+    {
+        transform.parent = GameManager.instance.transform;
     }
     protected virtual void Update()
     {

@@ -23,15 +23,17 @@ public class Projectile : MonoBehaviour
     public GameObject splat;
     Rigidbody rb;
 
-    public static GameObject projectileContainer;
+    public static Transform projectileContainer;
 
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        if (projectileContainer == null) projectileContainer = new GameObject("ProjectileContainer").transform;
+    }
+    void Start()
+    {
         if (useGravity) rb.useGravity = true;
         rb.AddForce(new(0, upForce, 0));
-        if (projectileContainer == null) projectileContainer = new("ProjectileContainer");
-        this.transform.parent = projectileContainer.transform;
     }
     void FixedUpdate()
     {

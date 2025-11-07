@@ -14,6 +14,7 @@ namespace DungeonGeneration
     public class BetterDungeonAssetGenerator : MonoBehaviour
     {
         DungeonGenerator d;
+        public Camera originalCam;
         [Header("Assets")]
         public GameObject[] marchingSquareAssets = new GameObject[16];
         public MeshRenderer floor;
@@ -168,8 +169,15 @@ namespace DungeonGeneration
         public IEnumerator SpawnPlayer()
         {
             d.navMeshSurface?.BuildNavMesh();
-            Destroy(Camera.main.gameObject);
-            Instantiate(player, new(d.originRoom.center.x, 0, d.originRoom.center.y), Quaternion.identity);
+            Destroy(originalCam.gameObject);
+            if (PlayerController.instance == null)
+            {
+                Instantiate(player, new(d.originRoom.center.x, 0, d.originRoom.center.y), Quaternion.identity);
+            }
+            else
+            {
+                PlayerController.instance.transform.position = new(d.originRoom.center.x, 0, d.originRoom.center.y);
+            }
 
             Debug.Log("Spawned player and generated navmesh");
             yield return new();

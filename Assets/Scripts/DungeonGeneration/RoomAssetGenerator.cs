@@ -43,6 +43,9 @@ namespace DungeonGeneration
         {
             d = this.GetComponent<DungeonGenerator>();
 
+        }
+        private void Start()
+        {
             // Containers
             roomAssetContainer = new("RoomAssetContainer");
             roomAssetContainer.transform.parent = d.assetContainer.transform;

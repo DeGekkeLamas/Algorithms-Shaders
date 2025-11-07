@@ -32,7 +32,7 @@ namespace InventoryStuff
             if (cooldownLeft <= 0)
             {
                 Projectile spawnedProjectile = MonoBehaviour.Instantiate(this.projectile,
-                    source.transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(inputDir));
+                    source.transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(inputDir), Projectile.projectileContainer);
                 Rigidbody rigidbody = spawnedProjectile.GetComponent<Rigidbody>();
                 rigidbody.excludeLayers = rigidbody.excludeLayers + (int)Mathf.Pow(2, source.gameObject.layer);
                 projectile.damage = damage;

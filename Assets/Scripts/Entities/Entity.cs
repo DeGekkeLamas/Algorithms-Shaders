@@ -67,7 +67,7 @@ public abstract class Entity : MonoBehaviour
     public void AddXP(float toAdd)
     {
         currentXP += toAdd;
-        if (currentXP > XPRequired)
+        if (currentXP >= XPRequired)
         {
             currentXP -= XPRequired;
             LevelUp();
@@ -78,7 +78,6 @@ public abstract class Entity : MonoBehaviour
 
     void LevelUp()
     {
-        currentXP -= XPRequired;
         level++;
         currentHP += (currentHP/maxHP) * HPIncrement;
         maxHP += HPIncrement;
@@ -88,6 +87,7 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Death()
     {
+        OnDeath?.Invoke();
         OnAnyDeath?.Invoke();
     }
 }

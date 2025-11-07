@@ -19,7 +19,8 @@ namespace InventoryStuff
 
         private void Awake()
         {
-            instance = this;
+            if (instance == null) instance = this;
+            else Destroy(this.gameObject);
         }
 
         void Update()
@@ -110,6 +111,15 @@ namespace InventoryStuff
                 }
             }
             return;
+        }
+
+        public void ClearInventory()
+        {
+            for(int i = 0;i < currentInventory.Length; i++)
+            {
+                RemoveItem(i);
+            }
+            Debug.Log("Cleared inventory");
         }
 
         /// <summary>
