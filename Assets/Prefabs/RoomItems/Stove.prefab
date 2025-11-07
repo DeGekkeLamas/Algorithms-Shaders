@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 649525591108393921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.585094, y: -2.5674088, z: 23.235344}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -63,7 +63,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b29bdfa0a036b54eb4dc2bf369f28c8, type: 2}
   - {fileID: 11400000, guid: e8ad2e3458b1c2f49929b6714a2e60b3, type: 2}
   - {fileID: 11400000, guid: debad02ac1e0c344e98d27c879e577b1, type: 2}
-  dimensions: {x: 1500, y: 750}
+  dimensions:
+    x: 100
+    y: 50
+    width: 500
+    height: 1250
   RecipeUI: {fileID: 0}
   image: {fileID: 2122635771538226184, guid: e9c577e61725ac845bd37beb9a68188b, type: 3}
   recipeDisplay: {fileID: 1531725308929375615, guid: 420a8a0c3df7fcf4aac7bfbac7cbbe60, type: 3}

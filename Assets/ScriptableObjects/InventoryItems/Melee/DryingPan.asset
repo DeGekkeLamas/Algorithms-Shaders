@@ -19,8 +19,7 @@ MonoBehaviour:
     maxStack: 1
     durability: 20
     grantsImmunityTo: []
-    itemSprite: {fileID: 0}
-    damage: 50
+    damage: 40
     effectsApplied: []
     swingTime: 0.25
     swingAngle: 45

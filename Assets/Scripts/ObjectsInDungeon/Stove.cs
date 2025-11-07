@@ -3,11 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Stove : MonoBehaviour, IInteractible
 {
     public Recipe[] knownRecipes;
-    public Vector2 dimensions;
+    public RectInt dimensions;
     public Transform RecipeUI;
     public RawImage image;
     public ItemCrafter recipeDisplay;
@@ -28,7 +29,7 @@ public class Stove : MonoBehaviour, IInteractible
     void GenerateUI()
     {
         int sqrtLength = Mathf.CeilToInt(Mathf.Sqrt(knownRecipes.Length));
-        Vector2 sizePerRecipe = dimensions / sqrtLength;
+        Vector2 sizePerRecipe = (dimensions.max - dimensions.min) / sqrtLength;
 
         for(int y  = 0; y < sqrtLength; y++)
         {
@@ -40,13 +41,23 @@ public class Stove : MonoBehaviour, IInteractible
                 InventoryItem recipeItem = recipe.result.GetItem();
 
                 // Container
-                Vector2 pos = new(sizePerRecipe.x * ((x) % sqrtLength),
-                    sizePerRecipe.y * (y) / sqrtLength);
-                ItemCrafter crafter = Instantiate(recipeDisplay, pos, Quaternion.identity, RecipeUI);
+                Vector3 pos = new Vector2(sizePerRecipe.x * (x % sqrtLength),
+                    sizePerRecipe.y * y / sqrtLength) + dimensions.min;
+                ItemCrafter crafter = Instantiate(recipeDisplay, pos * RecipeUI.transform.localScale.x, Quaternion.identity, RecipeUI);
                 crafter.recipe = recipe;
+
                 // Items
+                // Result
+                SpawnImage(pos + new Vector3(0, sizePerRecipe.y * .025f)
+                    , Inventory.instance.Contains(recipeItem) ? recipeItem.ItemSprite : recipeItem.ItemSilhouette, recipeItem.itemName);
+                // Ingredients
                 for (int j = 0; j < recipe.ingredients.Length; j++)
                 {
+                    InventoryItem currentItem = recipe.ingredients[j].GetItem();
+                    Vector2 position = pos + 
+                        new Vector3(Mathf.Lerp(-sizePerRecipe.x, sizePerRecipe.x, 1f/(Mathf.Min(1,recipe.ingredients.Length-1)) * (j)) * .25f , -sizePerRecipe.y * .025f);
+                    SpawnImage(position, Inventory.instance.Contains(currentItem) ?
+                        currentItem.ItemSprite : currentItem.ItemSilhouette, currentItem.itemName);
 
                 }
             }
