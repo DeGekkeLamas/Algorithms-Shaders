@@ -22,16 +22,37 @@ namespace InventoryStuff
         [Header("Overworld properties")]
         [SerializeField] public StatusEffect[] grantsImmunityTo;
 
-        [HideInInspector] public Texture2D itemSprite;
+        Texture2D itemSprite;
+        public Texture2D ItemSprite => itemSprite != null ? itemSprite : SetSprite();
+        Texture2D itemSilhouette;
+        public Texture2D ItemSilhouette => itemSilhouette != null ? itemSilhouette : SetSilhouette();
         [HideInInspector, NonSerialized] public bool canUseItem = true;
         public bool IsStackable => maxStack > 1;
 
         public Texture2D SetSprite()
         {
+            if (itemModel == null)
+            {
+                Debug.Log($"Model for {itemName} is null");
+                return null;
+            }
             itemSprite = RuntimePreviewGenerator.GenerateModelPreview(itemModel.transform, 256, 256, false, true);
             itemSprite = SpriteEditor.AddOutline(itemSprite);
 
             return itemSprite;
+        }
+
+        public Texture2D SetSilhouette()
+        {
+            if (itemModel == null)
+            {
+                Debug.Log($"Model for {itemName} is null");
+                return null;
+            }
+            itemSilhouette = RuntimePreviewGenerator.GenerateModelPreview(itemModel.transform, 256, 256, false, true);
+            itemSilhouette = SpriteEditor.MakeSilhouette(itemSilhouette);
+
+            return itemSilhouette;
         }
 
         protected void RemoveThisItem()

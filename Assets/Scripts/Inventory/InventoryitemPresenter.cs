@@ -33,10 +33,7 @@ public class InventoryitemPresenter : MonoBehaviour
         {
             if (invItem.item != null)
             {
-                if (invItem.item.itemSprite != null)
-                    sprite.texture = invItem.item.itemSprite;
-                else
-                    sprite.texture = invItem.item.SetSprite();
+                sprite.texture = invItem.item.ItemSprite;
             }
             else sprite.texture = emptySlotTex;
         }

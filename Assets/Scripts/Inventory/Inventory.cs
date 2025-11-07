@@ -84,6 +84,16 @@ namespace InventoryStuff
                 if (currentInventory[i].item == null) return true;
             return false;
         }
+
+        public bool Contains(InventoryItem item)
+        {
+            foreach(ItemUniqueStats invItem in currentInventory)
+            {
+                if (invItem.item == item) return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Remove an item by its index
         /// </summary>
@@ -130,6 +140,26 @@ namespace InventoryStuff
             currentInventory[index].quantityLeft--;
             if (currentInventory[index].quantityLeft == 0) RemoveItem(index);
             OnItemChanged?.Invoke();
+        }
+
+        /// <summary>
+        /// Remove an item from a stack
+        /// </summary>
+        public void RemoveFromStack(InventoryItem item)
+        {
+            int index = 0;
+            for (int i = 0; i < currentInventory.Length; i++)
+            {
+                // Compare to find item in inventory, remove by index if match
+                InventoryItem currentItem = currentInventory[i].item;
+                if (currentItem != null && currentItem.itemName == item.itemName)
+                {
+                    index = i;
+                    RemoveFromStack(index);
+                    return;
+                }
+            }
+            return;
         }
     }
 }
