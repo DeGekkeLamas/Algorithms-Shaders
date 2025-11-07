@@ -2,11 +2,7 @@ using UnityEngine;
 
 public class SpriteEditor
 {
-    static Color bgColor = new(0.3019608f, 0.3019608f, 0.3019608f);
-    static Color otherBgColor = new(0.07450981f, 0.07450981f, 0.07450981f);
-
-
-
+    public static Color bgColor = new(0.3019608f, 0.3019608f, 0.3019608f);
 
     static Texture2D DuplicateTexture(Texture2D source)
     {
@@ -109,5 +105,27 @@ public class SpriteEditor
         newSprite.SetPixels(newColors);
         newSprite.Apply();
         return newSprite;
+    }
+    public static Texture2D RemoveBG(Texture2D originSprite, Color BGColor)
+    {
+        Color[] colors;
+        if (!originSprite.isReadable) colors = DuplicateTexture(originSprite).GetPixels();
+        else colors = originSprite.GetPixels();
+
+        Color[] newColors = new Color[colors.Length];
+        Texture2D newSprite = new(originSprite.width, originSprite.height);
+
+        for (int i = 0; i < colors.Length; i++)
+        {
+            if (colors[i] != BGColor) newColors[i] = colors[i];
+        }
+
+        newSprite.SetPixels(newColors);
+        newSprite.Apply();
+        return newSprite;
+    }
+    public static Texture2D RemoveBG(Texture2D originSprite)
+    {
+        return RemoveBG(originSprite, bgColor);
     }
 }

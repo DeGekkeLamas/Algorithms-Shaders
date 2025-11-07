@@ -13,17 +13,29 @@ public class Stove : MonoBehaviour, IInteractible
     public RawImage image;
     public ItemCrafter recipeDisplay;
 
-    List<RawImage> spawnedObjects = new();
+    static List<GameObject> spawnedObjects = new();
+    bool isGenerated;
+    static bool menuIsOpen;
 
     public void OnInteract()
     {
-        OpenMenu();
+        if (menuIsOpen) CloseMenu();
+        else OpenMenu();
     }
 
     void OpenMenu()
     {
+        menuIsOpen = true;
         RecipeUI.gameObject.SetActive(true);
-        GenerateUI();
+        if (isGenerated) EnableAll();
+        else GenerateUI();
+    }
+
+    public void CloseMenu()
+    {
+        menuIsOpen = false;
+        DisableAll();
+        RecipeUI.gameObject.SetActive(false);
     }
 
     void GenerateUI()
@@ -45,11 +57,13 @@ public class Stove : MonoBehaviour, IInteractible
                     sizePerRecipe.y * y / sqrtLength) + dimensions.min;
                 ItemCrafter crafter = Instantiate(recipeDisplay, pos * RecipeUI.transform.localScale.x, Quaternion.identity, RecipeUI);
                 crafter.recipe = recipe;
+                spawnedObjects.Add(crafter.gameObject);
 
-                // Items
+                /// Items
                 // Result
                 SpawnImage(pos + new Vector3(0, sizePerRecipe.y * .025f)
-                    , Inventory.instance.Contains(recipeItem) ? recipeItem.ItemSprite : recipeItem.ItemSilhouette, recipeItem.itemName);
+                    , Inventory.instance.Contains(recipeItem) ? SpriteEditor.RemoveBG(recipeItem.ItemSprite) : 
+                    recipeItem.ItemSilhouette, recipeItem.itemName);
                 // Ingredients
                 for (int j = 0; j < recipe.ingredients.Length; j++)
                 {
@@ -57,40 +71,36 @@ public class Stove : MonoBehaviour, IInteractible
                     Vector2 position = pos + 
                         new Vector3(Mathf.Lerp(-sizePerRecipe.x, sizePerRecipe.x, 1f/(Mathf.Min(1,recipe.ingredients.Length-1)) * (j)) * .25f , -sizePerRecipe.y * .025f);
                     SpawnImage(position, Inventory.instance.Contains(currentItem) ?
-                        currentItem.ItemSprite : currentItem.ItemSilhouette, currentItem.itemName);
+                        SpriteEditor.RemoveBG(currentItem.ItemSprite) : currentItem.ItemSilhouette, currentItem.itemName);
 
                 }
             }
         }
-
-        //for (int i = 0; i < knownRecipes.Length; i++)
-        //{
-
-            //Vector2 recipeSize = sizePerRecipe / (recipe.ingredients.Length + 1);
-
-                //SpawnImage(new Vector2(recipeSize.x * (i % sqrtLength), recipeSize.y * i / sqrtLength),
-                //    Inventory.instance.Contains(recipeItem) ? recipeItem.ItemSprite : recipeItem.ItemSilhouette, recipeItem.itemName);
-                //for (int j = 0; j < recipe.ingredients.Length; j++)
-                //{
-                //    InventoryItem current = recipe.ingredients[j].GetItem();
-                //    Vector2 position = new(sizePerRecipe.x * ((j + 1) % sqrtLength),
-                //        sizePerRecipe.y * (i + 1) / sqrtLength);
-                //    SpawnImage(position, Inventory.instance.Contains(current) ? current.ItemSprite : current.ItemSilhouette, current.itemName);
-                //}
-        //}
+        isGenerated = true;
     }
 
     void SpawnImage(Vector2 position, Texture2D texture, string name)
     {
         position *= RecipeUI.localScale;
         RawImage spawned = Instantiate(image, position, Quaternion.identity, RecipeUI);
-        spawnedObjects.Add(spawned);
+        spawnedObjects.Add(spawned.gameObject);
         spawned.texture = texture;
         spawned.name = name;
     }
 
-    public void CloseMenu()
+    public static void EnableAll()
     {
-        RecipeUI.gameObject.SetActive(false);
+        for(int i = spawnedObjects.Count-1; i > 0; i--)
+        {
+            spawnedObjects[i].SetActive(true);
+        }
+    }
+
+    public static void DisableAll()
+    {
+        for(int i = spawnedObjects.Count-1; i > 0; i--)
+        {
+            spawnedObjects[i].SetActive(false);
+        }
     }
 }
