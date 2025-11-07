@@ -144,7 +144,7 @@ namespace DungeonGeneration
             }
             else // Item pickup
             {
-                SpawnPickup(new(counter.position.x, 10, counter.position.z));
+                SpawnPickup(new(counter.position.x, counter.position.y + 1, counter.position.z));
             }
         }
     }

@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9afd42dcf8a837e44ba65d59a21f6aed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 150410157
+  seed: 0
   shouldRemoveSmallestRooms: 1
   percentSmallestRoomsToRemove: 15
   initialRoom:
@@ -347,20 +347,23 @@ MonoBehaviour:
   AmountOfEnemiesToSpawn: 8
   totalEnemyChance: 100
   enemiesToSpawn:
-  - itemName: DinnerDemon (RangedEnemy), 75%
+  - itemName: DinnerDemon (RangedEnemy), 65%
     item: {fileID: 3376632439275880072, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-    probability: 75
-  - itemName: CerealKiller (MeleeEnemy), 25%
+    probability: 65
+  - itemName: CerealKiller (MeleeEnemy), 35%
     item: {fileID: 649392384874580996, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-    probability: 25
+    probability: 35
   counterMiddle: {fileID: 9011421418820237759, guid: 0d413d8ccf516d74bb2fa084514f420d, type: 3}
   counterCornerL: {fileID: 2101207922729177578, guid: c27b16d52413df147afcbd103875382f, type: 3}
   counterCornerR: {fileID: 8202259783184369343, guid: 9b4e8dccf73aade43b3cf1fb0c161018, type: 3}
   counterLength: 4
-  totalReplaceChance: 5
+  totalReplaceChance: 10
   counterReplacements:
   - itemName: Sink (UnityEngine.GameObject), 5%
     item: {fileID: 7248988456274800710, guid: e2c2e8c057e3bb1499ed5f13f73c1e03, type: 3}
+    probability: 5
+  - itemName: ReyRetopologized (UnityEngine.GameObject), 5%
+    item: {fileID: 919132149155446097, guid: 7bf57c58c0a413b4aa7559f6abac55e1, type: 3}
     probability: 5
   counterDoorDistance: 17.5
 --- !u!1 &1545061832
@@ -605,7 +608,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3777997893634887980, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

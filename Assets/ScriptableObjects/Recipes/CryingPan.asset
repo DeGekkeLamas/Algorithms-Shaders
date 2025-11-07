@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f69ea8c32105bc48bf0a3b8536d68af, type: 3}
+  m_Name: CryingPan
+  m_EditorClassIdentifier: 
+  recipeName: 'Crying pan: Frying pan, Water bottle, '
+  result: {fileID: 11400000, guid: 7ac080eb2418b864fb453dcd451705b6, type: 2}
+  ingredients:
+  - {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
+  - {fileID: 11400000, guid: 623d8eb10a9ed9845bc5972345fec14e, type: 2}

@@ -92,4 +92,22 @@ public class SpriteEditor
         newSprite.Apply();
         return newSprite;
     }
+    public static Texture2D MakeSilhouette(Texture2D originSprite)
+    {
+        Color[] colors;
+        if (!originSprite.isReadable) colors = DuplicateTexture(originSprite).GetPixels();
+        else colors = originSprite.GetPixels();
+
+        Color[] newColors = new Color[colors.Length];
+        Texture2D newSprite = new(originSprite.width, originSprite.height);
+
+        for (int i = 0; i < colors.Length; i++)
+        {
+            if (colors[i] != bgColor) newColors[i] = Color.black;
+        }
+
+        newSprite.SetPixels(newColors);
+        newSprite.Apply();
+        return newSprite;
+    }
 }

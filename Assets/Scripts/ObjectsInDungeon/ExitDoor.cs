@@ -9,10 +9,12 @@ public class ExitDoor : MonoBehaviour, IInteractible
     private void OnEnable()
     {
         Entity.OnAnyDeath += DoorCheck;
+        GameManager.instance.OnNewFloorLoaded += ResetDoor;
     }
     private void OnDisable()
     {
         Entity.OnAnyDeath -= DoorCheck;
+        GameManager.instance.OnNewFloorLoaded -= ResetDoor;
     }
 
     void DoorCheck()
@@ -29,6 +31,12 @@ public class ExitDoor : MonoBehaviour, IInteractible
     {
         Debug.Log("Opened door");
         yield return new();
+    }
+
+    public void ResetDoor()
+    {
+        killsDone = 0;
+        isOpen = false;
     }
 
     public void OnInteract()

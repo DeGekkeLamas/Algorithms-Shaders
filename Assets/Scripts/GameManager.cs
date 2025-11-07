@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public ExitDoor exit;
 
     public static GameManager instance;
+    public event Action OnNewFloorLoaded;
     
     private void Awake()
     {
@@ -25,7 +26,6 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        exit.killsRequired = DungeonGenerator.instance.Rda.AmountOfEnemiesToSpawn / 2;
         seed = DungeonGenerator.instance.seed;
     }
 
@@ -42,13 +42,15 @@ public class GameManager : MonoBehaviour
             }
         }
         SceneManager.LoadScene(scene);
-        exit.gameObject.SetActive(false);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         if (seed != 0)
             DungeonGenerator.instance.seed = seed + currentRoom - 1;
+        exit.killsRequired = DungeonGenerator.instance.Rda.AmountOfEnemiesToSpawn / 2;
+        OnNewFloorLoaded?.Invoke();
+        exit.gameObject?.SetActive(false);
     }
 
     public void ResetGame()

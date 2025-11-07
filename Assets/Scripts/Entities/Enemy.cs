@@ -18,7 +18,7 @@ public class Enemy : Entity
     }
 
     /// <summary>
-    /// Spawns corpse and lootdrops, also destroys object
+    /// Spawns lootdrops, also destroys object
     /// </summary>
     protected override void Death()
     {
