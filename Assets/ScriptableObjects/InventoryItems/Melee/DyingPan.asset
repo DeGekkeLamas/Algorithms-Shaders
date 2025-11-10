@@ -22,7 +22,7 @@ MonoBehaviour:
     damage: 50
     effectsApplied: []
     swingTime: 0.25
-    swingAngle: 45
+    swingAngle: -45
     distane: 3
     objectDistance: 2.5
     objectScale: 2

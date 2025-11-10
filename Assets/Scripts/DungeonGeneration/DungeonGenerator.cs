@@ -224,9 +224,10 @@ namespace DungeonGeneration
             int roomsRemovedAccessibility = 0;
             for (int i = 0; i < rooms.Count; i++)
             {
-                if (_dungeonGraph.adjacencyList[rooms[i].center].Count == 0)
+                RectInt room = rooms[i];
+                if (room != originRoom && _dungeonGraph.adjacencyList[room.center].Count == 0)
                 {
-                    RemoveRoom(rooms[i]);
+                    RemoveRoom(room);
                     roomsRemovedAccessibility++;
                     i--;
                     yield return interval;

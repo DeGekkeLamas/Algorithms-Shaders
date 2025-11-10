@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int scene;
     public IntScene[] roomExceptions;
     public ExitDoor exit;
+    public Transform RecipeUI;
 
     public static GameManager instance;
     public event Action OnNewFloorLoaded;

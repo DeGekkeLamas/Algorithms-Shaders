@@ -66,9 +66,8 @@ MonoBehaviour:
   dimensions:
     x: 100
     y: 50
-    width: 500
-    height: 1250
-  RecipeUI: {fileID: 0}
+    width: 550
+    height: 1375
   image: {fileID: 2122635771538226184, guid: e9c577e61725ac845bd37beb9a68188b, type: 3}
   recipeDisplay: {fileID: 1531725308929375615, guid: 420a8a0c3df7fcf4aac7bfbac7cbbe60, type: 3}
 --- !u!33 &6351884962458013998

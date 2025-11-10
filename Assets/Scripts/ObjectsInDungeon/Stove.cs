@@ -9,13 +9,25 @@ public class Stove : MonoBehaviour, IInteractible
 {
     public Recipe[] knownRecipes;
     public RectInt dimensions;
-    public Transform RecipeUI;
+    Transform RecipeUI;
     public RawImage image;
     public ItemCrafter recipeDisplay;
 
     static List<GameObject> spawnedObjects = new();
+    static Dictionary<RawImage, InventoryItem> imageTextures = new();
     bool isGenerated;
-    static bool menuIsOpen;
+    public static bool menuIsOpen;
+
+    private void Start()
+    {
+        RecipeUI = GameManager.instance.RecipeUI;
+    }
+
+    private void Update()
+    {
+        if (menuIsOpen && Input.GetKeyDown(KeyCode.Escape)) CloseMenu();
+    }
+
 
     public void OnInteract()
     {
@@ -31,11 +43,11 @@ public class Stove : MonoBehaviour, IInteractible
         else GenerateUI();
     }
 
-    public void CloseMenu()
+    public static void CloseMenu()
     {
         menuIsOpen = false;
         DisableAll();
-        RecipeUI.gameObject.SetActive(false);
+        GameManager.instance.RecipeUI.gameObject.SetActive(false);
     }
 
     void GenerateUI()
@@ -61,17 +73,19 @@ public class Stove : MonoBehaviour, IInteractible
 
                 /// Items
                 // Result
-                SpawnImage(pos + new Vector3(0, sizePerRecipe.y * .025f)
+                RawImage resultImage = SpawnImage(pos + new Vector3(0, sizePerRecipe.y * .025f)
                     , Inventory.instance.Contains(recipeItem) ? SpriteEditor.RemoveBG(recipeItem.ItemSprite) : 
                     recipeItem.ItemSilhouette, recipeItem.itemName);
+                imageTextures[resultImage] = recipeItem;
                 // Ingredients
                 for (int j = 0; j < recipe.ingredients.Length; j++)
                 {
                     InventoryItem currentItem = recipe.ingredients[j].GetItem();
-                    Vector2 position = pos + 
-                        new Vector3(Mathf.Lerp(-sizePerRecipe.x, sizePerRecipe.x, 1f/(Mathf.Min(1,recipe.ingredients.Length-1)) * (j)) * .25f , -sizePerRecipe.y * .025f);
-                    SpawnImage(position, Inventory.instance.Contains(currentItem) ?
+                    Vector2 position = pos +  new Vector3(Mathf.Lerp(-sizePerRecipe.x, sizePerRecipe.x, 
+                        Mathf.InverseLerp(0, recipe.ingredients.Length-1, j)) * .25f , -sizePerRecipe.y * .025f);
+                    RawImage ingredientImage = SpawnImage(position, Inventory.instance.Contains(currentItem) ?
                         SpriteEditor.RemoveBG(currentItem.ItemSprite) : currentItem.ItemSilhouette, currentItem.itemName);
+                    imageTextures[ingredientImage] = currentItem;
 
                 }
             }
@@ -79,13 +93,14 @@ public class Stove : MonoBehaviour, IInteractible
         isGenerated = true;
     }
 
-    void SpawnImage(Vector2 position, Texture2D texture, string name)
+    RawImage SpawnImage(Vector2 position, Texture2D texture, string name)
     {
         position *= RecipeUI.localScale;
         RawImage spawned = Instantiate(image, position, Quaternion.identity, RecipeUI);
         spawnedObjects.Add(spawned.gameObject);
         spawned.texture = texture;
         spawned.name = name;
+        return spawned;
     }
 
     public static void EnableAll()
@@ -93,6 +108,14 @@ public class Stove : MonoBehaviour, IInteractible
         for(int i = spawnedObjects.Count-1; i > 0; i--)
         {
             spawnedObjects[i].SetActive(true);
+        }
+        foreach(KeyValuePair<RawImage, InventoryItem> pair in imageTextures)
+        {
+            if (pair.Value != null)
+            {
+                pair.Key.texture = Inventory.instance.Contains(pair.Value) ? SpriteEditor.RemoveBG(pair.Value.ItemSprite) :
+                        pair.Value.ItemSilhouette;
+            }
         }
     }
 
