@@ -17,7 +17,7 @@ public class ExitDoor : MonoBehaviour, IInteractible
         GameManager.instance.OnNewFloorLoaded -= ResetDoor;
     }
 
-    void DoorCheck()
+    void DoorCheck(Entity _)
     {
         killsDone++;
         if (killsDone >= killsRequired)

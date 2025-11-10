@@ -983,7 +983,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scene: 0
-  roomExceptions: []
+  roomExceptions:
+  - number: 5
+    scene: 1
   exit: {fileID: 2740208576726757881}
   RecipeUI: {fileID: 3452442084628207339}
 --- !u!114 &2990881938606332820
