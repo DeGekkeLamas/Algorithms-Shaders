@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item:
     itemName: Cookbook
-    itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
+    itemModel: {fileID: 919132149155446097, guid: 6d814b774d7d652408678e19756bb5ca, type: 3}
     toolTip: Cookbook means you need to cook the book.
     maxStack: 1
     durability: 0

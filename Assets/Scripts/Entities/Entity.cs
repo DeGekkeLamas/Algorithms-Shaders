@@ -37,7 +37,7 @@ public abstract class Entity : MonoBehaviour
         currentHP = maxHP;
         movements = GetComponents<MovingObjectBase>();
     }
-    private void Start()
+    protected virtual void Start()
     {
         OnStatsChanged?.Invoke();
     }

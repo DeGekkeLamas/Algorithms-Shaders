@@ -26,8 +26,9 @@ public class PlayerController : Entity
         playerDestination = transform.position;
         projectileChartMat = projectileChart.material;
     }
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         transform.parent = GameManager.instance.transform;
     }
     protected virtual void Update()
