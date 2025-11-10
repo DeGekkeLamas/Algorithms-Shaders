@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        seed = DungeonGenerator.instance.seed;
+        if (DungeonGenerator.instance != null)
+        {
+            seed = DungeonGenerator.instance.seed;
+        }
     }
 
     public void MoveToNextRoom()
@@ -47,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (seed != 0)
+        if (seed != 0 && DungeonGenerator.instance != null)
             DungeonGenerator.instance.seed = seed + currentRoom - 1;
         exit.killsRequired = DungeonGenerator.instance.Rda.AmountOfEnemiesToSpawn / 2;
         OnNewFloorLoaded?.Invoke();

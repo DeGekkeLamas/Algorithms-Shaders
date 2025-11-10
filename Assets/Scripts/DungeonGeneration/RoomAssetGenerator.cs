@@ -83,6 +83,8 @@ namespace DungeonGeneration
 
         public IEnumerator SpawnEnemies()
         {
+            if (d.rooms.Count <= 1) yield break;
+
             GameObject enemyContainer = new("EnemyContainer");
             enemyContainer.transform.parent = roomAssetContainer.transform;
 
