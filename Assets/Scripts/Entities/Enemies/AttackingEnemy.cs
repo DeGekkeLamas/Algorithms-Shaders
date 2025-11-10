@@ -13,8 +13,6 @@ public abstract class AttackingEnemy : Enemy
     public bool showVisualDebug;
     bool isAttacking;
 
-    AnimationController anim;
-
     protected override void OnValidate()
     {
         base.OnValidate();
@@ -24,7 +22,6 @@ public abstract class AttackingEnemy : Enemy
     protected override void Awake()
     {
         base.Awake();
-        anim = GetComponent<AnimationController>();
     }
 
     private void Update()

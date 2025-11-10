@@ -41,13 +41,18 @@ public abstract class TargetSight : MonoBehaviour
     /// <returns></returns>
     public static bool CanSeePlayer(Transform self, Transform target, float maxVisionDistance, float visionAngle)
     {
+
+        return PlayerIsInRange(self, target, maxVisionDistance, visionAngle) &&
+            Physics.Raycast(self.transform.position + Vector3.up, target.position + Vector3.up - (self.transform.position), // Direct line of sight
+            out RaycastHit visionHit) && visionHit.collider.transform == target;                                         // to target
+    }
+    public static bool PlayerIsInRange(Transform self, Transform target, float maxVisionDistance, float visionAngle)
+    {
         Vector3 targetPos = target.position;
         float targetEnemyDistance = (targetPos - self.transform.position).magnitude;
 
         return targetEnemyDistance > .5f && targetEnemyDistance < maxVisionDistance && // Distance
-            VectorMath.GetAngleBetweenVectors(targetPos - self.transform.position, self.transform.forward) < visionAngle && // Vision angle
-                Physics.Raycast(self.transform.position + Vector3.up, targetPos + Vector3.up - (self.transform.position), // Direct line of sight
-            out RaycastHit visionHit) && visionHit.collider.transform == target;                                         // to target
+            VectorMath.GetAngleBetweenVectors(targetPos - self.transform.position, self.transform.forward) < visionAngle; // Vision angle
     }
 
     IEnumerator ShowDebug()

@@ -50,9 +50,12 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (seed != 0 && DungeonGenerator.instance != null)
-            DungeonGenerator.instance.seed = seed + currentRoom - 1;
-        exit.killsRequired = DungeonGenerator.instance.Rda.AmountOfEnemiesToSpawn / 2;
+        if (DungeonGenerator.instance != null)
+        {
+            if (seed != 0)
+                DungeonGenerator.instance.seed = seed + currentRoom - 1;
+            exit.killsRequired = DungeonGenerator.instance.Rda.AmountOfEnemiesToSpawn / 2;
+        }
         OnNewFloorLoaded?.Invoke();
         exit.gameObject?.SetActive(false);
     }

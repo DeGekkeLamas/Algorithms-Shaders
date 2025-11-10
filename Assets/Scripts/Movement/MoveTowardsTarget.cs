@@ -17,7 +17,7 @@ public class MoveTowardsTarget : MovingObjectBase
     }
     private void Update()
     {
-        transform.LookAt(target);
+        transform.eulerAngles = new Vector3(0,Quaternion.LookRotation(target.position - this.transform.position).eulerAngles.y,0);
         Vector3 diff = this.transform.position - target.position;
         float distance = diff.magnitude;
 

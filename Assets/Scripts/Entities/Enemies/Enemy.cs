@@ -10,11 +10,19 @@ public class Enemy : Entity
     [Header("Item drops")]
     [ReadOnly] public int totalDropChance;
     public ItemLootTable lootTable;
+    protected AnimationController anim;
+    public AnimationController Animator => anim;
 
     protected virtual void OnValidate()
     {
         totalDropChance = ItemLootDrop<InventoryItemData>.GetTotalItemProbability(lootTable.lootTable);
         ItemLootDrop<InventoryItemData>.MassValidate(lootTable.lootTable);
+    }
+
+    protected override void Awake()
+    {
+        anim = GetComponent<AnimationController>();
+        base.Awake();
     }
 
     /// <summary>
