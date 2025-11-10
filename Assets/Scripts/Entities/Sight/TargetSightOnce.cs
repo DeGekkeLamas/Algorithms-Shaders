@@ -5,13 +5,16 @@ using UnityEngine;
 /// </summary>
 public class TargetSightOnce : TargetSight
 {
-    protected override void Update()
+    bool hasSeenBefore;
+    protected void Update()
     {
-        base.Update();
         if (CanSeePlayer(this.transform, target.transform, maxVisionDistance, visionAngle))
         {
             MovementBeforeSeenTarget.enabled = false;
             MovementAfterSeenTarget.enabled = true;
+            if (!hasSeenBefore) InvokeOnFirstSeenTarget();
+            hasSeenBefore = true;
+
         }
     }
 }

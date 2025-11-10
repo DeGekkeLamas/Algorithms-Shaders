@@ -6,7 +6,17 @@ public class AttackCycleEnemy : Enemy
     [Header("Type specific")]
     public AttackCycle[] attackCycles;
     public float timeBetweenCycles = 1;
-    void Start()
+    protected override void Awake()
+    {
+        base.Awake();
+        if (this.TryGetComponent(out TargetSight sight))
+        {
+            sight.OnFirstSeenTarget += StartCycle;
+        }
+        else StartCycle();
+    }
+
+    void StartCycle()
     {
         StartCoroutine(AttackCycle());
     }

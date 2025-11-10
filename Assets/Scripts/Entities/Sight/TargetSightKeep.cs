@@ -6,9 +6,11 @@ using UnityEngine;
 /// </summary>
 public class TargetSightKeep : TargetSight
 {
-    protected override void Update()
+    bool hasSeenBefore;
+    protected void Update()
     {
-        base.Update();
+        if (!hasSeenBefore) InvokeOnFirstSeenTarget();
+        hasSeenBefore = true;
         bool canSeePlayer = CanSeePlayer(this.transform, target.transform, maxVisionDistance, visionAngle);
         MovementBeforeSeenTarget.enabled = !canSeePlayer;
         MovementAfterSeenTarget.enabled = canSeePlayer;

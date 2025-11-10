@@ -100,7 +100,7 @@ MonoBehaviour:
   HPIncrement: 10
   strengthIncrement: 0.1
   activeStatusEffects: []
-  xpToGive: 99
+  xpToGive: 90
   totalDropChance: 100
   lootTable: {fileID: 11400000, guid: a0bc65cd074498f4fb84040d238a0006, type: 2}
   attackCycles:
@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpText: {fileID: 0}
+  xpText: {fileID: 0}
   levelText: {fileID: 0}
   nameText: {fileID: 4291481863788173344}
 --- !u!114 &5482806033056124940

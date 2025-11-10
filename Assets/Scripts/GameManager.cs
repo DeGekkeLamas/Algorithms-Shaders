@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
             if (currentRoom == exception.number)
             {
                 SceneManager.LoadScene(exception.scene);
-                break;
+                return;
             }
         }
         SceneManager.LoadScene(scene);

@@ -15,7 +15,7 @@ MonoBehaviour:
   item:
     itemName: Super bowl
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
-    toolTip: 
+    toolTip: Not quite heavy enough to use for super bowling.
     maxStack: 1
     durability: 0
     grantsImmunityTo: []

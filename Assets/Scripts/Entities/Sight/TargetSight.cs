@@ -1,7 +1,7 @@
 using UnityEngine;
 using NaughtyAttributes;
 using System.Collections;
-using Unity.VisualScripting;
+using System;
 
 /// <summary>
 /// Base for switching between movement types depending on if target can be seen by object
@@ -17,6 +17,7 @@ public abstract class TargetSight : MonoBehaviour
     public float visionAngle = 75;
 
     public bool showDebug;
+    public event Action OnFirstSeenTarget;
 
     private void OnValidate()
     {
@@ -30,10 +31,11 @@ public abstract class TargetSight : MonoBehaviour
         if (target == null) target = PlayerController.instance.transform;
     }
 
-    protected virtual void Update()
+    protected void InvokeOnFirstSeenTarget()
     {
-        if (target == null) return;
+        OnFirstSeenTarget?.Invoke();
     }
+
 
     /// <summary>
     /// Returns if the object has sight of the player, based off distance, angle and objects in the way
