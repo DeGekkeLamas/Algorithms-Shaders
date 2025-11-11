@@ -15,16 +15,24 @@ public class FetchQuest : Quest
         SetDescription();
     }
 
-    protected override void Initialize()
+    public override void Initialize()
     {
         texture = toCollect.GetItem().ItemSprite;
         Inventory.instance.OnItemChanged += UpdateProgress;
+        base.Initialize();
     }
 
     protected void UpdateProgress()
     {
         if (Inventory.instance.Contains(toCollect.GetItem() ) ) OnCompleted();
+        InvokeOnProgressUpdated();
 
+    }
+
+    protected override void OnCompleted()
+    {
+        base.OnCompleted();
+        Inventory.instance.OnItemChanged -= UpdateProgress;
     }
 
     protected override string SetDescription()

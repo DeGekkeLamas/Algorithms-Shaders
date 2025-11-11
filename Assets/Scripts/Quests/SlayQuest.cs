@@ -17,10 +17,11 @@ public class SlayQuest : Quest
         SetDescription();
     }
 
-    protected override void Initialize()
+    public override void Initialize()
     {
         texture = RuntimePreviewGenerator.GenerateModelPreview(toKill.transform, 256, 256, false, true);
         Entity.OnAnyDeath += UpdateProgress;
+        base.Initialize();
     }
 
     void UpdateProgress(Entity toCheck)
@@ -28,6 +29,13 @@ public class SlayQuest : Quest
         if (toCheck.entityName == toKill.entityName) amountDone++;
 
         if (amountDone >= amount) OnCompleted();
+        InvokeOnProgressUpdated();
+    }
+
+    protected override void OnCompleted()
+    {
+        base.OnCompleted();
+        Entity.OnAnyDeath -= UpdateProgress;
     }
 
     protected override string SetDescription()
