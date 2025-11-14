@@ -13,9 +13,8 @@ public abstract class AttackingEnemy : Enemy
     public bool showVisualDebug;
     bool isAttacking;
 
-    protected override void OnValidate()
+    protected void OnValidate()
     {
-        base.OnValidate();
         if (showVisualDebug) StartCoroutine(ShowVisualDebug());
     }
 

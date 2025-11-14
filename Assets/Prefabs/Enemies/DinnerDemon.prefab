@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: -4471890809103436242}
   - component: {fileID: 2924243632334802397}
   - component: {fileID: 4581253673112429867}
+  - component: {fileID: -2763652267882714635}
   m_Layer: 0
   m_Name: DinnerDemon
   m_TagString: Untagged
@@ -69,8 +70,6 @@ MonoBehaviour:
   xpToGive: 20
   totalDropChance: 75
   lootTable: {fileID: 11400000, guid: 6f12e2f4b859e7540933723cf3ff9bf8, type: 2}
-  corpse: {fileID: 8120454217808119696, guid: 275cfdf6fcabefb4380cafd02cfad82a, type: 3}
-  tomatoSplat: {fileID: 966423011128645671, guid: 12141ac9eae3ad8428d53249e5653f16, type: 3}
   attackStartDistance: 14
   attackAngle: 75
   showVisualDebug: 0
@@ -241,6 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpText: {fileID: 0}
+  xpText: {fileID: 0}
   levelText: {fileID: 3570165424742009561}
   nameText: {fileID: 4930279257962950869}
 --- !u!114 &2924243632334802397
@@ -270,6 +270,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splat: {fileID: 966423011128645671, guid: 12141ac9eae3ad8428d53249e5653f16, type: 3}
+--- !u!114 &-2763652267882714635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18489271436508005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177b742a2bdac4046bd16c2c6f3312ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: 6f12e2f4b859e7540933723cf3ff9bf8, type: 2}
 --- !u!1 &699200300095502631
 GameObject:
   m_ObjectHideFlags: 0

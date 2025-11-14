@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 4375758346104909714}
   - component: {fileID: 5482806033056124940}
   - component: {fileID: 723436353155110538}
+  - component: {fileID: 7155184675417921291}
   m_Layer: 0
   m_Name: CerealWithWater
   m_TagString: Untagged
@@ -303,6 +304,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   splat: {fileID: 966423011128645671, guid: ad1c75ba6bec2c343946273f0f179617, type: 3}
+--- !u!114 &7155184675417921291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020230783508771579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 177b742a2bdac4046bd16c2c6f3312ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: a0bc65cd074498f4fb84040d238a0006, type: 2}
 --- !u!1 &5785726377127201296
 GameObject:
   m_ObjectHideFlags: 0
