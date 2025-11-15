@@ -41,11 +41,6 @@ public class AttackingEnemy : Enemy
         isAttacking = false;
     }
 
-    protected virtual void Attack()
-    {
-
-    }
-
     IEnumerator ShowVisualDebug()
     {
         while (showVisualDebug)

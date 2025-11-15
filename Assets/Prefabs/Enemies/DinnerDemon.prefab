@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5725711894490709162}
-  - component: {fileID: 3376632439275880072}
+  - component: {fileID: 1735096074375888911}
+  - component: {fileID: 6842347927762126252}
   - component: {fileID: 6232500598109979020}
   - component: {fileID: 2123825402581610809}
   - component: {fileID: 6087264469851866165}
@@ -46,7 +47,7 @@ Transform:
   - {fileID: 5875770768562176605}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3376632439275880072
+--- !u!114 &1735096074375888911
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 18489271436508005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8224d8a84f119c140a9b8a3518ca23b6, type: 3}
+  m_Script: {fileID: 11500000, guid: a2d42f786b28da4489d6a6db42a3f620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityName: Dinner demon
@@ -68,11 +69,23 @@ MonoBehaviour:
   strengthIncrement: 0.1
   activeStatusEffects: []
   xpToGive: 20
-  totalDropChance: 75
-  lootTable: {fileID: 11400000, guid: 6f12e2f4b859e7540933723cf3ff9bf8, type: 2}
+  totalDropChance: 0
   attackStartDistance: 14
   attackAngle: 75
+  attackToDo: {fileID: 6842347927762126252}
   showVisualDebug: 0
+--- !u!114 &6842347927762126252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18489271436508005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf769aae49ff3c4bb6eea80ff581b01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   projectile: {fileID: 2142696792574118062, guid: b38b8dbf5d1efab429b85183bbd4b35b, type: 3}
   projectileOrigin: {fileID: 821464050600228753}
 --- !u!136 &6232500598109979020

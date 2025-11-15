@@ -352,11 +352,11 @@ MonoBehaviour:
   AmountOfEnemiesToSpawn: 8
   totalEnemyChance: 100
   enemiesToSpawn:
-  - itemName: DinnerDemon (RangedEnemy), 65%
-    item: {fileID: 3376632439275880072, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
+  - itemName: DinnerDemon (AttackingEnemy), 65%
+    item: {fileID: 1735096074375888911, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
     probability: 65
-  - itemName: CerealKiller (MeleeEnemy), 35%
-    item: {fileID: 649392384874580996, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+  - itemName: CerealKiller (AttackingEnemy), 35%
+    item: {fileID: 2749727292304734216, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
     probability: 35
   counterMiddle: {fileID: 9011421418820237759, guid: 0d413d8ccf516d74bb2fa084514f420d, type: 3}
   counterCornerL: {fileID: 2101207922729177578, guid: c27b16d52413df147afcbd103875382f, type: 3}

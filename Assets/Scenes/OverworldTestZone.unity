@@ -20480,10 +20480,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3376632439275880072, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
-      propertyPath: showVisualDebug
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5725711894490709162, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.94104
@@ -23582,14 +23578,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1435547643}
     m_Modifications:
-    - target: {fileID: 649392384874580996, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: showVisualDebug
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2850295908962625381, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      propertyPath: showDebug
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5020230783508771579, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       propertyPath: m_Name
       value: CerealKiller

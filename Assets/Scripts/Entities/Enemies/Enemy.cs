@@ -6,9 +6,8 @@ using NaughtyAttributes;
 
 public class Enemy : Entity
 {
-    public float xpToGive = 10;
-    [Header("Item drops")]
-    [ReadOnly] public int totalDropChance;
+    public float xpToGive = 20;
+
     protected AnimationController anim;
     public AnimationController Animator => anim;
 
