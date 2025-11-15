@@ -19,12 +19,17 @@ public class FetchQuest : Quest
     {
         texture = toCollect.GetItem().ItemSprite;
         Inventory.instance.OnItemChanged += UpdateProgress;
+        maxProgress = 1;
         base.Initialize();
     }
 
     protected void UpdateProgress()
     {
-        if (Inventory.instance.Contains(toCollect.GetItem() ) ) OnCompleted();
+        if (Inventory.instance.Contains(toCollect.GetItem() ) )
+        {
+            progress = 1;
+            OnCompleted();
+        }
         InvokeOnProgressUpdated();
 
     }

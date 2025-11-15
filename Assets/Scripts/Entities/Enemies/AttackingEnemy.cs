@@ -2,13 +2,14 @@ using NaughtyAttributes;
 using System.Collections;
 using UnityEngine;
 
-public abstract class AttackingEnemy : Enemy
+public class AttackingEnemy : Enemy
 {
     [Header("Attack distance")]
     [InfoBox("maxAttackDistance is how far away the target will still receive damage, " +
         "attackStartDistance is from how far away the enemy will start attacking")]
-    public float attackStartDistance = 2;
+    public float attackStartDistance = 4;
     public float attackAngle = 75;
+    public AttackCycle attackToDo;
 
     public bool showVisualDebug;
     bool isAttacking;
@@ -36,21 +37,14 @@ public abstract class AttackingEnemy : Enemy
     {
         //Debug.Log("Started attack");
         isAttacking = true;
-        float originalSpeed = moveSpeed;
-        ChangeMoveSpeed(0);
-        // Wait for animation to finish
-        yield return anim.WaitForAnimation("Attack");
-
-        // Do attack
-        Attack();
-
-        yield return null;
-        yield return anim.WaitForCurrentAnimation();
+        yield return attackToDo.Attack(this);
         isAttacking = false;
-        ChangeMoveSpeed(originalSpeed);
     }
 
-    protected abstract void Attack();
+    protected virtual void Attack()
+    {
+
+    }
 
     IEnumerator ShowVisualDebug()
     {

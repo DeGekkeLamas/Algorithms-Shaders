@@ -3,17 +3,13 @@ using UnityEngine;
 /// <summary>
 /// Quest presenter for quest details that will be updated as the quest progresses
 /// </summary>
-public abstract class QuestPresenterOnProgressUpdated : MonoBehaviour
+public abstract class QuestPresenterOnProgressUpdated : QuestPresenter
 {
-    public Quest boundQuest;
-
-    protected abstract void UpdateDisplay();
-
-    private void OnEnable()
+    private void Start()
     {
         boundQuest.OnProgressUpdated += UpdateDisplay;
     }
-    private void OnDisable()
+    private void OnDestroy()
     {
         boundQuest.OnProgressUpdated -= UpdateDisplay;
     }

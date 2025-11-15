@@ -3,8 +3,12 @@ using UnityEngine.UI;
 
 public class QuestPresenterTexture : QuestPresenterOnInitialize
 {
-    public RawImage image;
-    protected override void SetDisplay()
+    RawImage image;
+    private void Awake()
+    {
+        image = this.GetComponent<RawImage>();
+    }
+    protected override void UpdateDisplay()
     {
         image.texture = boundQuest.texture;
     }

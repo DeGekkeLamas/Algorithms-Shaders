@@ -6,8 +6,14 @@ public class ExitDoor : MonoBehaviour, IInteractible
     public int killsRequired;
     int killsDone = 0;
     bool isOpen;
+    private void Start()
+    {
+        Entity.OnAnyDeath += DoorCheck;
+        GameManager.instance.OnNewFloorLoaded += ResetDoor;
+    }
     private void OnEnable()
     {
+        if (!didStart) return;
         Entity.OnAnyDeath += DoorCheck;
         GameManager.instance.OnNewFloorLoaded += ResetDoor;
     }

@@ -103,7 +103,6 @@ MonoBehaviour:
   activeStatusEffects: []
   xpToGive: 90
   totalDropChance: 100
-  lootTable: {fileID: 11400000, guid: a0bc65cd074498f4fb84040d238a0006, type: 2}
   attackCycles:
   - {fileID: 7927924630903075367}
   - {fileID: 7927924630903075367}
@@ -411,6 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: 4
+  attackAngle: 180
   showDebug: 0
 --- !u!1001 &8058027796200294125
 PrefabInstance:

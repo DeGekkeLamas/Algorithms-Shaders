@@ -17,7 +17,7 @@ public class AttackCycleLunge : AttackCycle
         if (showDebug) StartCoroutine(ShowDebug());
     }
 
-    public override IEnumerator Attack(AttackCycleEnemy source)
+    public override IEnumerator Attack(Enemy source)
     {
         Vector3 oriPos = source.transform.position;
         // Jump up

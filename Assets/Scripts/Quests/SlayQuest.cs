@@ -21,12 +21,14 @@ public class SlayQuest : Quest
     {
         texture = RuntimePreviewGenerator.GenerateModelPreview(toKill.transform, 256, 256, false, true);
         Entity.OnAnyDeath += UpdateProgress;
+        maxProgress = amount;
         base.Initialize();
     }
 
     void UpdateProgress(Entity toCheck)
     {
         if (toCheck.entityName == toKill.entityName) amountDone++;
+        progress = amountDone;
 
         if (amountDone >= amount) OnCompleted();
         InvokeOnProgressUpdated();

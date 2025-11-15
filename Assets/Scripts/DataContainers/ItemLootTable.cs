@@ -16,6 +16,8 @@ namespace InventoryStuff
         {
             ItemLootDrop<InventoryItemData>.MassValidate(lootTable);
             totalChance = ItemLootDrop<InventoryItemData>.GetTotalItemProbability(lootTable);
+
+            if (totalChance > 100) Debug.LogWarning("Total item chance is greater than 100%, items at the bottom of the table may be unobtainable");
         }
 
         [Button]

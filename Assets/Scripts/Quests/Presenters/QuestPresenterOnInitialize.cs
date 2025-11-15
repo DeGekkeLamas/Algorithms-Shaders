@@ -3,18 +3,14 @@ using UnityEngine;
 /// <summary>
 /// Quest presenter for stats that will always remain the same and dont need to be updated after the quest is first initialized
 /// </summary>
-public abstract class QuestPresenterOnInitialize : MonoBehaviour
+public abstract class QuestPresenterOnInitialize : QuestPresenter
 {
-    public Quest boundQuest;
-
-    protected abstract void SetDisplay();
-
-    private void OnEnable()
+    private void Start()
     {
-        boundQuest.OnInitialize += SetDisplay;
+        boundQuest.OnInitialize += UpdateDisplay;
     }
-    private void OnDisable()
+    private void OnDestroy()
     {
-        boundQuest.OnInitialize -= SetDisplay;
+        boundQuest.OnInitialize -= UpdateDisplay;
     }
 }

@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9089323051470772063}
-  - component: {fileID: 649392384874580996}
+  - component: {fileID: 2749727292304734216}
+  - component: {fileID: 8090648700422748870}
   - component: {fileID: 4282499219386979268}
   - component: {fileID: 6649370425793603788}
   - component: {fileID: 2850295908962625381}
@@ -46,7 +47,7 @@ Transform:
   - {fileID: 3345990610837203624}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &649392384874580996
+--- !u!114 &2749727292304734216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,25 +56,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 5020230783508771579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23483b5eae9357f4b98a3b1e2394f4ee, type: 3}
+  m_Script: {fileID: 11500000, guid: a2d42f786b28da4489d6a6db42a3f620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityName: Cereal killer
   maxHP: 200
   moveSpeed: 2
-  strength: 15
+  strength: 25
   level: 1
   XPRequired: 100
   HPIncrement: 10
   strengthIncrement: 0.1
   activeStatusEffects: []
   xpToGive: 20
-  totalDropChance: 55
-  lootTable: {fileID: 11400000, guid: ba47c2a9fc94b53418f5160326551949, type: 2}
+  totalDropChance: 0
   attackStartDistance: 2.5
   attackAngle: 75
+  attackToDo: {fileID: 8090648700422748870}
   showVisualDebug: 0
-  maxAttackDistance: 3
+--- !u!114 &8090648700422748870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020230783508771579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5b187b279d79f48a135c9461964d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 3
+  attackAngle: 75
+  showDebug: 0
 --- !u!136 &4282499219386979268
 CapsuleCollider:
   m_ObjectHideFlags: 0

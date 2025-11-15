@@ -10,15 +10,19 @@ public abstract class Quest : ScriptableObject
     public event Action OnInitialize;
     public event Action OnProgressUpdated;
 
+    [HideInInspector] public int progress = 0;
+    [HideInInspector] public int maxProgress = 1;
+
     public virtual void Initialize()
     {
         InvokeOnInitialize();
+        InvokeOnProgressUpdated();
     }
     protected abstract string SetDescription();
 
     protected virtual void OnCompleted()
     {
-
+        Debug.Log($"Completed quest {this.name}");
     }
 
     protected void InvokeOnProgressUpdated()

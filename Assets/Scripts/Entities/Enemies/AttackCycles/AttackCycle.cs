@@ -3,5 +3,5 @@ using UnityEngine;
 
 public abstract class AttackCycle : MonoBehaviour
 {
-    public abstract IEnumerator Attack(AttackCycleEnemy source);
+    public abstract IEnumerator Attack(Enemy source);
 }
