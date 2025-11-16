@@ -1,4 +1,5 @@
 using UnityEngine;
+using Entities;
 
 namespace InventoryStuff
 {

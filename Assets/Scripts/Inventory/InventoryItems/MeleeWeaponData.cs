@@ -1,5 +1,8 @@
 using System.Collections;
 using UnityEngine;
+using Entities;
+using Entities.Player;
+using Entities.StatusEffects;
 
 namespace InventoryStuff
 {

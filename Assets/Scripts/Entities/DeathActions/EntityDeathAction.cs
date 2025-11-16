@@ -1,20 +1,23 @@
 using UnityEngine;
 
-public abstract class EntityDeathAction : MonoBehaviour
+namespace Entities
 {
-    Entity boundEntity;
-    private void Awake()
+    public abstract class EntityDeathAction : MonoBehaviour
     {
-        boundEntity = this.GetComponent<Entity>();
-    }
-    private void OnEnable()
-    {
-        boundEntity.OnDeath += OnDeath;
-    }
-    private void OnDisable()
-    {
-        boundEntity.OnDeath -= OnDeath;
-    }
+        Entity boundEntity;
+        private void Awake()
+        {
+            boundEntity = this.GetComponent<Entity>();
+        }
+        private void OnEnable()
+        {
+            boundEntity.OnDeath += OnDeath;
+        }
+        private void OnDisable()
+        {
+            boundEntity.OnDeath -= OnDeath;
+        }
 
-    protected abstract void OnDeath();
+        protected abstract void OnDeath();
+    }
 }

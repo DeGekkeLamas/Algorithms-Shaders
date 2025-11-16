@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Entities;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour

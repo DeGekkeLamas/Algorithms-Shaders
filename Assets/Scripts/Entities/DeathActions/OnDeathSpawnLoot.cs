@@ -1,18 +1,26 @@
 using InventoryStuff;
 using UnityEngine;
 
-public class OnDeathSpawnLoot : EntityDeathAction
+namespace Entities
 {
-    public ItemLootTable lootTable;
-
-    protected override void OnDeath()
+    /// <summary>
+    /// Spawn an item from the loottable when the bound entity dies
+    /// </summary>
+    public class OnDeathSpawnLoot : EntityDeathAction
     {
-        InventoryItemData itemDropped = ItemLootDrop<InventoryItemData>.GetItemFromLoottable(lootTable.lootTable);
-        if (itemDropped != null && itemDropped != null)
+        public ItemLootTable lootTable;
+
+        protected override void OnDeath()
         {
-            Debug.Log($"{gameObject.name} dropped {itemDropped.GetItem().itemName}");
-            PickupItem pickup = PickupItem.SpawnPickup(itemDropped.GetItem(), this.transform, Vector3.up);
-            pickup.transform.parent = this.transform.parent;
+            // Spawn drops
+            InventoryItemData itemDropped = ItemLootDrop<InventoryItemData>.GetItemFromLoottable(lootTable.lootTable);
+            if (itemDropped != null && itemDropped != null)
+            {
+                Debug.Log($"{gameObject.name} dropped {itemDropped.GetItem().itemName}");
+                PickupItem pickup = PickupItem.SpawnPickup(itemDropped.GetItem(), this.transform, Vector3.up);
+                pickup.transform.parent = this.transform.parent;
+            }
         }
     }
+
 }

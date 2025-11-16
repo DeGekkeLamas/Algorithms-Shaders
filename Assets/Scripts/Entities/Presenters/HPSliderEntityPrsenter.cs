@@ -1,15 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HPSliderEntityPrsenter : EntityDataPresenter
+namespace Entities.Presenters
 {
-    [Header("HP slider")]
-    [SerializeField] Slider HPSlider;
-    [SerializeField] Color XPColorEmpty = Color.white;
-    [SerializeField] Color XPColorFull = Color.white;
-    protected override void UpdateDisplay()
+    public class HPSliderEntityPrsenter : EntityDataPresenter
     {
-        SetSlider(HPSlider, boundEntity.CurrentHP, boundEntity.maxHP);
-        SetSliderColor(HPSlider, XPColorEmpty, XPColorFull);
+        [Header("HP slider")]
+        [SerializeField] Slider HPSlider;
+        [SerializeField] Color XPColorEmpty = Color.white;
+        [SerializeField] Color XPColorFull = Color.white;
+        protected override void UpdateDisplay()
+        {
+            SetSlider(HPSlider, boundEntity.CurrentHP, boundEntity.maxHP);
+            SetSliderColor(HPSlider, XPColorEmpty, XPColorFull);
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Entities;
 
 public class ExitDoor : MonoBehaviour, IInteractible
 {

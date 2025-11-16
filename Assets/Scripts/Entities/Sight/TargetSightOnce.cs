@@ -1,20 +1,23 @@
 using UnityEngine;
 
-/// <summary>
-/// Switch between movement types once the target has been seen for the first time
-/// </summary>
-public class TargetSightOnce : TargetSight
+namespace MovementStuff
 {
-    bool hasSeenBefore;
-    protected void Update()
+    /// <summary>
+    /// Switch between movement types once the target has been seen for the first time
+    /// </summary>
+    public class TargetSightOnce : TargetSight
     {
-        if (CanSeePlayer(this.transform, target.transform, maxVisionDistance, visionAngle))
+        bool hasSeenBefore;
+        protected void Update()
         {
-            MovementBeforeSeenTarget.enabled = false;
-            MovementAfterSeenTarget.enabled = true;
-            if (!hasSeenBefore) InvokeOnFirstSeenTarget();
-            hasSeenBefore = true;
+            if (CanSeePlayer(this.transform, target.transform, maxVisionDistance, visionAngle))
+            {
+                MovementBeforeSeenTarget.enabled = false;
+                MovementAfterSeenTarget.enabled = true;
+                if (!hasSeenBefore) InvokeOnFirstSeenTarget();
+                hasSeenBefore = true;
 
+            }
         }
     }
 }

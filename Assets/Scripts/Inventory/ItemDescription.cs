@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using Entities.StatusEffects;
 
 namespace InventoryStuff
 {

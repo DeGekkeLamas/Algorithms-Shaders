@@ -1,18 +1,21 @@
 using UnityEngine;
 using InventoryStuff;
 
-public class Crate : Entity
+namespace Entities
 {
-    public InventoryItemData[] itemsToGive;
-    public PickupItem pickupSpawned;
-
-    protected override void Death()
+    public class Crate : Entity
     {
-        foreach (var item in itemsToGive)
+        public InventoryItemData[] itemsToGive;
+        public PickupItem pickupSpawned;
+
+        protected override void Death()
         {
-            Instantiate(pickupSpawned, transform.position, Quaternion.identity).itemToGive = item.GetItem();
-            Debug.Log($"Spawned {item.GetItem().itemName}, from {entityName}");
+            foreach (var item in itemsToGive)
+            {
+                Instantiate(pickupSpawned, transform.position, Quaternion.identity).itemToGive = item.GetItem();
+                Debug.Log($"Spawned {item.GetItem().itemName}, from {entityName}");
+            }
+            Destroy(this.gameObject);
         }
-        Destroy(this.gameObject);
     }
 }

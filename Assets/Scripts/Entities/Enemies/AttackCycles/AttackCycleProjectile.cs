@@ -1,27 +1,30 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackCycleProjectile : AttackCycle
+namespace Entities.Enemies
 {
-    public Projectile projectile;
-    public Transform projectileOrigin;
-
-    public override IEnumerator Attack(Enemy source)
+    public class AttackCycleProjectile : AttackCycle
     {
-        float originalSpeed = source.moveSpeed;
-        source.ChangeMoveSpeed(0);
-        // Wait for animation to finish
-        yield return source.Animator.WaitForAnimation("Attack");
+        public Projectile projectile;
+        public Transform projectileOrigin;
 
-        // Do attack
-        Projectile spawned = Instantiate(projectile, projectileOrigin.position, projectileOrigin.rotation, Projectile.projectileContainer);
-        spawned.damage = source.strength;
-        Rigidbody rigidbody = spawned.GetComponent<Rigidbody>();
-        rigidbody.AddForce(spawned.projectileSpeed * transform.forward);
-        rigidbody.angularVelocity = Vector3.Cross(transform.forward, Vector3.up) * -projectile.rotationIntensity;
+        public override IEnumerator Attack(Enemy source)
+        {
+            float originalSpeed = source.moveSpeed;
+            source.ChangeMoveSpeed(0);
+            // Wait for animation to finish
+            yield return source.Animator.WaitForAnimation("Attack");
 
-        yield return null;
-        yield return source.Animator.WaitForCurrentAnimation();
-        source.ChangeMoveSpeed(originalSpeed);
+            // Do attack
+            Projectile spawned = Instantiate(projectile, projectileOrigin.position, projectileOrigin.rotation, Projectile.projectileContainer);
+            spawned.damage = source.strength;
+            Rigidbody rigidbody = spawned.GetComponent<Rigidbody>();
+            rigidbody.AddForce(spawned.projectileSpeed * transform.forward);
+            rigidbody.angularVelocity = Vector3.Cross(transform.forward, Vector3.up) * -projectile.rotationIntensity;
+
+            yield return null;
+            yield return source.Animator.WaitForCurrentAnimation();
+            source.ChangeMoveSpeed(originalSpeed);
+        }
     }
 }

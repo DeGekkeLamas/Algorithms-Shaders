@@ -1,5 +1,6 @@
 using InventoryStuff;
 using UnityEngine;
+using Entities;
 
 
 [CreateAssetMenu(

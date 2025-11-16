@@ -1,6 +1,8 @@
 using NaughtyAttributes;
 using System;
 using UnityEngine;
+using Entities;
+using Entities.StatusEffects;
 
 namespace InventoryStuff
 {

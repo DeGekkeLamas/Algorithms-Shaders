@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class OnDeathSpawnCorpse : EntityDeathAction
+namespace Entities
 {
-    public Transform target;
-    public GameObject corpse;
-    protected override void OnDeath()
+    public class OnDeathSpawnCorpse : EntityDeathAction
     {
-        Instantiate(corpse, target.position, target.rotation);
-        Destroy(target.gameObject);
+        public Transform target;
+        public GameObject corpse;
+        protected override void OnDeath()
+        {
+            Instantiate(corpse, target.position, target.rotation);
+            Destroy(target.gameObject);
+        }
     }
 }

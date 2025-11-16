@@ -1,12 +1,19 @@
 using UnityEngine;
 
-public class OnDeathSpawnSplat : EntityDeathAction
+namespace Entities
 {
-    public GameObject splat;
-
-    protected override void OnDeath()
+    /// <summary>
+    /// Spawns object on floor when bound entity dies
+    /// </summary>
+    public class OnDeathSpawnSplat : EntityDeathAction
     {
-        Physics.Raycast(this.transform.position + Vector3.up, Vector3.down, out RaycastHit hitInfo);
-        Instantiate(splat, hitInfo.point + new Vector3(0, 0.01f, 0), Quaternion.identity);
+        public GameObject splat;
+
+        protected override void OnDeath()
+        {
+            // Spawn at floor
+            Physics.Raycast(this.transform.position + Vector3.up, Vector3.down, out RaycastHit hitInfo);
+            Instantiate(splat, hitInfo.point + new Vector3(0, 0.01f, 0), Quaternion.identity);
+        }
     }
 }

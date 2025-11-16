@@ -1,7 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public abstract class AttackCycle : MonoBehaviour
+namespace Entities.Enemies
 {
-    public abstract IEnumerator Attack(Enemy source);
+    public abstract class AttackCycle : MonoBehaviour
+    {
+        public abstract IEnumerator Attack(Enemy source);
+    }
 }

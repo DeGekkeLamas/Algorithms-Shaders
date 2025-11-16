@@ -3,29 +3,33 @@ using TMPro;
 using UnityEngine;
 using InventoryStuff;
 using NaughtyAttributes;
+using Entities.Player;
 
-public class Enemy : Entity
+namespace Entities.Enemies
 {
-    public float xpToGive = 20;
-
-    protected AnimationController anim;
-    public AnimationController Animator => anim;
-
-    protected override void Awake()
+    public class Enemy : Entity
     {
-        anim = GetComponent<AnimationController>();
-        base.Awake();
-    }
+        public float xpToGive = 20;
 
-    /// <summary>
-    /// Spawns lootdrops, also destroys object
-    /// </summary>
-    protected override void Death()
-    {
-        base.Death();
+        protected AnimationController anim;
+        public AnimationController Animator => anim;
 
-        PlayerController.instance.AddXP(xpToGive);
-        StopAllCoroutines();
-        Destroy(this.gameObject);
+        protected override void Awake()
+        {
+            anim = GetComponent<AnimationController>();
+            base.Awake();
+        }
+
+        /// <summary>
+        /// Spawns lootdrops, also destroys object
+        /// </summary>
+        protected override void Death()
+        {
+            base.Death();
+
+            PlayerController.instance.AddXP(xpToGive);
+            StopAllCoroutines();
+            Destroy(this.gameObject);
+        }
     }
 }

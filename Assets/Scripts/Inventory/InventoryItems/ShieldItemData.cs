@@ -1,4 +1,5 @@
 using UnityEngine;
+using Entities;
 
 namespace InventoryStuff
 {
@@ -18,7 +19,7 @@ namespace InventoryStuff
         public float dmgReduction;
         public override void UseItem(Entity source, Vector3 inputDir)
         {
-
+            Debug.LogWarning("Shield items are not implemented yet");
         }
     }
 
