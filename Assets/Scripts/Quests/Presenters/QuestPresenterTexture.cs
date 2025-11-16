@@ -1,15 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuestPresenterTexture : QuestPresenterOnInitialize
+namespace Quests.Presenters
 {
-    RawImage image;
-    private void Awake()
+    public class QuestPresenterTexture : QuestPresenterOnInitialize
     {
-        image = this.GetComponent<RawImage>();
-    }
-    protected override void UpdateDisplay()
-    {
-        image.texture = boundQuest.texture;
+        RawImage image;
+        private void Awake()
+        {
+            image = this.GetComponent<RawImage>();
+        }
+        protected override void UpdateDisplay()
+        {
+            image.texture = boundQuest.texture;
+        }
     }
 }

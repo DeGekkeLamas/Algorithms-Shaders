@@ -1,52 +1,55 @@
 using InventoryStuff;
 using UnityEngine;
 
-
-[CreateAssetMenu(
-    fileName = "FetchQuest",
-    menuName = "ScriptableObjects/Quests/FetchQuest",
-    order = 0)]
-public class FetchQuest : Quest
+namespace Quests
 {
-    public InventoryItemData toCollect;
 
-    private void OnValidate()
+    [CreateAssetMenu(
+        fileName = "FetchQuest",
+        menuName = "ScriptableObjects/Quests/FetchQuest",
+        order = 0)]
+    public class FetchQuest : Quest
     {
-        SetDescription();
-    }
+        public InventoryItemData toCollect;
 
-    public override void Initialize()
-    {
-        texture = toCollect.GetItem().ItemSprite;
-        Inventory.instance.OnItemChanged += UpdateProgress;
-        maxProgress = 1;
-        base.Initialize();
-    }
-
-    protected void UpdateProgress()
-    {
-        if (Inventory.instance.Contains(toCollect.GetItem() ) )
+        private void OnValidate()
         {
-            progress = 1;
-            OnCompleted();
+            SetDescription();
         }
-        InvokeOnProgressUpdated();
 
-    }
+        public override void Initialize()
+        {
+            texture = toCollect.GetItem().ItemSprite;
+            Inventory.instance.OnItemChanged += UpdateProgress;
+            maxProgress = 1;
+            base.Initialize();
+        }
 
-    protected override void OnCompleted()
-    {
-        base.OnCompleted();
-        Inventory.instance.OnItemChanged -= UpdateProgress;
-    }
+        protected void UpdateProgress()
+        {
+            if (Inventory.instance.Contains(toCollect.GetItem()))
+            {
+                progress = 1;
+                OnCompleted();
+            }
+            InvokeOnProgressUpdated();
 
-    protected override string SetDescription()
-    {
-        if (toCollect == null) return "No item set";
+        }
 
-        string desc = $"Obtain {("aeiouAEIOU".Contains(toCollect.GetItem().itemName[0]) ? "an" : "a")} {toCollect.GetItem().itemName}";
+        protected override void OnCompleted()
+        {
+            base.OnCompleted();
+            Inventory.instance.OnItemChanged -= UpdateProgress;
+        }
 
-        description = desc;
-        return desc;
+        protected override string SetDescription()
+        {
+            if (toCollect == null) return "No item set";
+
+            string desc = $"Obtain {("aeiouAEIOU".Contains(toCollect.GetItem().itemName[0]) ? "an" : "a")} {toCollect.GetItem().itemName}";
+
+            description = desc;
+            return desc;
+        }
     }
 }

@@ -1,15 +1,18 @@
 using TMPro;
 using UnityEngine;
 
-public class QuestPresenterDescription : QuestPresenterOnInitialize
+namespace Quests.Presenters
 {
-    TMP_Text text;
-    private void Awake()
+    public class QuestPresenterDescription : QuestPresenterOnInitialize
     {
-        text = this.GetComponent<TMP_Text>();
-    }
-    protected override void UpdateDisplay()
-    {
-        text.text = boundQuest.description;
+        TMP_Text text;
+        private void Awake()
+        {
+            text = this.GetComponent<TMP_Text>();
+        }
+        protected override void UpdateDisplay()
+        {
+            text.text = boundQuest.description;
+        }
     }
 }

@@ -1,16 +1,20 @@
 using UnityEngine;
 
-/// <summary>
-/// Quest presenter for stats that will always remain the same and dont need to be updated after the quest is first initialized
-/// </summary>
-public abstract class QuestPresenterOnInitialize : QuestPresenter
+
+namespace Quests.Presenters
 {
-    private void Start()
+    /// <summary>
+    /// Quest presenter for stats that will always remain the same and dont need to be updated after the quest is first initialized
+    /// </summary>
+    public abstract class QuestPresenterOnInitialize : QuestPresenter
     {
-        boundQuest.OnInitialize += UpdateDisplay;
-    }
-    private void OnDestroy()
-    {
-        boundQuest.OnInitialize -= UpdateDisplay;
+        private void Start()
+        {
+            boundQuest.OnInitialize += UpdateDisplay;
+        }
+        private void OnDestroy()
+        {
+            boundQuest.OnInitialize -= UpdateDisplay;
+        }
     }
 }

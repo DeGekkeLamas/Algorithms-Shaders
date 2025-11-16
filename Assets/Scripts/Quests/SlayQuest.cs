@@ -2,52 +2,55 @@ using InventoryStuff;
 using UnityEngine;
 using Entities;
 
-
-[CreateAssetMenu(
-    fileName = "SlayQuest",
-    menuName = "ScriptableObjects/Quests/SlayQuest",
-    order = 0)]
-public class SlayQuest : Quest
+namespace Quests
 {
-    public Entity toKill;
-    public int amount;
-    int amountDone;
 
-    private void OnValidate()
+    [CreateAssetMenu(
+        fileName = "SlayQuest",
+        menuName = "ScriptableObjects/Quests/SlayQuest",
+        order = 0)]
+    public class SlayQuest : Quest
     {
-        SetDescription();
-    }
+        public Entity toKill;
+        public int amount;
+        int amountDone;
 
-    public override void Initialize()
-    {
-        texture = RuntimePreviewGenerator.GenerateModelPreview(toKill.transform, 256, 256, false, true);
-        Entity.OnAnyDeath += UpdateProgress;
-        maxProgress = amount;
-        base.Initialize();
-    }
+        private void OnValidate()
+        {
+            SetDescription();
+        }
 
-    void UpdateProgress(Entity toCheck)
-    {
-        if (toCheck.entityName == toKill.entityName) amountDone++;
-        progress = amountDone;
+        public override void Initialize()
+        {
+            texture = RuntimePreviewGenerator.GenerateModelPreview(toKill.transform, 256, 256, false, true);
+            Entity.OnAnyDeath += UpdateProgress;
+            maxProgress = amount;
+            base.Initialize();
+        }
 
-        if (amountDone >= amount) OnCompleted();
-        InvokeOnProgressUpdated();
-    }
+        void UpdateProgress(Entity toCheck)
+        {
+            if (toCheck.entityName == toKill.entityName) amountDone++;
+            progress = amountDone;
 
-    protected override void OnCompleted()
-    {
-        base.OnCompleted();
-        Entity.OnAnyDeath -= UpdateProgress;
-    }
+            if (amountDone >= amount) OnCompleted();
+            InvokeOnProgressUpdated();
+        }
 
-    protected override string SetDescription()
-    {
-        if (toKill == null) return "No item set";
+        protected override void OnCompleted()
+        {
+            base.OnCompleted();
+            Entity.OnAnyDeath -= UpdateProgress;
+        }
 
-        string desc = $"Kill {amount} {toKill.entityName}{(amount != 1 ? "s" : "")}";
+        protected override string SetDescription()
+        {
+            if (toKill == null) return "No item set";
 
-        description = desc;
-        return desc;
+            string desc = $"Kill {amount} {toKill.entityName}{(amount != 1 ? "s" : "")}";
+
+            description = desc;
+            return desc;
+        }
     }
 }
