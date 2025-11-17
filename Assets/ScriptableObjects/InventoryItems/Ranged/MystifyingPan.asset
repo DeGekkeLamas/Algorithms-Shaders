@@ -17,15 +17,13 @@ MonoBehaviour:
     itemModel: {fileID: 919132149155446097, guid: 4cda69c66e4642642805242b9890c7d2, type: 3}
     toolTip: One pan to rule them all...
     maxStack: 1
-    durability: 40
+    durability: 1000
     grantsImmunityTo: []
-    itemSprite: {fileID: 0}
-    canUseItem: 1
-    damage: 40
+    damage: 20
     effectApplied: []
     projectile: {fileID: -4791254542994142077, guid: 5f701301407c6644f996319132fd3a8e, type: 3}
     autoFire: 0
     cooldown: 0.2
     isConsumedOnUse: 0
     fuel: {fileID: 0}
-    cooldownLeft: -14.682129
+    cooldownLeft: -412.5422

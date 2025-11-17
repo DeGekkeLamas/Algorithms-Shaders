@@ -12,8 +12,8 @@ namespace Entities.Presenters
         [SerializeField] TMP_Text nameText;
         protected override void UpdateDisplay()
         {
-            if (hpText != null) hpText.text = $"{boundEntity.CurrentHP} / {boundEntity.maxHP}";
-            if (xpText != null) xpText.text = $"{boundEntity.CurrentXP} / {boundEntity.XPRequired}";
+            if (hpText != null) hpText.text = $"{(int)boundEntity.CurrentHP} / {(int)boundEntity.maxHP}";
+            if (xpText != null) xpText.text = $"{(int)boundEntity.CurrentXP} / {(int)boundEntity.XPRequired}";
             if (levelText != null) levelText.text = $"LV {boundEntity.level}";
             if (nameText != null) nameText.text = boundEntity.entityName;
         }

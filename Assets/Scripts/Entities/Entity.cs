@@ -46,6 +46,7 @@ namespace Entities
         }
         protected virtual void Start()
         {
+            for (int i = 1; i < level; i++) LevelUpIncrements();
             OnStatsChanged?.Invoke();
         }
 
@@ -86,10 +87,14 @@ namespace Entities
         void LevelUp()
         {
             level++;
+            LevelUpIncrements();
+            OnLevelUp?.Invoke();
+        }
+        void LevelUpIncrements()
+        {
             currentHP += (currentHP / maxHP) * HPIncrement;
             maxHP += HPIncrement;
             strength += strengthIncrement;
-            OnLevelUp?.Invoke();
         }
 
         protected virtual void Death()

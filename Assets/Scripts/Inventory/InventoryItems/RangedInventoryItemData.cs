@@ -38,7 +38,7 @@ namespace InventoryStuff
                     source.transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(inputDir), Projectile.projectileContainer);
                 Rigidbody rigidbody = spawnedProjectile.GetComponent<Rigidbody>();
                 rigidbody.excludeLayers = rigidbody.excludeLayers + (int)Mathf.Pow(2, source.gameObject.layer);
-                projectile.GetComponent<OnTriggerDamageEntity>().damage = damage;
+                projectile.GetComponent<OnTriggerDamageEntity>().damage = damage * source.strength;
                 if (!projectile.useGravity)
                 { // Straight projectile
                     rigidbody.linearVelocity = inputDir.normalized *

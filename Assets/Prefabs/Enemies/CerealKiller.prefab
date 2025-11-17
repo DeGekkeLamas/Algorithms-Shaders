@@ -62,14 +62,13 @@ MonoBehaviour:
   entityName: Cereal killer
   maxHP: 200
   moveSpeed: 2
-  strength: 25
+  strength: 30
   level: 1
   XPRequired: 100
-  HPIncrement: 10
-  strengthIncrement: 0.1
+  HPIncrement: 20
+  strengthIncrement: 3
   activeStatusEffects: []
   xpToGive: 20
-  totalDropChance: 0
   attackStartDistance: 2.5
   attackAngle: 75
   attackToDo: {fileID: 8090648700422748870}
@@ -253,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d969f86963054364d9198535496712b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpText: {fileID: 0}
+  hpText: {fileID: 5121271572463600135}
   xpText: {fileID: 0}
   levelText: {fileID: 5651578072879243820}
   nameText: {fileID: 4291481863788173344}
@@ -410,6 +409,17 @@ RectTransform:
 --- !u!114 &4291481863788173344 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6079214714139582157, guid: e20c57f859de96540bee665e202f6609, type: 3}
+  m_PrefabInstance: {fileID: 8058027796200294125}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5121271572463600135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2936827215259747562, guid: e20c57f859de96540bee665e202f6609, type: 3}
   m_PrefabInstance: {fileID: 8058027796200294125}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

@@ -8,6 +8,7 @@ using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     int currentRoom = 1;
+    public int CurrentRoom => currentRoom;
     int seed;
     public int scene;
     public IntScene[] roomExceptions;

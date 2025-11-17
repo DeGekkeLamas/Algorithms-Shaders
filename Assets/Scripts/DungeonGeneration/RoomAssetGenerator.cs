@@ -135,7 +135,8 @@ namespace DungeonGeneration
             Entity toSpawn = ItemLootDrop<Entity>.GetItemFromLoottable(enemiesToSpawn, d.random);
             if (toSpawn != null)
             {
-                Instantiate(toSpawn, position, Quaternion.identity, parent);
+                Entity spawned = Instantiate(toSpawn, position, Quaternion.identity, parent);
+                spawned.level = GameManager.instance.CurrentRoom;
             }
         }
 

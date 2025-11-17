@@ -2,6 +2,7 @@ using Entities.Player;
 using NaughtyAttributes;
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MovementStuff
@@ -60,8 +61,9 @@ namespace MovementStuff
         }
         public static bool PlayerIsInLineOfSight(Transform self, Transform target)
         {
-            return Physics.Raycast(self.transform.position + Vector3.up, target.position + Vector3.up - (self.transform.position), // Direct line of sight
-            out RaycastHit visionHit) && visionHit.collider.transform == target;                                                   // to target
+            return Physics.Raycast(self.transform.position + new Vector3(0,target.transform.localScale.y*.5f,0)
+                , target.position + Vector3.up - (self.transform.position),      // Direct line of sight
+            out RaycastHit visionHit) && visionHit.collider.transform == target; // to target
         }
 
         IEnumerator ShowDebug()

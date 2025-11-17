@@ -49,7 +49,7 @@ namespace InventoryStuff
                 source.meleeWeaponHandle.transform.rotation, source.meleeWeaponHandle.transform);
             model.transform.localScale *= objectScale;
             source.meleeWeaponHandle.handleCollider.size = new(.2f, 1, distane);
-            source.meleeWeaponHandle.damager.damage = damage;
+            source.meleeWeaponHandle.damager.damage = damage * source.strength;
             inputDir.y = 0;
 
             // Swing

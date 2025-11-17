@@ -7,9 +7,8 @@ namespace Entities.Player
     /// <summary>
     /// Base for playercontroller, override to add a way to move player
     /// </summary>
-    public class PlayerController : Entity
+    public abstract class PlayerController : Entity
     {
-        Vector3 playerDestination;
         public float projectileForce = 5;
 
         [Header("References")]
@@ -21,10 +20,13 @@ namespace Entities.Player
         protected override void Awake()
         {
             if (instance == null) instance = this;
-            else Destroy(this.gameObject);
+            else
+            {
+                instance.transform.position = this.transform.position;
+                Destroy(this.gameObject);
+            }
 
             base.Awake();
-            playerDestination = transform.position;
             projectileChartMat = projectileChart.material;
         }
         protected override void Start()
