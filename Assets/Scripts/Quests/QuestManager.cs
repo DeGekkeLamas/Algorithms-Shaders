@@ -16,6 +16,19 @@ namespace Quests
         public GameObject questPresenter;
         public HorizontalOrVerticalLayoutGroup layoutGroup;
 
+        [Header("Quests to give")]
+        public List<Quest> registeredQuests;
+        public int amountToGive = 2;
+
+        private void Awake()
+        {
+            for(int i = 0; i < Mathf.Min(registeredQuests.Count, amountToGive); i++)
+            {
+                int index = Random.Range(0, registeredQuests.Count);
+                AddQuest(registeredQuests[index]);
+                registeredQuests.RemoveAt(i);
+            }
+        }
         public void AddQuest(Quest toAdd)
         {
             activeQuests.Add(toAdd);
@@ -27,17 +40,13 @@ namespace Quests
                 presenters[i].boundQuest = toAdd;
             }
             // Wait a frame between setting the quest and activating initilize, so the presenters can initialize
-            StartCoroutine(WaitThenInitialize());
+            StartCoroutine(WaitThenInitialize(toAdd));
         }
 
-        IEnumerator WaitThenInitialize()
+        IEnumerator WaitThenInitialize(Quest toAdd)
         {
             yield return null;
             toAdd.Initialize();
         }
-
-        public Quest toAdd;
-        [Button("Test quest adder", EButtonEnableMode.Playmode)]
-        void TestAddQuest() => AddQuest(toAdd);
     }
 }

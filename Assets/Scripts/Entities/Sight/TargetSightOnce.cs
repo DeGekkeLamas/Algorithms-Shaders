@@ -7,16 +7,15 @@ namespace MovementStuff
     /// </summary>
     public class TargetSightOnce : TargetSight
     {
-        bool hasSeenBefore;
         protected void Update()
         {
-            if (CanSeePlayer(this.transform, target.transform, maxVisionDistance, visionAngle))
+            if (CanSeeTarget(this.transform, target.transform, maxVisionDistance, visionAngle))
             {
                 MovementBeforeSeenTarget.enabled = false;
                 MovementAfterSeenTarget.enabled = true;
-                if (!hasSeenBefore) InvokeOnFirstSeenTarget();
-                hasSeenBefore = true;
-
+                InvokeOnFirstSeenTarget();
+                // Destroy at it will no longer be needed
+                Destroy(this);
             }
         }
     }

@@ -3,7 +3,9 @@ using UnityEngine;
 
 namespace Quests
 {
-
+    /// <summary>
+    /// Questtype for obtaining a specific item
+    /// </summary>
     [CreateAssetMenu(
         fileName = "FetchQuest",
         menuName = "ScriptableObjects/Quests/FetchQuest",
@@ -32,7 +34,8 @@ namespace Quests
                 progress = 1;
                 OnCompleted();
             }
-            InvokeOnProgressUpdated();
+            else progress = 0;
+                InvokeOnProgressUpdated();
 
         }
 

@@ -13,7 +13,7 @@ namespace MovementStuff
         {
             if (!hasSeenBefore) InvokeOnFirstSeenTarget();
             hasSeenBefore = true;
-            bool canSeePlayer = CanSeePlayer(this.transform, target.transform, maxVisionDistance, visionAngle);
+            bool canSeePlayer = CanSeeTarget(this.transform, target.transform, maxVisionDistance, visionAngle);
             MovementBeforeSeenTarget.enabled = !canSeePlayer;
             MovementAfterSeenTarget.enabled = canSeePlayer;
         }

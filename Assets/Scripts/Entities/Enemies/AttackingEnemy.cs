@@ -35,7 +35,7 @@ namespace Entities.Enemies
 
         protected bool PlayerInRange(float maxDst)
         {
-            return TargetSight.CanSeePlayer(this.transform, PlayerController.instance.transform, maxDst, attackAngle);
+            return TargetSight.CanSeeTarget(this.transform, PlayerController.instance.transform, maxDst, attackAngle);
         }
         IEnumerator AttackCycle()
         {

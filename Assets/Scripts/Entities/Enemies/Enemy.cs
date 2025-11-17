@@ -23,9 +23,6 @@ namespace Entities.Enemies
             base.Awake();
         }
 
-        /// <summary>
-        /// Spawns lootdrops, also destroys object
-        /// </summary>
         protected override void Death()
         {
             base.Death();

@@ -79684,26 +79684,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1150015492}
   m_Mesh: {fileID: 5062246478642505140, guid: 31221db1d24ec744cb6bf3f5acba97c3, type: 3}
---- !u!1 &1150362567 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7148870164262935656, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-  m_PrefabInstance: {fileID: 1867934152}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1150362572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150362567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd742c6eb0744af44a22c41ddf968ca5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questPresenter: {fileID: 2485737564242495950, guid: e46481c96623c604e85dce843fc289c0, type: 3}
-  layoutGroup: {fileID: 1529099081}
-  toAdd: {fileID: 11400000, guid: fe838eb6dea3d4c409689e27e71d5ec0, type: 2}
 --- !u!1 &1150668765
 GameObject:
   m_ObjectHideFlags: 0
@@ -95903,11 +95883,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357768544}
   m_Mesh: {fileID: 5062246478642505140, guid: 31221db1d24ec744cb6bf3f5acba97c3, type: 3}
---- !u!224 &1358510656 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3917339117753375212, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-  m_PrefabInstance: {fileID: 1867934152}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1369536474
 GameObject:
   m_ObjectHideFlags: 0
@@ -107308,68 +107283,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527461187}
   m_Mesh: {fileID: 5062246478642505140, guid: 31221db1d24ec744cb6bf3f5acba97c3, type: 3}
---- !u!1 &1529099079
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1529099080}
-  - component: {fileID: 1529099081}
-  m_Layer: 0
-  m_Name: QuestLayout
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1529099080
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529099079}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1358510656}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1529099081
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529099079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_Spacing: 25
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!1 &1529137601
 GameObject:
   m_ObjectHideFlags: 0
@@ -129939,10 +129852,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2740208576726757881, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-      propertyPath: killsRequired
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2975254441102481949, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_LocalPosition.x
       value: 39
@@ -129965,14 +129874,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3917339117753375212, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1529099080}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7148870164262935656, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1150362572}
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
 --- !u!1 &1868780821
 GameObject:
@@ -132787,10 +132690,10 @@ MonoBehaviour:
   AmountOfEnemiesToSpawn: 8
   totalEnemyChance: 100
   enemiesToSpawn:
-  - itemName: DinnerDemon (RangedEnemy), 65%
+  - itemName: null, 65%
     item: {fileID: 3376632439275880072, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
     probability: 65
-  - itemName: CerealKiller (MeleeEnemy), 35%
+  - itemName: null, 35%
     item: {fileID: 649392384874580996, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
     probability: 35
   counterMiddle: {fileID: 9011421418820237759, guid: 0d413d8ccf516d74bb2fa084514f420d, type: 3}

@@ -15,8 +15,8 @@ namespace Quests
         public event Action OnInitialize;
         public event Action OnProgressUpdated;
 
-        [HideInInspector] public int progress = 0;
-        [HideInInspector] public int maxProgress = 1;
+        [HideInInspector, NonSerialized] public int progress = 0;
+        [HideInInspector, NonSerialized] public int maxProgress = 1;
 
         public virtual void Initialize()
         {

@@ -1,16 +1,21 @@
 using InventoryStuff;
 using UnityEngine;
 using Entities;
+using NaughtyAttributes;
+using Entities.Enemies;
 
 namespace Quests
 {
-
+    /// <summary>
+    /// Questtype for killing a certain amount of enemies
+    /// </summary>
     [CreateAssetMenu(
         fileName = "SlayQuest",
         menuName = "ScriptableObjects/Quests/SlayQuest",
         order = 0)]
     public class SlayQuest : Quest
     {
+        [InfoBox("Leave empty for any enemy to count")]
         public Entity toKill;
         public int amount;
         int amountDone;
@@ -22,7 +27,11 @@ namespace Quests
 
         public override void Initialize()
         {
-            texture = RuntimePreviewGenerator.GenerateModelPreview(toKill.transform, 256, 256, false, true);
+            // Texture
+            if (toKill != null)
+                texture = RuntimePreviewGenerator.GenerateModelPreview(toKill.transform, 256, 256, false, true);
+            else texture = default;
+
             Entity.OnAnyDeath += UpdateProgress;
             maxProgress = amount;
             base.Initialize();
@@ -30,7 +39,7 @@ namespace Quests
 
         void UpdateProgress(Entity toCheck)
         {
-            if (toCheck.entityName == toKill.entityName) amountDone++;
+            if (toKill == null || toCheck.entityName == toKill.entityName) amountDone++;
             progress = amountDone;
 
             if (amountDone >= amount) OnCompleted();
@@ -45,7 +54,7 @@ namespace Quests
 
         protected override string SetDescription()
         {
-            if (toKill == null) return "No item set";
+            if (toKill == null) return "Kill {amount} enemies";
 
             string desc = $"Kill {amount} {toKill.entityName}{(amount != 1 ? "s" : "")}";
 

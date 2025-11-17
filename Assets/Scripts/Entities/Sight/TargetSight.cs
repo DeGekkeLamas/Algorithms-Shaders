@@ -2,7 +2,6 @@ using Entities.Player;
 using NaughtyAttributes;
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MovementStuff
@@ -42,16 +41,18 @@ namespace MovementStuff
 
 
         /// <summary>
-        /// Returns if the object has sight of the player, based off distance, angle and objects in the way
+        /// Returns if the object has sight of the target, based off distance, angle and objects in the way
         /// </summary>
         /// <returns></returns>
-        public static bool CanSeePlayer(Transform self, Transform target, float maxVisionDistance, float visionAngle)
+        public static bool CanSeeTarget(Transform self, Transform target, float maxVisionDistance, float visionAngle)
         {
-
-            return PlayerIsInRange(self, target, maxVisionDistance, visionAngle) && // Sight range
-                PlayerIsInLineOfSight(self, target); // Line of sight
+            return TargetIsInRange(self, target, maxVisionDistance, visionAngle) && // Sight range
+                TargetIsInLineOfSight(self, target); // Line of sight
         }
-        public static bool PlayerIsInRange(Transform self, Transform target, float maxVisionDistance, float visionAngle)
+        /// <summary>
+        /// Returns if target is in seeing range from the self object
+        /// </summary>
+        public static bool TargetIsInRange(Transform self, Transform target, float maxVisionDistance, float visionAngle)
         {
             Vector3 targetPos = target.position;
             float targetEnemyDistance = (targetPos - self.transform.position).magnitude;
@@ -59,7 +60,10 @@ namespace MovementStuff
             return targetEnemyDistance > .5f && targetEnemyDistance < maxVisionDistance && // Distance
                 VectorMath.GetAngleBetweenVectors(targetPos - self.transform.position, self.transform.forward) < visionAngle; // Vision angle
         }
-        public static bool PlayerIsInLineOfSight(Transform self, Transform target)
+        /// <summary>
+        /// Returns if target is in direct line of sight, determined using a raycast
+        /// </summary>
+        public static bool TargetIsInLineOfSight(Transform self, Transform target)
         {
             return Physics.Raycast(self.transform.position + new Vector3(0,target.transform.localScale.y*.5f,0)
                 , target.position + Vector3.up - (self.transform.position),      // Direct line of sight
