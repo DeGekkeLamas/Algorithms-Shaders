@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace MovementStuff
 {
+    /// <summary>
+    /// Moves this transform towards the target and rotates it towards it
+    /// </summary>
     public class MoveTowardsTarget : MovingObjectBase
     {
-
         [InfoBox("Leave target empty for it to be automatically set to player instance")]
         public Transform target;
         public float moveSpeed = 1;

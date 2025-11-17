@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using Entities.StatusEffects;
+using MovementStuff;
 
 namespace Entities
 {

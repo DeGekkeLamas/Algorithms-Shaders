@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using MovementStuff;
 
 namespace Entities.Enemies
 {

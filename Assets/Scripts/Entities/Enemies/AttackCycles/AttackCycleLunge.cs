@@ -1,13 +1,16 @@
-using System.Collections;
-using UnityEngine;
 using Entities.Player;
 using MovementStuff;
+using NaughtyAttributes;
+using System.Collections;
+using UnityEngine;
 
 
 namespace Entities.Enemies
 {
     public class AttackCycleLunge : AttackCycle
     {
+        [InfoBox("Leave target empty for it to be automatically set to player instance")]
+        Transform target;
         [Header("Jump")]
         public float jumpHeight = 8;
         public float jumpDuration = .5f;
@@ -20,6 +23,10 @@ namespace Entities.Enemies
         {
             if (showDebug) StartCoroutine(ShowDebug());
         }
+        private void Awake()
+        {
+            if (target == null) target = PlayerController.instance.transform;
+        }
 
         public override IEnumerator Attack(Enemy source)
         {
@@ -30,18 +37,20 @@ namespace Entities.Enemies
                 source.transform.position = Vector3.Lerp(oriPos, oriPos + new Vector3(0, jumpHeight, 0), i / jumpDuration);
                 yield return null;
             }
-            Vector3 playerPos = PlayerController.instance.transform.position;
+            Vector3 playerPos = target.position;
             oriPos = source.transform.position;
+
             // Lunge down
             for (float i = 0; i < lungeDuration; i += Time.deltaTime)
             {
                 source.transform.position = Vector3.Lerp(oriPos, playerPos, i / lungeDuration);
                 yield return null;
             }
-            // Attack
-            if (TargetSight.PlayerIsInRange(source.transform, PlayerController.instance.transform, lungeAttackRange, 180))
+
+            // Deal damage
+            if (TargetSight.PlayerIsInRange(source.transform, target, lungeAttackRange, 180))
             {
-                PlayerController.instance.DealDamage(source.strength);
+                target.GetComponent<Entity>().DealDamage(source.strength);
             }
         }
 

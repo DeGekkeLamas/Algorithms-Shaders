@@ -1,6 +1,12 @@
 using UnityEngine;
 
-public abstract class MovingObjectBase : MonoBehaviour
+namespace MovementStuff
 {
-    public float baseSpeed = 1;
+    /// <summary>
+    /// Base for moving objects, useful for its baseSpeed value that can be modified by entites
+    /// </summary>
+    public abstract class MovingObjectBase : MonoBehaviour
+    {
+        public float baseSpeed = 1;
+    }
 }
