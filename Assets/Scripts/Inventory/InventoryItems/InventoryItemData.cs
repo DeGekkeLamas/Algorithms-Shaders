@@ -6,12 +6,18 @@ using Entities.StatusEffects;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// Baseclass for scriptableObject containing itemdata, to use add a value for the type of item and override the GetItem() function
+    /// </summary>
     public abstract class InventoryItemData : ScriptableObject
     {
         //[HideInInspector] public InventoryItemData item = new();
         public abstract InventoryItem GetItem();
     }
 
+    /// <summary>
+    /// Baseclass for inventory items, contains general stats like name or model
+    /// </summary>
     [System.Serializable]
     public abstract class InventoryItem
     {
@@ -25,13 +31,19 @@ namespace InventoryStuff
         [SerializeField] public StatusEffect[] grantsImmunityTo;
 
         Texture2D itemSprite;
+        /// <summary>
+        /// Get a texture of this item. If it doesnt exist yet it will be created
+        /// </summary>
         public Texture2D ItemSprite => itemSprite != null ? itemSprite : SetSprite();
+        /// <summary>
+        /// Get a silhoutte texture, which is completely black texture of this item. If it doesnt exist yet it will be created
+        /// </summary>
         Texture2D itemSilhouette;
         public Texture2D ItemSilhouette => itemSilhouette != null ? itemSilhouette : SetSilhouette();
         [HideInInspector, NonSerialized] public bool canUseItem = true;
         public bool IsStackable => maxStack > 1;
 
-        public Texture2D SetSprite()
+        Texture2D SetSprite()
         {
             if (itemModel == null)
             {
@@ -44,7 +56,7 @@ namespace InventoryStuff
             return itemSprite;
         }
 
-        public Texture2D SetSilhouette()
+        Texture2D SetSilhouette()
         {
             if (itemModel == null)
             {
@@ -62,6 +74,9 @@ namespace InventoryStuff
             Inventory.instance.RemoveItem(Inventory.itemSelected);
         }
 
+        /// <summary>
+        /// Uses this item, override for items type specific interaction
+        /// </summary>
         public abstract void UseItem(Entity source, Vector3 inputDir);
 
         public virtual void UpdateAction() { }

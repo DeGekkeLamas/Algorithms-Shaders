@@ -12,6 +12,9 @@ namespace InventoryStuff
         public PassiveItem item = new();
         public override InventoryItem GetItem() { return item; }
     }
+    /// <summary>
+    /// Not implemented yet :(
+    /// </summary>
 
     [System.Serializable]
     public class PassiveItem : InventoryItem

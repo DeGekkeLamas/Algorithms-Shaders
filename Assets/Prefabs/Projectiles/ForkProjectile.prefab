@@ -117,6 +117,9 @@ PrefabInstance:
       addedObject: {fileID: 2142696792574118062}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: edc1d3738eac56045b52662da3845311, type: 3}
       insertIndex: -1
+      addedObject: {fileID: -6650557188322307845}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: edc1d3738eac56045b52662da3845311, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 7745726260990678392}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: edc1d3738eac56045b52662da3845311, type: 3}
       insertIndex: -1
@@ -144,11 +147,27 @@ MonoBehaviour:
   upForce: 400
   useGravity: 1
   rotationIntensity: 0.1
-  onlyDestroyOnTerrain: 0
-  destroyOnGround: 1
+  destroyOnTerrain: 1
+  destroyOnAnything: 1
   expands: 0
   expansionFactor: 1.05
   maxExpansion: 2
+  splat: {fileID: 0}
+--- !u!114 &-6650557188322307845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4239965954476855208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd116f86eae55264fbbf48549a6a71be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  destroyOnTerrain: 1
+  destroyOnAnything: 1
   splat: {fileID: 0}
 --- !u!54 &7745726260990678392
 Rigidbody:

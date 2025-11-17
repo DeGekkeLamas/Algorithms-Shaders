@@ -49,7 +49,7 @@ namespace InventoryStuff
                 source.meleeWeaponHandle.transform.rotation, source.meleeWeaponHandle.transform);
             model.transform.localScale *= objectScale;
             source.meleeWeaponHandle.handleCollider.size = new(.2f, 1, distane);
-            source.meleeWeaponHandle.projectile.damage = damage;
+            source.meleeWeaponHandle.damager.damage = damage;
             inputDir.y = 0;
 
             // Swing
@@ -70,7 +70,7 @@ namespace InventoryStuff
             // Exit
             source.ChangeMoveSpeed(originalSpeed);
             MonoBehaviour.Destroy(model);
-            source.meleeWeaponHandle.projectile.damage = 0;
+            source.meleeWeaponHandle.damager.damage = 0;
             source.meleeWeaponHandle.gameObject.SetActive(false);
             canUseItem = true;
         }

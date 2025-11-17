@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 9183099017955183830}
   - component: {fileID: 5354087325613210857}
   - component: {fileID: 1962694465822976214}
-  - component: {fileID: 7138622263183876475}
+  - component: {fileID: 4582547115322770723}
   - component: {fileID: 3036669457786429698}
   m_Layer: 0
   m_Name: MeleeWeaponHandle
@@ -492,7 +492,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7138622263183876475
+--- !u!114 &4582547115322770723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -501,20 +501,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5108015423391365949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e0995d91cc4baa49b647456bbb59d0b, type: 3}
+  m_Script: {fileID: 11500000, guid: cd116f86eae55264fbbf48549a6a71be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  projectileSpeed: 0
-  upForce: 0
-  useGravity: 0
-  rotationIntensity: 0
-  destroyOnTerrain: 0
-  destroyOnAnything: 0
-  expands: 0
-  expansionFactor: 1.05
-  maxExpansion: 2
-  splat: {fileID: 0}
 --- !u!114 &3036669457786429698
 MonoBehaviour:
   m_ObjectHideFlags: 0

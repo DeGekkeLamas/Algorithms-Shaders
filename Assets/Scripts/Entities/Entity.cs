@@ -5,6 +5,9 @@ using Entities.StatusEffects;
 
 namespace Entities
 {
+    /// <summary>
+    /// Baseclass for any object that should have it own HP or use entity presenters
+    /// </summary>
     public abstract class Entity : MonoBehaviour
     {
         public string entityName;

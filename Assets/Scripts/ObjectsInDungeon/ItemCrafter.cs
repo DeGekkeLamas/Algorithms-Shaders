@@ -1,31 +1,37 @@
 using InventoryStuff;
 using UnityEngine;
 
-public class ItemCrafter : MonoBehaviour
+namespace InventoryStuff
 {
-    public Recipe recipe;
-
-    public void Craft()
+    /// <summary>
+    /// Class used for crafting items currently in the inventory into another item
+    /// </summary>
+    public class ItemCrafter : MonoBehaviour
     {
-        if (ContainsAllItems())
+        public Recipe recipe;
+
+        public void Craft()
         {
+            if (ContainsAllItems())
+            {
+                foreach (InventoryItemData item in recipe.ingredients)
+                {
+                    Inventory.instance.RemoveFromStack(item.GetItem());
+                }
+                Inventory.instance.AddItem(recipe.result.GetItem());
+                Debug.Log($"Crafted {recipe.recipeName}");
+            }
+            else Debug.Log($"Failed to craft {recipe.recipeName}");
+        }
+
+        bool ContainsAllItems()
+        {
+            int itemQTY = 0;
             foreach (InventoryItemData item in recipe.ingredients)
             {
-                Inventory.instance.RemoveFromStack(item.GetItem());
+                if (Inventory.instance.Contains(item.GetItem())) itemQTY++;
             }
-            Inventory.instance.AddItem(recipe.result.GetItem());
-            Debug.Log($"Crafted {recipe.recipeName}");
+            return itemQTY >= recipe.ingredients.Length;
         }
-        else Debug.Log($"Failed to craft {recipe.recipeName}");
-    }
-
-    bool ContainsAllItems()
-    {
-        int itemQTY = 0;
-        foreach(InventoryItemData item in recipe.ingredients)
-        {
-            if (Inventory.instance.Contains(item.GetItem() ) ) itemQTY++;
-        }
-        return itemQTY >= recipe.ingredients.Length;
     }
 }

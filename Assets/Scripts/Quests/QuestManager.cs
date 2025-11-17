@@ -7,6 +7,9 @@ using Quests.Presenters;
 
 namespace Quests
 {
+    /// <summary>
+    /// Singleton for managing active quests
+    /// </summary>
     public class QuestManager : MonoBehaviour
     {
         List<Quest> activeQuests = new();

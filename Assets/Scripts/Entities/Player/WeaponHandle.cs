@@ -1,15 +1,18 @@
 using UnityEngine;
 
-[RequireComponent (typeof(Projectile))]
-[RequireComponent (typeof(BoxCollider))]
-public class WeaponHandle : MonoBehaviour
+namespace Entities.Player
 {
-    [HideInInspector] public BoxCollider handleCollider;
-    [HideInInspector] public Projectile projectile;
-
-    private void Awake()
+    [RequireComponent(typeof(OnTriggerDamageEntity))]
+    [RequireComponent(typeof(BoxCollider))]
+    public class WeaponHandle : MonoBehaviour
     {
-        handleCollider = this.GetComponent<BoxCollider>();
-        projectile = this.GetComponent<Projectile>();
+        [HideInInspector] public BoxCollider handleCollider;
+        [HideInInspector] public OnTriggerDamageEntity damager;
+
+        private void Awake()
+        {
+            handleCollider = this.GetComponent<BoxCollider>();
+            damager = this.GetComponent<OnTriggerDamageEntity>();
+        }
     }
 }

@@ -7,6 +7,9 @@ using Entities.Player;
 
 namespace Entities.Enemies
 {
+    /// <summary>
+    /// Baseclass for enemies
+    /// </summary>
     public class Enemy : Entity
     {
         public float xpToGive = 20;

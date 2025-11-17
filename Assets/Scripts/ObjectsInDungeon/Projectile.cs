@@ -2,10 +2,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using Entities;
 
+/// <summary>
+/// Script for projectiles that damage entities on collision
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class Projectile : MonoBehaviour
 {
-    [HideInInspector] public float damage;
     [Header("Movement")]
     public float projectileSpeed = 20;
     public float upForce;
@@ -28,7 +30,7 @@ public class Projectile : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = this.GetComponent<Rigidbody>();
         if (projectileContainer == null) projectileContainer = new GameObject("ProjectileContainer").transform;
     }
     void Start()
@@ -44,15 +46,10 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Entity entity))
-        {
-            entity.DealDamage(damage);
-        }
-
         // Add force to hit
         if (other.gameObject.TryGetComponent(out Rigidbody rb))
         {
-            rb.AddExplosionForce(projectileSpeed + 0.1f*upForce, this.transform.position, 5);
+            rb.AddExplosionForce(rb.linearVelocity.magnitude, this.transform.position, 5);
         }
 
         // destroys on terrain collision or wall collision or any collision
@@ -67,7 +64,7 @@ public class Projectile : MonoBehaviour
         if (splat != null)
         {
             Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hitInfo);
-            Instantiate(splat, hitInfo.point + new Vector3(0, 0.01f, 0), Quaternion.identity, 
+            Instantiate(splat, hitInfo.point + new Vector3(0, 0.01f, 0), Quaternion.identity,
                 Projectile.projectileContainer.transform);
         }
     }

@@ -17,7 +17,7 @@ namespace Entities.Enemies
 
             // Do attack
             Projectile spawned = Instantiate(projectile, projectileOrigin.position, projectileOrigin.rotation, Projectile.projectileContainer);
-            spawned.damage = source.strength;
+            spawned.GetComponent<OnTriggerDamageEntity>().damage = source.strength;
             Rigidbody rigidbody = spawned.GetComponent<Rigidbody>();
             rigidbody.AddForce(spawned.projectileSpeed * transform.forward);
             rigidbody.angularVelocity = Vector3.Cross(transform.forward, Vector3.up) * -projectile.rotationIntensity;

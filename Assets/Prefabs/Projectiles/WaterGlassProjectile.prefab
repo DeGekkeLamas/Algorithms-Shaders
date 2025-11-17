@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1604154198125830387}
   - component: {fileID: -8806985211751940049}
   - component: {fileID: -4791254542994142077}
+  - component: {fileID: -2808630114112796858}
   - component: {fileID: 7891199860114195892}
   - component: {fileID: 794499156652449697}
   m_Layer: 7
@@ -157,12 +158,28 @@ MonoBehaviour:
   upForce: 400
   useGravity: 1
   rotationIntensity: 1
-  onlyDestroyOnTerrain: 0
-  destroyOnGround: 1
+  destroyOnTerrain: 1
+  destroyOnAnything: 1
   expands: 0
   expansionFactor: 1.1
   maxExpansion: 5
   splat: {fileID: 966423011128645671, guid: ad1c75ba6bec2c343946273f0f179617, type: 3}
+--- !u!114 &-2808630114112796858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97514727698275135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd116f86eae55264fbbf48549a6a71be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  destroyOnTerrain: 1
+  destroyOnAnything: 1
+  splat: {fileID: 0}
 --- !u!136 &7891199860114195892
 CapsuleCollider:
   m_ObjectHideFlags: 0

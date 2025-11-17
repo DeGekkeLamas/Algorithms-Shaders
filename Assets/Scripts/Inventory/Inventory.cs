@@ -5,6 +5,9 @@ using System;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// Singleton managing the player inventory
+    /// </summary>
     public class Inventory : MonoBehaviour
     {
         public ItemUniqueStats[] currentInventory = new ItemUniqueStats[5];

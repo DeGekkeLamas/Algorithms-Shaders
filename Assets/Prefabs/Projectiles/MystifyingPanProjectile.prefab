@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6525004972420991998}
   - component: {fileID: 5298393269010741978}
   - component: {fileID: -8806985211751940049}
+  - component: {fileID: 8739487523482755518}
   - component: {fileID: -4791254542994142077}
   - component: {fileID: 7214948073872953894}
   m_Layer: 7
@@ -116,6 +117,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8739487523482755518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 97514727698275135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd116f86eae55264fbbf48549a6a71be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  destroyOnTerrain: 1
+  destroyOnAnything: 1
+  splat: {fileID: 0}
 --- !u!114 &-4791254542994142077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +150,6 @@ MonoBehaviour:
   upForce: 0
   useGravity: 0
   rotationIntensity: 1
-  onlyDestroyOnTerrain: 1
   destroyOnTerrain: 1
   destroyOnAnything: 0
   expands: 1

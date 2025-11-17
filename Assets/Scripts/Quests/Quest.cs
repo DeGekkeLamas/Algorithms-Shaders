@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Quests
 {
+    /// <summary>
+    /// Baseclass for quests, progress and maxProgress values are used for presenters
+    /// </summary>
     public abstract class Quest : ScriptableObject
     {
         [ReadOnly][TextArea] public string description;
