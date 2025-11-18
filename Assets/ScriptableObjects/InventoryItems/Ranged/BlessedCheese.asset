@@ -14,18 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item:
     itemName: Blessed cheese
-    itemModel: {fileID: 0}
+    itemModel: {fileID: 919132149155446097, guid: 9d4c0d054d778334eb1a17710312d43b, type: 3}
     toolTip: You cheated to get this item =)
     maxStack: 1
     durability: 42069
     grantsImmunityTo: []
-    itemSprite: {fileID: 0}
-    canUseItem: 0
     damage: 1500
     effectApplied: []
-    projectile: {fileID: -4791254542994142077, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
+    projectile: {fileID: -4791254542994142077, guid: 24e0ce05cccb31643a92fb8a1da697d6, type: 3}
     autoFire: 1
     cooldown: 0.2
     isConsumedOnUse: 0
     fuel: {fileID: 0}
-    cooldownLeft: 0
+    cooldownLeft: -212.38037

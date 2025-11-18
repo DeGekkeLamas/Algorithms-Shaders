@@ -11,13 +11,12 @@ GameObject:
   - component: {fileID: 6928636955673287219}
   - component: {fileID: 6525004972420991998}
   - component: {fileID: 5298393269010741978}
-  - component: {fileID: 1604154198125830387}
   - component: {fileID: -8806985211751940049}
-  - component: {fileID: 5479767641151887115}
+  - component: {fileID: 8739487523482755518}
   - component: {fileID: -4791254542994142077}
-  - component: {fileID: 8504142228676782153}
+  - component: {fileID: 7214948073872953894}
   m_Layer: 7
-  m_Name: PlateProjectile
+  m_Name: BlessedWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.005, y: 0.00049999997, z: 0.005}
+  m_LocalScale: {x: 0.004, y: 0.004, z: 0.004}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97514727698275135}
-  m_Mesh: {fileID: 3736213754101489272, guid: 1a473f3d0e3abdb4a96c49dc049144b4, type: 3}
+  m_Mesh: {fileID: 7646698260527424830, guid: 1030e4e381a5a4347a713661bf4f80bb, type: 3}
 --- !u!23 &5298393269010741978
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -69,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f9afb7d4d3a5de2419ea2ef73198fe29, type: 2}
+  - {fileID: 2100000, guid: e3eb115ad1449e84bb39aae990daa006, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,27 +90,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1604154198125830387
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 97514727698275135}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 128
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 100
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-8806985211751940049
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -139,7 +117,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5479767641151887115
+--- !u!114 &8739487523482755518
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,25 +142,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0995d91cc4baa49b647456bbb59d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 20
+  projectileSpeed: 40
   upForce: 0
   useGravity: 0
   rotationIntensity: 1
   destroyOnTerrain: 1
-  destroyOnAnything: 1
-  expands: 0
+  destroyOnAnything: 0
+  expands: 1
   expansionFactor: 1.1
-  maxExpansion: 5
+  maxExpansion: 0.025
   splat: {fileID: 0}
---- !u!114 &8504142228676782153
-MonoBehaviour:
+--- !u!64 &7214948073872953894
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 97514727698275135}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aec3dcef8f3b0c428809690303852ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7646698260527424830, guid: 1030e4e381a5a4347a713661bf4f80bb, type: 3}

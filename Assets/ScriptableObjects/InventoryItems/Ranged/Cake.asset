@@ -19,11 +19,9 @@ MonoBehaviour:
     maxStack: 1
     durability: 0
     grantsImmunityTo: []
-    itemSprite: {fileID: 0}
-    canUseItem: 0
     damage: 70
     effectApplied: []
-    projectile: {fileID: -4791254542994142077, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
+    projectile: {fileID: -4791254542994142077, guid: af8d5fada7144d84c88fc954a8e6690c, type: 3}
     autoFire: 0
     cooldown: 0
     isConsumedOnUse: 1

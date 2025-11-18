@@ -25334,6 +25334,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4842508753801431567, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6533478313816462005, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -25341,6 +25345,10 @@ PrefabInstance:
     - target: {fileID: 6533478313816462005, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812370529885375380, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8608250485412360592, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
       propertyPath: m_Name
@@ -129864,6 +129872,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990881938606332820, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: itemToAdd
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f2a1dfccc2cbdf46b2ea8cb3e67a2d3, type: 2}
     - target: {fileID: 6207984939156594857, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_IsActive
       value: 0

@@ -2,7 +2,7 @@ using InventoryStuff;
 using UnityEngine;
 using Entities;
 using NaughtyAttributes;
-using Entities.Enemies;
+using System;
 
 namespace Quests
 {
@@ -18,7 +18,7 @@ namespace Quests
         [InfoBox("Leave empty for any enemy to count")]
         public Entity toKill;
         public int amount;
-        int amountDone;
+        [NonSerialized] int amountDone;
 
         private void OnValidate()
         {

@@ -34,6 +34,14 @@ namespace InventoryStuff
         {
             if (cooldownLeft <= 0)
             {
+                // Fuel
+                if (fuel != null)
+                {
+                    if (!Inventory.instance.Contains(fuel.GetItem())) return;
+
+                    Inventory.instance.RemoveFromStack(fuel.GetItem());
+                }
+                // Spawn projectie
                 Projectile spawnedProjectile = MonoBehaviour.Instantiate(this.projectile,
                     source.transform.position + new Vector3(0, 1, 0), Quaternion.LookRotation(inputDir), Projectile.projectileContainer);
                 Rigidbody rigidbody = spawnedProjectile.GetComponent<Rigidbody>();
