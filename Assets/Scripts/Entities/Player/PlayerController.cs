@@ -123,21 +123,10 @@ namespace Entities.Player
         }
         protected (bool, RaycastHit) GetCamCast(int layermask)
         {
-            //Translates mouse 2D position
-            float _posX = Remap(0, 1, -1, 1, Input.mousePosition.x / Screen.width);
-            float _posY = Remap(0, 1, -0.667f, 0.667f, Input.mousePosition.y / Screen.height);
-            Vector3 _mousePosition = new(_posX, _posY, 0);
-
-            bool hitSomething = Physics.Raycast(Camera.main.transform.position,
-                VectorMath.RotateVector3(_mousePosition + transform.forward, Camera.main.transform.eulerAngles),
+            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            bool hitSomething = Physics.Raycast(mouseRay,
                 out RaycastHit rayHit, 1000, layermask, QueryTriggerInteraction.Ignore);
             return (hitSomething, rayHit);
-        }
-
-        static float Remap(float oldRangeX, float oldRangeY, float newRangeX, float newRangeY, float value)
-        {
-            Mathf.InverseLerp(oldRangeX, oldRangeY, value);
-            return Mathf.Lerp(newRangeX, newRangeY, value);
         }
 
         protected override void Death()

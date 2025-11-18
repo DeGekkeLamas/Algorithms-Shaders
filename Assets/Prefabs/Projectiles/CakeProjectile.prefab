@@ -174,7 +174,7 @@ MonoBehaviour:
   expands: 0
   expansionFactor: 1.1
   maxExpansion: 5
-  splat: {fileID: 966423011128645671, guid: 12141ac9eae3ad8428d53249e5653f16, type: 3}
+  splat: {fileID: 966423011128645671, guid: 7473f46c068fb9548ab4f67bdf05586b, type: 3}
 --- !u!114 &8069094821143367999
 MonoBehaviour:
   m_ObjectHideFlags: 0
