@@ -1,6 +1,9 @@
 using Entities.Enemies;
 using UnityEngine;
 
+/// <summary>
+/// Spawns a wave when the enemy attacks, object spawned has its scale based off the attack radius
+/// </summary>
 public class OnAttackSpawnWave : OnAttackAction
 {
     public GameObject toSpawn;

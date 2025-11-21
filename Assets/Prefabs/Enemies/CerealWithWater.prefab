@@ -363,7 +363,7 @@ MonoBehaviour:
   jumpHeight: 10
   jumpDuration: 0.35
   lungeDuration: 0.35
-  lungeAttackRange: 3.5
+  lungeAttackRange: 4
   showDebug: 0
 --- !u!114 &7286313313765476584
 MonoBehaviour:
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5b187b279d79f48a135c9461964d90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 4
+  attackRange: 4.5
   attackAngle: 180
   showDebug: 0
 --- !u!114 &8963910000240951127

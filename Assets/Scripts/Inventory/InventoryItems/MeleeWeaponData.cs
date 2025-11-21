@@ -3,6 +3,7 @@ using Entities.Player;
 using Entities.StatusEffects;
 using System.Collections;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 using static UnityEditor.Progress;
 
 namespace InventoryStuff
@@ -46,14 +47,25 @@ namespace InventoryStuff
             float originalSpeed = source.moveSpeed;
             source.ChangeMoveSpeed(0);
             canUseItem = false;
-            GameObject model = MonoBehaviour.Instantiate(itemModel, source.meleeWeaponHandle.transform.position,
-                source.meleeWeaponHandle.transform.rotation, source.meleeWeaponHandle.transform);
-            model.transform.localScale *= objectScale;
             source.meleeWeaponHandle.handleCollider.size = new(.2f, 1, distane);
             source.meleeWeaponHandle.damager.damage = damage * source.strength;
             inputDir.y = 0;
 
+            yield return UseWeaponAnimation(source, inputDir);
+
+            // Exit
+            source.ChangeMoveSpeed(originalSpeed);
+            source.meleeWeaponHandle.damager.damage = 0;
+            source.meleeWeaponHandle.gameObject.SetActive(false);
+            canUseItem = true;
+        }
+
+        protected virtual IEnumerator UseWeaponAnimation(PlayerController source, Vector3 inputDir)
+        {
             // Swing
+            GameObject model = MonoBehaviour.Instantiate(itemModel, source.meleeWeaponHandle.transform.position,
+                source.meleeWeaponHandle.transform.rotation, source.meleeWeaponHandle.transform);
+            model.transform.localScale *= objectScale;
             for (float i = 0; i < swingTime; i += Time.deltaTime)
             {
                 // Position
@@ -64,16 +76,10 @@ namespace InventoryStuff
                 float rotation = Quaternion.LookRotation(offset, Vector3.up).eulerAngles.y;
 
                 source.meleeWeaponHandle.transform.position = source.transform.position + offset + Vector3.up;
-                source.meleeWeaponHandle.transform.eulerAngles = new Vector3(0,rotation,0) + modelRotation;
+                source.meleeWeaponHandle.transform.eulerAngles = new Vector3(0, rotation, 0) + modelRotation;
                 yield return null;
             }
-
-            // Exit
-            source.ChangeMoveSpeed(originalSpeed);
             MonoBehaviour.Destroy(model);
-            source.meleeWeaponHandle.damager.damage = 0;
-            source.meleeWeaponHandle.gameObject.SetActive(false);
-            canUseItem = true;
         }
 
         public override string GetItemDescription()

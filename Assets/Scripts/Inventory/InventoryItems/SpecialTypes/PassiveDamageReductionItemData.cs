@@ -5,7 +5,7 @@ namespace InventoryStuff
 {
     [CreateAssetMenu(
         fileName = "PassiveDamageReductionItem",
-        menuName = "ScriptableObjects/Items/PassiveItems/PassiveDamageReductionItem",
+        menuName = "ScriptableObjects/Items/Special/PassiveDamageReductionItem",
         order = 0)]
     public class PassiveDamageReductionItemData : InventoryItemData
     {

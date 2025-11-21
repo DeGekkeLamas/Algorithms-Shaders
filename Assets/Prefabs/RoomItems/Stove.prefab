@@ -63,6 +63,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3b29bdfa0a036b54eb4dc2bf369f28c8, type: 2}
   - {fileID: 11400000, guid: e8ad2e3458b1c2f49929b6714a2e60b3, type: 2}
   - {fileID: 11400000, guid: debad02ac1e0c344e98d27c879e577b1, type: 2}
+  - {fileID: 11400000, guid: 83d10f8342b883d4787122a015ae3484, type: 2}
   dimensions:
     x: 100
     y: 50
