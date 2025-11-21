@@ -30,6 +30,8 @@ namespace InventoryStuff
 
         float ReduceDamageTaken(float dmg)
         {
+            if (dmg < 0) return dmg;
+
             Debug.Log($"Reduced damage taken from {dmg} to {dmg - damageReduced}");
             return Mathf.Max(dmg - damageReduced, 0f);
         }

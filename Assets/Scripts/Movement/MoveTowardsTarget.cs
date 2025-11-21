@@ -30,7 +30,7 @@ namespace MovementStuff
             {
                 this.transform.position -= baseSpeed * moveSpeed * Time.deltaTime * (diff / distance);
             }
-            else
+            else if (distance < minDistance - .5f)
             {
                 this.transform.position += baseSpeed * moveSpeed * Time.deltaTime * (diff / distance);
             }

@@ -209,7 +209,7 @@ MonoBehaviour:
   target: {fileID: 0}
   moveSpeed: 2
   rotationSpeed: 1
-  minDistance: 0
+  minDistance: 2
 --- !u!95 &4200914740082318497
 Animator:
   serializedVersion: 7
