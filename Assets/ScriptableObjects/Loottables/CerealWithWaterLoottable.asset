@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalChance: 100
   lootTable:
-  - itemName: SuperBowl (InventoryStuff.MeleeWeaponData), 100%
+  - itemName: SuperBowl (InventoryStuff.AOEAttackItemData), 100%
     item: {fileID: 11400000, guid: 37a4396469932004486823c8ad41b3fc, type: 2}
     probability: 100

@@ -23,7 +23,7 @@ namespace Entities.Enemies
         {
             if (showDebug) StartCoroutine(ShowDebug());
         }
-        private void Awake()
+        private void Start()
         {
             if (target == null) target = PlayerController.instance.transform;
         }

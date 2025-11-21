@@ -19,7 +19,7 @@ MonoBehaviour:
     maxStack: 1
     durability: 0
     grantsImmunityTo: []
-    damage: 30
+    damage: 50
     effectsApplied: []
     swingTime: 0.5
     swingAngle: 360
@@ -27,4 +27,5 @@ MonoBehaviour:
     objectDistance: 2.5
     objectScale: 2
     modelRotation: {x: 0, y: 0, z: 0}
-    toSpawn: {fileID: 2245092675210453861, guid: 2c296bbfca03cf9459df26849a07c550, type: 3}
+    toSpawn: {fileID: 5419534598211842566, guid: 2c296bbfca03cf9459df26849a07c550, type: 3}
+    duration: 0.25

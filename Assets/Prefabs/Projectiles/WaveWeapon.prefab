@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 2589636327562251739}
   - component: {fileID: 6431438877571015731}
   - component: {fileID: 5419534598211842566}
-  - component: {fileID: -340991570042604168}
-  - component: {fileID: 2245092675210453861}
-  - component: {fileID: 7972632024485685503}
-  m_Layer: 0
+  - component: {fileID: 6082742858630351065}
+  - component: {fileID: 123611453725859123}
+  m_Layer: 7
   m_Name: WaveWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,8 +31,8 @@ Transform:
   m_GameObject: {fileID: 2833746559379661310}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.577507, y: 0.95, z: 11.601427}
-  m_LocalScale: {x: 4.5, y: 1, z: 4.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -116,9 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd116f86eae55264fbbf48549a6a71be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avoidDamagingPlayer: 1
   damage: 0
---- !u!65 &-340991570042604168
-BoxCollider:
+--- !u!64 &6082742858630351065
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -132,36 +132,37 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.0000002, y: 2, z: 2.0000002}
-  m_Center: {x: 0, y: 0, z: 0.000000029802326}
---- !u!114 &2245092675210453861
-MonoBehaviour:
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5076798556035486163, guid: aaf60f9b46afb564897fc5c090d066ac, type: 3}
+--- !u!54 &123611453725859123
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2833746559379661310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c83360da14f2b04a8ef97e014c52ea9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  handleCollider: {fileID: 0}
-  damager: {fileID: 0}
---- !u!114 &7972632024485685503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2833746559379661310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd116f86eae55264fbbf48549a6a71be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0

@@ -18,15 +18,17 @@ namespace InventoryStuff
     [Serializable]
     public class AOEAttackItem : MeleeWeapon
     {
-        public WeaponHandle toSpawn;
+        public OnTriggerDamageEntity toSpawn;
+        public float duration = .5f;
 
         protected override IEnumerator UseWeaponAnimation(PlayerController source, Vector3 inputDir)
         {
-            var spawned = MonoBehaviour.Instantiate(toSpawn, source.transform.position + new Vector3(0, .5f, 0), source.transform.rotation);
+            OnTriggerDamageEntity spawned = MonoBehaviour.Instantiate(toSpawn, source.transform.position + new Vector3(0, .5f, 0), source.transform.rotation);
             toSpawn.transform.localScale = new(distane, 1, distane);
+            spawned.damage = damage;
+            spawned.exceptions.Add(source);
 
-            // Wait for object to destroy itself
-            while (spawned != null) yield return null;
+            yield return new WaitForSeconds(duration);
         }
     }
 }

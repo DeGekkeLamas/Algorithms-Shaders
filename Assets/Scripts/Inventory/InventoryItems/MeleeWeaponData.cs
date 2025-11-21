@@ -43,25 +43,24 @@ namespace InventoryStuff
         IEnumerator SwingWeapon(PlayerController source, Vector3 inputDir)
         {
             // Initialize
-            source.meleeWeaponHandle.gameObject.SetActive(true);
             float originalSpeed = source.moveSpeed;
             source.ChangeMoveSpeed(0);
             canUseItem = false;
-            source.meleeWeaponHandle.handleCollider.size = new(.2f, 1, distane);
-            source.meleeWeaponHandle.damager.damage = damage * source.strength;
-            inputDir.y = 0;
 
             yield return UseWeaponAnimation(source, inputDir);
 
             // Exit
             source.ChangeMoveSpeed(originalSpeed);
-            source.meleeWeaponHandle.damager.damage = 0;
-            source.meleeWeaponHandle.gameObject.SetActive(false);
             canUseItem = true;
         }
 
         protected virtual IEnumerator UseWeaponAnimation(PlayerController source, Vector3 inputDir)
         {
+            source.meleeWeaponHandle.gameObject.SetActive(true);
+            source.meleeWeaponHandle.handleCollider.size = new(.2f, 1, distane);
+            source.meleeWeaponHandle.damager.damage = damage * source.strength;
+            inputDir.y = 0;
+
             // Swing
             GameObject model = MonoBehaviour.Instantiate(itemModel, source.meleeWeaponHandle.transform.position,
                 source.meleeWeaponHandle.transform.rotation, source.meleeWeaponHandle.transform);
@@ -79,6 +78,9 @@ namespace InventoryStuff
                 source.meleeWeaponHandle.transform.eulerAngles = new Vector3(0, rotation, 0) + modelRotation;
                 yield return null;
             }
+
+            source.meleeWeaponHandle.damager.damage = 0;
+            source.meleeWeaponHandle.gameObject.SetActive(false);
             MonoBehaviour.Destroy(model);
         }
 
