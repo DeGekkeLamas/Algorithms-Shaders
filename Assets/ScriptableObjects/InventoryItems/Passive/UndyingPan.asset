@@ -14,16 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item:
     itemName: Undying pan
-    itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
+    itemModel: {fileID: 919132149155446097, guid: 37c8e02a466e6b3478df13ff7b94e95b, type: 3}
     toolTip: You cheated to get this item =)
     maxStack: 1
     durability: 0
     grantsImmunityTo: []
-    grantsImmortality: 1
-    knifeBoost: 0
-    foodBoost: 0
-    foodResistanceBoost: 0
     durabilityBoost: 0
     healingBoost: 0
-    seeEnemyInventories: 0
     damageReduced: 9999
