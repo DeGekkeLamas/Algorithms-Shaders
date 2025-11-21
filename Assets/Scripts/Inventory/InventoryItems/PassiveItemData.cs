@@ -12,21 +12,13 @@ namespace InventoryStuff
         public PassiveItem item = new();
         public override InventoryItem GetItem() { return item; }
     }
-    /// <summary>
-    /// Not implemented yet :(
-    /// </summary>
 
     [System.Serializable]
     public class PassiveItem : InventoryItem
     {
         [Header("Type specific")]
-        public bool grantsImmortality;
-        public bool knifeBoost;
-        public bool foodBoost;
-        public bool foodResistanceBoost;
         public bool durabilityBoost;
         public int healingBoost;
-        public bool seeEnemyInventories;
 
         public override void UseItem(Entity source, Vector3 inputDir)
         {

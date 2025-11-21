@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Entities.Player;
 
 namespace InventoryStuff
 {
@@ -59,6 +60,7 @@ namespace InventoryStuff
                     {
                         currentInventory[i].quantityLeft++;
                         currentInventory[i].itemName = itemToAdd.itemName;
+                        currentInventory[i].item.OnItemObtained(PlayerController.instance);
                         OnItemChanged?.Invoke();
                         return true;
                     }
@@ -72,6 +74,7 @@ namespace InventoryStuff
                     currentInventory[i].item = itemToAdd;
                     currentInventory[i].quantityLeft++;
                     currentInventory[i].itemName = itemToAdd.itemName;
+                    currentInventory[i].item.OnItemObtained(PlayerController.instance);
                     OnItemChanged?.Invoke();
                     Debug.Log("Added " + itemToAdd.itemName + ", from " + this);
                     return true;
@@ -102,6 +105,7 @@ namespace InventoryStuff
         /// </summary>
         public void RemoveItem(int index)
         {
+            currentInventory[index].item?.OnItemRemoved(PlayerController.instance);
             currentInventory[index].item = null;
             OnItemChanged?.Invoke();
         }
@@ -140,6 +144,7 @@ namespace InventoryStuff
         /// </summary>
         public void RemoveFromStack(int index)
         {
+            currentInventory[index].item?.OnItemRemoved(PlayerController.instance);
             currentInventory[index].quantityLeft--;
             if (currentInventory[index].quantityLeft == 0) RemoveItem(index);
             OnItemChanged?.Invoke();

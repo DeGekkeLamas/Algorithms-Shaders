@@ -82,6 +82,10 @@ namespace InventoryStuff
 
         public virtual void UpdateAction() { }
 
+        public virtual void OnItemObtained(Entity source) { }
+
+        public virtual void OnItemRemoved(Entity source) { }
+
         public virtual string GetItemDescription()
         {
             string description = string.Empty;
