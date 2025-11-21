@@ -1,6 +1,7 @@
-using UnityEngine;
 using Entities;
 using Entities.StatusEffects;
+using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace InventoryStuff
 {
@@ -35,6 +36,22 @@ namespace InventoryStuff
         public override void UpdateAction()
         {
             canUseItem = true;
+        }
+
+        public override string GetItemDescription()
+        {
+            string description = base.GetItemDescription();
+
+            // Healing
+            description += $"Recovers {hpHealed} HP.\n";
+            // Given effects
+            foreach (StatusEffect effect in effectsApplied)
+            {
+                description += $"Gives {effect.name} effect.\n";
+            }
+
+            return description;
+
         }
     }
 

@@ -65,7 +65,7 @@ namespace MovementStuff
             // Leave splat
             if (splat != null)
             {
-                Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hitInfo);
+                Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hitInfo, 10, LayerMask.GetMask("Terrain"));
                 Instantiate(splat, hitInfo.point + new Vector3(0, 0.01f, 0), Quaternion.identity,
                     Projectile.projectileContainer.transform);
             }

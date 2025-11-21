@@ -1,7 +1,8 @@
-using UnityEngine;
 using Entities;
 using Entities.StatusEffects;
 using MovementStuff;
+using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace InventoryStuff
 {
@@ -72,6 +73,20 @@ namespace InventoryStuff
         {
             cooldownLeft -= Time.deltaTime;
             canUseItem = cooldownLeft <= 0;
+        }
+
+        public override string GetItemDescription()
+        {
+            string description = base.GetItemDescription();
+
+            // Damage
+            description += $"Deals {damage} {(!projectile.useGravity ? "ranged" : "lobbed")} damage.\n";
+            // fuel
+            if (fuel != null) description += $"Uses {fuel.GetItem().itemName} as fuel.\n";
+            // Onetime use
+            if (isConsumedOnUse) description += "Single use.\n";
+
+            return description;
         }
     }
 }

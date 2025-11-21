@@ -1,8 +1,9 @@
+using Entities;
+using Entities.StatusEffects;
 using NaughtyAttributes;
 using System;
 using UnityEngine;
-using Entities;
-using Entities.StatusEffects;
+using static UnityEditor.Progress;
 
 namespace InventoryStuff
 {
@@ -80,5 +81,22 @@ namespace InventoryStuff
         public abstract void UseItem(Entity source, Vector3 inputDir);
 
         public virtual void UpdateAction() { }
+
+        public virtual string GetItemDescription()
+        {
+            string description = string.Empty;
+            // Max stacj
+            if (IsStackable)
+            {
+                description += $"Max stack = {maxStack}.\n";
+            }
+            // Immune effects
+            foreach (StatusEffect effect in grantsImmunityTo)
+            {
+                description += $"Grants immunity to {effect.name}.\n";
+            }
+
+            return description;
+        }
     }
 }

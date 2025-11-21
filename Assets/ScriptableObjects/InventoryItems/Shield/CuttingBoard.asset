@@ -16,23 +16,8 @@ MonoBehaviour:
     itemName: CuttingBoard
     itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
     toolTip: Great for cutting, or as a shield, depends on how good you are at cooking.
-    isStackable: 0
     maxStack: 1
     durability: 50
-    isFood: 0
-    isMetal: 0
-    isKnife: 0
-    onAttackHealHP: 0
-    damageScalesWithHP: 0
-    damageAfterBlock: 0
-    grantsImmortality: 0
-    knifeBoost: 1
-    foodBoost: 0
-    foodResistanceBoost: 0
-    durabilityBoost: 0
-    healingBoost: 0
-    seeEnemyInventories: 0
     grantsImmunityTo: []
-    itemSprite: {fileID: 0}
-    canUseItem: 0
-    dmgReduction: 30
+    dmgReduction: 15
+    blockDuration: 1

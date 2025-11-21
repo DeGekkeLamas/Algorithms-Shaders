@@ -1,8 +1,9 @@
-using System.Collections;
-using UnityEngine;
 using Entities;
 using Entities.Player;
 using Entities.StatusEffects;
+using System.Collections;
+using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace InventoryStuff
 {
@@ -73,6 +74,21 @@ namespace InventoryStuff
             source.meleeWeaponHandle.damager.damage = 0;
             source.meleeWeaponHandle.gameObject.SetActive(false);
             canUseItem = true;
+        }
+
+        public override string GetItemDescription()
+        {
+            string description = base.GetItemDescription();
+
+            // Damage
+            description += $"Deals {damage} melee damage.\n";
+            // Effects applied
+            foreach (StatusEffect effect in effectsApplied)
+            {
+                description += $"Inflicts {effect.name}.\n";
+            }
+
+            return description;
         }
         
     }

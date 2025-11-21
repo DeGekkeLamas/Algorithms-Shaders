@@ -129875,7 +129875,7 @@ PrefabInstance:
     - target: {fileID: 2990881938606332820, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: itemToAdd
       value: 
-      objectReference: {fileID: 11400000, guid: 7f2a1dfccc2cbdf46b2ea8cb3e67a2d3, type: 2}
+      objectReference: {fileID: 11400000, guid: c86b9a5cfe08f7b4cb2062800d273d53, type: 2}
     - target: {fileID: 6207984939156594857, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_IsActive
       value: 0

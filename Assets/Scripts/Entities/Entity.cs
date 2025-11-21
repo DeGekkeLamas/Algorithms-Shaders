@@ -31,6 +31,7 @@ namespace Entities
         [HideInInspector] public List<StatusEffect> activeStatusEffects;
         // events
         [HideInInspector] public event Action OnStatsChanged;
+        [HideInInspector] public List<Func<float, float>> processDamageReceived = new();
         [HideInInspector] public event Action OnLevelUp;
         [HideInInspector] public event Action OnXPAdded;
         [HideInInspector] public event Action OnDeath;
@@ -59,6 +60,12 @@ namespace Entities
 
         public void DealDamage(float dmg)
         {
+            // Process damage first
+            foreach(Func<float, float> func in processDamageReceived)
+            {
+                dmg = func.Invoke(dmg);
+            }
+
             UpdateHP(currentHP - dmg);
             Debug.Log($"Dealt {dmg} damage to {this.entityName}");
         }
