@@ -325,6 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4778969613604673521}
   - component: {fileID: 8318035617550816254}
+  - component: {fileID: 7286313313765476584}
   m_Layer: 0
   m_Name: Lunge
   m_TagString: Untagged
@@ -364,6 +365,19 @@ MonoBehaviour:
   lungeDuration: 0.35
   lungeAttackRange: 3.5
   showDebug: 0
+--- !u!114 &7286313313765476584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785726377127201296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20867e9335de89f4eb2c1741896ab994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toSpawn: {fileID: 2833746559379661310, guid: 18de5f23ff94e6e4da8ae510ac386833, type: 3}
 --- !u!1 &9025924344669640218
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,6 +388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3194919227140604203}
   - component: {fileID: 7927924630903075367}
+  - component: {fileID: 8963910000240951127}
   m_Layer: 0
   m_Name: Slam
   m_TagString: Untagged
@@ -411,6 +426,19 @@ MonoBehaviour:
   attackRange: 4
   attackAngle: 180
   showDebug: 0
+--- !u!114 &8963910000240951127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9025924344669640218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20867e9335de89f4eb2c1741896ab994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toSpawn: {fileID: 2833746559379661310, guid: 18de5f23ff94e6e4da8ae510ac386833, type: 3}
 --- !u!1001 &8058027796200294125
 PrefabInstance:
   m_ObjectHideFlags: 0

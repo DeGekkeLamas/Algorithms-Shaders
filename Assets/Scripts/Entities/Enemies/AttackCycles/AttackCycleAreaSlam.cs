@@ -20,6 +20,8 @@ namespace Entities.Enemies
             float originalSpeed = source.moveSpeed;
             source.ChangeMoveSpeed(0);
             yield return source.Animator.WaitForAnimation("Attack");
+            // Deal damage
+            InvokeOnAttackDone(attackRange);
             if (TargetSight.TargetIsInRange(source.transform, PlayerController.instance.transform, attackRange, attackAngle))
             {
                 PlayerController.instance.DealDamage(source.strength);

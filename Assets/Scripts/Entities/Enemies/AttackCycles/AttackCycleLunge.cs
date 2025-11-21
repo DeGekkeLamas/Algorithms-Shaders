@@ -48,6 +48,7 @@ namespace Entities.Enemies
             }
 
             // Deal damage
+            InvokeOnAttackDone(lungeAttackRange);
             if (TargetSight.TargetIsInRange(source.transform, target, lungeAttackRange, 180))
             {
                 target.GetComponent<Entity>().DealDamage(source.strength);
