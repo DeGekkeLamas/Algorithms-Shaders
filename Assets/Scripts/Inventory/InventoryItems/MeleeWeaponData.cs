@@ -28,7 +28,7 @@ namespace InventoryStuff
         public float swingTime = .5f;
         public float swingAngle = 45;
         [Tooltip("Size of the collider on the object")]
-        public float distane = 1;
+        public float distance = 3;
         [Tooltip("Distance of the physical model from the player")]
         public float objectDistance = 1;
         public float objectScale = 1;
@@ -57,7 +57,7 @@ namespace InventoryStuff
         protected virtual IEnumerator UseWeaponAnimation(PlayerController source, Vector3 inputDir)
         {
             source.meleeWeaponHandle.gameObject.SetActive(true);
-            source.meleeWeaponHandle.handleCollider.size = new(.2f, 1, distane);
+            source.meleeWeaponHandle.handleCollider.size = new(.2f, 1, distance);
             source.meleeWeaponHandle.damager.damage = damage * source.strength;
             inputDir.y = 0;
 
@@ -98,6 +98,5 @@ namespace InventoryStuff
 
             return description;
         }
-        
     }
 }

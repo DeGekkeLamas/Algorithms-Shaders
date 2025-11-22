@@ -101,7 +101,7 @@ MonoBehaviour:
   HPIncrement: 10
   strengthIncrement: 2
   activeStatusEffects: []
-  xpToGive: 90
+  xpToGive: 100
   attackCycles:
   - {fileID: 7927924630903075367}
   - {fileID: 7927924630903075367}

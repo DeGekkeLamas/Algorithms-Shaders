@@ -22,9 +22,9 @@ public class MeleeWeaponTester : MonoBehaviour
         while(showDebug)
         {
             DebugExtension.DebugCircle(this.transform.position, Color.red, item.objectDistance);
-            DebugExtension.DebugCircle(this.transform.position, Color.red, item.distane);
-            Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * item.distane, item.swingAngle), Color.red);
-            Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * item.distane, -item.swingAngle), Color.red);
+            DebugExtension.DebugCircle(this.transform.position, Color.red, item.distance);
+            Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * item.distance, item.swingAngle), Color.red);
+            Debug.DrawRay(transform.position, VectorMath.RotateVectorXZ(this.transform.forward * item.distance, -item.swingAngle), Color.red);
             yield return null;
         }
     }

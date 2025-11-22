@@ -17,6 +17,7 @@ namespace InventoryStuff
     public class PassiveDamageReductionItem : PassiveItem
     {
         public float damageReduced;
+        public float extraHealing;
 
         public override void OnItemObtained(Entity source)
         {
@@ -30,17 +31,25 @@ namespace InventoryStuff
 
         float ReduceDamageTaken(float dmg)
         {
-            if (dmg < 0) return dmg;
+            if (dmg < 0)
+            {
+                Debug.Log($"Increased HP recovered from {-dmg} to {-(dmg - damageReduced)}");
+                return dmg - extraHealing;
+            }
+            else
+            {
+                Debug.Log($"Reduced damage taken from {dmg} to {dmg - damageReduced}");
+                return Mathf.Max(dmg - damageReduced, 0f);
+            }
 
-            Debug.Log($"Reduced damage taken from {dmg} to {dmg - damageReduced}");
-            return Mathf.Max(dmg - damageReduced, 0f);
         }
 
         public override string GetItemDescription()
         {
             string description = base.GetItemDescription();
 
-            description += $"Passively reduces damage taken by {damageReduced}.\n";
+            if (damageReduced != 0) description += $"Passively reduces damage taken by {damageReduced}.\n";
+            if (extraHealing != 0) description += $"Consumable items recover {extraHealing} extra HP.\n";
 
             return description;
         }
