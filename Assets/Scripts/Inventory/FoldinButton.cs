@@ -3,6 +3,9 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// I hate this script with a burning passion, if you are this script you should kill yourself
+/// </summary>
 public class FoldinButton : MonoBehaviour
 {
     public RectTransform target;

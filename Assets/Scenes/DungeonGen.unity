@@ -352,10 +352,10 @@ MonoBehaviour:
   AmountOfEnemiesToSpawn: 8
   totalEnemyChance: 100
   enemiesToSpawn:
-  - itemName: DinnerDemon (AttackingEnemy), 65%
+  - itemName: DinnerDemon (Entities.Enemies.AttackingEnemy), 65%
     item: {fileID: 1735096074375888911, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
     probability: 65
-  - itemName: CerealKiller (AttackingEnemy), 35%
+  - itemName: CerealKiller (Entities.Enemies.AttackingEnemy), 35%
     item: {fileID: 2749727292304734216, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
     probability: 35
   counterMiddle: {fileID: 9011421418820237759, guid: 0d413d8ccf516d74bb2fa084514f420d, type: 3}
@@ -684,6 +684,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2990881938606332820, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: itemToAdd
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f2a1dfccc2cbdf46b2ea8cb3e67a2d3, type: 2}
     - target: {fileID: 7148870164262935656, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_Name
       value: GameManager
