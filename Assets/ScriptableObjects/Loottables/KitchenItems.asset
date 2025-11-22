@@ -20,10 +20,10 @@ MonoBehaviour:
   - itemName: Towel (InventoryStuff.PassiveItemData), 1%
     item: {fileID: 11400000, guid: 0b352e7b1fdba9142a3c23bc8f80323f, type: 2}
     probability: 1
-  - itemName: Apron (InventoryStuff.PassiveItemData), 1%
+  - itemName: Apron (InventoryStuff.PassiveDamageReductionItemData), 1%
     item: {fileID: 11400000, guid: a8343eaa7b2d9454daf9e25da1e54f4e, type: 2}
     probability: 1
-  - itemName: ChefHat (InventoryStuff.PassiveItemData), 1%
+  - itemName: ChefHat (InventoryStuff.PassiveDamageReductionItemData), 1%
     item: {fileID: 11400000, guid: c7751ea55ba0a8f468deb474792099fe, type: 2}
     probability: 1
   - itemName: CuttingBoard (InventoryStuff.ShieldItemData), 1%
@@ -68,6 +68,6 @@ MonoBehaviour:
   - itemName: Plate (InventoryStuff.RangedWeaponData), 3%
     item: {fileID: 11400000, guid: 48adf9d060aa1a74a9daa8b325b083dc, type: 2}
     probability: 3
-  - itemName: CookBook (InventoryStuff.PassiveItemData), 1%
+  - itemName: CookBook (InventoryStuff.PassiveDamageReductionItemData), 1%
     item: {fileID: 11400000, guid: b91cf5ac102677e438c130294aaedf62, type: 2}
     probability: 1

@@ -18,7 +18,6 @@ namespace InventoryStuff
     {
         [Header("Type specific")]
         public bool durabilityBoost;
-        public int healingBoost;
 
         public override void UseItem(Entity source, Vector3 inputDir)
         {

@@ -19,8 +19,7 @@ MonoBehaviour:
     maxStack: 1
     durability: 0
     grantsImmunityTo: []
-    knifeBoost: 0
-    foodBoost: 1
     durabilityBoost: 0
     healingBoost: 0
     damageReduced: 5
+    extraHealing: 5
