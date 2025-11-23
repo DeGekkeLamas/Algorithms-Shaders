@@ -8,7 +8,7 @@ public class OnTriggerDamageEntity : MonoBehaviour
 {
     [HideInInspector] public float damage;
     [HideInInspector] public float damageToExceptions;
-    List<Entity> exceptions;
+    List<Entity> exceptions = new();
 
     private void OnTriggerEnter(Collider other)
     {
