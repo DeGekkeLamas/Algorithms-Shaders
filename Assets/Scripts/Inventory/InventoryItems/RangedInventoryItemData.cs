@@ -60,7 +60,7 @@ namespace InventoryStuff
                         projectile.projectileSpeed;
                     rigidbody.angularVelocity = Vector3.Cross(rigidbody.linearVelocity, Vector3.up) * -projectile.rotationIntensity;
                 }
-                if (projectile.splat.TryGetComponent(out OnTriggerDamageEntity damager))
+                if (projectile.splat != null && projectile.splat.TryGetComponent(out OnTriggerDamageEntity damager))
                 {
                     damager.damage = damage;
                     damager.damageToExceptions = damage / 5f;
