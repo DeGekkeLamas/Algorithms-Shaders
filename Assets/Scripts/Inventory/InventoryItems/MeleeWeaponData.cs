@@ -3,8 +3,6 @@ using Entities.Player;
 using Entities.StatusEffects;
 using System.Collections;
 using UnityEngine;
-using static Unity.VisualScripting.Member;
-using static UnityEditor.Progress;
 
 namespace InventoryStuff
 {

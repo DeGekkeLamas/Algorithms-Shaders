@@ -1,7 +1,6 @@
 using Entities;
 using Entities.StatusEffects;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace InventoryStuff
 {

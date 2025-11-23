@@ -3,7 +3,6 @@ using Entities.StatusEffects;
 using NaughtyAttributes;
 using System;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace InventoryStuff
 {
