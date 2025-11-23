@@ -22,6 +22,7 @@ Shader "Custom/CellShadeOutline"
 
 			#include "UnityCG.cginc"
 			#include "UnityLightingCommon.cginc"
+			#include "Assets\Shaders\Lighting.hlsl"
 
 			struct input
 			{
@@ -43,7 +44,6 @@ Shader "Custom/CellShadeOutline"
 			float4 _Color;
 			float _Reflectiveness;
 			int _CellShadeLoops;
-			float _Transparency;
 			float _Emissiveness;
 
 			output vert(input v)
@@ -65,27 +65,7 @@ Shader "Custom/CellShadeOutline"
 			{
 				float4 col = tex2D(_MainTex, i.uv) * _Color;
 
-				// Lighting
-				float4 lightDir = _WorldSpaceLightPos0;
-				lightDir = lightDir == float4(0,0,0,0) ? float4(0.00f, 0.87f, 0.50f,0) : lightDir;
-				float4 lightColor = _LightColor0;
-				lightColor = lightColor== float4(0,0,0,0) ? float4(1,.9f,.8f,1) : lightColor;
-				float4 ambientColor = (float4(1,1,1,1) - lightColor);
-				float3 cameraDir = _WorldSpaceCameraPos;
-				// Diffuse
-				float diffuse = saturate(dot(lightDir, i.normal));
-				// Specular
-				float3 reflectionDir = normalize(cameraDir - i.worldPos);
-				float4 reflection = reflect(float4(-reflectionDir, 0), normalize(i.normal));
-				float specular = dot(reflection, lightDir);
-				specular = pow( specular, _Reflectiveness);
-				float4 specular4 = saturate( float4(specular.xxx, 0) * lightColor );
-				diffuse += specular4;
-				// Cell shade conversion
-				diffuse = ceil(diffuse * _CellShadeLoops + pow(_CellShadeLoops, -1)) / _CellShadeLoops;
-				 
-				col *= (diffuse + ambientColor) * lightColor;
-				col.a = 1 * _Transparency;
+				col = GetLightingCellshade(col, i.normal, i.worldPos, _Reflectiveness, _CellShadeLoops);
 				col *= 1 + _Emissiveness;
 
 				return col;

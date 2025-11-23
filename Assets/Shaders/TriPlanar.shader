@@ -21,6 +21,7 @@ Shader "Custom/Triplanar"
 
 			#include "UnityCG.cginc"
 			#include "UnityLightingCommon.cginc"
+			#include "Assets\Shaders\Lighting.hlsl"
 
 			struct input
 			{
@@ -73,25 +74,7 @@ Shader "Custom/Triplanar"
 				
 				col = colX * blendWeight.x + colY * blendWeight.y + colZ * blendWeight.z;
 
-				
-				// Lighting
-				float4 lightDir = _WorldSpaceLightPos0;
-				float4 lightColor = _LightColor0;
-				float4 ambientColor = (float4(1,1,1,1) - lightColor);
-				float3 cameraDir = _WorldSpaceCameraPos;
-				// Diffuse
-				float diffuse = saturate(dot(lightDir, i.normal));
-				// Specular
-				float3 reflectionDir = normalize(cameraDir - i.coords);
-				float4 reflection = reflect(float4(-reflectionDir, 0), normalize(i.normal));
-				float specular = dot(reflection, lightDir);
-				specular = pow( specular, _Reflectiveness);
-				float4 specular4 = saturate( float4(specular.xxx, 0) * lightColor );
-				diffuse += specular4;
-				// Cell shade conversion
-				diffuse = ceil(diffuse * _CellShadeLoops + pow(_CellShadeLoops, -1)) / _CellShadeLoops;
-				 
-				col *= (diffuse + ambientColor) * lightColor;
+				col = GetLightingCellshade(col, i.normal, float4(i.coords,0), _Reflectiveness, _CellShadeLoops);
 
 				return col;
 			}
