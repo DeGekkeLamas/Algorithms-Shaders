@@ -67,7 +67,9 @@ Shader "Custom/CellShadeOutline"
 
 				// Lighting
 				float4 lightDir = _WorldSpaceLightPos0;
+				lightDir = lightDir == float4(0,0,0,0) ? float4(0.00f, 0.87f, 0.50f,0) : lightDir;
 				float4 lightColor = _LightColor0;
+				lightColor = lightColor== float4(0,0,0,0) ? float4(1,.9f,.8f,1) : lightColor;
 				float4 ambientColor = (float4(1,1,1,1) - lightColor);
 				float3 cameraDir = _WorldSpaceCameraPos;
 				// Diffuse

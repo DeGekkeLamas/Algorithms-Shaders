@@ -58,12 +58,7 @@ namespace InventoryStuff
 
         Texture2D SetSilhouette()
         {
-            if (itemModel == null)
-            {
-                Debug.Log($"Model for {itemName} is null");
-                return null;
-            }
-            itemSilhouette = RuntimePreviewGenerator.GenerateModelPreview(itemModel.transform, 256, 256, false, true);
+            itemSilhouette = ItemSprite;
             itemSilhouette = SpriteEditor.MakeSilhouette(itemSilhouette);
 
             return itemSilhouette;
