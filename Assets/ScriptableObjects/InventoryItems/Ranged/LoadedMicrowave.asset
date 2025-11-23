@@ -21,7 +21,7 @@ MonoBehaviour:
     grantsImmunityTo: []
     damage: 250
     effectApplied: []
-    projectile: {fileID: -4791254542994142077, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
+    projectile: {fileID: -4791254542994142077, guid: 9165ae1eb3dccc1429ec046a539ce717, type: 3}
     autoFire: 0
     cooldown: 0
     isConsumedOnUse: 1

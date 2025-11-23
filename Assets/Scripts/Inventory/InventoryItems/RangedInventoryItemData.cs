@@ -60,6 +60,12 @@ namespace InventoryStuff
                         projectile.projectileSpeed;
                     rigidbody.angularVelocity = Vector3.Cross(rigidbody.linearVelocity, Vector3.up) * -projectile.rotationIntensity;
                 }
+                if (projectile.splat.TryGetComponent(out OnTriggerDamageEntity damager))
+                {
+                    damager.damage = damage;
+                    damager.damageToExceptions = damage / 5f;
+                    damager.AddException(source);
+                }
 
                 cooldownLeft += cooldown;
 

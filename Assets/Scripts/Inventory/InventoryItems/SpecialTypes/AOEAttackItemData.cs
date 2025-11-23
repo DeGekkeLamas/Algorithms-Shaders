@@ -52,7 +52,7 @@ namespace InventoryStuff
             OnTriggerDamageEntity spawned = MonoBehaviour.Instantiate(toSpawn, source.transform.position + new Vector3(0, .5f, 0), source.transform.rotation);
             toSpawn.transform.localScale = new(distance, 1, distance);
             spawned.damage = damage * source.strength;
-            spawned.exceptions.Add(source);
+            spawned.AddException(source);
 
             yield return new WaitForSeconds(duration);
         }
