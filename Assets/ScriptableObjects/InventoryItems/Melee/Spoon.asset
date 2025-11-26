@@ -14,17 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item:
     itemName: Spoon
-    itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
+    itemModel: {fileID: 919132149155446097, guid: 413dc9650e5299d4983f77db36e83bb7, type: 3}
     toolTip: Great for if you're lonely in bed
     maxStack: 1
     durability: 10
     grantsImmunityTo: []
-    itemSprite: {fileID: 0}
     damage: 20
     effectsApplied: []
     swingTime: 0.15
     swingAngle: 45
-    distane: 3
+    distance: 3
     objectDistance: 2.5
     objectScale: 2
     modelRotation: {x: 0, y: 180, z: 0}

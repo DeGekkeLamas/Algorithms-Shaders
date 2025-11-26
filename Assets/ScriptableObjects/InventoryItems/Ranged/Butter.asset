@@ -14,18 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item:
     itemName: Butter
-    itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
+    itemModel: {fileID: 919132149155446097, guid: b0402328c182f45469333f101a11f691, type: 3}
     toolTip: It's like sunscreen but better!
     maxStack: 1
     durability: 0
     grantsImmunityTo: []
-    itemSprite: {fileID: 0}
-    canUseItem: 0
     damage: 25
     effectApplied: []
-    projectile: {fileID: -4791254542994142077, guid: 169f02b00663d2444b21ce82746f229b, type: 3}
-    autoFire: 0
+    projectile: {fileID: -4791254542994142077, guid: 538bad7a0faa2d64e9b21c5a0d967eb0, type: 3}
     cooldown: 0
     isConsumedOnUse: 1
     fuel: {fileID: 0}
-    cooldownLeft: 0
+    cooldownLeft: -6.2676096

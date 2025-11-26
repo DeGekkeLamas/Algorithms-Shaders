@@ -14,17 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item:
     itemName: Spife
-    itemModel: {fileID: 97514727698275135, guid: ae0949cdca4173c40be66d1b1b02fe78, type: 3}
+    itemModel: {fileID: 919132149155446097, guid: 7684b6f9641f506479012c0edf2a44b3, type: 3}
     toolTip: Spife will take your life.
     maxStack: 1
     durability: 15
     grantsImmunityTo: []
-    itemSprite: {fileID: 0}
     damage: 30
     effectsApplied: []
     swingTime: 0.15
     swingAngle: 45
-    distane: 3
+    distance: 3
     objectDistance: 2.5
     objectScale: 2
     modelRotation: {x: 0, y: 180, z: 0}

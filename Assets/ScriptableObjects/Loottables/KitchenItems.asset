@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1068a3cabdfdbd44f93dc81a81c28155, type: 3}
   m_Name: KitchenItems
   m_EditorClassIdentifier: 
-  totalChance: 26
+  totalChance: 27
   lootTable:
   - itemName: FryingPan (InventoryStuff.MeleeWeaponData), 1%
     item: {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
@@ -70,4 +70,7 @@ MonoBehaviour:
     probability: 3
   - itemName: CookBook (InventoryStuff.PassiveDamageReductionItemData), 1%
     item: {fileID: 11400000, guid: b91cf5ac102677e438c130294aaedf62, type: 2}
+    probability: 1
+  - itemName: Bread (InventoryStuff.PassiveItemData), 1%
+    item: {fileID: 11400000, guid: 5a402ceecb804564fb804d4f971fa8c9, type: 2}
     probability: 1
