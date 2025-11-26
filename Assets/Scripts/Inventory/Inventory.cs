@@ -71,8 +71,8 @@ namespace InventoryStuff
             {
                 if (currentInventory[i].item == null)
                 {
-                    currentInventory[i].item = itemToAdd;
                     currentInventory[i].quantityLeft++;
+                    currentInventory[i].item = itemToAdd;
                     currentInventory[i].itemName = itemToAdd.itemName;
                     currentInventory[i].item.OnItemObtained(PlayerController.instance);
                     OnItemChanged?.Invoke();
@@ -106,7 +106,7 @@ namespace InventoryStuff
         public void RemoveItem(int index)
         {
             currentInventory[index].item?.OnItemRemoved(PlayerController.instance);
-            currentInventory[index].item = null;
+            currentInventory[index].Reset();
             OnItemChanged?.Invoke();
         }
 
@@ -146,7 +146,7 @@ namespace InventoryStuff
         {
             currentInventory[index].item?.OnItemRemoved(PlayerController.instance);
             currentInventory[index].quantityLeft--;
-            if (currentInventory[index].quantityLeft == 0) RemoveItem(index);
+            if (currentInventory[index].quantityLeft <= 0) RemoveItem(index);
             OnItemChanged?.Invoke();
         }
 

@@ -83,7 +83,9 @@ namespace Entities.Player
             Debug.Log($"Dropped {itemSelected.itemName}, from {this}");
             Rigidbody droppedItem = Instantiate(pickupSpawned, this.transform.position + transform.forward, Quaternion.identity);
             droppedItem.gameObject.GetComponent<PickupItem>().itemToGive = Inventory.instance.currentInventory[Inventory.itemSelected].item;
-            Inventory.instance.RemoveFromStack(Inventory.itemSelected);
+            if (itemSelected.IsStackable) Inventory.instance.RemoveFromStack(Inventory.itemSelected);
+            else Inventory.instance.RemoveItem(Inventory.itemSelected);
+
         }
 
         void SetProjectileChart(Vector3 mousePos)

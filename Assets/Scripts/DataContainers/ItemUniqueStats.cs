@@ -14,5 +14,11 @@ namespace InventoryStuff
         public InventoryItem item;
         public float durabilityLeft;
         public float quantityLeft;
+
+        public void Reset()
+        {
+            quantityLeft = 0;
+            item = null;
+        }
     }
 }
