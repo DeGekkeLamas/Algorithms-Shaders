@@ -24,6 +24,6 @@ MonoBehaviour:
     projectile: {fileID: -4791254542994142077, guid: aa4d95b5a80302e4e8499cc6f4ebe0ae, type: 3}
     autoFire: 0
     cooldown: 0
-    isConsumedOnUse: 0
+    isConsumedOnUse: 1
     fuel: {fileID: 0}
-    cooldownLeft: -211.81546
+    cooldownLeft: -244.11522

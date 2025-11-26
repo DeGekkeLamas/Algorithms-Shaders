@@ -233,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  damageToExceptions: 0
 --- !u!114 &3036669457786429698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +435,7 @@ GameObject:
   - component: {fileID: 1272428489091131549}
   - component: {fileID: 3290451083931652406}
   - component: {fileID: 7329909894806129867}
+  - component: {fileID: 4730187310908057946}
   m_Layer: 6
   m_Name: PlayerWASD
   m_TagString: Untagged
@@ -582,6 +584,19 @@ MonoBehaviour:
   xpText: {fileID: 2765253389448284919}
   levelText: {fileID: 5404272836999487072}
   nameText: {fileID: 7986658992417016708}
+--- !u!114 &4730187310908057946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608250485412360592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff11f04e52d1e4446a7adf27fe9a751a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toSpawn: {fileID: 2833746559379661310, guid: e6ce2ca603b174f45918dfefff0e5aaa, type: 3}
 --- !u!1001 &4218717930192115017
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -682,6 +697,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5374713836188281376, guid: be4aff185e064df46bda6b3c33185782, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -27348171
+      objectReference: {fileID: 0}
     - target: {fileID: 6926666459130333180, guid: be4aff185e064df46bda6b3c33185782, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -690,6 +709,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7206185448920866525, guid: be4aff185e064df46bda6b3c33185782, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a6de03faba10644cb65ead7d5556734, type: 2}
+    - target: {fileID: 8772987425713676102, guid: be4aff185e064df46bda6b3c33185782, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a6de03faba10644cb65ead7d5556734, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,16 +1,22 @@
 using System.Collections;
 using UnityEngine;
 using Entities;
+using System;
 
 public class ExitDoor : MonoBehaviour, IInteractible
 {
     public int killsRequired;
     int killsDone = 0;
+    public int KillsDone => killsDone;
     bool isOpen;
+    public bool IsOpen => isOpen;
+    [HideInInspector] public event Action OnStatsUpdated;
+
     private void Start()
     {
         Entity.OnAnyDeath += DoorCheck;
         GameManager.instance.OnNewFloorLoaded += ResetDoor;
+        OnStatsUpdated?.Invoke();
     }
     private void OnEnable()
     {
@@ -32,6 +38,7 @@ public class ExitDoor : MonoBehaviour, IInteractible
             if (!isOpen) StartCoroutine(OpenDoor());
             isOpen = true;
         }
+        OnStatsUpdated?.Invoke();
     }
 
     IEnumerator OpenDoor()
@@ -44,6 +51,7 @@ public class ExitDoor : MonoBehaviour, IInteractible
     {
         killsDone = 0;
         isOpen = false;
+        OnStatsUpdated?.Invoke();
     }
 
     public void OnInteract()

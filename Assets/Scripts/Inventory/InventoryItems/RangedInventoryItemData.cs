@@ -22,7 +22,6 @@ namespace InventoryStuff
         public float damage;
         public StatusEffect[] effectApplied;
         public Projectile projectile;
-        public bool autoFire;
         public float cooldown;
         public bool isConsumedOnUse;
         [Tooltip("Leave empty to use no fuel")]

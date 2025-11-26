@@ -25296,7 +25296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1823438395285073010, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.48
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1823438395285073010, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25304,7 +25304,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1823438395285073010, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1823438395285073010, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25349,10 +25349,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8608250485412360592, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1831893508}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
 --- !u!1 &349949497
 GameObject:
@@ -126607,24 +126604,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831733466}
   m_Mesh: {fileID: 5062246478642505140, guid: 31221db1d24ec744cb6bf3f5acba97c3, type: 3}
---- !u!1 &1831893500 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8608250485412360592, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
-  m_PrefabInstance: {fileID: 348122782}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1831893508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831893500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff11f04e52d1e4446a7adf27fe9a751a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toSpawn: {fileID: 2833746559379661310, guid: e6ce2ca603b174f45918dfefff0e5aaa, type: 3}
 --- !u!1 &1832991070
 GameObject:
   m_ObjectHideFlags: 0
@@ -129789,26 +129768,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1413741798407944745, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2975254441102481949, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 39
-      objectReference: {fileID: 0}
-    - target: {fileID: 2975254441102481949, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 2975254441102481949, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2990881938606332820, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-      propertyPath: itemToAdd
-      value: 
-      objectReference: {fileID: 11400000, guid: 7f2a1dfccc2cbdf46b2ea8cb3e67a2d3, type: 2}
-    - target: {fileID: 6207984939156594857, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7148870164262935656, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
@@ -138407,6 +138366,14 @@ PrefabInstance:
     - target: {fileID: 1682048774937779058, guid: f4dfe9be6e2943143864b699ec08bd6d, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381630461583315236, guid: f4dfe9be6e2943143864b699ec08bd6d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7381630461583315236, guid: f4dfe9be6e2943143864b699ec08bd6d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7455650038898592290, guid: f4dfe9be6e2943143864b699ec08bd6d, type: 3}
       propertyPath: killsRequired

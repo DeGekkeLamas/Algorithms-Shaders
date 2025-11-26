@@ -29,15 +29,17 @@ static float GetAmbient()
 static float GetDiffuse(float4 normal)
 {
     float diffuse = saturate(dot(GetLightDir(), normal));
+    diffuse = max(diffuse,0);
     return diffuse;
 }
 
-static float4 GetSpecular(float4 worldPos, float4 normal, float reflectivenessExponent)
+static float GetSpecular(float4 worldPos, float4 normal, float reflectivenessExponent)
 {
     float3 reflectionDir = normalize(GetCameraDir() - worldPos);
     float4 reflection = reflect(float4(-reflectionDir, 0), normalize(normal));
     float specular = dot(reflection, GetLightDir());
     specular = pow(specular, reflectivenessExponent);
+    //specular = saturate(specular);
     float4 specular4 = saturate(float4(specular.xxx, 0) * GetLightColor());
     return specular4.x;
 }
@@ -58,7 +60,7 @@ static float4 GetLighting(float4 col, float4 normal, float4 worldPos, float refl
     float specular = GetSpecular(worldPos, normal, reflectivenessExponent);
     diffuse += specular;
 				
-    col *= (diffuse + ambientColor) * GetLightColor();
+    col *= float4(diffuse.xxx, 0) * GetLightColor() + ambientColor;
     
     return col;
 }

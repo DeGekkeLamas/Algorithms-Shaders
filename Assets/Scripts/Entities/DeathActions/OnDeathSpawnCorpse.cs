@@ -8,7 +8,7 @@ namespace Entities
         public GameObject corpse;
         protected override void OnDeath()
         {
-            Instantiate(corpse, target.position, target.rotation);
+            Instantiate(corpse, target.position + corpse.transform.position, target.rotation);
             Destroy(target.gameObject);
         }
     }
