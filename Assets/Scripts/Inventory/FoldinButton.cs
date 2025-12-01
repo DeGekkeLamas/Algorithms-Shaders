@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// I hate this script with a burning passion, if you are this script you should kill yourself
+/// Interpolate an object between its original position and target position based on the scale of the canvas its on
 /// </summary>
 public class FoldinButton : MonoBehaviour
 {
@@ -21,6 +21,10 @@ public class FoldinButton : MonoBehaviour
     {
         canvas = GetCanvas();
 
+    }
+
+    private void Start()
+    {
         originalPos = target.position / canvas.transform.localScale.x;
     }
 
@@ -46,42 +50,30 @@ public class FoldinButton : MonoBehaviour
         // Fold or unfold
         if (isCollapsed)
         {
-            StartCoroutine(FoldOut());
+            StartCoroutine(LerpBetween(target, targetPos, originalPos, foldTime));
             isCollapsed = false;
         }
         else
         {
-            StartCoroutine(FoldIn());
+            StartCoroutine(LerpBetween(target, originalPos, targetPos, foldTime));
             isCollapsed = true;
         }
     }
 
-    IEnumerator FoldIn()
+    IEnumerator LerpBetween(Transform target, Vector3 initialPos, Vector3 targetPos, float duration)
     {
         float timer = 0;
-        while(timer < foldTime)
+        while(timer < duration)
         {
             timer += Time.deltaTime;
             // Set pos
-            target.position = Vector3.Lerp(originalPos, targetPos, timer/foldTime) * canvas.transform.localScale.x;
+            target.position = Vector3.Lerp(initialPos, targetPos, timer/ duration) * canvas.transform.localScale.x;
             //target.position = originalPos;
             yield return null;
         }
         Debug.Log("Folded in menu");
     }
 
-    IEnumerator FoldOut()
-    {
-        float timer = 0;
-        while (timer < foldTime)
-        {
-            timer += Time.deltaTime;
-            // Set pos
-            target.position = Vector3.Lerp(targetPos, originalPos, timer/foldTime) * canvas.transform.localScale.x;
-            yield return null;
-        }
-        Debug.Log("Folded out menu");
-    }
     [Button("(Debug) get current pos", EButtonEnableMode.Editor)]
     void PrintCurrentPos()
     {
