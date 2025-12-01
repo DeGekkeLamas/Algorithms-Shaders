@@ -1,3 +1,4 @@
+using Entities.Player;
 using NaughtyAttributes;
 using System;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Quests
     {
         [ReadOnly][TextArea] public string description;
         [ReadOnly] public Texture2D texture;
+        public float XPReward = 60;
 
         public event Action OnInitialize;
         public event Action OnProgressUpdated;
@@ -28,6 +30,7 @@ namespace Quests
         protected virtual void OnCompleted()
         {
             Debug.Log($"Completed quest {this.name}");
+            PlayerController.instance.AddXP(XPReward);
         }
 
         protected void InvokeOnProgressUpdated()

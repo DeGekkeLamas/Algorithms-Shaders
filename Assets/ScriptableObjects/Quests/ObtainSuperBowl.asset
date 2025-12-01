@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84e40a907762b8c41912ff245ca86550, type: 3}
-  m_Name: ObtainSporf
+  m_Name: ObtainSuperBowl
   m_EditorClassIdentifier: 
-  description: Obtain a Sporf
+  description: Obtain a Super bowl
   texture: {fileID: 0}
-  XPReward: 100
-  toCollect: {fileID: 11400000, guid: f68a265b79360694ca49a819c932524e, type: 2}
+  XPReward: 40
+  toCollect: {fileID: 11400000, guid: 37a4396469932004486823c8ad41b3fc, type: 2}

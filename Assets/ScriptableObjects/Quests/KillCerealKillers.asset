@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e40a907762b8c41912ff245ca86550, type: 3}
-  m_Name: ObtainSporf
+  m_Script: {fileID: 11500000, guid: 4f7352902bc4d97418652ff10ca5e774, type: 3}
+  m_Name: KillCerealKillers
   m_EditorClassIdentifier: 
-  description: Obtain a Sporf
+  description: Kill 20 Cereal killers
   texture: {fileID: 0}
   XPReward: 100
-  toCollect: {fileID: 11400000, guid: f68a265b79360694ca49a819c932524e, type: 2}
+  toKill: {fileID: 2749727292304734216, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
+  amount: 20

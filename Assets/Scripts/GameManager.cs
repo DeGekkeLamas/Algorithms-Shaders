@@ -26,18 +26,15 @@ public class GameManager : MonoBehaviour
         if (instance == null) instance = this;
         else
         {
-            Debug.LogWarning($"{instance} already exists, destroyed {this}");
             Destroy(this.gameObject);
             return;
         }
 
         SceneManager.sceneLoaded += OnSceneLoaded;
         DontDestroyOnLoad(this.gameObject);
-        Debug.LogWarning($"NO DEATHS YET");
     }
     private void OnDestroy()
     {
-        Debug.LogWarning("IM GONNA CRY");
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     private void Start()

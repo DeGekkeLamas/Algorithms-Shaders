@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Kill 1 Cereal with water
   texture: {fileID: 0}
+  XPReward: 100
   toKill: {fileID: 5866176182591907743, guid: a5a4686d88ffe864bba8f345ad0cddc7, type: 3}
   amount: 1

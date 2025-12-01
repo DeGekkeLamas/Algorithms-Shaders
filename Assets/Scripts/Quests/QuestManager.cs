@@ -26,7 +26,7 @@ namespace Quests
             {
                 int index = Random.Range(0, registeredQuests.Count);
                 AddQuest(registeredQuests[index]);
-                registeredQuests.RemoveAt(i);
+                registeredQuests.RemoveAt(index);
             }
         }
         public void AddQuest(Quest toAdd)

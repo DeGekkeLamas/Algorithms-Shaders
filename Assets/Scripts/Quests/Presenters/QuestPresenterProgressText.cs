@@ -13,7 +13,14 @@ namespace Quests.Presenters
         }
         protected override void UpdateDisplay()
         {
-            text.text = $"{boundQuest.progress} / {boundQuest.maxProgress}";
+            if (boundQuest.progress >= boundQuest.maxProgress)
+            {
+                text.text = $"Complete!";
+            }
+            else
+            {
+                text.text = $"{boundQuest.progress} / {boundQuest.maxProgress}";
+            }
         }
     }
 }

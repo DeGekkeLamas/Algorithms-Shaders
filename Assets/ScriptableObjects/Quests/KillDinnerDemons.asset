@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Kill 20 Dinner demons
   texture: {fileID: 0}
+  XPReward: 100
   toKill: {fileID: 1735096074375888911, guid: be28c3c80e1ba1f4b87651ccc0505dda, type: 3}
   amount: 20
