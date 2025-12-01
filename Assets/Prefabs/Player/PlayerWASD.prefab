@@ -436,6 +436,7 @@ GameObject:
   - component: {fileID: 3290451083931652406}
   - component: {fileID: 7329909894806129867}
   - component: {fileID: 4730187310908057946}
+  - component: {fileID: 3411223684296902322}
   m_Layer: 6
   m_Name: PlayerWASD
   m_TagString: Untagged
@@ -597,6 +598,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toSpawn: {fileID: 2833746559379661310, guid: e6ce2ca603b174f45918dfefff0e5aaa, type: 3}
+--- !u!114 &3411223684296902322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608250485412360592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb189991ad25c68498ba6c7b9685cfee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4218717930192115017
 PrefabInstance:
   m_ObjectHideFlags: 0

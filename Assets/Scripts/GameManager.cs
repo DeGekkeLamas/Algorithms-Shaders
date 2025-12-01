@@ -1,8 +1,12 @@
-using UnityEngine;
 using DungeonGeneration;
-using UnityEngine.SceneManagement;
-using System;
+using Entities.Player;
 using InventoryStuff;
+using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Diagnostics;
+using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,10 +24,21 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
-        else Destroy(this.gameObject);
+        else
+        {
+            Debug.LogWarning($"{instance} already exists, destroyed {this}");
+            Destroy(this.gameObject);
+            return;
+        }
 
-        DontDestroyOnLoad(this.gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+        DontDestroyOnLoad(this.gameObject);
+        Debug.LogWarning($"NO DEATHS YET");
+    }
+    private void OnDestroy()
+    {
+        Debug.LogWarning("IM GONNA CRY");
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
     private void Start()
     {
@@ -36,6 +51,7 @@ public class GameManager : MonoBehaviour
     public void MoveToNextRoom()
     {
         currentRoom++;
+        // Load exception scene if needed
         for (int i = 0; i < roomExceptions.Length; i++)
         {
             IntScene exception = roomExceptions[i];
@@ -60,11 +76,14 @@ public class GameManager : MonoBehaviour
         exit.gameObject.SetActive(false);
     }
 
-    public void ResetGame()
+    public IEnumerator ResetGame()
     {
+        yield return new WaitForEndOfFrame();
         currentRoom = 0;
         Inventory.instance.ClearInventory();
         MoveToNextRoom();
+        SceneManager.MoveGameObjectToScene(this.gameObject, SceneManager.GetActiveScene());
+        instance = null;
     }
 }
 

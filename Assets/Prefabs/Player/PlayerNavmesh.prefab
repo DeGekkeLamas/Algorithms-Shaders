@@ -322,6 +322,7 @@ GameObject:
   - component: {fileID: -1686056727752661807}
   - component: {fileID: 4554953839631238754}
   - component: {fileID: 1709325684178408358}
+  - component: {fileID: 1145660066043090464}
   m_Layer: 6
   m_Name: PlayerNavmesh
   m_TagString: Untagged
@@ -444,3 +445,15 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1145660066043090464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608250485412360592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb189991ad25c68498ba6c7b9685cfee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
