@@ -1,8 +1,5 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
-using InventoryStuff;
-using NaughtyAttributes;
 using Entities.Player;
 
 namespace Entities.Enemies
@@ -27,7 +24,7 @@ namespace Entities.Enemies
         {
             base.Death();
 
-            PlayerController.instance.AddXP(xpToGive);
+            PlayerController.instance?.AddXP(xpToGive);
             StopAllCoroutines();
             Destroy(this.gameObject);
         }

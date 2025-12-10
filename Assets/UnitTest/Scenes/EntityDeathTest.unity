@@ -287,28 +287,13 @@ PrefabInstance:
       addedObject: {fileID: 2061107592}
     - targetCorrespondingSourceObject: {fileID: 5020230783508771579, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2061107591}
-    - targetCorrespondingSourceObject: {fileID: 5020230783508771579, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2061107601}
+      addedObject: {fileID: 2061107602}
   m_SourcePrefab: {fileID: 100100000, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
 --- !u!1 &2061107590 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5020230783508771579, guid: 6d8ac97f433db0c4db08a129f58e0328, type: 3}
   m_PrefabInstance: {fileID: 2061107589}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2061107591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2061107590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a56d73d19512b41468f2466bd6766bea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2061107592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,7 +316,7 @@ MonoBehaviour:
   strengthIncrement: 0.1
   activeStatusEffects: []
   xpToGive: 20
---- !u!114 &2061107601
+--- !u!114 &2061107602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -340,10 +325,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2061107590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff11f04e52d1e4446a7adf27fe9a751a, type: 3}
+  m_Script: {fileID: 11500000, guid: 74c9a658f1881cb45ac749c274556809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSpawn: {fileID: 2833746559379661310, guid: e6ce2ca603b174f45918dfefff0e5aaa, type: 3}
 --- !u!1 &2128647224
 GameObject:
   m_ObjectHideFlags: 0
