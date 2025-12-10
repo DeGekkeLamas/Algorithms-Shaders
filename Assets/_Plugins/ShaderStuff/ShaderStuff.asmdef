@@ -1,0 +1,16 @@
+{
+    "name": "ShaderStuff",
+    "rootNamespace": "",
+    "references": [
+        "GUID:8b563c8ba04a48b4091501b4c6ade123"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
