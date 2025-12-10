@@ -12,6 +12,13 @@ namespace InventoryStuff
 
         public void Craft()
         {
+#if UNITY_EDITOR
+            if (DebugCheats.alwaysCraft)
+            {
+                Inventory.instance.AddItem(recipe.result.GetItem());
+                return;
+            }
+#endif
             if (ContainsAllItems())
             {
                 foreach (InventoryItemData item in recipe.ingredients)

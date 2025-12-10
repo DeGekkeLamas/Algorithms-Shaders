@@ -56,6 +56,9 @@ public class ExitDoor : MonoBehaviour, IInteractible
 
     public void OnInteract()
     {
+#if UNITY_EDITOR
+        if (DebugCheats.unlockAllDoors) GameManager.instance.MoveToNextRoom();
+#endif
         if (isOpen) GameManager.instance.MoveToNextRoom();
     }
 }
