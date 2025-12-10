@@ -14,7 +14,7 @@ namespace MovementStuff
                 MovementBeforeSeenTarget.enabled = false;
                 MovementAfterSeenTarget.enabled = true;
                 InvokeOnFirstSeenTarget();
-                // Destroy at it will no longer be needed
+                // Destroy as it will no longer be needed
                 Destroy(this);
             }
         }

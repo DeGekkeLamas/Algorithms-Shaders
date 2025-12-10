@@ -1,0 +1,36 @@
+using Entities;
+using MovementStuff;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace UnitTesting
+{
+    public class TargetsightTest : MonoBehaviour
+    {
+        //bool wasSuccess;
+
+        private void Start()
+        {
+            Targetsight_Is_Triggered();
+        }
+
+        void Targetsight_Is_Triggered()
+        {
+            this.GetComponent<TargetSight>().OnFirstSeenTarget += TargetSeen;;
+        }
+
+        void TargetSeen()
+        {
+            //wasSuccess = true;
+            Debug.Log("Targetsight test success");
+        }
+
+        public static IEnumerator LoadScene(string sceneName)
+        {
+            AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);
+            while (!loadSceneOperation.isDone)
+                yield return null;
+        }
+    }
+}

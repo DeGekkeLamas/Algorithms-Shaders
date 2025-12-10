@@ -65,9 +65,9 @@ namespace MovementStuff
         /// </summary>
         public static bool TargetIsInLineOfSight(Transform self, Transform target)
         {
-            return Physics.Raycast(self.transform.position + new Vector3(0,target.transform.localScale.y*.5f,0)
-                , target.position + Vector3.up - (self.transform.position),      // Direct line of sight
-            out RaycastHit visionHit) && visionHit.collider.transform == target; // to target
+            return Physics.Raycast(self.transform.position
+                , target.position + new Vector3(0, target.transform.localScale.y * .5f, 0) - (self.transform.position),      // Direct line of sight to target
+            out RaycastHit visionHit) && visionHit.collider.transform == target;
         }
 
         IEnumerator ShowDebug()
