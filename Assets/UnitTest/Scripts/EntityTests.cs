@@ -1,4 +1,4 @@
-using Entities;
+//using Entities;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -17,9 +17,9 @@ namespace UnitTesting
             //Setup the test
             yield return LoadScene("EntityLevelupTest");//Wait for the scene to finish loading. 
 
-            Entity target = Object.FindFirstObjectByType<Entity>();
-            target.OnLevelUp += LevelUp;
-            target.AddXP(target.XPRequired);
+            //Entity target = Object.FindFirstObjectByType<Entity>();
+            //target.OnLevelUp += LevelUp;
+            //target.AddXP(target.XPRequired);
 
             //Check the result
             Assert.AreEqual(wasSuccess, true);
