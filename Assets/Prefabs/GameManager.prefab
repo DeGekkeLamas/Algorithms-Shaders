@@ -2723,12 +2723,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 275521849307330366}
-        m_TargetAssemblyTypeName: DebugCheats, Assembly-CSharp
+        m_TargetAssemblyTypeName: DebugCheats, GameScripts
         m_MethodName: AddItem
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: d653e735a49825744ae28edc6dc4b7fd, type: 2}
-          m_ObjectArgumentAssemblyTypeName: InventoryStuff.InventoryItemData, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: InventoryStuff.InventoryItemData, GameScripts
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3488,12 +3488,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 275521849307330366}
-        m_TargetAssemblyTypeName: DebugCheats, Assembly-CSharp
+        m_TargetAssemblyTypeName: DebugCheats, GameScripts
         m_MethodName: AddItem
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 11400000, guid: 7f2a1dfccc2cbdf46b2ea8cb3e67a2d3, type: 2}
-          m_ObjectArgumentAssemblyTypeName: InventoryStuff.InventoryItemData, Assembly-CSharp
+          m_ObjectArgumentAssemblyTypeName: InventoryStuff.InventoryItemData, GameScripts
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

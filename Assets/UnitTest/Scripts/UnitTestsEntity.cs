@@ -30,6 +30,28 @@ namespace UnitTesting
             Assert.IsTrue(tester.wasSuccess);
         }
 
+        [UnityTest]
+        public IEnumerator Targetsight_Is_Triggered_When_In_View()
+        {
+            yield return LoadScene("TargetSightTest");
+
+            TargetsightTest tester = Object.FindFirstObjectByType<TargetsightTest>();
+
+            yield return null;
+            Assert.IsTrue(tester.wasSuccess);
+        }
+
+        [UnityTest]
+        public IEnumerator Targetsight_Is_Not_Triggered_When_Out_OF_View()
+        {
+            yield return LoadScene("TargetSightTestOutofView");
+
+            TargetsightTest tester = Object.FindFirstObjectByType<TargetsightTest>();
+
+            yield return null;
+            Assert.IsTrue(!tester.wasSuccess);
+        }
+
         public static IEnumerator LoadScene(string sceneName)
         {
             AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);

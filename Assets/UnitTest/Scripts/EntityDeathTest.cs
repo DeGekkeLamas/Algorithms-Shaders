@@ -8,6 +8,7 @@ namespace UnitTesting
     public class EntityDeathTest : MonoBehaviour
     {
         [HideInInspector] public bool wasSuccess;
+        [SerializeField] Entity target;
 
         private void Start()
         {
@@ -16,7 +17,6 @@ namespace UnitTesting
 
         void Entity_Death_Is_Triggered()
         {
-            Entity target = this.GetComponent<Entity>();
             target.OnDeath += Death;
             target.DealDamage(target.maxHP);
         }

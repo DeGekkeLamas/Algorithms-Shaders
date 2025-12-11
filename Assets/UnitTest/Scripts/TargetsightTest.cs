@@ -8,7 +8,7 @@ namespace UnitTesting
 {
     public class TargetsightTest : MonoBehaviour
     {
-        //bool wasSuccess;
+        [HideInInspector] public bool wasSuccess;
 
         private void Start()
         {
@@ -17,12 +17,12 @@ namespace UnitTesting
 
         void Targetsight_Is_Triggered()
         {
-            this.GetComponent<TargetSight>().OnFirstSeenTarget += TargetSeen;;
+            this.GetComponent<TargetSight>().OnFirstSeenTarget += TargetSeen;
         }
 
         void TargetSeen()
         {
-            //wasSuccess = true;
+            wasSuccess = true;
             Debug.Log("Targetsight test success");
         }
     }

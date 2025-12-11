@@ -5,15 +5,27 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/ModelDisplay.unity
-    guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/DungeonGen.unity
+    path: Assets/Scenes/DungeonGeneration.unity
     guid: a7e7f01717466f54ebb0648fc7e08ba4
   - enabled: 1
     path: Assets/Scenes/BossBattle.unity
     guid: e5d0a524ebb6a9f4c9949e5271642174
+  - enabled: 1
+    path: Assets/UnitTest/Scenes/EntityDeathTest.unity
+    guid: c4c2ddf68235ef742bdabb427a232fda
+  - enabled: 1
+    path: Assets/UnitTest/Scenes/EntityLevelupTest.unity
+    guid: 7c31bc9b8444f5c4bbda541f66beedf4
+  - enabled: 1
+    path: Assets/UnitTest/Scenes/InventoryTests.unity
+    guid: dd7e58bdabedc2741baff9cfcfea5a11
+  - enabled: 1
+    path: Assets/UnitTest/Scenes/TargetSightTest.unity
+    guid: a12d2d5517c57744e9d1e696ee7415e8
+  - enabled: 1
+    path: Assets/UnitTest/Scenes/TargetSightTestOutofView.unity
+    guid: 270b67badbfe121499c9e12ed2861499
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

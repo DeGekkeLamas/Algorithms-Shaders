@@ -120,7 +120,7 @@ namespace InventoryStuff
             {
                 // Compare to find item in inventory, remove by index if match
                 InventoryItem currentItem = currentInventory[i].item;
-                if (currentItem != null && currentItem.itemName == item.itemName)
+                if (currentItem != null && currentItem == item)
                 {
                     index = i;
                     RemoveItem(index);
