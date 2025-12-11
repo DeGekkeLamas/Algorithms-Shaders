@@ -25,12 +25,5 @@ namespace UnitTesting
             //wasSuccess = true;
             Debug.Log("Targetsight test success");
         }
-
-        public static IEnumerator LoadScene(string sceneName)
-        {
-            AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);
-            while (!loadSceneOperation.isDone)
-                yield return null;
-        }
     }
 }

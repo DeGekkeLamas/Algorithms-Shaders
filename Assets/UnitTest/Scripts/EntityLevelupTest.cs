@@ -7,7 +7,7 @@ namespace UnitTesting
 {
     public class EntityLevelupTest : MonoBehaviour
     {
-        //bool wasSuccess;
+        [HideInInspector] public bool wasSuccess;
 
         private void Start()
         {
@@ -19,23 +19,12 @@ namespace UnitTesting
             Entity target = this.GetComponent<Entity>();
             target.OnLevelUp += LevelUp;
             target.AddXP(target.XPRequired);
-
-            //Check the result
-            //yield return null;
-            //Assert.AreEqual(wasSuccess, true);
         }
 
         void LevelUp()
         {
-            //wasSuccess = true;
+            wasSuccess = true;
             Debug.Log("Levelup test success");
-        }
-
-        public static IEnumerator LoadScene(string sceneName)
-        {
-            AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);
-            while (!loadSceneOperation.isDone)
-                yield return null;
         }
     }
 }

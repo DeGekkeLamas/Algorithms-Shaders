@@ -7,6 +7,7 @@ namespace UnitTesting
 {
     public class EntityDeathTest : MonoBehaviour
     {
+        [HideInInspector] public bool wasSuccess;
 
         private void Start()
         {
@@ -22,14 +23,8 @@ namespace UnitTesting
 
         void Death()
         {
+            wasSuccess = true;
             Debug.Log("Death test success");
-        }
-
-        public static IEnumerator LoadScene(string sceneName)
-        {
-            AsyncOperation loadSceneOperation = SceneManager.LoadSceneAsync(sceneName);
-            while (!loadSceneOperation.isDone)
-                yield return null;
         }
     }
 }
