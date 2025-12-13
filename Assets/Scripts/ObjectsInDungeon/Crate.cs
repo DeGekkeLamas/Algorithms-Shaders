@@ -5,8 +5,8 @@ namespace Entities
 {
     public class Crate : Entity
     {
-        public InventoryItemData[] itemsToGive;
-        public PickupItem pickupSpawned;
+        [SerializeField] InventoryItemData[] itemsToGive;
+        [SerializeField] PickupItem pickupSpawned;
 
         protected override void Death()
         {
