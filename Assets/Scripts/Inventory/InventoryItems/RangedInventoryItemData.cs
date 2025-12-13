@@ -19,13 +19,13 @@ namespace InventoryStuff
     public class RangedWeapon : InventoryItem
     {
         [Header("Type specific")]
-        public float damage;
-        public StatusEffect[] effectApplied;
+        [SerializeField] float damage;
+        [SerializeField] StatusEffect[] effectApplied;
         public Projectile projectile;
-        public float cooldown;
-        public bool isConsumedOnUse;
+        [SerializeField] float cooldown;
+        [SerializeField] bool isConsumedOnUse;
         [Tooltip("Leave empty to use no fuel")]
-        public InventoryItemData fuel;
+        [SerializeField] InventoryItemData fuel;
 
         [HideInInspector] public float cooldownLeft;
 

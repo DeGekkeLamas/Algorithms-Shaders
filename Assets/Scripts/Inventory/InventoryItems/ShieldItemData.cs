@@ -17,8 +17,8 @@ namespace InventoryStuff
     public class ShieldItem : InventoryItem
     {
         [Header("Type specific")]
-        public float dmgReduction = 20;
-        public float blockDuration = 1;
+        [SerializeField] float dmgReduction = 20;
+        [SerializeField] float blockDuration = 1;
         static bool blockIsActive;
 
         public override void UseItem(Entity source, Vector3 inputDir)

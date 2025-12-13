@@ -20,34 +20,34 @@ namespace InventoryStuff
     [Serializable]
     public class AOEAttackItem : InventoryItem
     {
-        public float damage;
-        public StatusEffect[] effectsApplied;
-        public float distance = 3;
-        public OnTriggerDamageEntity toSpawn;
-        public float duration = .5f;
+        [SerializeField] float damage;
+        [SerializeField] StatusEffect[] effectsApplied;
+        [SerializeField] float distance = 3;
+        [SerializeField] OnTriggerDamageEntity toSpawn;
+        [SerializeField] float duration = .5f;
 
         public override void UseItem(Entity source, Vector3 inputDir)
         {
             Debug.Log($"Swung {itemName}");
             PlayerController player = source as PlayerController;
-            source.StartCoroutine(SwingWeapon(player, inputDir));
+            source.StartCoroutine(SwingWeapon(player));
         }
 
-        IEnumerator SwingWeapon(PlayerController source, Vector3 inputDir)
+        IEnumerator SwingWeapon(PlayerController source)
         {
             // Initialize
             float originalSpeed = source.moveSpeed;
             source.ChangeMoveSpeed(0);
             canUseItem = false;
 
-            yield return UseWeaponAnimation(source, inputDir);
+            yield return UseWeaponAnimation(source);
 
             // Exit
             source.ChangeMoveSpeed(originalSpeed);
             canUseItem = true;
         }
 
-        IEnumerator UseWeaponAnimation(PlayerController source, Vector3 inputDir)
+        IEnumerator UseWeaponAnimation(PlayerController source)
         {
             OnTriggerDamageEntity spawned = MonoBehaviour.Instantiate(toSpawn, source.transform.position + new Vector3(0, .5f, 0), source.transform.rotation);
             toSpawn.transform.localScale = new(distance, 1, distance);

@@ -10,11 +10,10 @@ namespace MovementStuff
     public class MoveTowardsTarget : MovingObjectBase
     {
         [InfoBox("Leave target empty for it to be automatically set to player instance")]
-        public Transform target;
-        public float moveSpeed = 1;
-        public float rotationSpeed = 1;
+        [SerializeField] Transform target;
+        [SerializeField] float moveSpeed = 1;
         [Tooltip("this object will never get closer than the minimum distance")]
-        public float minDistance = 0;
+        [SerializeField] float minDistance = 0;
 
         private void Start()
         {

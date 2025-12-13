@@ -13,12 +13,12 @@ namespace Quests
     public class QuestManager : MonoBehaviour
     {
         List<Quest> activeQuests = new();
-        public GameObject questPresenter;
-        public HorizontalOrVerticalLayoutGroup layoutGroup;
+        [SerializeField] GameObject questPresenter;
+        [SerializeField] HorizontalOrVerticalLayoutGroup layoutGroup;
 
         [Header("Quests to give")]
-        public List<Quest> registeredQuests;
-        public int amountToGive = 2;
+        [SerializeField] List<Quest> registeredQuests;
+        [SerializeField] int amountToGive = 2;
 
         private void Awake()
         {

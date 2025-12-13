@@ -14,7 +14,6 @@ namespace InventoryStuff
         public ItemUniqueStats[] currentInventory = new ItemUniqueStats[5];
 
         [Header("UI")]
-        public Texture2D HotbarItemBG;
         public static int itemSelected;
 
         public static Inventory instance;

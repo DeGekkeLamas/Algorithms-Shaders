@@ -16,8 +16,8 @@ namespace Quests
     public class SlayQuest : Quest
     {
         [InfoBox("Leave empty for any enemy to count")]
-        public Entity toKill;
-        public int amount;
+        [SerializeField] Entity toKill;
+        [SerializeField] int amount;
         [NonSerialized] int amountDone;
 
         private void OnValidate()

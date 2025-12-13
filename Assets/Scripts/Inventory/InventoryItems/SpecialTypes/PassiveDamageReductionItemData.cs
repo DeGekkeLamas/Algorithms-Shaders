@@ -16,8 +16,8 @@ namespace InventoryStuff
     [System.Serializable]
     public class PassiveDamageReductionItem : PassiveItem
     {
-        public float damageReduced;
-        public float extraHealing;
+        [SerializeField] float damageReduced;
+        [SerializeField] float extraHealing;
 
         public override void OnItemObtained(Entity source)
         {

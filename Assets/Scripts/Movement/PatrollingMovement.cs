@@ -7,11 +7,11 @@ namespace MovementStuff
     public class PatrollingMovement : MovingObjectBase
     {
         [Header("Movement")]
-        public float moveSpeed;
-        public float rotationSpeed = 30;
-        public Vector2 RotationRange = new(30, 45);
-        public float delayBetweenMovements = .5f;
-        public float moveDistance = 2;
+        [SerializeField] float moveSpeed;
+        [SerializeField] float rotationSpeed = 30;
+        [SerializeField] Vector2 RotationRange = new(30, 45);
+        [SerializeField] float delayBetweenMovements = .5f;
+        [SerializeField] float moveDistance = 2;
 
         void OnEnable()
         {

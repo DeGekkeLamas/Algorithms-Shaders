@@ -12,8 +12,8 @@ namespace Entities.Player
         public float projectileForce = 5;
 
         [Header("References")]
-        public Rigidbody pickupSpawned;
-        public MeshRenderer projectileChart;
+        [SerializeField] Rigidbody pickupSpawned;
+        [SerializeField] MeshRenderer projectileChart;
         public WeaponHandle meleeWeaponHandle;
         Material projectileChartMat;
         public static PlayerController instance;

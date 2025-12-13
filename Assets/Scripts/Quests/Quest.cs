@@ -12,7 +12,7 @@ namespace Quests
     {
         [ReadOnly][TextArea] public string description;
         [ReadOnly] public Texture2D texture;
-        public float XPReward = 60;
+        [SerializeField] float XPReward = 60;
 
         public event Action OnInitialize;
         public event Action OnProgressUpdated;

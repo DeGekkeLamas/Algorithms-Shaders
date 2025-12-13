@@ -11,9 +11,9 @@ namespace Entities.Enemies
         [Header("Attack distance")]
         [InfoBox("maxAttackDistance is how far away the target will still receive damage, " +
             "attackStartDistance is from how far away the enemy will start attacking")]
-        public float attackStartDistance = 4;
-        public float attackAngle = 75;
-        public AttackCycle attackToDo;
+        [SerializeField] float attackStartDistance = 4;
+        [SerializeField] float attackAngle = 75;
+        [SerializeField] AttackCycle attackToDo;
 
         public bool showVisualDebug;
         bool isAttacking;
@@ -33,7 +33,7 @@ namespace Entities.Enemies
             if (!isAttacking && PlayerInRange(attackStartDistance)) StartCoroutine(AttackCycle());
         }
 
-        protected bool PlayerInRange(float maxDst)
+        bool PlayerInRange(float maxDst)
         {
             return TargetSight.CanSeeTarget(this.transform, PlayerController.instance.transform, maxDst, attackAngle);
         }

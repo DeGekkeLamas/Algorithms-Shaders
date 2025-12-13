@@ -7,8 +7,8 @@ namespace Entities.Enemies
     public class AttackCycleEnemy : Enemy
     {
         [Header("Type specific")]
-        public AttackCycle[] attackCycles;
-        public float timeBetweenCycles = 1;
+        [SerializeField] AttackCycle[] attackCycles;
+        [SerializeField] float timeBetweenCycles = 1;
         protected override void Awake()
         {
             base.Awake();

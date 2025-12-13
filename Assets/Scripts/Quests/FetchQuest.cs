@@ -12,7 +12,7 @@ namespace Quests
         order = 0)]
     public class FetchQuest : Quest
     {
-        public InventoryItemData toCollect;
+        [SerializeField] InventoryItemData toCollect;
 
         private void OnValidate()
         {

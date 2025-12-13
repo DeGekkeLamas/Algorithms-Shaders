@@ -9,14 +9,14 @@ namespace MovementStuff
         /// </summary>
 
         [Header("Movement related")]
-        public Vector3 moveSpeed;
-        public Vector3 moveRange;
-        public Vector3 offset;
+        [SerializeField] Vector3 moveSpeed;
+        [SerializeField] Vector3 moveRange;
+        [SerializeField] Vector3 offset;
 
         Vector3 _oriPos;
 
         public enum MovementType { Circular, PingPong, Forward };
-        public MovementType currentMovement = MovementType.PingPong;
+        [SerializeField] MovementType currentMovement = MovementType.PingPong;
 
         void Awake()
         {

@@ -9,7 +9,7 @@ namespace Entities.Enemies
     /// </summary>
     public class Enemy : Entity
     {
-        public float xpToGive = 20;
+        [SerializeField] float xpToGive = 20;
 
         protected AnimationController anim;
         public AnimationController Animator => anim;

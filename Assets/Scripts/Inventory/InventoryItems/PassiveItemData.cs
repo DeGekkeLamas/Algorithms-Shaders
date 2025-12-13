@@ -16,9 +16,6 @@ namespace InventoryStuff
     [System.Serializable]
     public class PassiveItem : InventoryItem
     {
-        [Header("Type specific")]
-        public bool durabilityBoost;
-
         public override void UseItem(Entity source, Vector3 inputDir)
         {
             // do nothing lmao

@@ -11,13 +11,13 @@ namespace MovementStuff
     /// </summary>
     public abstract class TargetSight : MonoBehaviour
     {
-        public MovingObjectBase MovementBeforeSeenTarget;
-        public MovingObjectBase MovementAfterSeenTarget;
+        [SerializeField] protected MovingObjectBase MovementBeforeSeenTarget;
+        [SerializeField] protected MovingObjectBase MovementAfterSeenTarget;
         [InfoBox("Leave target empty for it to be automatically set to player instance")]
-        public Transform target;
+        protected Transform target;
         [Header("Vision")]
-        public float maxVisionDistance = 15;
-        public float visionAngle = 75;
+        [SerializeField] protected float maxVisionDistance = 15;
+        [SerializeField] protected float visionAngle = 75;
 
         public bool showDebug;
         public event Action OnFirstSeenTarget;

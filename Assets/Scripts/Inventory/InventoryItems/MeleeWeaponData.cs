@@ -20,17 +20,17 @@ namespace InventoryStuff
     public class MeleeWeapon : InventoryItem
     {
         [Header("Type specific")]
-        public float damage;
-        public StatusEffect[] effectsApplied;
+        [SerializeField] float damage;
+        [SerializeField] StatusEffect[] effectsApplied;
 
-        public float swingTime = .5f;
-        public float swingAngle = 45;
+        [SerializeField] float swingTime = .5f;
+        [SerializeField] float swingAngle = 45;
         [Tooltip("Size of the collider on the object")]
-        public float distance = 3;
+        [SerializeField] float distance = 3;
         [Tooltip("Distance of the physical model from the player")]
-        public float objectDistance = 1;
-        public float objectScale = 1;
-        public Vector3 modelRotation;
+        [SerializeField] float objectDistance = 1;
+        [SerializeField] float objectScale = 1;
+        [SerializeField] Vector3 modelRotation;
         public override void UseItem(Entity source, Vector3 inputDir)
         {
             Debug.Log($"Swung {itemName}");
