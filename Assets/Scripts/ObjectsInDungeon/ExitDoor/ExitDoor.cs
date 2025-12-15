@@ -27,7 +27,8 @@ public class ExitDoor : MonoBehaviour, IInteractible
     private void OnDisable()
     {
         Entity.OnAnyDeath -= DoorCheck;
-        GameManager.instance.OnNewFloorLoaded -= ResetDoor;
+        if (GameManager.instance != null)
+            GameManager.instance.OnNewFloorLoaded -= ResetDoor;
     }
 
     void DoorCheck(Entity _)

@@ -107,7 +107,7 @@ namespace DungeonGeneration
                 _floor.transform.localScale = new Vector3(room.width - 2, 1, room.height - 2);
                 DungeonGenerator.DrawRectangle(room, .2f, Color.white, .5f);
                 _assetsDone++;
-                if (_assetsDone >= assetsPerDelayWalls)
+                if (_assetsDone >= assetsPerDelayFloors)
                 {
                     yield return new WaitForSeconds(d.generationInterval);
                     _assetsDone = 0;

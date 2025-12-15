@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 namespace InventoryStuff
 {
@@ -12,11 +11,11 @@ namespace InventoryStuff
     /// </summary>
     public class Stove : MonoBehaviour, IInteractible
     {
-        public Recipe[] knownRecipes;
-        public RectInt dimensions;
+        [SerializeField] Recipe[] knownRecipes;
+        [SerializeField] RectInt dimensions;
         Transform RecipeUI;
-        public RawImage image;
-        public ItemCrafter recipeDisplay;
+        [SerializeField] RawImage image;
+        [SerializeField] ItemCrafter recipeDisplay;
 
         static List<GameObject> spawnedObjects = new();
         static Dictionary<RawImage, InventoryItem> imageTextures = new();

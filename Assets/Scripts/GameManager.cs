@@ -4,17 +4,15 @@ using InventoryStuff;
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Diagnostics;
 using UnityEngine.SceneManagement;
-using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
 {
     int currentRoom = 1;
     public int CurrentRoom => currentRoom;
     int seed;
-    public int scene;
-    public IntScene[] roomExceptions;
+    [SerializeField] int scene;
+    [SerializeField] IntScene[] roomExceptions;
     public ExitDoor exit;
     public Transform RecipeUI;
 
