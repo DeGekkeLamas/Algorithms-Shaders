@@ -28,12 +28,57 @@ namespace InventoryStuff
 
         void Update()
         {
+            // Mouse scroll
             if (Input.mouseScrollDelta.y != 0)
             {
                 float _direction = (Input.mouseScrollDelta.y > 0) ? -1 : 1;
                 itemSelected += Mathf.RoundToInt(_direction);
                 itemSelected = (int)Mathf.Repeat(itemSelected, currentInventory.Length);
                 OnSeletecItemSwitched?.Invoke();
+            }
+            // Key press
+            switch (Input.inputString)
+            {
+                case "1":
+                    itemSelected = Mathf.Clamp(0, 0, currentInventory.Length-1);
+                    OnSeletecItemSwitched?.Invoke();
+                    break;
+                case "2":
+                    itemSelected = Mathf.Clamp(1, 0, currentInventory.Length-1);
+                    OnSeletecItemSwitched?.Invoke();
+                    break;
+                case "3":
+                    itemSelected = Mathf.Clamp(2, 0, currentInventory.Length-1);
+                    OnSeletecItemSwitched?.Invoke();
+                    break;
+                case "4":
+                    itemSelected = Mathf.Clamp(3, 0, currentInventory.Length-1);
+                    OnSeletecItemSwitched?.Invoke();
+                    break;
+                case "5":
+                    itemSelected = Mathf.Clamp(4, 0, currentInventory.Length-1);
+                    OnSeletecItemSwitched?.Invoke();
+                    break;
+                case "6":
+                    itemSelected = Mathf.Clamp(5, 0, currentInventory.Length-1);
+                    OnSeletecItemSwitched?.Invoke();
+                    break;
+                case "7":
+                    itemSelected = Mathf.Clamp(6, 0, currentInventory.Length-1);
+                    OnSeletecItemSwitched?.Invoke();
+                    break;
+                case "8":
+                    itemSelected = Mathf.Clamp(7, 0, currentInventory.Length-1);
+                    OnSeletecItemSwitched?.Invoke();
+                    break;
+                case "9":
+                    itemSelected = Mathf.Clamp(8, 0, currentInventory.Length-1);
+                    OnSeletecItemSwitched?.Invoke();
+                    break;
+                case "10":
+                    itemSelected = Mathf.Clamp(9, 0, currentInventory.Length-1);
+                    OnSeletecItemSwitched?.Invoke();
+                    break;
             }
 
             for (int i = 0; i < currentInventory.Length; i++)
