@@ -14,10 +14,10 @@ namespace DungeonGeneration
     public abstract class RoomAssetGenerator : MonoBehaviour
     {
         [Header("Asset stuff")]
-        public ItemLootTable lootSpawns;
-        public Material wallMat;
+        [SerializeField] ItemLootTable lootSpawns;
+        [SerializeField] Material wallMat;
         public Material floorMat;
-        public PickupItem itemPickup;
+        [SerializeField] PickupItem itemPickup;
 
         protected DungeonGenerator d;
         // Containers
@@ -26,8 +26,8 @@ namespace DungeonGeneration
 
         [Header("Enemy stuff")]
         public int AmountOfEnemiesToSpawn = 8;
-        [ReadOnly] public int totalEnemyChance;
-        public ItemLootDrop<Entity>[] enemiesToSpawn;
+        [ReadOnly] [SerializeField] int totalEnemyChance;
+        [SerializeField] ItemLootDrop<Entity>[] enemiesToSpawn;
 
         protected virtual void OnValidate()
         {

@@ -11,12 +11,11 @@ namespace DungeonGeneration
     {
         DungeonGenerator d;
         [Header("Assets")]
-        public GameObject wall;
+        [SerializeField] GameObject wall;
         public GameObject floor;
-        public GameObject player;
         [Header("Coroutine speed")]
-        public int assetsPerDelayWalls = 40;
-        public int assetsPerDelayFloors = 5;
+        [SerializeField] int assetsPerDelayWalls = 40;
+        [SerializeField] int assetsPerDelayFloors = 5;
         private int _assetsDone;
 
         private void Awake() => d = this.GetComponent<DungeonGenerator>();

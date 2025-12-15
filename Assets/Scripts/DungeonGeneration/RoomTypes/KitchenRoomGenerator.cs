@@ -8,14 +8,14 @@ namespace DungeonGeneration
     public class KitchenRoomGenerator : RoomAssetGenerator
     {
         [Header("Type specific")]
-        public GameObject counterMiddle;
-        public GameObject counterCornerL;
-        public GameObject counterCornerR;
+        [SerializeField] GameObject counterMiddle;
+        [SerializeField] GameObject counterCornerL;
+        [SerializeField] GameObject counterCornerR;
         public int counterLength = 4;
 
-        [ReadOnly] public int totalReplaceChance;
-        public ItemLootDrop<GameObject>[] counterReplacements;
-        public float counterDoorDistance;
+        [ReadOnly] [SerializeField] int totalReplaceChance;
+        [SerializeField] ItemLootDrop<GameObject>[] counterReplacements;
+        [SerializeField] float counterDoorDistance;
 
         protected override void OnValidate()
         {

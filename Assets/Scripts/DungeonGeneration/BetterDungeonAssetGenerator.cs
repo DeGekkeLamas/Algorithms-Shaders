@@ -13,15 +13,15 @@ namespace DungeonGeneration
     public class BetterDungeonAssetGenerator : MonoBehaviour
     {
         DungeonGenerator d;
-        public Camera originalCam;
+        [SerializeField] Camera originalCam;
         [Header("Assets")]
-        public GameObject[] marchingSquareAssets = new GameObject[16];
-        public MeshRenderer floor;
-        public GameObject player;
+        [SerializeField] GameObject[] marchingSquareAssets = new GameObject[16];
+        [SerializeField] MeshRenderer floor;
+        [SerializeField] GameObject player;
         public GameObject floorCollider;
         [Header("Coroutine speed")]
-        public int assetsPerDelayWalls = 20;
-        public int assetsPerDelayFloor = 50;
+        [SerializeField] int assetsPerDelayWalls = 20;
+        [SerializeField] int assetsPerDelayFloor = 50;
         private int _assetsDone;
 
         private void OnValidate()

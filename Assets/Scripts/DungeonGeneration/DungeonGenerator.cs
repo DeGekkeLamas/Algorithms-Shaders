@@ -21,34 +21,34 @@ namespace DungeonGeneration
         [Header("Generation properties")]
         [Tooltip("Leave as 0 to use a random seed")]
         public int seed;
-        public bool shouldRemoveSmallestRooms;
-        [Range(0, 100)] public int percentSmallestRoomsToRemove = 10;
+        [SerializeField] bool shouldRemoveSmallestRooms;
+        [Range(0, 100)][SerializeField] int percentSmallestRoomsToRemove = 10;
         public RectInt initialRoom = new(0, 0, 100, 100);
         RectInt _originRoom;
         public RectInt originRoom => _originRoom;
         public enum GenerationType { Cool, Lame } // Cool is for good requirements, lame is for sufficient requirements
-        public GenerationType generationType = GenerationType.Cool;
+        [SerializeField] GenerationType generationType = GenerationType.Cool;
 
         float fraction = 0.5f;
-        public Vector2Int splitFractionRange = new(35, 66);
-        public float roomMaxSize = 45;
-        public int maxDoorsForOriginRoom = 1;
-        public int maxDoorsPerRoom = 3;
+        [SerializeField] Vector2Int splitFractionRange = new(35, 66);
+        [SerializeField] float roomMaxSize = 45;
+        [SerializeField] int maxDoorsForOriginRoom = 1;
+        [SerializeField] int maxDoorsPerRoom = 3;
 
         [Header("Display properties")]
-        public bool displayVisualDebugging = true;
+        [SerializeField] bool displayVisualDebugging = true;
         public float generationInterval = .1f;
         public YieldInstruction interval;
-        public int doorWidth = 1;
-        public bool showDeletedObjects = true;
-        public bool disableVisualDebuggingAfterRoomGeneration = true;
+        [SerializeField] int doorWidth = 1;
+        [SerializeField] bool showDeletedObjects = true;
+        [SerializeField] bool disableVisualDebuggingAfterRoomGeneration = true;
 
         [Header("Generated stuff")]
         public NavMeshSurface navMeshSurface;
         [HideInInspector] public GameObject assetContainer;
         public List<RectInt> rooms = new(1);
         public List<RectInt> doors = new(1);
-        public List<RectInt> removedObjects = new(1);
+        [SerializeField] List<RectInt> removedObjects = new(1);
         Graph<Vector2> _dungeonGraph = new();
         public Graph<Vector2> DungoonGraph => _dungeonGraph;
         System.Random _random = new();
@@ -124,6 +124,7 @@ namespace DungeonGeneration
             FillInaccessibleSpaces();
             yield return StartCoroutine(rda.SpawnEnemies());
             Debug.Log("Generated all room assets!");
+            if (disableVisualDebuggingAfterRoomGeneration) displayVisualDebugging = false;
         }
         /// <summary>
         /// Draws out initial rooms
