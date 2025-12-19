@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1068a3cabdfdbd44f93dc81a81c28155, type: 3}
   m_Name: KitchenItems
   m_EditorClassIdentifier: 
-  totalChance: 27
+  totalChance: 26
   lootTable:
   - itemName: FryingPan (InventoryStuff.MeleeWeaponData), 1%
     item: {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
@@ -59,9 +59,6 @@ MonoBehaviour:
   - itemName: Jalapeno (InventoryStuff.ConsumableItemData), 2%
     item: {fileID: 11400000, guid: 511a173d4c59bbc4cba2a50d0a934351, type: 2}
     probability: 2
-  - itemName: Sausage (InventoryStuff.MeleeWeaponData), 1%
-    item: {fileID: 11400000, guid: c7a8dc1b3e830714ca75bb3e0b6bc870, type: 2}
-    probability: 1
   - itemName: StainlessSteelPot (InventoryStuff.PassiveItemData), 1%
     item: {fileID: 11400000, guid: b515f50e15c8bb441a22fdd9eaa65797, type: 2}
     probability: 1
