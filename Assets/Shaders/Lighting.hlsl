@@ -11,7 +11,7 @@ static float4 GetLightColor()
 static float4 GetLightDir()
 {
     float4 lightDir = _WorldSpaceLightPos0;
-    lightDir = lightDir == float4(0, 0, 0, 0) ? float4(0.00f, 0.87f, 0.50f, 0) : lightDir;
+    lightDir = lightDir == float4(0, 0, 0, 0) ? float4(-0.3f, 0.7f, -0.5f, 0) : lightDir;
     return lightDir;
 }
 static float4 GetCameraDir()

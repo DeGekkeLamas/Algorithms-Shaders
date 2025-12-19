@@ -325,7 +325,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wall: {fileID: 7248190965236874754, guid: d6f869f665bace843b6a22279a706c14, type: 3}
   floor: {fileID: 330691455853550617, guid: cbae025bc70e7d14292ff810bc5f2bb6, type: 3}
-  player: {fileID: 8608250485412360592, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
   assetsPerDelayWalls: 80
   assetsPerDelayFloors: 2
 --- !u!114 &1256635338

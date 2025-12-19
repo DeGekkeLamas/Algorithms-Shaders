@@ -429,7 +429,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1823438395285073010}
-  - component: {fileID: 3214448125551340852}
+  - component: {fileID: 4526160484177077902}
+  - component: {fileID: 7358606512773854483}
+  - component: {fileID: 8942737531362773500}
+  - component: {fileID: 7692887886814558944}
+  - component: {fileID: 1562327459889662636}
   - component: {fileID: 2188930207846607868}
   - component: {fileID: 1709325684178408358}
   - component: {fileID: 1272428489091131549}
@@ -464,7 +468,7 @@ Transform:
   - {fileID: 9183099017955183830}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3214448125551340852
+--- !u!114 &4526160484177077902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -473,7 +477,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8608250485412360592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ad9f6bc7fca714c88a9751bb4d461e, type: 3}
+  m_Script: {fileID: 11500000, guid: f45f5157a6f11a645a1514ed503ae6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entityName: You
@@ -486,9 +490,60 @@ MonoBehaviour:
   strengthIncrement: 0.1
   activeStatusEffects: []
   projectileForce: 20
-  pickupSpawned: {fileID: 2400643790871167767, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
-  projectileChart: {fileID: 6158452050362798746}
   meleeWeaponHandle: {fileID: 3036669457786429698}
+--- !u!114 &7358606512773854483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608250485412360592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e2fee404e648f04bb18c5b3ac624a38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 1
+  moveSpeed: 1
+--- !u!114 &8942737531362773500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608250485412360592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3babd5efc71bbc47a3b8c22c44228be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: 0
+--- !u!114 &7692887886814558944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608250485412360592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a87a91c65fc8ddc4585ab521621a4491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupSpawned: {fileID: 2400643790871167767, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
+--- !u!114 &1562327459889662636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8608250485412360592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b10a38f8c76a941ac749dbbbe33da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileChart: {fileID: 6158452050362798746}
 --- !u!54 &2188930207846607868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -610,6 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb189991ad25c68498ba6c7b9685cfee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: 1
 --- !u!1001 &4218717930192115017
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -58,6 +58,22 @@ public static class MathTools
         return found;
     }
 
+    public static T GetComponentInParents<T>(Transform target) where T : Component
+    {
+        // Get T
+        Transform current = target;
+        while (current != null) // find canvas in parents
+        {
+            if (current.TryGetComponent(out T found))
+            {
+                return found;
+            }
+            current = current.parent;
+        }
+        Debug.LogError("Could not find canvas");
+        return null;
+    }
+
     public static Vector3 Vector3Multiply(Vector3 a, Vector3 b)
     {
         return new(a.x * b.x, a.y * b.y, a.z * b.z);

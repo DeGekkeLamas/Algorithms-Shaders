@@ -13,6 +13,8 @@ namespace Entities.Enemies
         private void OnValidate()
         {
             if (showDebug) StartCoroutine(ShowDebug());
+
+            //HasAnimationCheck("Attack");
         }
 
         public override IEnumerator Attack(Enemy source)

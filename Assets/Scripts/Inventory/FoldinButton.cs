@@ -30,18 +30,7 @@ public class FoldinButton : MonoBehaviour
 
     Canvas GetCanvas()
     {
-        // Get canvas
-        Transform current = this.transform;
-        while (current != null) // find canvas in parents
-        {
-            if (current.TryGetComponent(out Canvas canvas))
-            {
-                return canvas;
-            }
-            current = current.parent;
-        }
-        Debug.LogError("Could not find canvas");
-        return null;
+        return MathTools.GetComponentInParents<Canvas>(this.transform);
     }
 
     public void OnPress()

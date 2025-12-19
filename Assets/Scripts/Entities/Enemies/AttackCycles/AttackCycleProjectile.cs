@@ -9,6 +9,10 @@ namespace Entities.Enemies
         public Projectile projectile;
         public Transform projectileOrigin;
 
+        private void OnValidate()
+        {
+            //HasAnimationCheck("Attack");
+        }
         public override IEnumerator Attack(Enemy source)
         {
             float originalSpeed = source.moveSpeed;

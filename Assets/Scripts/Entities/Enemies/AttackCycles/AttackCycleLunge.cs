@@ -22,6 +22,8 @@ namespace Entities.Enemies
         private void OnValidate()
         {
             if (showDebug) StartCoroutine(ShowDebug());
+
+            //HasAnimationCheck("Attack");
         }
         private void Start()
         {
