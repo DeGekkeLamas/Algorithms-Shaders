@@ -59,6 +59,7 @@ namespace DungeonGeneration
         public System.Random random => _random;
         List<Vector2> _accessibleRooms = new();
         public int[,] tilemap;
+        [HideInInspector] public int enemiesSpawned = 0;
         public static DungeonGenerator instance;
 
 

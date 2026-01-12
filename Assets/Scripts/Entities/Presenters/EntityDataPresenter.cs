@@ -12,11 +12,11 @@ namespace Entities.Presenters
             boundEntity = GetComponent<Entity>();
         }
 
-        protected void SetSlider(Slider slider, float value, float maxValue)
+        protected static void SetSlider(Slider slider, float value, float maxValue)
         {
             slider.value = value / maxValue * slider.maxValue;
         }
-        protected void SetSliderColor(Slider slider, Color empty, Color full)
+        protected static void SetSliderColor(Slider slider, Color empty, Color full)
         {
             slider.fillRect.GetComponent<Image>().color = Color.Lerp(empty, full, slider.value / slider.maxValue);
         }

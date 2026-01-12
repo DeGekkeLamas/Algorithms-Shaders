@@ -83,6 +83,7 @@ namespace DungeonGeneration
 
         public IEnumerator SpawnEnemies()
         {
+            d.enemiesSpawned = 0;
             if (d.rooms.Count <= 1) yield break;
 
             GameObject enemyContainer = new("EnemyContainer");
@@ -94,6 +95,7 @@ namespace DungeonGeneration
                 Vector3 spot = GetAvailableSpot();
                 SpawnEnemy(spot, enemyContainer.transform);
                 //yield return d.interval;
+                d.enemiesSpawned++;
             }
             yield return new();
         }

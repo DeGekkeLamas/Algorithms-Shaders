@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Entities;
 using System;
+using DungeonGeneration;
 
 public class ExitDoor : MonoBehaviour, IInteractible
 {
@@ -34,7 +35,7 @@ public class ExitDoor : MonoBehaviour, IInteractible
     void DoorCheck(Entity _)
     {
         killsDone++;
-        if (killsDone >= killsRequired)
+        if (killsDone >= Mathf.Min(killsRequired, DungeonGenerator.instance.enemiesSpawned))
         {
             if (!isOpen) StartCoroutine(OpenDoor());
             isOpen = true;
