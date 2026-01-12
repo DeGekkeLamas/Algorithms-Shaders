@@ -111,7 +111,11 @@ namespace InventoryStuff
         {
             for (int i = spawnedObjects.Count - 1; i > 0; i--)
             {
-                spawnedObjects[i].SetActive(true);
+                GameObject obj = spawnedObjects[i];
+                if (obj != null)
+                {
+                    obj.SetActive(true);
+                }
             }
             foreach (KeyValuePair<RawImage, InventoryItem> pair in imageTextures)
             {
@@ -127,7 +131,11 @@ namespace InventoryStuff
         {
             for (int i = spawnedObjects.Count - 1; i > 0; i--)
             {
-                spawnedObjects[i].SetActive(false);
+                GameObject obj = spawnedObjects[i];
+                if (obj != null)
+                {
+                    obj.SetActive(false);
+                }
             }
         }
     }

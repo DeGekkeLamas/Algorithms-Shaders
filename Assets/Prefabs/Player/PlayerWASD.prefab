@@ -544,6 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupSpawned: {fileID: 2400643790871167767, guid: 68e6d823d6382c44f929bc23d2a15643, type: 3}
+  forwardReference: {fileID: 984279638801531718}
 --- !u!114 &1562327459889662636
 MonoBehaviour:
   m_ObjectHideFlags: 0

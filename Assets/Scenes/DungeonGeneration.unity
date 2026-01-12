@@ -261,6 +261,7 @@ MonoBehaviour:
   doors: []
   removedObjects: []
   tilemapDebugger: {fileID: 1696973453}
+  enemiesSpawned: 0
 --- !u!4 &1256635334
 Transform:
   m_ObjectHideFlags: 0
