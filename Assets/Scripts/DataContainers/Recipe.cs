@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// Scriptableobject containing resulting item and items required
+    /// </summary>
     [CreateAssetMenu(
         fileName = "Recipe",
         menuName = "ScriptableObjects/Recipe",

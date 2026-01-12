@@ -4,6 +4,9 @@ using Entities;
 using System;
 using DungeonGeneration;
 
+/// <summary>
+/// Door to next level that requires a certain amount of kills to "open"
+/// </summary>
 public class ExitDoor : MonoBehaviour, IInteractible
 {
     public int killsRequired;
@@ -49,6 +52,9 @@ public class ExitDoor : MonoBehaviour, IInteractible
         yield return new();
     }
 
+    /// <summary>
+    /// Reset the openstate and killsdone
+    /// </summary>
     public void ResetDoor()
     {
         killsDone = 0;

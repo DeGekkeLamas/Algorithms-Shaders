@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// Cheat to add a certain item to inventory, only compiles in unityeditor
+    /// </summary>
     public class ItemCheats : MonoBehaviour
     {
         public InventoryItemData itemToAdd;

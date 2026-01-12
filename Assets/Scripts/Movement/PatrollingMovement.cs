@@ -4,6 +4,9 @@ using Unity.VisualScripting;
 
 namespace MovementStuff
 {
+    /// <summary>
+    /// Movement type for patrolling movement
+    /// </summary>
     public class PatrollingMovement : MovingObjectBase
     {
         [Header("Movement")]

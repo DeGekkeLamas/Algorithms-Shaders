@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Entities.Player
 {
+    /// <summary>
+    /// Set values of projectile chart, enables it if held item is lobbed, disables it otherwise
+    /// </summary>
     public class SetProjectileChart : MonoBehaviour
     {
         [SerializeField] MeshRenderer projectileChart;

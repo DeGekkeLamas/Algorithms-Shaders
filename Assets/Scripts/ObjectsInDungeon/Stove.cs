@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace InventoryStuff
 {
     /// <summary>
-    /// I hate this script and working with UI in code
+    /// Manages the crafting UI when the stove object is interacted with. I hate this script and working with UI in code
     /// </summary>
     public class Stove : MonoBehaviour, IInteractible
     {

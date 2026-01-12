@@ -6,6 +6,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Script for managing gameflow and switching between floors 
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     int currentRoom = 1;

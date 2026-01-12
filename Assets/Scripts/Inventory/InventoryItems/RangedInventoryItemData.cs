@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// ScriptableObject for RangedWeapon
+    /// </summary>
     [CreateAssetMenu(
         fileName = "RangedItem",
         menuName = "ScriptableObjects/Items/RangedItem",
@@ -15,6 +18,9 @@ namespace InventoryStuff
         public override InventoryItem GetItem() { return item; }
     }
 
+    /// <summary>
+    /// Itemtype with ranged attack
+    /// </summary>
     [System.Serializable]
     public class RangedWeapon : InventoryItem
     {

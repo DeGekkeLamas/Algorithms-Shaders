@@ -4,6 +4,9 @@ using MovementStuff;
 
 namespace Entities.Enemies
 {
+    /// <summary>
+    /// Enemytype that cycles through multiple attackcycles
+    /// </summary>
     public class AttackCycleEnemy : Enemy
     {
         [Header("Type specific")]

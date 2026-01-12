@@ -3,6 +3,9 @@ using Entities;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// ScriptableObject for PassiveItem
+    /// </summary>
     [CreateAssetMenu(
         fileName = "PassiveItem",
         menuName = "ScriptableObjects/Items/PassiveItem",
@@ -13,6 +16,9 @@ namespace InventoryStuff
         public override InventoryItem GetItem() { return item; }
     }
 
+    /// <summary>
+    /// Itwmtype that has no interactions when used
+    /// </summary>
     [System.Serializable]
     public class PassiveItem : InventoryItem
     {

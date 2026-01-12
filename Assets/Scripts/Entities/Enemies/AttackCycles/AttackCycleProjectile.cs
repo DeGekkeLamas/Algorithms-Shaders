@@ -4,6 +4,9 @@ using MovementStuff;
 
 namespace Entities.Enemies
 {
+    /// <summary>
+    /// Ranged attack cycle
+    /// </summary>
     public class AttackCycleProjectile : AttackCycle
     {
         public Projectile projectile;

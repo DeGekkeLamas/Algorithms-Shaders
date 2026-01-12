@@ -2,7 +2,9 @@ using Entities.Player;
 using InventoryStuff;
 using UnityEngine;
 
-
+/// <summary>
+/// Debug cheats, most functions in it will only compile in unity editor
+/// </summary>
 public class DebugCheats : MonoBehaviour
 {
     public static bool alwaysCraft;

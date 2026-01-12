@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// ScriptableObject for ConsumableItem
+    /// </summary>
     [CreateAssetMenu(
         fileName = "ConsumableItem",
         menuName = "ScriptableObjects/Items/ConsumableItem",
@@ -14,6 +17,9 @@ namespace InventoryStuff
         public override InventoryItem GetItem() { return item; }
     }
 
+    /// <summary>
+    /// Itemtype that can recover HP when eaten
+    /// </summary>
     [System.Serializable]
     public class ConsumableItem : InventoryItem
     {

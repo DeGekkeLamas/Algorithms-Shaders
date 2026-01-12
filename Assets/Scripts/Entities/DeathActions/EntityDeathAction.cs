@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Entities
 {
+    /// <summary>
+    /// Baseclass for actions that happen when the bound entity dies
+    /// </summary>
     public abstract class EntityDeathAction : MonoBehaviour
     {
         Entity boundEntity;

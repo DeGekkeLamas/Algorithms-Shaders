@@ -30,6 +30,9 @@ public class AnimationController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Wait for the currently playing animation to finish
+    /// </summary>
     public IEnumerator WaitForCurrentAnimation()
     {
         float animationDuration = animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;

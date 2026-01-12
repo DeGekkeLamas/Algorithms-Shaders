@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// ScriptableObject for AOEAttackItem
+    /// </summary>
     [CreateAssetMenu(
         fileName = "AOEAttackItem",
         menuName = "ScriptableObjects/Items/Special/AOEAttackItem",
@@ -17,6 +20,9 @@ namespace InventoryStuff
         public override InventoryItem GetItem() { return item; }
     }
 
+    /// <summary>
+    /// Itemtype that spawns a OnTriggerDamageEntity when used
+    /// </summary>
     [Serializable]
     public class AOEAttackItem : InventoryItem
     {
@@ -30,31 +36,26 @@ namespace InventoryStuff
         {
             Debug.Log($"Swung {itemName}");
             PlayerController player = source as PlayerController;
-            source.StartCoroutine(SwingWeapon(player));
+            source.StartCoroutine(UseWeapon(player));
         }
 
-        IEnumerator SwingWeapon(PlayerController source)
+        IEnumerator UseWeapon(PlayerController source)
         {
             // Initialize
             float originalSpeed = source.moveSpeed;
             source.ChangeMoveSpeed(0);
             canUseItem = false;
 
-            yield return UseWeaponAnimation(source);
-
-            // Exit
-            source.ChangeMoveSpeed(originalSpeed);
-            canUseItem = true;
-        }
-
-        IEnumerator UseWeaponAnimation(PlayerController source)
-        {
             OnTriggerDamageEntity spawned = MonoBehaviour.Instantiate(toSpawn, source.transform.position + new Vector3(0, .5f, 0), source.transform.rotation);
             toSpawn.transform.localScale = new(distance, 1, distance);
             spawned.damage = damage * source.strength;
             spawned.AddException(source);
 
             yield return new WaitForSeconds(duration);
+
+            // Exit
+            source.ChangeMoveSpeed(originalSpeed);
+            canUseItem = true;
         }
 
         public override string GetItemDescription()

@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// ScriptableObject for PassiveDamageReductionItem
+    /// </summary>
     [CreateAssetMenu(
         fileName = "PassiveDamageReductionItem",
         menuName = "ScriptableObjects/Items/Special/PassiveDamageReductionItem",
@@ -13,6 +16,9 @@ namespace InventoryStuff
         public override InventoryItem GetItem() { return item; }
     }
 
+    /// <summary>
+    /// Itemtype that passively reduces damage taken and/or increased hp recovered from healing items
+    /// </summary>
     [System.Serializable]
     public class PassiveDamageReductionItem : PassiveItem
     {

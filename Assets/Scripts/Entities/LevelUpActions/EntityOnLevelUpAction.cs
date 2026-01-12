@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Entities
 {
+    /// <summary>
+    /// Baseclass for actions that happen when the bound entity levels up
+    /// </summary>
     public abstract class EntityOnLevelUpAction : MonoBehaviour
     {
         Entity boundEntity;

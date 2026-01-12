@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// Scriptableobject containing an array of ItemLootDrops of type InventoryItemData
+    /// </summary>
     [CreateAssetMenu(
         fileName = "ItemLootTable",
         menuName = "ScriptableObjects/Item Loottable",

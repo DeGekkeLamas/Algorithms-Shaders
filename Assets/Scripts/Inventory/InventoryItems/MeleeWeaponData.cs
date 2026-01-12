@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// ScriptableObject for MeleeWeapon
+    /// </summary>
     [CreateAssetMenu(
         fileName = "MeleeItem",
         menuName = "ScriptableObjects/Items/MeleeItem",
@@ -15,6 +18,10 @@ namespace InventoryStuff
         public MeleeWeapon item = new();
         public override InventoryItem GetItem() { return item; }
     }
+
+    /// <summary>
+    /// Itemtype that has a melee attack
+    /// </summary>
 
     [System.Serializable]
     public class MeleeWeapon : InventoryItem

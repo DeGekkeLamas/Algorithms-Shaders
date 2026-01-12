@@ -1,3 +1,4 @@
+using Entities;
 using InventoryStuff;
 using UnityEngine;
 
@@ -17,6 +18,11 @@ namespace Quests
         private void OnValidate()
         {
             SetDescription();
+        }
+
+        public override void Destructor()
+        {
+            Inventory.instance.OnItemChanged -= UpdateProgress;
         }
 
         public override void Initialize()

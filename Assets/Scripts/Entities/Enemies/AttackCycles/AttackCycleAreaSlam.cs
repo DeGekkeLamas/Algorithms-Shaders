@@ -5,6 +5,9 @@ using MovementStuff;
 
 namespace Entities.Enemies
 {
+    /// <summary>
+    /// Melee attack cycle
+    /// </summary>
     public class AttackCycleAreaSlam : AttackCycle
     {
         public float attackRange = 4;

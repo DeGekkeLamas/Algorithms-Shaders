@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace MovementStuff
 {
+    /// <summary>
+    /// Moves the object based on WASD input
+    /// </summary>
     public class WASDMovement : MovingObjectBase
     {
         [SerializeField] float moveSpeed = 1;

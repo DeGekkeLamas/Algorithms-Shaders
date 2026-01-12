@@ -4,6 +4,9 @@ using System.Collections;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// ScriptableObject for ShieldItem
+    /// </summary>
     [CreateAssetMenu(
         fileName = "ShieldItem",
         menuName = "ScriptableObjects/Items/ShieldItem",
@@ -13,6 +16,10 @@ namespace InventoryStuff
         public ShieldItem item = new();
         public override InventoryItem GetItem() { return item; }
     }
+
+    /// <summary>
+    /// Itemtype that actively reduces damage taken when used
+    /// </summary>
     [System.Serializable]
     public class ShieldItem : InventoryItem
     {

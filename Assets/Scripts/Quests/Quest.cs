@@ -20,13 +20,28 @@ namespace Quests
         [HideInInspector, NonSerialized] public int progress = 0;
         [HideInInspector, NonSerialized] public int maxProgress = 1;
 
+        /// <summary>
+        /// Initialize the quest
+        /// </summary>
         public virtual void Initialize()
         {
             InvokeOnInitialize();
             InvokeOnProgressUpdated();
         }
+
+        /// <summary>
+        /// Uninizialized the quest, implement this to unsubscribe from the event that calls the type-specific quest check. Questmanager calls this when it gets destroyed
+        /// </summary>
+        public abstract void Destructor();
+
+        /// <summary>
+        /// Sets the description of the quest
+        /// </summary>
         protected abstract string SetDescription();
 
+        /// <summary>
+        /// Called when quest is complete
+        /// </summary>
         protected virtual void OnCompleted()
         {
             Debug.Log($"Completed quest {this.name}");

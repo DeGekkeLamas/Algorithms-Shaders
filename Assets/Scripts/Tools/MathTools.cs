@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Helper class with math functions and some gameobject functions
+/// </summary>
 public static class MathTools
 {
     /// <summary>

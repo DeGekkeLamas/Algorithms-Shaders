@@ -5,6 +5,10 @@ using System;
 
 namespace InventoryStuff
 {
+    /// <summary>
+    /// Contains a value and a probability in percents, use this for loottables of any type to get a random item
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     [System.Serializable]
     public class ItemLootDrop<T>
     {

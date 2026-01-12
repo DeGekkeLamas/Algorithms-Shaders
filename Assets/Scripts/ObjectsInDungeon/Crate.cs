@@ -3,6 +3,9 @@ using InventoryStuff;
 
 namespace Entities
 {
+    /// <summary>
+    /// Entity that drops items when killed
+    /// </summary>
     public class Crate : Entity
     {
         [SerializeField] InventoryItemData[] itemsToGive;

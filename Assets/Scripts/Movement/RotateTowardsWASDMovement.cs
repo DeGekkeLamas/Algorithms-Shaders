@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Rotates transform towards WASD input
+/// </summary>
 public class RotateTowardsWASDMovement : MonoBehaviour
 {
     void Update()

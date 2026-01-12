@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace Entities.Presenters
 {
+    /// <summary>
+    /// Baseclass for entitypresenters
+    /// </summary>
     public abstract class EntityDataPresenter : MonoBehaviour
     {
         protected Entity boundEntity;

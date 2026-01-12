@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Presenter for inventoryitems
+/// </summary>
 public class InventoryitemPresenter : MonoBehaviour
 {
     [SerializeField] int index;

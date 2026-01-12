@@ -25,6 +25,11 @@ namespace Quests
             SetDescription();
         }
 
+        public override void Destructor()
+        {
+            Entity.OnAnyDeath -= UpdateProgress;
+        }
+
         public override void Initialize()
         {
             // Texture

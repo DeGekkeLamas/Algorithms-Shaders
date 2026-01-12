@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine.UI;
 using Quests.Presenters;
+using Entities;
 
 namespace Quests
 {
@@ -29,6 +30,10 @@ namespace Quests
                 registeredQuests.RemoveAt(index);
             }
         }
+
+        /// <summary>
+        /// Adds a quest to activeQuests. Is it NOT removed from registeredQuests, remove it from the code where this function is called
+        /// </summary>
         public void AddQuest(Quest toAdd)
         {
             activeQuests.Add(toAdd);
@@ -39,7 +44,7 @@ namespace Quests
             {
                 presenters[i].boundQuest = toAdd;
             }
-            // Wait a frame between setting the quest and activating initilize, so the presenters can initialize
+            // Wait a frame between setting the quest and activating initilize, so the presenters can initialize first
             StartCoroutine(WaitThenInitialize(toAdd));
         }
 
@@ -47,6 +52,14 @@ namespace Quests
         {
             yield return null;
             toAdd.Initialize();
+        }
+
+        private void OnDestroy()
+        {
+            foreach(Quest quest in activeQuests)
+            {
+                quest.Destructor();
+            }
         }
     }
 }

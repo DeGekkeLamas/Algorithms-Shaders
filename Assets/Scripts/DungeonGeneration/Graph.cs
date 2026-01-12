@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Graph with nodes and connections
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class Graph<T>
 {
     public Dictionary<T, List<T>> adjacencyList;

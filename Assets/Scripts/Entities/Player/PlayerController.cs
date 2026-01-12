@@ -5,7 +5,7 @@ using UnityEngine.AI;
 namespace Entities.Player
 {
     /// <summary>
-    /// Base for playercontroller, override to add a way to move player
+    /// Contains player data
     /// </summary>
     public class PlayerController : Entity
     {

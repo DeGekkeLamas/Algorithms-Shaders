@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Entities.Player
 {
+    /// <summary>
+    /// Drops the held item in the direction of forwardReference.forward
+    /// </summary>
     public class DropHeldItemOnEPressed : MonoBehaviour
     {
         [SerializeField] Rigidbody pickupSpawned;

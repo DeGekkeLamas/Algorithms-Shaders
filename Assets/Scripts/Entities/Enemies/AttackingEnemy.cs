@@ -6,6 +6,9 @@ using MovementStuff;
 
 namespace Entities.Enemies
 {
+    /// <summary>
+    /// Type of enemy that uses 1 type of attack, when the player is visible to it
+    /// </summary>
     public class AttackingEnemy : Enemy
     {
         [Header("Attack distance")]

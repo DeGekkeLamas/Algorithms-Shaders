@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace Entities.Enemies
 {
+    /// <summary>
+    /// Lunge attack cycle
+    /// </summary>
     public class AttackCycleLunge : AttackCycle
     {
         [InfoBox("Leave target empty for it to be automatically set to player instance")]

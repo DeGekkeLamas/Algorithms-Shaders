@@ -10,6 +10,9 @@ namespace InventoryStuff
     {
         public Recipe recipe;
 
+        /// <summary>
+        /// Crafts item if possible, removes original items and adds result to inventory
+        /// </summary>
         public void Craft()
         {
 #if UNITY_EDITOR
@@ -31,6 +34,9 @@ namespace InventoryStuff
             else Debug.Log($"Failed to craft {recipe.recipeName}");
         }
 
+        /// <summary>
+        /// Check if all required items are present in inventory
+        /// </summary>
         bool ContainsAllItems()
         {
             int itemQTY = 0;
