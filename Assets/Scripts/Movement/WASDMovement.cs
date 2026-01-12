@@ -13,7 +13,7 @@ namespace MovementStuff
             Vector3 movement = new(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             movement = VectorMath.RotateVectorXZ(movement, -camAngle);
 
-            if (!Physics.Raycast(this.transform.position, movement, .5f))
+            if (!Physics.Raycast(this.transform.position + this.transform.localScale.y * .5f * Vector3.up, movement, .5f))
             {
                 transform.position += moveSpeed * baseSpeed * Time.deltaTime * movement;
             }
