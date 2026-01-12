@@ -1,3 +1,4 @@
+using Entities.Player;
 using InventoryStuff;
 using UnityEngine;
 
@@ -35,5 +36,12 @@ public class DebugCheats : MonoBehaviour
         unlockAllDoors = !unlockAllDoors;
         Debug.Log("Toggled unlock all doors");
 #endif
+    }
+
+    public void Unstuck()
+    {
+        Transform target = PlayerController.instance.transform;
+        target.position += Vector3.up * 5;
+        target.transform.eulerAngles = Vector3.zero;
     }
 }
