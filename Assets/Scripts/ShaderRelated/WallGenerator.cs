@@ -1,7 +1,11 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
+/// <summary>
+/// Generate a brick wall mesh based off the current objects scale
+/// </summary>
 [RequireComponent(typeof(MeshFilter))]
 public class WallGenerator : MonoBehaviour
 {
@@ -73,66 +77,55 @@ public class WallGenerator : MonoBehaviour
             for (int j = 0; j < Mathf.Ceil((generateOverXAxis ? originalScale.x : originalScale.z) / width) + (i % 2 != 0 ? 1 : 0); j++)
             {
                 //side left
-                int v0 = sideBuilder.AddVertex(origin + offset + new Vector3(0, 0, 0),
-                    new());
-                int v1 = sideBuilder.AddVertex(origin + offset + new Vector3(0, height, 0),
-                    new(0, brickRatio.y));
-                int v2 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth),
-                    new(brickRatio.z, brickRatio.z));
-                int v3 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth), 
+                AddQuad(sideBuilder,
+                    origin + offset + new Vector3(0, 0, 0),
+                    origin + offset + new Vector3(0, height, 0),
+                    origin + offset + new Vector3(depth, depth, -depth),
+                    origin + offset + new Vector3(depth, height - depth, -depth),
+                    new(),
+                    new(0, brickRatio.y),
+                    new(brickRatio.z, brickRatio.z),
                     new(brickRatio.z, brickRatio.y - brickRatio.z));
                 // side right
-                int v4 = sideBuilder.AddVertex(origin + offset + new Vector3(width, 0, 0),
-                    new(brickRatio.x, 0));
-                int v5 = sideBuilder.AddVertex(origin + offset + new Vector3(width, height, 0),
-                    new(brickRatio.x, brickRatio.y));
-                int v6 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth), 
-                    new(brickRatio.x - brickRatio.z, brickRatio.z));
-                int v7 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth),
+                AddQuad(sideBuilder,
+                    origin + offset + new Vector3(width, 0, 0),
+                    origin + offset + new Vector3(width - depth, depth, -depth),
+                    origin + offset + new Vector3(width, height, 0),
+                    origin + offset + new Vector3(width - depth, height - depth, -depth),
+                    new(brickRatio.x, 0),
+                    new(brickRatio.x - brickRatio.z, brickRatio.z),
+                    new(brickRatio.x, brickRatio.y),
                     new(brickRatio.x - brickRatio.z, brickRatio.y - brickRatio.z));
                 // bottom
-                int v8 = sideBuilder.AddVertex(origin + offset + new Vector3(0, 0, 0),
-                    new());
-                int v9 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth),
-                    new(brickRatio.z, brickRatio.z));
-                int v10 = sideBuilder.AddVertex(origin + offset + new Vector3(width, 0, 0),
-                    new(brickRatio.x, 0));
-                int v11 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth), 
+                AddQuad(sideBuilder,
+                    origin + offset + new Vector3(0, 0, 0),
+                    origin + offset + new Vector3(depth, depth, -depth),
+                    origin + offset + new Vector3(width, 0, 0),
+                    origin + offset + new Vector3(width - depth, depth, -depth),
+                    new(),
+                    new(brickRatio.z, brickRatio.z),
+                    new(brickRatio.x, 0),
                     new(brickRatio.x - brickRatio.z, brickRatio.z));
                 // top
-                int v12 = sideBuilder.AddVertex(origin + offset + new Vector3(0, height, 0),
-                    new(0, brickRatio.y));
-                int v13 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth),
-                    new(brickRatio.z, brickRatio.y - brickRatio.z));
-                int v14 = sideBuilder.AddVertex(origin + offset + new Vector3(width, height, 0),
-                    new(brickRatio.x, brickRatio.y));
-                int v15 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth),
+                AddQuad(sideBuilder,
+                    origin + offset + new Vector3(0, height, 0),
+                    origin + offset + new Vector3(width, height, 0),
+                    origin + offset + new Vector3(depth, height - depth, -depth),
+                    origin + offset + new Vector3(width - depth, height - depth, -depth),
+                    new(0, brickRatio.y),
+                    new(brickRatio.x, brickRatio.y),
+                    new(brickRatio.z, brickRatio.y - brickRatio.z),
                     new(brickRatio.x - brickRatio.z, brickRatio.y - brickRatio.z));
                 // front
-                int v16 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, depth, -depth), 
-                    new(brickRatio.z, brickRatio.z));
-                int v17 = sideBuilder.AddVertex(origin + offset + new Vector3(depth, height - depth, -depth), 
-                    new(brickRatio.z, brickRatio.y - brickRatio.z));
-                int v18 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, height - depth, -depth), 
+                AddQuad(sideBuilder,
+                    origin + offset + new Vector3(depth, depth, -depth),
+                    origin + offset + new Vector3(depth, height - depth, -depth),
+                    origin + offset + new Vector3(width - depth, depth, -depth),
+                    origin + offset + new Vector3(width - depth, height - depth, -depth),
+                    new(brickRatio.z, brickRatio.z),
+                    new(brickRatio.z, brickRatio.y - brickRatio.z),
+                    new(brickRatio.x - brickRatio.z, brickRatio.z),
                     new(brickRatio.x - brickRatio.z, brickRatio.y - brickRatio.z));
-                int v19 = sideBuilder.AddVertex(origin + offset + new Vector3(width - depth, depth, -depth), 
-                    new(brickRatio.x - brickRatio.z, brickRatio.z));
-
-                //side left
-                sideBuilder.AddTriangle(v1, v2, v0);
-                sideBuilder.AddTriangle(v3, v2, v1);
-                //side right
-                sideBuilder.AddTriangle(v5, v4, v6);
-                sideBuilder.AddTriangle(v7, v5, v6);
-                // bottom
-                sideBuilder.AddTriangle(v8, v9, v11);
-                sideBuilder.AddTriangle(v8, v11, v10);
-                // top
-                sideBuilder.AddTriangle(v13, v12, v14);
-                sideBuilder.AddTriangle(v13, v14, v15);
-                // front
-                sideBuilder.AddTriangle(v16, v17, v18);
-                sideBuilder.AddTriangle(v16, v18, v19);
 
                 offset.x += width;
             }
@@ -142,5 +135,29 @@ public class WallGenerator : MonoBehaviour
         sideBuilder.RotateAllVertices(angle);
 
         return sideBuilder.CreateMesh(true);
+    }
+
+    void AddQuad(MeshBuilder builder, Vector3 vertex1, Vector3 vertex2, Vector3 vertex3, Vector3 vertex4)
+    {
+        // Verts
+        int v0 = builder.AddVertex(vertex1);
+        int v1 = builder.AddVertex(vertex2);
+        int v2 = builder.AddVertex(vertex3);
+        int v3 = builder.AddVertex(vertex4);
+        // Tris
+        builder.AddTriangle(v1, v2, v0);
+        builder.AddTriangle(v3, v2, v1);
+    }
+
+    void AddQuad(MeshBuilder builder, Vector3 vertex1, Vector3 vertex2, Vector3 vertex3, Vector3 vertex4, Vector2 UV1, Vector2 UV2, Vector2 UV3, Vector2 UV4)
+    {
+        // Verts
+        int v0 = builder.AddVertex(vertex1, UV1);
+        int v1 = builder.AddVertex(vertex2, UV2);
+        int v2 = builder.AddVertex(vertex3, UV3);
+        int v3 = builder.AddVertex(vertex4, UV4);
+        // Tris
+        builder.AddTriangle(v1, v2, v0);
+        builder.AddTriangle(v3, v2, v1);
     }
 }
