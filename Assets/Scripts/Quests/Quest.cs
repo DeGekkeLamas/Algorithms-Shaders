@@ -16,6 +16,7 @@ namespace Quests
 
         public event Action OnInitialize;
         public event Action OnProgressUpdated;
+        public event Action OnComplete;
 
         [HideInInspector, NonSerialized] public int progress = 0;
         [HideInInspector, NonSerialized] public int maxProgress = 1;
@@ -30,9 +31,12 @@ namespace Quests
         }
 
         /// <summary>
-        /// Uninizialized the quest, implement this to unsubscribe from the event that calls the type-specific quest check. Questmanager calls this when it gets destroyed
+        /// Uninizializes the quest, implement this to unsubscribe from the event that calls the type-specific quest check. Questmanager calls this when it gets destroyed
         /// </summary>
-        public abstract void Destructor();
+        public virtual void Destructor()
+        {
+            Debug.Log($"Destroyed {this.name}");
+        }
 
         /// <summary>
         /// Sets the description of the quest
@@ -44,8 +48,9 @@ namespace Quests
         /// </summary>
         protected virtual void OnCompleted()
         {
+            OnComplete?.Invoke();
             Debug.Log($"Completed quest {this.name}");
-            PlayerController.instance.AddXP(XPReward);
+            PlayerController.instance?.AddXP(XPReward);
         }
 
         protected void InvokeOnProgressUpdated()

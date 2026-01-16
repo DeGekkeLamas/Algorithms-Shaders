@@ -21,9 +21,12 @@ namespace Quests
         [SerializeField] List<Quest> registeredQuests;
         [SerializeField] int amountToGive = 2;
 
+        public static QuestManager instance;
+
         private void Awake()
         {
-            for(int i = 0; i < Mathf.Min(registeredQuests.Count, amountToGive); i++)
+            instance = this;
+            for (int i = 0; i < Mathf.Min(registeredQuests.Count, amountToGive); i++)
             {
                 int index = Random.Range(0, registeredQuests.Count);
                 AddQuest(registeredQuests[index]);
@@ -46,6 +49,11 @@ namespace Quests
             }
             // Wait a frame between setting the quest and activating initilize, so the presenters can initialize first
             StartCoroutine(WaitThenInitialize(toAdd));
+        }
+
+        public bool IsActive(Quest toCheck)
+        {
+            return activeQuests.Contains(toCheck);
         }
 
         IEnumerator WaitThenInitialize(Quest toAdd)

@@ -27,6 +27,7 @@ namespace Quests
 
         public override void Destructor()
         {
+            base.Destructor();
             Entity.OnAnyDeath -= UpdateProgress;
         }
 

@@ -22,6 +22,7 @@ namespace Quests
 
         public override void Destructor()
         {
+            base.Destructor();
             Inventory.instance.OnItemChanged -= UpdateProgress;
         }
 
