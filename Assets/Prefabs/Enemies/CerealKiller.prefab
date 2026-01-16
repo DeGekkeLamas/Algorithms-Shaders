@@ -65,8 +65,8 @@ MonoBehaviour:
   strength: 30
   level: 1
   XPRequired: 100
-  HPIncrement: 20
-  strengthIncrement: 3
+  HPIncrement: 40
+  strengthIncrement: 10
   activeStatusEffects: []
   xpToGive: 20
   attackStartDistance: 2.5
@@ -152,7 +152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementBeforeSeenTarget: {fileID: 7583575851937448990}
   MovementAfterSeenTarget: {fileID: 4595315138715716598}
-  target: {fileID: 0}
   maxVisionDistance: 15
   visionAngle: 105
   showDebug: 0
@@ -189,7 +188,6 @@ MonoBehaviour:
   baseSpeed: 1
   target: {fileID: 0}
   moveSpeed: 2
-  rotationSpeed: 1
   minDistance: 0
 --- !u!95 &4200914740082318497
 Animator:
