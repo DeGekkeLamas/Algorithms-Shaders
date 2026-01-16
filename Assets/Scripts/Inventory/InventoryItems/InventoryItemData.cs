@@ -30,7 +30,7 @@ namespace InventoryStuff
         [Header("Overworld properties")]
         [SerializeField] public StatusEffect[] grantsImmunityTo;
 
-        Texture2D itemSprite;
+        [SerializeField, HideInInspector] Texture2D itemSprite;
         /// <summary>
         /// Get a texture of this item. If it doesnt exist yet it will be created
         /// </summary>
@@ -38,7 +38,7 @@ namespace InventoryStuff
         /// <summary>
         /// Get a silhoutte texture, which is completely black texture of this item. If it doesnt exist yet it will be created
         /// </summary>
-        Texture2D itemSilhouette;
+        [SerializeField, HideInInspector] Texture2D itemSilhouette;
         public Texture2D ItemSilhouette => itemSilhouette != null ? itemSilhouette : SetSilhouette();
         [HideInInspector, NonSerialized] public bool canUseItem = true;
         public bool IsStackable => maxStack > 1;

@@ -7,7 +7,7 @@ namespace Entities
     /// </summary>
     public abstract class EntityDeathAction : MonoBehaviour
     {
-        Entity boundEntity;
+        protected Entity boundEntity;
         private void Awake()
         {
             boundEntity = this.GetComponent<Entity>();

@@ -15,7 +15,7 @@ public class WaveShaderController : MonoBehaviour
     {
         float currentTime = Time.time; //material.GetVector("_Time").y;
         material.SetFloat("_CurrentTime", currentTime);
-        StartCoroutine(DestroyAfterDelay());
+        if (shouldDestroy) StartCoroutine(DestroyAfterDelay());
     }
 
     IEnumerator DestroyAfterDelay()

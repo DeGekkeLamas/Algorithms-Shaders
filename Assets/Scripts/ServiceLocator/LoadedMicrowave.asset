@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0132876871fe616429a3a0f0a9a430cc, type: 3}
   m_Name: LoadedMicrowave
   m_EditorClassIdentifier: 
-  boundQuest: {fileID: 0}
+  boundQuest: {fileID: 11400000, guid: c7978a3c30a0d3c45ab88b3d33167da8, type: 2}

@@ -1,7 +1,9 @@
 using Entities;
+using Entities.Player;
 using Entities.StatusEffects;
 using MovementStuff;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 namespace InventoryStuff
 {
@@ -66,9 +68,9 @@ namespace InventoryStuff
                 }
                 if (projectile.splat != null && projectile.splat.TryGetComponent(out OnTriggerDamageEntity damager))
                 {
-                    damager.damage = damage;
-                    damager.damageToExceptions = damage / 5f;
                     damager.AddException(source);
+                    damager.damage = damage;
+                    damager.damageToExceptions = damage * .25f;
                 }
 
                 cooldownLeft += cooldown;

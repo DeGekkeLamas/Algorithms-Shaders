@@ -35,7 +35,7 @@ namespace Quests
         /// </summary>
         public virtual void Destructor()
         {
-            Debug.Log($"Destroyed {this.name}");
+
         }
 
         /// <summary>
