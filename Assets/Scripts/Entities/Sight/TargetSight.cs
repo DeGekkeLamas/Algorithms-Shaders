@@ -14,7 +14,7 @@ namespace MovementStuff
         [SerializeField] protected MovingObjectBase MovementBeforeSeenTarget;
         [SerializeField] protected MovingObjectBase MovementAfterSeenTarget;
         [InfoBox("Leave target empty for it to be automatically set to player instance")]
-        protected Transform target;
+        [SerializeField] protected Transform target;
         [Header("Vision")]
         [SerializeField] protected float maxVisionDistance = 15;
         [SerializeField] protected float visionAngle = 75;
