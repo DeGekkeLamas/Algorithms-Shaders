@@ -11,7 +11,7 @@ namespace InventoryStuff
     /// </summary>
     public class Stove : MonoBehaviour, IInteractible
     {
-        [SerializeField] Recipe[] knownRecipes;
+        [SerializeField] RecipeBook knownRecipes;
         [SerializeField] RectInt dimensions;
         Transform RecipeUI;
         [SerializeField] RawImage image;
@@ -56,7 +56,7 @@ namespace InventoryStuff
 
         void GenerateUI()
         {
-            int sqrtLength = Mathf.CeilToInt(Mathf.Sqrt(knownRecipes.Length));
+            int sqrtLength = Mathf.CeilToInt(Mathf.Sqrt(knownRecipes.recipes.Length));
             Vector2 sizePerRecipe = (dimensions.max - dimensions.min) / sqrtLength;
 
             for (int y = 0; y < sqrtLength; y++)
@@ -64,8 +64,8 @@ namespace InventoryStuff
                 for (int x = 0; x < sqrtLength; x++)
                 {
                     int i = y * sqrtLength + x;
-                    if (i >= knownRecipes.Length) break;
-                    Recipe recipe = knownRecipes[i];
+                    if (i >= knownRecipes.recipes.Length) break;
+                    Recipe recipe = knownRecipes.recipes[i];
                     InventoryItem recipeItem = recipe.result.GetItem();
 
                     // Container

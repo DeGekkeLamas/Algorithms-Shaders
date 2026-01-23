@@ -48,23 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6bf7a4699c5224cbd4a3902e548598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knownRecipes:
-  - {fileID: 11400000, guid: 6380e31c1b40fae44ae9d5eb2ebd765d, type: 2}
-  - {fileID: 11400000, guid: af6698cbb879e8a47aa26a58a06689be, type: 2}
-  - {fileID: 11400000, guid: fc3a2330f6b38ea48b4a7b9a2caddb0e, type: 2}
-  - {fileID: 11400000, guid: ffa4a6875f1e1fd49b8251a49c019a3c, type: 2}
-  - {fileID: 11400000, guid: 9773e04e3b3fefd47a78ef6cde02e159, type: 2}
-  - {fileID: 11400000, guid: 0ba73e1ded71b2b419d8daa73f6e55df, type: 2}
-  - {fileID: 11400000, guid: 3fdc4678c35c92a4ebe4e47321d37db8, type: 2}
-  - {fileID: 11400000, guid: 9d41dac231f89984c8cbeea31700949e, type: 2}
-  - {fileID: 11400000, guid: c34a7708145d5e345b137e8df1a7aa21, type: 2}
-  - {fileID: 11400000, guid: 805445215535b8f4282644c5e5ccc700, type: 2}
-  - {fileID: 11400000, guid: f6bff35ae095f38479ab1fb6e3d2f892, type: 2}
-  - {fileID: 11400000, guid: 5cb1b2576ab8656408d3e8cfbf8607e2, type: 2}
-  - {fileID: 11400000, guid: 3b29bdfa0a036b54eb4dc2bf369f28c8, type: 2}
-  - {fileID: 11400000, guid: e8ad2e3458b1c2f49929b6714a2e60b3, type: 2}
-  - {fileID: 11400000, guid: debad02ac1e0c344e98d27c879e577b1, type: 2}
-  - {fileID: 11400000, guid: 83d10f8342b883d4787122a015ae3484, type: 2}
+  knownRecipes: {fileID: 11400000, guid: 12bab6e6a4f3ce84fb13808db4020217, type: 2}
   dimensions:
     x: 100
     y: 50
@@ -235,23 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6bf7a4699c5224cbd4a3902e548598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knownRecipes:
-  - {fileID: 11400000, guid: 6380e31c1b40fae44ae9d5eb2ebd765d, type: 2}
-  - {fileID: 11400000, guid: af6698cbb879e8a47aa26a58a06689be, type: 2}
-  - {fileID: 11400000, guid: fc3a2330f6b38ea48b4a7b9a2caddb0e, type: 2}
-  - {fileID: 11400000, guid: ffa4a6875f1e1fd49b8251a49c019a3c, type: 2}
-  - {fileID: 11400000, guid: 9773e04e3b3fefd47a78ef6cde02e159, type: 2}
-  - {fileID: 11400000, guid: 0ba73e1ded71b2b419d8daa73f6e55df, type: 2}
-  - {fileID: 11400000, guid: 3fdc4678c35c92a4ebe4e47321d37db8, type: 2}
-  - {fileID: 11400000, guid: 9d41dac231f89984c8cbeea31700949e, type: 2}
-  - {fileID: 11400000, guid: c34a7708145d5e345b137e8df1a7aa21, type: 2}
-  - {fileID: 11400000, guid: 805445215535b8f4282644c5e5ccc700, type: 2}
-  - {fileID: 11400000, guid: f6bff35ae095f38479ab1fb6e3d2f892, type: 2}
-  - {fileID: 11400000, guid: 5cb1b2576ab8656408d3e8cfbf8607e2, type: 2}
-  - {fileID: 11400000, guid: 3b29bdfa0a036b54eb4dc2bf369f28c8, type: 2}
-  - {fileID: 11400000, guid: e8ad2e3458b1c2f49929b6714a2e60b3, type: 2}
-  - {fileID: 11400000, guid: debad02ac1e0c344e98d27c879e577b1, type: 2}
-  - {fileID: 11400000, guid: 83d10f8342b883d4787122a015ae3484, type: 2}
+  knownRecipes: {fileID: 0}
   dimensions:
     x: 100
     y: 50
