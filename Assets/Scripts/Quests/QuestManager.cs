@@ -40,12 +40,15 @@ namespace Quests
         public void AddQuest(Quest toAdd)
         {
             activeQuests.Add(toAdd);
-            // Set presenters
-            GameObject spawned = Instantiate(questPresenter, layoutGroup.transform);
-            QuestPresenter[] presenters = spawned.GetComponentsInChildren<QuestPresenter>();
-            for (int i = 0; i < presenters.Length; i++)
+            if (layoutGroup != null && questPresenter != null)
             {
-                presenters[i].boundQuest = toAdd;
+                // Set presenters
+                GameObject spawned = Instantiate(questPresenter, layoutGroup.transform);
+                QuestPresenter[] presenters = spawned.GetComponentsInChildren<QuestPresenter>();
+                for (int i = 0; i < presenters.Length; i++)
+                {
+                    presenters[i].boundQuest = toAdd;
+                }
             }
             // Wait a frame between setting the quest and activating initilize, so the presenters can initialize first
             StartCoroutine(WaitThenInitialize(toAdd));

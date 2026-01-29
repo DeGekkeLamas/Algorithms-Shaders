@@ -14,7 +14,7 @@ namespace Quests
     public class FetchQuest : Quest
     {
         [SerializeField] InventoryItemData toCollect;
-
+        [HideInInspector] public InventoryItem item;
         private void OnValidate()
         {
             SetDescription();
@@ -28,7 +28,11 @@ namespace Quests
 
         public override void Initialize()
         {
-            texture = toCollect.GetItem().ItemSprite;
+            if (toCollect != null)
+            {
+                item = toCollect.GetItem();
+                texture = item.ItemSprite;
+            }
             Inventory.instance.OnItemChanged += UpdateProgress;
             maxProgress = 1;
             base.Initialize();
@@ -36,7 +40,7 @@ namespace Quests
 
         protected void UpdateProgress()
         {
-            if (Inventory.instance.Contains(toCollect.GetItem()))
+            if (Inventory.instance.Contains(item))
             {
                 progress = 1;
                 OnCompleted();
@@ -56,7 +60,7 @@ namespace Quests
         {
             if (toCollect == null) return "No item set";
 
-            string desc = $"Obtain {("aeiouAEIOU".Contains(toCollect.GetItem().itemName[0]) ? "an" : "a")} {toCollect.GetItem().itemName}";
+            string desc = $"Obtain {("aeiouAEIOU".Contains(item.itemName[0]) ? "an" : "a")} {item.itemName}";
 
             description = desc;
             return desc;
