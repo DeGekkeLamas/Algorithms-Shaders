@@ -47,7 +47,7 @@ namespace Quests
         void UpdateProgress(Entity toCheck)
         {
             if (toKill == null || toCheck.entityName == toKill.entityName) amountDone++;
-            else Debug.Log($"toCheck.entityName = {toCheck.entityName}, toKill.entityName = {toKill.entityName}");
+            //else Debug.Log($"toCheck.entityName = {toCheck.entityName}, toKill.entityName = {toKill.entityName}");
                 progress = amountDone;
 
             if (amountDone >= amount) OnCompleted();
