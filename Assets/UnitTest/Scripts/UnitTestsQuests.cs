@@ -42,15 +42,10 @@ namespace UnitTesting
             yield return null;
 
             bool isCompleted = false;
-            testQuest.OnComplete += SetToTrue;
+            testQuest.OnComplete += () => isCompleted = true;
             yield return null;
             Inventory.instance.AddItem(testItem);
             Assert.IsTrue(isCompleted);
-
-            void SetToTrue()
-            {
-                isCompleted = true;
-            }
         }
 
         [UnityTest]
@@ -72,15 +67,10 @@ namespace UnitTesting
             yield return null;
 
             bool isCompleted = false;
-            testQuest.OnComplete += SetToTrue;
+            testQuest.OnComplete += () => isCompleted = true;
             yield return null;
             testEntity.DealDamage(float.MaxValue);
             Assert.IsTrue(isCompleted);
-
-            void SetToTrue()
-            {
-                isCompleted = true;
-            }
         }
 
         public static IEnumerator LoadScene(string sceneName)

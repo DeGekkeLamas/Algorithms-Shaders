@@ -60,7 +60,7 @@ namespace Quests
         {
             if (toCollect == null) return "No item set";
 
-            string desc = $"Obtain {("aeiouAEIOU".Contains(item.itemName[0]) ? "an" : "a")} {item.itemName}";
+            string desc = $"Obtain {("aeiouAEIOU".Contains(toCollect.GetItem().itemName[0]) ? "an" : "a")} {toCollect.GetItem().itemName}";
 
             description = desc;
             return desc;
