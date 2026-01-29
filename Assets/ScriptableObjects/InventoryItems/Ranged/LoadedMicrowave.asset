@@ -15,15 +15,19 @@ MonoBehaviour:
   item:
     itemName: Loaded microwave
     itemModel: {fileID: 919132149155446097, guid: 6f316557c0c0f8f49b64841f10f98f63, type: 3}
-    toolTip: This thing is the bomb!
+    toolTip: 'This thing is the bomb!
+
+      Be very careful with this, or it may
+      cause your doom. '
     maxStack: 1
     durability: 0
     grantsImmunityTo: []
+    itemSprite: {fileID: 0}
+    itemSilhouette: {fileID: 0}
     damage: 250
     effectApplied: []
     projectile: {fileID: -4791254542994142077, guid: 9165ae1eb3dccc1429ec046a539ce717, type: 3}
-    autoFire: 0
     cooldown: 0
     isConsumedOnUse: 1
     fuel: {fileID: 0}
-    cooldownLeft: 0
+    cooldownLeft: -17.090466

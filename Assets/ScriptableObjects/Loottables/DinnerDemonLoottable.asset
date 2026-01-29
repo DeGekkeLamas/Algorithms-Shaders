@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1068a3cabdfdbd44f93dc81a81c28155, type: 3}
   m_Name: DinnerDemonLoottable
   m_EditorClassIdentifier: 
-  totalChance: 82
+  totalChance: 92
   lootTable:
   - itemName: StainlessSteelPot (InventoryStuff.PassiveItemData), 5%
     item: {fileID: 11400000, guid: b515f50e15c8bb441a22fdd9eaa65797, type: 2}
     probability: 5
-  - itemName: Fork (InventoryStuff.RangedWeaponData), 15%
+  - itemName: Fork (InventoryStuff.RangedWeaponData), 20%
     item: {fileID: 11400000, guid: d917162f781d71f4aba3befed25f97ef, type: 2}
-    probability: 15
+    probability: 20
   - itemName: Spoon (InventoryStuff.MeleeWeaponData), 5%
     item: {fileID: 11400000, guid: 1846ce1672ee67a44b4dc2aa60149f15, type: 2}
     probability: 5
-  - itemName: Knife (InventoryStuff.MeleeWeaponData), 5%
+  - itemName: Knife (InventoryStuff.MeleeWeaponData), 10%
     item: {fileID: 11400000, guid: b4d103c4bf22e4e468105e0b39042c3c, type: 2}
-    probability: 5
+    probability: 10
   - itemName: FryingPan (InventoryStuff.MeleeWeaponData), 12%
     item: {fileID: 11400000, guid: 2ab905777fda08e4e86e2c9dff5aba1d, type: 2}
     probability: 12

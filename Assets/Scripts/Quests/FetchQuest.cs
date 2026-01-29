@@ -34,6 +34,7 @@ namespace Quests
                 texture = item.ItemSprite;
             }
             Inventory.instance.OnItemChanged += UpdateProgress;
+            progress = 0;
             maxProgress = 1;
             base.Initialize();
         }

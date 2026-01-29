@@ -17,7 +17,7 @@ namespace ServiceLocator
         public void Reset()
         {
             boundQuest.OnComplete -= Complete;
-            boundQuest.Destructor();
+            if (!QuestManager.instance.IsActive(boundQuest)) boundQuest.Destructor();
         }
 
         void Complete()

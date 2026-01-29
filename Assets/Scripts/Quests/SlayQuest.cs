@@ -38,6 +38,7 @@ namespace Quests
                 texture = RuntimePreviewGenerator.GenerateModelPreview(toKill.transform, 256, 256, false, true);
             else texture = default;
 
+            progress = 0;
             Entity.OnAnyDeath += UpdateProgress;
             maxProgress = amount;
             base.Initialize();
@@ -46,7 +47,8 @@ namespace Quests
         void UpdateProgress(Entity toCheck)
         {
             if (toKill == null || toCheck.entityName == toKill.entityName) amountDone++;
-            progress = amountDone;
+            else Debug.Log($"toCheck.entityName = {toCheck.entityName}, toKill.entityName = {toKill.entityName}");
+                progress = amountDone;
 
             if (amountDone >= amount) OnCompleted();
             InvokeOnProgressUpdated();
