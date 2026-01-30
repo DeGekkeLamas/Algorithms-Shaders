@@ -215,6 +215,7 @@ GameObject:
   m_Component:
   - component: {fileID: 838901601}
   - component: {fileID: 838901600}
+  - component: {fileID: 838901602}
   m_Layer: 0
   m_Name: Tool
   m_TagString: Untagged
@@ -250,6 +251,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &838901602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838901599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1493cf346bdea4aa1a3a82e6461608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorsToUse:
+  - {r: 0, g: 0, b: 0, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.498, g: 0.506, b: 0.506, a: 1}
+  - {r: 0.765, g: 0.765, b: 0.765, a: 1}
+  - {r: 0.53333336, g: 0.09019608, b: 0.098039225, a: 1}
+  - {r: 0.73333335, g: 0.48235297, b: 0.34509805, a: 1}
+  - {r: 0.92549026, g: 0.121568635, b: 0.15294118, a: 1}
+  - {r: 0.96470594, g: 0.6745098, b: 0.78823537, a: 1}
+  - {r: 0.9607844, g: 0.49411768, b: 0.17254902, a: 1}
+  - {r: 1, g: 0.79215693, b: 0.0627451, a: 1}
+  - {r: 0.9725491, g: 0.93725497, b: 0.13333334, a: 1}
+  - {r: 0.9333334, g: 0.90196085, b: 0.6901961, a: 1}
+  - {r: 0.16862746, g: 0.69803923, b: 0.29803923, a: 1}
+  - {r: 0.70980394, g: 0.82745105, b: 0.20000002, a: 1}
+  - {r: 0.13725491, g: 0.627451, b: 0.854902, a: 1}
+  - {r: 0.6, g: 0.854902, b: 0.92549026, a: 1}
+  - {r: 0.28627452, g: 0.33333334, b: 0.64705884, a: 1}
+  - {r: 0.43921572, g: 0.57254905, b: 0.7490196, a: 1}
+  - {r: 0.6313726, g: 0.29411766, b: 0.6117647, a: 1}
+  - {r: 0.7843138, g: 0.7490196, b: 0.8705883, a: 1}
 --- !u!1 &1256635332
 GameObject:
   m_ObjectHideFlags: 0
