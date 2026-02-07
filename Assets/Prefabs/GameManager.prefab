@@ -2502,10 +2502,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49dd665afb07194283e35bcc1d27119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scene: 0
+  scene: 1
   roomExceptions:
   - number: 5
-    scene: 1
+    scene: 2
   exit: {fileID: 2740208576726757881}
   RecipeUI: {fileID: 3452442084628207339}
 --- !u!114 &2990881938606332820
@@ -3655,6 +3655,10 @@ PrefabInstance:
     - target: {fileID: 8294646627098507629, guid: bd58c7b5e0bb4df4dabd3a47b7c58106, type: 3}
       propertyPath: m_Name
       value: HideousButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 8294646627098507629, guid: bd58c7b5e0bb4df4dabd3a47b7c58106, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9188937154601549498, guid: bd58c7b5e0bb4df4dabd3a47b7c58106, type: 3}
       propertyPath: m_AnchoredPosition.x
