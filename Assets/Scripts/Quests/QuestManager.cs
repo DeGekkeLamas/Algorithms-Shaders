@@ -67,9 +67,12 @@ namespace Quests
 
         private void OnDestroy()
         {
-            foreach(Quest quest in activeQuests)
+            if (instance == this)
             {
-                quest.Destructor();
+                foreach (Quest quest in activeQuests)
+                {
+                    quest.Destructor();
+                }
             }
         }
     }
