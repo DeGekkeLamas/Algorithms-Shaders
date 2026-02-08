@@ -17,7 +17,7 @@ namespace InventoryStuff
         [Button]
         void ExportSilhouetteTexture()
         {
-            TextureExporter.ExportTexture(Item.ItemSilhouette, $"ItemSilhouetteSprite{item.name}");
+            TextureExporter.ExportTexture(Item.ItemGrayscale, $"ItemSilhouetteSprite{item.name}");
         }
     }
 }

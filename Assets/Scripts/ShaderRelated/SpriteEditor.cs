@@ -80,8 +80,13 @@ public class SpriteEditor
 
         for(int i = 0; i < colors.Length; i++)
         {
-            float average = (colors[i].r + colors[i].g + colors[i].b) / 3;
-            newColors[i] = new(average, average, average, 1);
+            if (colors[i] == bgColor) newColors[i] = new();
+            else
+            {
+                Color col = colors[i];
+                float value = Mathf.Max(col.r,col.g,col.b);
+                newColors[i] = new(value, value, value, 1);
+            }
         }
 
         newSprite.SetPixels(newColors);

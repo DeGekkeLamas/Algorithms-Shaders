@@ -38,8 +38,8 @@ namespace InventoryStuff
         /// <summary>
         /// Get a silhoutte texture, which is completely black texture of this item. If it doesnt exist yet it will be created
         /// </summary>
-        [SerializeField, HideInInspector] Texture2D itemSilhouette;
-        public Texture2D ItemSilhouette => itemSilhouette != null ? itemSilhouette : SetSilhouette();
+        [SerializeField, HideInInspector] Texture2D itemGrayscale;
+        public Texture2D ItemGrayscale => itemGrayscale != null ? itemGrayscale : SetGrayscale();
         [HideInInspector, NonSerialized] public bool canUseItem = true;
         public bool IsStackable => maxStack > 1;
 
@@ -56,12 +56,12 @@ namespace InventoryStuff
             return itemSprite;
         }
 
-        Texture2D SetSilhouette()
+        Texture2D SetGrayscale()
         {
-            itemSilhouette = ItemSprite;
-            itemSilhouette = SpriteEditor.MakeSilhouette(itemSilhouette);
+            itemGrayscale = ItemSprite;
+            itemGrayscale = SpriteEditor.MakeGrayScale(itemGrayscale);
 
-            return itemSilhouette;
+            return itemGrayscale;
         }
 
         protected void RemoveThisItem()
@@ -89,10 +89,10 @@ namespace InventoryStuff
                 description += $"Max stack = {maxStack}.\n";
             }
             // Immune effects
-            foreach (StatusEffect effect in grantsImmunityTo)
-            {
-                description += $"Grants immunity to {effect.name}.\n";
-            }
+            //foreach (StatusEffect effect in grantsImmunityTo)
+            //{
+            //    description += $"Grants immunity to {effect.name}.\n";
+            //}
 
             return description;
         }

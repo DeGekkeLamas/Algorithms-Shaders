@@ -79,7 +79,7 @@ namespace InventoryStuff
                     // Result
                     RawImage resultImage = SpawnImage(pos + new Vector3(0, sizePerRecipe.y * .025f)
                         , Inventory.instance.Contains(recipeItem) ? SpriteEditor.RemoveBG(recipeItem.ItemSprite) :
-                        recipeItem.ItemSilhouette, recipeItem.itemName);
+                        recipeItem.ItemGrayscale, recipeItem.itemName);
                     imageTextures[resultImage] = recipeItem;
                     // Ingredients
                     for (int j = 0; j < recipe.ingredients.Length; j++)
@@ -88,7 +88,7 @@ namespace InventoryStuff
                         Vector2 position = pos + new Vector3(Mathf.Lerp(-sizePerRecipe.x, sizePerRecipe.x,
                             Mathf.InverseLerp(0, recipe.ingredients.Length - 1, j)) * .25f, -sizePerRecipe.y * .025f);
                         RawImage ingredientImage = SpawnImage(position, Inventory.instance.Contains(currentItem) ?
-                            SpriteEditor.RemoveBG(currentItem.ItemSprite) : currentItem.ItemSilhouette, currentItem.itemName);
+                            SpriteEditor.RemoveBG(currentItem.ItemSprite) : currentItem.ItemGrayscale, currentItem.itemName);
                         imageTextures[ingredientImage] = currentItem;
 
                     }
@@ -122,7 +122,7 @@ namespace InventoryStuff
                 if (pair.Value != null)
                 {
                     pair.Key.texture = Inventory.instance.Contains(pair.Value) ? SpriteEditor.RemoveBG(pair.Value.ItemSprite) :
-                            pair.Value.ItemSilhouette;
+                            pair.Value.ItemGrayscale;
                 }
             }
         }
