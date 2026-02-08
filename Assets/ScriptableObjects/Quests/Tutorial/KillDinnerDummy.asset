@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f7352902bc4d97418652ff10ca5e774, type: 3}
+  m_Name: KillDinnerDummy
+  m_EditorClassIdentifier: 
+  description: Kill 1 Dinner Dummy
+  texture: {fileID: 0}
+  XPReward: 40
+  toKill: {fileID: -2207487477691685348, guid: 7352bf74e6b2a5145b1442dd4116a87e, type: 3}
+  amount: 1

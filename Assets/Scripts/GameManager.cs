@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
             exit.killsRequired = DungeonGenerator.instance.Rda.AmountOfEnemiesToSpawn / 2;
         }
         OnNewFloorLoaded?.Invoke();
-        exit.gameObject.SetActive(false);
+        exit?.gameObject.SetActive(false);
     }
 
     public IEnumerator ResetGame()
