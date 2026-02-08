@@ -55,7 +55,8 @@ namespace InventoryStuff
             yield return UseWeaponAnimation(source, inputDir);
 
             // Exit
-            source.ChangeMoveSpeed(originalSpeed);
+            if (originalSpeed != 0)
+                source.ChangeMoveSpeed(originalSpeed);
             canUseItem = true;
         }
 

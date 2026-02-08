@@ -6135,9 +6135,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6855589953386135051, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
+      propertyPath: dimensions.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855589953386135051, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
+      propertyPath: dimensions.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855589953386135051, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
       propertyPath: knownRecipes
       value: 
       objectReference: {fileID: 11400000, guid: 0ba4f0076b2b8b146aa82a1ac4291cf7, type: 2}
+    - target: {fileID: 6855589953386135051, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
+      propertyPath: dimensions.width
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855589953386135051, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
+      propertyPath: dimensions.height
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 7094020254704276820, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
       propertyPath: m_Size.x
       value: 2
@@ -9641,9 +9657,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6855589953386135051, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
+      propertyPath: dimensions.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855589953386135051, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
+      propertyPath: dimensions.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855589953386135051, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
       propertyPath: knownRecipes
       value: 
       objectReference: {fileID: 11400000, guid: 0ba4f0076b2b8b146aa82a1ac4291cf7, type: 2}
+    - target: {fileID: 6855589953386135051, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
+      propertyPath: dimensions.width
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 6855589953386135051, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
+      propertyPath: dimensions.height
+      value: 700
+      objectReference: {fileID: 0}
     - target: {fileID: 7094020254704276820, guid: cf420d9794234a84d907faf7b3a168d3, type: 3}
       propertyPath: m_Size.x
       value: 2
