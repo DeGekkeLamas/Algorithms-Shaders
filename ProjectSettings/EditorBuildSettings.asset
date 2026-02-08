@@ -19,10 +19,13 @@ EditorBuildSettings:
     guid: 1fb6f5a691cbcdd47b4f4e96c12f8a37
   - enabled: 1
     path: Assets/Scenes/Tutorials/TutorialItemPickups.unity
-    guid: 1c5d872fa55937349b2c066b4a4cf82a
+    guid: 67769a296a2399542ba4a3dac6848bfe
   - enabled: 1
     path: Assets/Scenes/Tutorials/TutorialCombat.unity
     guid: 6200cca010c937a44be1dd912985a0ec
+  - enabled: 1
+    path: Assets/Scenes/Tutorials/TutorialCrafting.unity
+    guid: e79e8a6ae3a43b0488221d56ef3fd26f
   - enabled: 1
     path: Assets/UnitTest/Scenes/---- UnitTests ----------.unity
     guid: ed03ad39e80fe0947ac7f28b0afc2739

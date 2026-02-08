@@ -26,7 +26,8 @@ namespace Quests
         private void Awake()
         {
             if (instance == null) instance = this;
-            for (int i = 0; i < Mathf.Min(registeredQuests.Count, amountToGive); i++)
+            int QCoutnt = registeredQuests.Count;
+            for (int i = 0; i < Mathf.Min(QCoutnt, amountToGive); i++)
             {
                 int index = Random.Range(0, registeredQuests.Count);
                 AddQuest(registeredQuests[index]);

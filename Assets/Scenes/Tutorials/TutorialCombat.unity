@@ -7592,8 +7592,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8608250485412360592, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 348122784}
   m_SourcePrefab: {fileID: 100100000, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+--- !u!1 &348122783 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8608250485412360592, guid: a84dde2d4d9a0b749922ca3ee3e4442d, type: 3}
+  m_PrefabInstance: {fileID: 348122782}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &348122784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348122783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc678a22acdb54244aa29db999d95a97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageToDo: 50
 --- !u!1 &349993874
 GameObject:
   m_ObjectHideFlags: 0
@@ -40434,9 +40455,17 @@ PrefabInstance:
       propertyPath: exit
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3287097213636541634, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7148870164262935656, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879786566373070736, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
+      propertyPath: amountToGive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7879786566373070736, guid: c6672a1e4d5ce9544aa9ed7639f01666, type: 3}
       propertyPath: registeredQuests.Array.size
@@ -43830,7 +43859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questsRequired:
   - {fileID: 11400000, guid: b5a1c4851b9e15e44b5dd58770ce3443, type: 2}
-  sceneToLoad: 0
+  sceneToLoad: 6
 --- !u!1 &2022043624
 GameObject:
   m_ObjectHideFlags: 0
@@ -46342,7 +46371,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Pick up these items, click while holding them to use them.
+  m_text: 'Pick up these items, then click while holding them to use them.
 
     Scroll
     or press a number key to change your held item. '

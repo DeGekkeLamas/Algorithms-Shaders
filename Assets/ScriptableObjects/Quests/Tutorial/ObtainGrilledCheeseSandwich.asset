@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84e40a907762b8c41912ff245ca86550, type: 3}
+  m_Name: ObtainGrilledCheeseSandwich
+  m_EditorClassIdentifier: 
+  description: Obtain a Grilled cheese sandwich
+  texture: {fileID: 0}
+  XPReward: 40
+  toCollect: {fileID: 11400000, guid: a03e253024b72bd449c7aa591ab2a7d0, type: 2}

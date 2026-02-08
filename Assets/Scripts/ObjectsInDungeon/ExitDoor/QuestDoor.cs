@@ -21,28 +21,10 @@ public class QuestDoor : MonoBehaviour, IInteractible
     {
         foreach (Quest quest in questsRequired)
         {
-            quest.Initialize();
             quest.OnComplete += DoorCheck;
         }
         GameManager.instance.OnNewFloorLoaded += ResetDoor;
         OnStatsUpdated?.Invoke();
-    }
-    private void OnEnable()
-    {
-        if (!didStart) return;
-        foreach (Quest quest in questsRequired)
-        {
-            quest.Initialize();
-            quest.OnComplete += DoorCheck;
-        }
-    }
-    private void OnDisable()
-    {
-        foreach (Quest quest in questsRequired)
-        {
-            quest.Destructor();
-            quest.OnComplete -= DoorCheck;
-        }
     }
 
     void DoorCheck()
