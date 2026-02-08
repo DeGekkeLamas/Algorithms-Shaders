@@ -19,11 +19,12 @@ MonoBehaviour:
     maxStack: 1
     durability: 1000
     grantsImmunityTo: []
-    damage: 20
+    itemSprite: {fileID: 0}
+    itemGrayscale: {fileID: 0}
+    damage: 35
     effectApplied: []
     projectile: {fileID: -4791254542994142077, guid: 5f701301407c6644f996319132fd3a8e, type: 3}
-    autoFire: 0
     cooldown: 0.2
     isConsumedOnUse: 0
     fuel: {fileID: 0}
-    cooldownLeft: -412.5422
+    cooldownLeft: -424.9441
