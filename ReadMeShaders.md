@@ -1,1 +1,0 @@
-Only relevant scene is ShaderDisplay, other scenes are for either testing or algorithms and shouldnt be looked at/graded. 
